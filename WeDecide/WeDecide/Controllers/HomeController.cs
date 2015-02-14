@@ -11,6 +11,7 @@ namespace WeDecide.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            //Check
             return View();
         }
     }
