@@ -99,6 +99,7 @@
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\QueryController.cs" />
     <Compile Include="Controllers\QuestionAnalyticsController.cs" />
+    <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\QuestionResponseController.cs" />
     <Compile Include="DAL\Abstract\IDAL.cs" />
     <Compile Include="DAL\Abstract\MembershipDAL.cs" />
@@ -113,9 +114,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\web.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Views\web.config" />
     <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -133,6 +132,7 @@
     <Folder Include="Views\Query\" />
     <Folder Include="Views\QuestionAnalytics\" />
     <Folder Include="Views\QuestionResponse\" />
+    <Folder Include="Views\Question\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
