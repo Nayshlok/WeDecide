@@ -103,6 +103,7 @@
     <Compile Include="DAL\Abstract\IDAL.cs" />
     <Compile Include="DAL\Abstract\MembershipDAL.cs" />
     <Compile Include="DAL\Abstract\QuestionDAL.cs" />
+    <Compile Include="DAL\Concrete\CustomMembershipDAL.cs" />
     <Compile Include="DAL\Concrete\FacebookMembershipDAL.cs" />
     <Compile Include="DAL\Concrete\GoogleMembershipDAL.cs" />
     <Compile Include="Global.asax.cs">

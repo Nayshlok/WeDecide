@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WeDecide.DAL.Abstract
 {
-    public interface MembershipDAL // : IDAL<Account>
+    public interface IMembershipDAL // : IDAL<Account>
     {
     }
 }
