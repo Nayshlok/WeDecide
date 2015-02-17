@@ -100,10 +100,16 @@
     <Compile Include="Controllers\QueryController.cs" />
     <Compile Include="Controllers\QuestionAnalyticsController.cs" />
     <Compile Include="Controllers\QuestionResponseController.cs" />
+    <Compile Include="DAL\Abstract\IDAL.cs" />
+    <Compile Include="DAL\Abstract\MembershipDAL.cs" />
+    <Compile Include="DAL\Abstract\QuestionDAL.cs" />
+    <Compile Include="DAL\Concrete\FacebookMembershipDAL.cs" />
+    <Compile Include="DAL\Concrete\GoogleMembershipDAL.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
+    <Compile Include="Models\Concrete\Question.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -118,7 +124,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Models\Abstract\" />
     <Folder Include="Views\Feed\" />
     <Folder Include="Views\Home\" />
     <Folder Include="Views\Profile\" />

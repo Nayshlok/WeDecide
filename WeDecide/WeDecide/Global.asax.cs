@@ -15,7 +15,6 @@ namespace WeDecide
             AreaRegistration.RegisterAllAreas();
 
             DependencyResolver.SetResolver(new NinjectDependencyResolver());
-
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
     }
