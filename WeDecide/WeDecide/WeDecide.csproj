@@ -85,7 +85,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\FeedController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\QueryController.cs" />
+    <Compile Include="Controllers\QuestionAnalyticsController.cs" />
+    <Compile Include="Controllers\QuestionResponseController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -104,7 +109,12 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Feed\" />
     <Folder Include="Views\Home\" />
+    <Folder Include="Views\Profile\" />
+    <Folder Include="Views\Query\" />
+    <Folder Include="Views\QuestionAnalytics\" />
+    <Folder Include="Views\QuestionResponse\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
