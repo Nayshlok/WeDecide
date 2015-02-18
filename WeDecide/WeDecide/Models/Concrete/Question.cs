@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace WeDecide.Models.Concrete
 {
-    public abstract class Question
+    public class Question
     {
+        public int Id { get; set; }
         public string Text { get; set; }
         public List<Response> Responses { get; set; }
         public Scope QuestionScope { get; set; }
