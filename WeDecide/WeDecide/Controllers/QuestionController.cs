@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
 using WeDecide.ViewModels;
 
 namespace WeDecide.Controllers
@@ -20,8 +19,18 @@ namespace WeDecide.Controllers
         [HttpPost]
         public ActionResult CreateQuestion(QuestionViewModel q)
         {
-            //Create the new question and store it.
+            if (ModelState.IsValid)
+            {
+                //Do Stuff
+
+                //Don't know what to return yet
+                return View();
+            }
+            else
+            {
+            }
             return View();
+        }
         }
         
         [HttpGet]
@@ -34,7 +43,11 @@ namespace WeDecide.Controllers
         [HttpPost]
         public ActionResult EditQuestion(QuestionViewModel q)
         {
+            if(ModelState.IsValid)
+            {
             //Take in the edited question from the user and change the original question.
+            }
+            
             return View();
         }
 
