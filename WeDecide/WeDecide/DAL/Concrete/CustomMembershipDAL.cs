@@ -6,7 +6,7 @@ using WeDecide.DAL.Abstract;
 
 namespace WeDecide.DAL.Concrete
 {
-    public class FacebookMembershipDAL : IMembershipDAL
+    public class CustomMembershipDAL : IMembershipDAL
     {
     }
 }
