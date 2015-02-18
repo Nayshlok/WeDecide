@@ -18,7 +18,10 @@ namespace WeDecide.Controllers
         [HttpPost]
         public ActionResult CreateQuestion(QuestionViewModel q)
         {
-            //Create the new question and store it.
+            if(ModelState.IsValid)
+            {
+                //Create the new question and store it.
+            }
             return View();
         }
         
@@ -32,7 +35,11 @@ namespace WeDecide.Controllers
         [HttpPost]
         public ActionResult EditQuestion(QuestionViewModel q)
         {
-            //Take in the edited question from the user and change the original question.
+            if(ModelState.IsValid)
+            {
+                //Take in the edited question from the user and change the original question.
+            }
+            
             return View();
         }
 
