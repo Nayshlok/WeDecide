@@ -12,6 +12,7 @@ namespace WeDecide.Models.Concrete
         public string Text { get; set; }
         public List<Response> Responses { get; set; }
         public Scope QuestionScope { get; set; }
+        public bool IsActive { get; set; }
         public bool? FreeResponseEnabled { get; set; }
         public enum Scope
         {
