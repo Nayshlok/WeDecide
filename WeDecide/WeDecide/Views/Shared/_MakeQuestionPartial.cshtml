@@ -2,19 +2,22 @@
 
 @using (Html.BeginForm())
 {
-    <label>Question Text: </label>@Html.TextBoxFor(x => x.Question)
-    <br/>
-    <ul>
-        @for (int i = 0; i < 2; i++)
-        {
-        <li>
-            <label>Response: </label>
-            <input type="text" name="Responses" />
-        </li>
-        }
-    </ul>
+    <section class="MakeQuestion">
+        <h3>Question Text: </h3> @Html.TextBoxFor(x => x.Question)
+        <br />
+        <ul>
+            @for (int i = 0; i < 2; i++)
+            {
+                <li>
+                    <p>Response: </p>
+                    <input type="text" name="Responses" />
+                </li>
+            }
+        </ul>
 
-    <input type="datetime" name="EndDate"/>
-    
-    <input type="submit" value="Make Question"/>
+        <p>Timout Date: </p><input type="datetime" name="EndDate" />
+        <br/>
+
+        <input type="submit" value="Make Question" />
+    </section>
 }

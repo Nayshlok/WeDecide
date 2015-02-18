@@ -112,10 +112,17 @@
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\Concrete\Question.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\QuestionViewModel.cs" />
+    <Compile Include="ViewModels\UserResponseViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_MakeQuestionPartial.cshtml" />
+    <Content Include="Views\Shared\_RespondToQuestionPartial.cshtml" />
+    <Content Include="Views\Question\CreateQuestion.cshtml" />
+    <Content Include="Views\QuestionResponse\Response.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -131,8 +138,6 @@
     <Folder Include="Views\Profile\" />
     <Folder Include="Views\Query\" />
     <Folder Include="Views\QuestionAnalytics\" />
-    <Folder Include="Views\QuestionResponse\" />
-    <Folder Include="Views\Question\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
