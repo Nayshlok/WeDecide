@@ -1,6 +1,6 @@
 ﻿@model WeDecide.ViewModels.QuestionViewModel
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("CreateQuestion", "Question"))
 {
     <section class="MakeQuestion">
         @Html.ValidationSummary()

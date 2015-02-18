@@ -151,6 +151,8 @@
     <Folder Include="Views\Profile\" />
     <Folder Include="Views\Query\" />
     <Folder Include="Views\QuestionAnalytics\" />
+    <Folder Include="Views\QuestionResponse\" />
+    <Folder Include="Views\Question\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
