@@ -31,7 +31,6 @@ namespace WeDecide.Controllers
             }
             return View();
         }
-        }
         
         [HttpGet]
         public ViewResult EditQuestion(int ID)
