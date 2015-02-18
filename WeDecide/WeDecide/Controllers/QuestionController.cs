@@ -28,8 +28,8 @@ namespace WeDecide.Controllers
             }
             else
             {
+                return View();
             }
-            return View();
         }
         }
         

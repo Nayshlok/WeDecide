@@ -3,6 +3,7 @@
 @using (Html.BeginForm())
 {
     <section class="MakeQuestion">
+        @Html.ValidationSummary()
         <h3>Question Text: </h3> @Html.TextBoxFor(x => x.Question)
         <br />
         <ul>
