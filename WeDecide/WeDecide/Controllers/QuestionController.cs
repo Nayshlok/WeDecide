@@ -28,8 +28,9 @@ namespace WeDecide.Controllers
             }
             else
             {
-                return View();
             }
+            return View();
+        }
         }
         
         [HttpGet]
@@ -42,7 +43,11 @@ namespace WeDecide.Controllers
         [HttpPost]
         public ActionResult EditQuestion(QuestionViewModel q)
         {
+            if(ModelState.IsValid)
+            {
             //Take in the edited question from the user and change the original question.
+            }
+            
             return View();
         }
 
