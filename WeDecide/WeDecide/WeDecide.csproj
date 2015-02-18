@@ -59,7 +59,9 @@
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Web" />
+    <Reference Include="System.Web">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
@@ -136,6 +138,9 @@
     <Content Include="Views\Shared\_MakeQuestionPartial.cshtml" />
     <Content Include="Views\Shared\_RespondToQuestionPartial.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Home\LandingPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -147,8 +152,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Models\Abstract\" />
     <Folder Include="Views\Feed\" />
-    <Folder Include="Views\Home\" />
-    <Folder Include="Views\Profile\" />
     <Folder Include="Views\Query\" />
     <Folder Include="Views\QuestionAnalytics\" />
   </ItemGroup>
