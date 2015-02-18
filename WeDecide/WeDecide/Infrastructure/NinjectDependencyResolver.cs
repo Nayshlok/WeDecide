@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web.Mvc;
 
 using Ninject;
+using WeDecide.DAL.Abstract;
+using WeDecide.DAL.Concrete;
 
 namespace WeDecide.Infrastructure
 {
@@ -33,6 +35,8 @@ namespace WeDecide.Infrastructure
         private void ApplyBindings()
         {
             // Do this waaaayyyy better
+            kernel.Bind<IMembershipDAL>().To<CustomMembershipDAL>();
+            //kernel.Bind<IQuestionDAL>().To<Questio
         }
 
     }
