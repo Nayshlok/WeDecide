@@ -21,12 +21,16 @@ namespace WeDecide.Controllers
         {
             if (ModelState.IsValid)
             {
-                //Do A lot of stuff
+                //Save the question
 
+                //Return the RespondToQuestionForNow
+                return View("~/Views/QuestionResponse/Response.cshtml", q);
             }
-
-            //Don't know what to return yet
-            return View();
+            else
+            {
+                //Return view with errors marked out
+                return View();
+            }
         }
         
         [HttpGet]

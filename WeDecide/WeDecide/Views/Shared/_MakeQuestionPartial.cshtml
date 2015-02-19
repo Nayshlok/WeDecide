@@ -5,11 +5,11 @@
     {
         <h1>Make a New Question</h1>
 
-        @Html.ValidationSummary()
-
+        @Html.ValidationMessageFor(x => x.Question)
         <p>Question Text: </p>
         @Html.TextBoxFor(x => x.Question)
         <ul id="responseHolder">
+            @Html.ValidationMessageFor(x => x.Responses)
             <li class="response">
                 <p>Response: </p>
                 <input type="text" name="Responses" />
@@ -20,7 +20,9 @@
             </li>
         </ul>
         <input id="addResponse" type="button" value="Add More Responses" />
+        <br/>
 
+        @Html.ValidationMessageFor(x => x.EndDate)
         <p>Timout Date: </p>
         <input id="EndDate" type="text" name="EndDate" />
         <input type="submit" value="Make Question" />
