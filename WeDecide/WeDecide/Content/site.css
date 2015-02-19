@@ -1,4 +1,5 @@
 ﻿* {
+	font-family: Arial, sans-serif;
 	margin: 0;
 	padding: 0;
  }
@@ -10,7 +11,6 @@ body {
  
 header {
 	background-color: #000;
-	font-family: Arial, sans-serif;
 	height: 100px;
 	width: 100%;
  }
@@ -23,6 +23,27 @@ header {
 		left: 2%;
 		position: relative;
 		top: 10%;
+	 }
+ 
+.make-question {
+	border: 1px solid #000;
+	height: 350px;
+	padding: 15px;
+	text-align: center;
+	width: 400px;
+ }
+ 
+	.make-question h1 {
+		font-size: 24px;
+		margin-bottom: 30px;
+		text-decoration: underline;
+	 }
+ 
+	.make-question ul li {list-style: none;}
+ 
+	.make-question input[type=submit] {
+		display: block;
+		margin: 30px auto;
 	 }
  
 footer {

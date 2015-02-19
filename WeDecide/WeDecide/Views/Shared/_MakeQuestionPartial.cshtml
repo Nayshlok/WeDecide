@@ -1,24 +1,26 @@
 ﻿@model WeDecide.ViewModels.QuestionViewModel
 
-@using (Html.BeginForm())
-{
-    <section class="MakeQuestion">
+<section class="make-question">
+    @using (Html.BeginForm())
+    {
+        <h1>Make a New Question</h1>
+        
         @Html.ValidationSummary()
-        <h3>Question Text: </h3> @Html.TextBoxFor(x => x.Question)
-        <br />
+        
+        <p>Question Text: </p>
+        @Html.TextBoxFor(x => x.Question)
         <ul>
             @for (int i = 0; i < 2; i++)
             {
+
                 <li>
                     <p>Response: </p>
                     <input type="text" name="Responses" />
                 </li>
             }
         </ul>
-
-        <p>Timout Date: </p><input type="datetime" name="EndDate" />
-        <br/>
-
+        <p>Timout Date: </p>
+        <input id="EndDate" type="text" name="EndDate" />
         <input type="submit" value="Make Question" />
-    </section>
-}
+    }
+</section>
