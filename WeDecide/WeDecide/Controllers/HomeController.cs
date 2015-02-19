@@ -11,7 +11,13 @@ namespace WeDecide.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            //Check
+            //If the user is logged in, take him to the home page with feed.  
+            return View();
+        }
+
+        public ActionResult LandingPage()
+        {
+            //Take the user to the landing page if not logged in our if not yet registered.
             return View();
         }
     }
