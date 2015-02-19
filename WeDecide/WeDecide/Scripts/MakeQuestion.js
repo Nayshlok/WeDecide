@@ -7,7 +7,7 @@
 
         var questionElement = {}
         questionElement.responseHolder = $('#responseHolder');
-        questionElement.newResponse = $("<li class='response'><p>Response: </p><input type='text' name='Responses' /></li>");
+        questionElement.newResponse = "<li class='response'><p>Response: </p><input type='text' name='Responses' /></li>";
         questionElement.addResponseBtn = $('#addResponse');
 
         questionElement.addResponse = function () {
