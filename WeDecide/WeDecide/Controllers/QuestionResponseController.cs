@@ -19,7 +19,7 @@ namespace WeDecide.Controllers
         [HttpPost]
         public ActionResult QuestionResponse(UserResponseViewModel UserResponse)
         {
-            //Do Stuff
+            //Add or Update UserResponse to appropriate question
             
             //Would like to have this not actually return, as the Partial View will always be a part of something else
             return View();
