@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using WeDecide.Infrastructure;
 
 namespace WeDecide.ViewModels
 {
@@ -12,7 +13,8 @@ namespace WeDecide.ViewModels
         [Required(ErrorMessage = "Please enter a question.", AllowEmptyStrings = false)]
         public string Question { get; set; }
 
-        [Required(ErrorMessage="You need more than one possible response")]
+        [HasAtLeastTwoElements(ErrorMessage="Your question must have at least two possible responses")]
+        [DisplayFormat(ConvertEmptyStringToNull=true)]
         public List<string> Responses { get; set; }
 
         [Required(ErrorMessage="The question needs to end at some time")]

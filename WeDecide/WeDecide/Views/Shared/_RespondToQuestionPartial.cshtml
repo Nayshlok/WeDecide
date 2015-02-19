@@ -11,6 +11,7 @@
                 @for (int i = 0; i < Model.Responses.Count; i++)
                 {
                     <li>
+                        @*Add another check to make sure current user is not the question asker*@
                         @if(DateTime.Now.CompareTo(@Model.EndDate) < 0)
                         {
                             <input type="radio" name="ChosenResponse" value="@Model.Responses[i]" onclick="this.form.submit()" />
@@ -18,6 +19,12 @@
                         <p>@Model.Responses[i]</p>
                     </li>
                 }
+
+                @*Make this only available to friends?*@
+                <li>
+                    <input type="radio" name="ChosenResponse" onclick="this.form.submit()" />
+                    <p>Have another idea?  Write it down here : </p> <input type="text" name="FreeResponse"/>
+                </li>
             </ul>
 
             @*<input type="submit" value="Save Response" />*@
