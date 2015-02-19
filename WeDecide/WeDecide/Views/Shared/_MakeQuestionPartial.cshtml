@@ -9,16 +9,18 @@
         
         <p>Question Text: </p>
         @Html.TextBoxFor(x => x.Question)
-        <ul>
-            @for (int i = 0; i < 2; i++)
-            {
-
-                <li>
-                    <p>Response: </p>
-                    <input type="text" name="Responses" />
-                </li>
-            }
+        <ul id="responseHolder">
+            <li class="response">
+                <p>Response: </p>
+                <input type="text" name="Responses" />
+            </li>
+            <li class="response">
+                <p>Response: </p>
+                <input type="text" name="Responses" />
+            </li>
         </ul>
+        <input id="addResponse" type="button" value="Add More Responses" />
+        
         <p>Timout Date: </p>
         <input id="EndDate" type="text" name="EndDate" />
         <input type="submit" value="Make Question" />
