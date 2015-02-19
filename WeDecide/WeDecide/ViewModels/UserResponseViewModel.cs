@@ -9,6 +9,8 @@ namespace WeDecide.ViewModels
     {
         //public int QuestionId { get; set; }
 
+        //public User Respondent {get; set; }
+
         public string ChosenResponse { get; set; }
     }
 }

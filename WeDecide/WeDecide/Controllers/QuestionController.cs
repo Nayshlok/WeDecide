@@ -23,12 +23,9 @@ namespace WeDecide.Controllers
             {
                 //Do A lot of stuff
 
-                //Don't know what to return yet
-                return View();
             }
-            else
-            {
-            }
+
+            //Don't know what to return yet
             return View();
         }
         
