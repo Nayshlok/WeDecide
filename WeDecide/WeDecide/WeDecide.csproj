@@ -159,6 +159,7 @@
     <Compile Include="Controllers\QuestionAnalyticsController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\QuestionResponseController.cs" />
+    <Compile Include="Models\Concrete\IdentityModels.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\UserResponseViewModel.cs" />
     <Compile Include="DAL\Abstract\IDAL.cs" />
@@ -173,8 +174,6 @@
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\Account\Profile.cs" />
     <Compile Include="Models\Account\User.cs" />
-    <Compile Include="Models\Concrete\ApplicationDbContext.cs" />
-    <Compile Include="Models\Concrete\ApplicationUser.cs" />
     <Compile Include="Models\Concrete\Question.cs" />
     <Compile Include="Models\Concrete\Response.cs" />
     <Compile Include="Models\Concrete\UserResponse.cs" />
@@ -193,6 +192,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

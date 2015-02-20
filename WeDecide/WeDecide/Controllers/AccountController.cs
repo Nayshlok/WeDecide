@@ -33,7 +33,7 @@ namespace WeDecide.Controllers
         {
             get
             {
-                return _signInManager;
+                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
             private set
             {
@@ -45,7 +45,7 @@ namespace WeDecide.Controllers
         {
             get
             {
-                return _userManager;
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
             private set
             {
