@@ -40,7 +40,7 @@ header {
 		text-decoration: underline;
 	 }
  
-	.make-question, .respond-to-question ul li {list-style: none;}
+	li {list-style: none;}
  
 	.make-question #addResponse {
 		display: block;
