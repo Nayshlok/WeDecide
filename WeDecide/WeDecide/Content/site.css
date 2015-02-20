@@ -26,7 +26,7 @@ header {
 	 }
  
     /*Styling for the make question box*/
-.make-question {
+.make-question, .respond-to-question {
 	border: 1px solid #000;
 	min-height: 350px;
 	padding: 15px;
@@ -40,7 +40,7 @@ header {
 		text-decoration: underline;
 	 }
  
-	.make-question ul li {list-style: none;}
+	.make-question, .respond-to-question ul li {list-style: none;}
  
 	.make-question #addResponse {
 		display: block;
@@ -52,6 +52,20 @@ header {
 		margin: 30px auto;
 	 }
  
+    /*Styling for the response box*/
+.respond-to-question input[type=radio] {
+    display: inline-block;
+}
+
+.respond-to-question p {
+    display: inline-block;
+    font-size: 20px;
+}
+
+.respond-to-question ul li {
+    margin: 20px auto;
+}
+
     /*Styling for Validation Errors*/
 .input-validation-error {
 	background-color: #FEE;
