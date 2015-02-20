@@ -1,6 +1,6 @@
 ﻿@model WeDecide.ViewModels.QuestionViewModel
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("ResponseToQuestion", "QuestionResponse"))
 {
     if (@Model != null)
     {
@@ -19,13 +19,26 @@
                         <p>@Model.Responses[i]</p>
                     </li>
                 }
-
-                @*Make this only available to friends?*@
-                <li>
-                    <input type="radio" name="ChosenResponse" onclick="this.form.submit()" />
-                    <p>Have another idea?  Write it down here : </p> <input type="text" name="FreeResponse"/>
-                </li>
+                @if (DateTime.Now.CompareTo(@Model.EndDate) < 0)
+                {
+                    @*Make this only available to friends?*@
+                    <li>
+                        <input type="radio" name="ChosenResponse" onclick="this.form.submit()" />
+                        <p>Have another idea?  Write it down here : </p> <input type="text" name="FreeResponse"/>
+                    </li>
+                }
+                
             </ul>
+            @if (DateTime.Now.CompareTo(@Model.EndDate) < 0)
+            {
+                <p>
+                    @{
+                    TimeSpan ts = Model.EndDate - DateTime.Now;
+                    string time = "Hours : " + ((int)ts.TotalHours) + ", Minutes : " + ts.Minutes;
+                    @: Time left to respond : @time
+                    }
+                </p>
+            }
 
             @*<input type="submit" value="Save Response" />*@
         </section>
