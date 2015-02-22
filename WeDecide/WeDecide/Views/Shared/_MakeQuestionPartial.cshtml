@@ -1,14 +1,16 @@
 ﻿@model WeDecide.ViewModels.QuestionViewModel
 
 <section class="make-question">
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("CreateQuestion", "Question"))
     {
         <h1>Make a New Question</h1>
         
-        @Html.ValidationSummary()
-        
+        @Html.ValidationMessageFor(x => x.Question)
         <p>Question Text: </p>
         @Html.TextBoxFor(x => x.Question)
+        <br/>
+        
+        @Html.ValidationMessageFor(x => x.Responses)
         <ul id="responseHolder">
             <li class="response">
                 <p>Response: </p>
@@ -21,7 +23,16 @@
         </ul>
         <input id="addResponse" type="button" value="Add More Responses" />
         
-        <p>Timout Date: </p>
+        @Html.ValidationMessageFor(x => x.QuestionScope)
+        @Html.EnumDropDownListFor(x => x.QuestionScope)
+        <br/>
+        
+        <p>@Html.CheckBoxFor(x => x.FreeResponseEnabled)
+        Allow free response on my question.</p>
+        <br/>
+        
+        @Html.ValidationMessageFor(x => x.EndDate)
+        <p>The question should be available for: </p>
         <input id="EndDate" type="text" name="EndDate" />
         <input type="submit" value="Make Question" />
     }

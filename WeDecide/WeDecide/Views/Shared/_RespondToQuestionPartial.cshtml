@@ -7,15 +7,34 @@
         <section class="RespondToQuestion">
             <h3>@Model.Question</h3>
 
+            @Html.HiddenFor(x => x.QuestionId)
+
             <ul>
-                @for (int i = 0; i < Model.Responses.Count; i++)
+                @foreach(string Response in @Model.Responses)
                 {
                     <li>
-                        <input type="radio" name="ChosenResponse" value="@Model.Responses[i]" onclick="this.form.submit()" />
-                        <p>@Model.Responses[i]</p>
+                        @if (DateTime.Now.CompareTo(Model.EndDate) < 0)
+                        {
+                            <input type="radio" name="ChosenResponse" value="@Response" onclick="this.form.submit()" />
+                        }
+                        <p>@Response</p>
                     </li>
                 }
             </ul>
+
+            @if (DateTime.Now.CompareTo(Model.EndDate) < 0)
+            {
+                if (Model.FreeResponseEnabled)
+                {
+                    <input type="radio" name="ChosenRespose" onclick="this.form.submit()"/>
+                    <p>Don't like any of these answers? Submit your own : <input type="text"/></p>
+                }
+                @ {
+                      TimeSpan ts = DateTime.Now - Model.EndDate;
+                      string TimeLeft = "Hours : " + ((int)ts.TotalHours) + ", Minutes : " + ts.Minutes;
+                      @:Time left : @TimeLeft
+                  }
+            }
 
             @*<input type="submit" value="Save Response" />*@
         </section>

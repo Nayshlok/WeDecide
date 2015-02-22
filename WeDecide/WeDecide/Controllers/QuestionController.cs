@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WeDecide.DAL.Abstract;
+using WeDecide.DAL.Concrete;
+using WeDecide.Models.Concrete;
 using WeDecide.ViewModels;
 
 namespace WeDecide.Controllers
 {
     public class QuestionController : Controller
     {
+        //Until we have the DAL injection done
+        private static IQuestionDAL Qdal = new MemoryQuestionDAL();
+
         [HttpGet]
         public ViewResult CreateQuestion()
         {
@@ -21,13 +27,13 @@ namespace WeDecide.Controllers
         {
             if (ModelState.IsValid)
             {
-                //Do Stuff
-
-                //Don't know what to return yet
-                return View();
-            }
-            else
-            {
+                //Construct the Question
+                Question NewQuestion = q.GetQuestion();
+                //Add current user to question
+                //Save the Question
+                Qdal.Create(NewQuestion);
+                //Don't know what to return yet, so returning response page
+                return View("~/Views/QuestionResponse/Response.cshtml", q);
             }
             return View();
         }

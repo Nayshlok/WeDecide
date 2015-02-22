@@ -161,12 +161,13 @@
     <Compile Include="Controllers\QuestionAnalyticsController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\QuestionResponseController.cs" />
+    <Compile Include="DAL\Concrete\MemoryQuestionDAL.cs" />
+    <Compile Include="Infrastructure\ValidateResponses.cs" />
     <Compile Include="Models\Concrete\IdentityModels.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\UserResponseViewModel.cs" />
     <Compile Include="DAL\Abstract\IDAL.cs" />
-    <Compile Include="DAL\Abstract\MembershipDAL.cs" />
-    <Compile Include="DAL\Abstract\QuestionDAL.cs" />
+    <Compile Include="DAL\Abstract\IMembershipDAL.cs" />
+    <Compile Include="DAL\Abstract\IQuestionDAL.cs" />
     <Compile Include="DAL\Concrete\CustomMembershipDAL.cs" />
     <Compile Include="DAL\Concrete\FacebookMembershipDAL.cs" />
     <Compile Include="DAL\Concrete\GoogleMembershipDAL.cs" />
@@ -195,6 +196,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\QuestionResponse\Response.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -210,7 +212,6 @@
     <Folder Include="Views\Profile\" />
     <Folder Include="Views\Query\" />
     <Folder Include="Views\QuestionAnalytics\" />
-    <Folder Include="Views\QuestionResponse\" />
     <Folder Include="Views\Question\" />
   </ItemGroup>
   <PropertyGroup>

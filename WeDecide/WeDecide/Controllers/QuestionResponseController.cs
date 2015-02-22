@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WeDecide.DAL.Abstract;
+using WeDecide.DAL.Concrete;
+using WeDecide.Models.Concrete;
 using WeDecide.ViewModels;
 
 namespace WeDecide.Controllers
 {
     public class QuestionResponseController : Controller
     {
+
+        //Until we have the DAL injection done
+        private static IQuestionDAL Qdal = new MemoryQuestionDAL();
+
         // GET: QuestionResponse
         [HttpGet]
         public ActionResult QuestionResponse(QuestionViewModel question)
@@ -17,10 +24,15 @@ namespace WeDecide.Controllers
         }
 
         [HttpPost]
-        public ActionResult QuestionResponse(UserResponseViewModel UserResponse)
+        public ActionResult QuestionResponse(string ChosenResponse, int QuestionId)
         {
-            //Do Stuff
+            //Make New UserResponse with given string and question id
+            Question AffectedQuestion = Qdal.Get(QuestionId);
+            //UserResponse NewUR = new UserResponse(new Response(AffectedQuestion, ChosenResponse), User);
+            //AffectedQuestion.UserResponses.Add(NewUR);
+            Qdal.Update(QuestionId, AffectedQuestion);
             
+            //Add UserResponse to Question
             //Would like to have this not actually return, as the Partial View will always be a part of something else
             return View();
         }

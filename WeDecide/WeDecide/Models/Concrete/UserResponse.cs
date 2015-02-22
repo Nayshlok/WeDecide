@@ -11,5 +11,11 @@ namespace WeDecide.Models.Concrete
     {
         public Response Choice { get; set; }
         public User Resondant { get; set; }
+
+        public UserResponse(Response Choice, User Respondant)
+        {
+            this.Choice = Choice;
+            this.Resondant = Respondant;
+        }
     }
 }
