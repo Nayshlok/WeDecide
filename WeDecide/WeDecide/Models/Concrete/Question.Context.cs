@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WeDecide.Models.Entity
+namespace WeDecide.Models.Concrete
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class WeDecideDbContext : DbContext
+    public partial class Entities : DbContext
     {
-        public WeDecideDbContext()
-            : base("name=WeDecideDbContext")
+        public Entities()
+            : base("name=Entities")
         {
         }
     

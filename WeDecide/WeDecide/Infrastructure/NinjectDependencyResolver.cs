@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using Ninject;
 using WeDecide.DAL.Abstract;
 using WeDecide.DAL.Concrete;
-using WeDecide.Models.Entity;
+using WeDecide.Models.Concrete;
 
 namespace WeDecide.Infrastructure
 {
@@ -39,11 +39,11 @@ namespace WeDecide.Infrastructure
             kernel.Bind<IMembershipDAL>().To<CustomMembershipDAL>();
             // Just dependency inject the things you need.
             // No longer do we have to waste resources on "newing up" the context object.
-            kernel.Bind<WeDecideDbContext>().ToMethod<WeDecideDbContext>(
-                (context) => { return WeDecideDbContext.Create(); }
+            kernel.Bind<Entities>().ToMethod<Entities>(
+                (context) => { return Entities.Create(); }
             );
 
-            kernel.Bind<IQuestionDAL>().To<SqlQuestionDAL>();
+            kernel.Bind<IQuestionDAL>().To<MemoryQuestionDAL>();
         }
 
     }

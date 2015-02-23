@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using WeDecide.Models.Entity;
 
-namespace WeDecide.Models.Entity
+namespace WeDecide.Models.Concrete
 {
-    partial class WeDecideDbContext : DbContext
+    public partial class Entities : DbContext
     {
-        private static WeDecideDbContext s_instance;
-        public static WeDecideDbContext Create()
+        private static Entities s_instance;
+        public static Entities Create()
         {
             if (s_instance == null)
-                s_instance = new WeDecideDbContext();
+                s_instance = new Entities();
             return s_instance;
         }
     }

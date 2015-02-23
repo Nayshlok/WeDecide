@@ -23,7 +23,7 @@ namespace WeDecide.ViewModels
         [Required(ErrorMessage="The question needs to end at some time")]
         public DateTime EndDate { get; set; }
 
-        public WeDecide.Models.Concrete.Question.Scope QuestionScope { get; set; }
+        public Question.Scope QuestionScope { get; set; }
 
         public bool FreeResponseEnabled { get; set; }
 

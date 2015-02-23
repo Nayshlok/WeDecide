@@ -4,35 +4,50 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WeDecide.DAL.Abstract;
-using WeDecide.Models.Entity;
+using WeDecide.Models.Concrete;
 
 namespace WeDecide.DAL.Concrete
 {
     public class SqlQuestionDAL : IQuestionDAL
     {
+        Entities dbContext;
+        public SqlQuestionDAL()
+        {
+            dbContext = Entities.Create();
+        }
+
+        #region IQuestionDAL Members
+
+        public void SaveAllQuestions()
+        {
+            dbContext.SaveChanges();
+        }
+
+        #endregion
+
         #region IDAL<Question> Members
 
-        public bool Create(Models.Concrete.Question entity)
+        public bool Create(Question entity)
         {
             throw new NotImplementedException();
         }
 
-        public Models.Concrete.Question Get(int id)
+        public Question Get(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Models.Concrete.Question Delete(int id)
+        public Question Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Models.Concrete.Question Update(int id, Models.Concrete.Question entity)
+        public Question Update(int id, Models.Concrete.Question entity)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Models.Concrete.Question> GetAll(Func<Models.Concrete.Question, bool> predicate)
+        public IEnumerable<Question> GetAll(Func<Question, bool> predicate)
         {
             throw new NotImplementedException();
         }
