@@ -10,11 +10,5 @@ namespace WeDecide.Models.Concrete
     {
         public Question Owner { get; set; }
         public string Text { get; set; }
-
-        public Response(Question Owner, string Text)
-        {
-            this.Owner = Owner;
-            this.Text = Text;
-        }
     }
 }
