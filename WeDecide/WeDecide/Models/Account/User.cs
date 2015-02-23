@@ -11,10 +11,11 @@ namespace WeDecide.Models.Account
     {
         //public Account OwningAccount { get; set; }
         public int Id { get; set; }
-        [Required(ErrorMessage="Everyone has a name")]
+        [Required(ErrorMessage = "Everyone has a name")]
         public string Name { get; set; }
-        [Required(ErrorMessage="You must have a valid password")]
-        [MinLength(6)] [MaxLength(20)]
+        [Required(ErrorMessage = "You must have a valid password")]
+        [MinLength(6)]
+        [MaxLength(20)]
         public string Password { get; set; } // Not permanent, but we need to discuss this
         public List<User> Friends { get; set; }
 

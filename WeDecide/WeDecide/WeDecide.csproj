@@ -88,6 +88,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -136,9 +138,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\WeDecideDB.mdf" />
+    <Content Include="App_Data\WeDecideDB_log.ldf">
+      <DependentUpon>WeDecideDB.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\site.css" />
     <Content Include="Global.asax" />
+    <EntityDeploy Include="Models\Entity\Question.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Question1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Entity\Question.edmx.diagram">
+      <DependentUpon>Question.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Models\Entity\Question.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Question2.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -164,6 +181,33 @@
     <Compile Include="DAL\Concrete\MemoryQuestionDAL.cs" />
     <Compile Include="Infrastructure\ValidateResponses.cs" />
     <Compile Include="Models\Concrete\IdentityModels.cs" />
+    <Compile Include="Models\Entity\Question.Context.cs" />
+    <Compile Include="Models\Entity\Question.cs">
+      <DependentUpon>Question.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\Question.Designer.cs">
+      <DependentUpon>Question.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\Question1.cs" />
+    <Compile Include="Models\Entity\Question1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Question.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\Question2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Question.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\Response.cs">
+      <DependentUpon>Question.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\User.cs">
+      <DependentUpon>Question.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\UserResponse.cs">
+      <DependentUpon>Question.tt</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="DAL\Abstract\IDAL.cs" />
     <Compile Include="DAL\Abstract\IMembershipDAL.cs" />
@@ -197,6 +241,7 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\QuestionResponse\Response.cshtml" />
+    <Content Include="Views\Home\Testpage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -205,14 +250,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Models\Abstract\" />
     <Folder Include="Views\Feed\" />
-    <Folder Include="Views\Home\" />
     <Folder Include="Views\Profile\" />
     <Folder Include="Views\Query\" />
     <Folder Include="Views\QuestionAnalytics\" />
     <Folder Include="Views\Question\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

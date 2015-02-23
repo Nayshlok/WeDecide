@@ -1,0 +1,34 @@
+﻿@model WeDecide.Controllers.TestViewModel
+
+@{
+    ViewBag.Title = "Testpage";
+}
+
+<h2>Testpage</h2>
+
+<div>
+    <h4>TestViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal"></dl>
+    @{
+        @: @Model.TheQuestion
+        <h3>Responses</h3>
+        foreach (var response in Model.Responses)
+        {
+            <p>
+                @response
+            </p>
+        }
+        <h3>User Response</h3>
+        foreach (var userResp in Model.UserResponses)
+        {
+            <p>
+                @userResp
+            </p>
+        }
+    }
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
