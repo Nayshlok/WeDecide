@@ -29,6 +29,7 @@ namespace WeDecide.Controllers
             //Take the user to the landing page if not logged in our if not yet registered.
             return View();
         }
+
         public ActionResult Testpage()
         {
             // Use a viewmodel that holds Question, its responses, and those user responses

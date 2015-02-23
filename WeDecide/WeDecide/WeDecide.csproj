@@ -179,8 +179,10 @@
     <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\QuestionResponseController.cs" />
     <Compile Include="DAL\Concrete\MemoryQuestionDAL.cs" />
+    <Compile Include="DAL\Concrete\SqlQuestionDAL.cs" />
     <Compile Include="Infrastructure\ValidateResponses.cs" />
     <Compile Include="Models\Concrete\IdentityModels.cs" />
+    <Compile Include="Models\Concrete\WeDecideDbContextCustom.cs" />
     <Compile Include="Models\Entity\Question.Context.cs" />
     <Compile Include="Models\Entity\Question.cs">
       <DependentUpon>Question.tt</DependentUpon>
@@ -188,7 +190,6 @@
     <Compile Include="Models\Entity\Question.Designer.cs">
       <DependentUpon>Question.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\Entity\Question1.cs" />
     <Compile Include="Models\Entity\Question1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
