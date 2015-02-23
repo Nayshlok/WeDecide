@@ -24,7 +24,7 @@ namespace WeDecide.Models.Concrete
         public string Text { get; set; }
         public int QuestionId { get; set; }
     
-        public virtual Question Question { get; set; }
+        public virtual Question Owner { get; set; }
         public virtual ICollection<UserResponse> UserResponses { get; set; }
     }
 }

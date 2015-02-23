@@ -69,7 +69,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="OwnerId" Type="Int32" Nullable="false" />
           <Property Name="Text" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Question" Relationship="WeDecideDBModel.QuestionResponse" FromRole="Response" ToRole="Question" />
+          <NavigationProperty Name="Owner" Relationship="WeDecideDBModel.QuestionResponse" FromRole="Response" ToRole="Question" />
           <Property Name="QuestionId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="UserResponses" Relationship="WeDecideDBModel.ResponseUserResponse" FromRole="Response" ToRole="UserResponse" />
         </EntityType>

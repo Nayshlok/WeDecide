@@ -24,6 +24,10 @@ header {
 		position: relative;
 		top: 10%;
 	 }
+
+    header h1 a {
+        color: #FFF;
+    }
  
 .make-question {
 	border: 1px solid #000;

@@ -9,7 +9,7 @@ namespace WeDecide.DAL.Concrete
 {
     public class MemoryQuestionDAL : IQuestionDAL
     {
-        private List<Question> questions;
+        private static List<Question> questions;
 
         public MemoryQuestionDAL()
         {
