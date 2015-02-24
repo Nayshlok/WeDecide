@@ -22,7 +22,7 @@ namespace WeDecide.ViewModels
 
         public int Minutes { get; set; }
 
-        public WeDecide.Models.Concrete.Question.Scope QuestionScope { get; set; }
+        public Models.Concrete.Question.Scope QuestionScope { get; set; }
 
         public bool FreeResponseEnabled { get; set; }
 
