@@ -23,8 +23,6 @@ namespace WeDecide.Models.Concrete
     {
         public Response(Question owner, string text)
         {
-            Question = owner;
-            Text = text;
         }
     }
 }
