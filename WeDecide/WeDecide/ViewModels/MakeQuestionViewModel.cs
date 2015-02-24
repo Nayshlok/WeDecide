@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using WeDecide.Infrastructure;
-using WeDecide.Models.Entity;
 
 namespace WeDecide.ViewModels
 {
@@ -20,7 +19,7 @@ namespace WeDecide.ViewModels
 
         public int Minutes { get; set; }
 
-        public WeDecide.Models.Concrete.Question.Scope QuestionScope { get; set; }
+        public Models.Concrete.Question.Scope QuestionScope { get; set; }
 
         public bool FreeResponseEnabled { get; set; }
     }
