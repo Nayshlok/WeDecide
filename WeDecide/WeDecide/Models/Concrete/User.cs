@@ -7,18 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WeDecide.Models.Entity
+namespace WeDecide.Models.Concrete
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Response
+    public partial class User
     {
-        public int Id { get; set; }
-        public int OwnerId { get; set; }
-        public string Text { get; set; }
-        public int QuestionId { get; set; }
+        public User()
+        {
+            this.Questions = new HashSet<Question>();
+        }
     
-        public virtual Question Question { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int QuestionId { get; set; }
+        public int ResponseId { get; set; }
+    
+        public virtual ICollection<Question> Questions { get; set; }
     }
 }
