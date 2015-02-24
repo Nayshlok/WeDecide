@@ -251,6 +251,7 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\QuestionResponse\Response.cshtml" />
     <Content Include="Views\Home\Testpage.cshtml" />
+    <Content Include="Views\Shared\_CurrentQuestion.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
