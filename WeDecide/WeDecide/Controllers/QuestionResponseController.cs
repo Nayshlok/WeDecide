@@ -18,9 +18,11 @@ namespace WeDecide.Controllers
 
         // GET: QuestionResponse
         [HttpGet]
-        public ActionResult QuestionResponse(QuestionViewModel question)
+        public ActionResult QuestionResponse(int id)
         {
-            return View("~/View/Shared/_ResponseToQuestionPartial.cshtml", question);
+            Question question = Qdal.Get(id);
+            RespondToQuestionViewModel vm = new RespondToQuestionViewModel(question);
+            return View("~/Views/QuestionResponse/Response.cshtml", vm);
         }
 
         [HttpPost]

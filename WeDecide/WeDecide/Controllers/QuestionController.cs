@@ -33,7 +33,8 @@ namespace WeDecide.Controllers
                 //Save the Question
                 Qdal.Create(NewQuestion);
                 //Don't know what to return yet, so returning response page
-                return View("~/Views/QuestionResponse/Response.cshtml", q);
+                RespondToQuestionViewModel model = new RespondToQuestionViewModel(NewQuestion);
+                return RedirectToAction("QuestionResponse", "QuestionResponse", new { id = NewQuestion.Id });
             }
             return View();
         }

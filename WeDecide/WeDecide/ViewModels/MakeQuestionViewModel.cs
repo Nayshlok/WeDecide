@@ -36,7 +36,7 @@ namespace WeDecide.ViewModels
                 Text = this.Question
             };
 
-            ReturnValue.Responses = this.Responses.ToList().ConvertAll(x => new Response(ReturnValue, x));
+            ReturnValue.Responses = this.Responses.ToList().ConvertAll(x => new Response() { Text = x, Owner = ReturnValue });
 
             return ReturnValue;
         }
