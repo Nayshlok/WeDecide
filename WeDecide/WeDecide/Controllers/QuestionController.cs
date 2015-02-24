@@ -23,7 +23,7 @@ namespace WeDecide.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateQuestion(QuestionViewModel q)
+        public ActionResult CreateQuestion(MakeQuestionViewModel q)
         {
             if (ModelState.IsValid)
             {
