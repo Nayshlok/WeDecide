@@ -8,5 +8,8 @@ namespace WeDecide.DAL.Abstract
 {
     public interface IQuestionDAL : IDAL<Question>
     {
+        //IEnumerable<Question> GetQuestions(Func<Question, bool> predicate);
+        void SaveAllQuestions();
+
     }
 }

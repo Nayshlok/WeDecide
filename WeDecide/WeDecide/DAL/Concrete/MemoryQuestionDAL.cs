@@ -63,5 +63,14 @@ namespace WeDecide.DAL.Concrete
         {
             return questions.Where(predicate);
         }
+
+        #region IQuestionDAL Members
+
+        public void SaveAllQuestions()
+        {
+            // intentionally omitted
+        }
+
+        #endregion
     }
 }

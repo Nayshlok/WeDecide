@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using WeDecide.Models.Entity;
+using WeDecide.Models.Concrete;
 using WeDecide.ViewModels;
 
 namespace WeDecide.Controllers
 {
     public class HomeController : Controller
     {
-        WeDecideDbContext _Context;
-        public HomeController(WeDecideDbContext context)
+        private Entities _Context;
+        public HomeController(Entities context)
         {
             _Context = context;
         }
