@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using WeDecide.Infrastructure;
-using WeDecide.Models.Entity;
 
 namespace WeDecide.ViewModels
 {

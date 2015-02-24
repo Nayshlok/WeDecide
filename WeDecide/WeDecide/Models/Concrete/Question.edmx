@@ -112,8 +112,8 @@
             <End Role="Question" EntitySet="Questions" />
           </AssociationSet>
           <AssociationSet Name="ResponseUserResponse" Association="WeDecideDBModel.ResponseUserResponse">
-            <End Role="Response" EntitySet="Responses" />
-            <End Role="UserResponse" EntitySet="UserResponses" />
+            <End EntitySet="Responses" Role="Response" />
+            <End EntitySet="UserResponses" Role="UserResponse" />
           </AssociationSet>
           </EntityContainer>
         <Association Name="QuestionUserResponse">
@@ -153,8 +153,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="ResponseUserResponse">
-          <End Type="WeDecideDBModel.Response" Role="Response" Multiplicity="1" />
-          <End Type="WeDecideDBModel.UserResponse" Role="UserResponse" Multiplicity="*" />
+          <End Type="WeDecideDBModel.Response" Multiplicity="1" Role="Response" />
+          <End Type="WeDecideDBModel.UserResponse" Multiplicity="*" Role="UserResponse" />
           <ReferentialConstraint>
             <Principal Role="Response">
               <PropertyRef Name="Id" />
