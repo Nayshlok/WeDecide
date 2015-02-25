@@ -1,4 +1,4 @@
-﻿@model WeDecide.ViewModels.QuestionViewModel
+﻿@model WeDecide.ViewModels.MakeQuestionViewModel
 
 <section class="make-question">
     @using (Html.BeginForm("CreateQuestion", "Question"))
@@ -31,9 +31,9 @@
         Allow free response on my question.</p>
         <br/>
         
-        @Html.ValidationMessageFor(x => x.EndDate)
+        @Html.ValidationMessageFor(x => x)
         <p>The question should be available for: </p>
-        <input id="EndDate" type="text" name="EndDate" />
+        <p>Hours: <input type="text" value="0" name="Hours"/> Minutes : <input type="text" value="10" name="Minutes"/></p>
         <input type="submit" value="Make Question" />
     }
 </section>

@@ -9,19 +9,21 @@ namespace WeDecide.DAL.Concrete
 {
     public class MemoryQuestionDAL : IQuestionDAL
     {
-        private static List<Question> questions;
+        private static Dictionary<int, Question> questions = new Dictionary<int,Question>();
 
-        public MemoryQuestionDAL()
-        {
-            questions = new List<Question>();
-        }
+        private static int NextId = 1;
 
         public bool Create(Question entity)
         {
             bool Successful = false;
-            if (!questions.Contains(entity))
+            if (!questions.Values.Contains(entity))
             {
-                questions.Add(entity);
+                lock (questions)
+                {
+                    entity.Id = NextId;
+                    NextId++;
+                }
+                questions.Add(entity.Id, entity);
                 Successful = true;
             }
             return Successful;
@@ -29,13 +31,13 @@ namespace WeDecide.DAL.Concrete
 
         public Question Get(int id)
         {
-            return questions.Where(x => x.Id == id).First();
+            return questions[id];
         }
 
         public Question Delete(int id)
         {
             Question removedQuestion = Get(id);
-            questions.Remove(removedQuestion);
+            questions.Remove(id);
             return removedQuestion;
         }
 
@@ -61,7 +63,7 @@ namespace WeDecide.DAL.Concrete
 
         public IEnumerable<Question> GetAll(Func<Question, bool> predicate)
         {
-            return questions.Where(predicate);
+            return questions.Values.Where(predicate);
         }
 
         #region IQuestionDAL Members

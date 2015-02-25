@@ -142,15 +142,65 @@
     <Content Include="App_Data\WeDecideDB_log.ldf">
       <DependentUpon>WeDecideDB.mdf</DependentUpon>
     </Content>
+    <Content Include="bin\EntityFramework.dll" />
+    <Content Include="bin\EntityFramework.SqlServer.dll" />
+    <Content Include="bin\EntityFramework.SqlServer.xml" />
+    <Content Include="bin\EntityFramework.xml" />
+    <Content Include="bin\Images\placeholder-headshot.jpg" />
+    <Content Include="bin\Microsoft.AspNet.Identity.Core.dll" />
+    <Content Include="bin\Microsoft.AspNet.Identity.Core.xml" />
+    <Content Include="bin\Microsoft.AspNet.Identity.EntityFramework.dll" />
+    <Content Include="bin\Microsoft.AspNet.Identity.EntityFramework.xml" />
+    <Content Include="bin\Microsoft.AspNet.Identity.Owin.dll" />
+    <Content Include="bin\Microsoft.AspNet.Identity.Owin.xml" />
+    <Content Include="bin\Microsoft.Owin.dll" />
+    <Content Include="bin\Microsoft.Owin.Host.SystemWeb.dll" />
+    <Content Include="bin\Microsoft.Owin.Host.SystemWeb.xml" />
+    <Content Include="bin\Microsoft.Owin.Security.Cookies.dll" />
+    <Content Include="bin\Microsoft.Owin.Security.Cookies.xml" />
+    <Content Include="bin\Microsoft.Owin.Security.dll" />
+    <Content Include="bin\Microsoft.Owin.Security.OAuth.dll" />
+    <Content Include="bin\Microsoft.Owin.Security.OAuth.xml" />
+    <Content Include="bin\Microsoft.Owin.Security.xml" />
+    <Content Include="bin\Microsoft.Owin.xml" />
+    <Content Include="bin\Newtonsoft.Json.dll" />
+    <Content Include="bin\Newtonsoft.Json.xml" />
+    <Content Include="bin\Ninject.dll" />
+    <Content Include="bin\Ninject.xml" />
+    <Content Include="bin\Owin.dll" />
+    <Content Include="bin\System.Net.Http.Formatting.dll" />
+    <Content Include="bin\System.Net.Http.Formatting.xml" />
+    <Content Include="bin\System.Web.Helpers.dll" />
+    <Content Include="bin\System.Web.Helpers.xml" />
+    <Content Include="bin\System.Web.Http.dll" />
+    <Content Include="bin\System.Web.Http.Owin.dll" />
+    <Content Include="bin\System.Web.Http.Owin.xml" />
+    <Content Include="bin\System.Web.Http.xml" />
+    <Content Include="bin\System.Web.Mvc.dll" />
+    <Content Include="bin\System.Web.Mvc.xml" />
+    <Content Include="bin\System.Web.Razor.dll" />
+    <Content Include="bin\System.Web.Razor.xml" />
+    <Content Include="bin\System.Web.Webpages.Deployment.dll" />
+    <Content Include="bin\System.Web.Webpages.Deployment.xml" />
+    <Content Include="bin\System.Web.Webpages.dll" />
+    <Content Include="bin\System.Web.Webpages.Razor.dll" />
+    <Content Include="bin\System.Web.Webpages.Razor.xml" />
+    <Content Include="bin\System.Web.Webpages.xml" />
+    <Content Include="bin\WeDecide.dll" />
+    <Content Include="bin\WeDecide.pdb" />
     <Content Include="Content\site.css" />
     <Content Include="Global.asax" />
     <EntityDeploy Include="Models\Concrete\Question.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Question.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Images\placeholder-headshot.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Models\Concrete\Question.edmx.diagram">
       <DependentUpon>Question.edmx</DependentUpon>
     </Content>
+    <Content Include="bin\WeDecide.dll.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Models\Concrete\Question.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -187,7 +237,8 @@
     <Compile Include="Controllers\QuestionResponseController.cs" />
     <Compile Include="DAL\Concrete\MemoryQuestionDAL.cs" />
     <Compile Include="DAL\Concrete\SqlQuestionDAL.cs" />
-    <Compile Include="Infrastructure\ValidateResponses.cs" />
+    <Compile Include="Infrastructure\Annotations\ValidateResponses.cs" />
+    <Compile Include="Infrastructure\Annotations\ValidateTimeToAnswer.cs" />
     <Compile Include="Models\Concrete\IdentityModels.cs" />
     <Compile Include="Models\Concrete\PartialClasses.cs" />
     <Compile Include="Models\Concrete\Question.Context.cs">
@@ -234,6 +285,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MakeQuestionViewModel.cs" />
+    <Compile Include="ViewModels\QuestionPollingViewModel.cs" />
     <Compile Include="ViewModels\QuestionViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\RespondToQuestionViewModel.cs" />
@@ -254,6 +306,8 @@
     <Content Include="Views\Home\Testpage.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\LandingPage.cshtml" />
+    <Content Include="Views\Shared\_QuestionPollPartial.cshtml" />
+    <Content Include="Views\QuestionAnalytics\QuestionPoll.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -266,7 +320,6 @@
     <Folder Include="Views\Feed\" />
     <Folder Include="Views\Profile\" />
     <Folder Include="Views\Query\" />
-    <Folder Include="Views\QuestionAnalytics\" />
     <Folder Include="Views\Question\" />
   </ItemGroup>
   <ItemGroup>
