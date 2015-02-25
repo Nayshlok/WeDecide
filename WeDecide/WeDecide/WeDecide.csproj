@@ -246,6 +246,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Question.Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Concrete\Question.cs">
+      <DependentUpon>QuestionContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Concrete\Question.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -256,7 +259,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>QuestionContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Concrete\Response.cs">
+      <DependentUpon>QuestionContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Concrete\User.cs">
+      <DependentUpon>QuestionContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Concrete\UserResponse.cs">
       <DependentUpon>QuestionContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Concrete\WeDecideDbContextCustom.cs" />
@@ -273,15 +282,6 @@
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\Account\Profile.cs" />
     <Compile Include="Models\Account\User.cs" />
-    <Compile Include="Models\Concrete\Question.cs">
-      <DependentUpon>QuestionContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Concrete\Response.cs">
-      <DependentUpon>QuestionContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Concrete\UserResponse.cs">
-      <DependentUpon>QuestionContext.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MakeQuestionViewModel.cs" />

@@ -11,9 +11,9 @@
         <EntityTypeShape EntityType="WeDecideDBModel.UserResponse" Width="2.5" PointX="6" PointY="4.125" IsExpanded="true" />
         <AssociationConnector Association="WeDecideDBModel.QuestionUserResponse" />
         <AssociationConnector Association="WeDecideDBModel.QuestionResponse" />
-        <AssociationConnector Association="WeDecideDBModel.UserQuestion" />
         <AssociationConnector Association="WeDecideDBModel.ResponseUserResponse" />
         <AssociationConnector Association="WeDecideDBModel.RespondantToUserResponse" />
+        <AssociationConnector Association="WeDecideDBModel.UserQuestion" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

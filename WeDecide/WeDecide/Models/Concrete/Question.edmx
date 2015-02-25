@@ -10,6 +10,26 @@
     <EntitySet Name="Responses" EntityType="WeDecideDBModel.Store.Responses" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Users" EntityType="WeDecideDBModel.Store.Users" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="UserResponses" EntityType="WeDecideDBModel.Store.UserResponses" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="QuestionUserResponse" Association="WeDecideDBModel.Store.QuestionUserResponse">
+      <End Role="Question" EntitySet="Questions" />
+      <End Role="UserResponse" EntitySet="UserResponses" />
+    </AssociationSet>
+    <AssociationSet Name="QuestionResponse" Association="WeDecideDBModel.Store.QuestionResponse">
+      <End Role="Question" EntitySet="Questions" />
+      <End Role="Response" EntitySet="Responses" />
+    </AssociationSet>
+    <AssociationSet Name="ResponseUserResponse" Association="WeDecideDBModel.Store.ResponseUserResponse">
+      <End Role="Response" EntitySet="Responses" />
+      <End Role="UserResponse" EntitySet="UserResponses" />
+    </AssociationSet>
+    <AssociationSet Name="RespondantToUserResponse" Association="WeDecideDBModel.Store.RespondantToUserResponse">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserResponse" EntitySet="UserResponses" />
+    </AssociationSet>
+    <AssociationSet Name="UserQuestion" Association="WeDecideDBModel.Store.UserQuestion">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Question" EntitySet="Questions" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Questions">
     <Key>
@@ -19,6 +39,7 @@
     <Property Name="Text" Type="varchar(max)" Nullable="false" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
     <Property Name="FreeResponseEnabled" Type="bit" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Responses">
     <Key>
@@ -27,6 +48,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="OwnerId" Type="int" Nullable="false" />
     <Property Name="Text" Type="nchar" Nullable="false" MaxLength="10" />
+    <Property Name="QuestionId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Users">
     <Key>
@@ -42,9 +64,70 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="QuestionId" Type="int" Nullable="false" />
     <Property Name="ResponseId" Type="int" Nullable="false" />
-    <Property Name="RespontdantId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
   </EntityType>
+  <Association Name="QuestionUserResponse">
+    <End Role="Question" Type="WeDecideDBModel.Store.Questions" Multiplicity="1" />
+    <End Role="UserResponse" Type="WeDecideDBModel.Store.UserResponses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Question">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserResponse">
+        <PropertyRef Name="QuestionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="QuestionResponse">
+    <End Role="Question" Type="WeDecideDBModel.Store.Questions" Multiplicity="1" />
+    <End Role="Response" Type="WeDecideDBModel.Store.Responses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Question">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Response">
+        <PropertyRef Name="QuestionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ResponseUserResponse">
+    <End Role="Response" Type="WeDecideDBModel.Store.Responses" Multiplicity="1" />
+    <End Role="UserResponse" Type="WeDecideDBModel.Store.UserResponses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Response">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserResponse">
+        <PropertyRef Name="ResponseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RespondantToUserResponse">
+    <End Role="User" Type="WeDecideDBModel.Store.Users" Multiplicity="1" />
+    <End Role="UserResponse" Type="WeDecideDBModel.Store.UserResponses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserResponse">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserQuestion">
+    <End Role="User" Type="WeDecideDBModel.Store.Users" Multiplicity="1" />
+    <End Role="Question" Type="WeDecideDBModel.Store.Questions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Question">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -81,8 +164,8 @@
           <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="QuestionId" Type="Int32" Nullable="false" />
           <Property Name="ResponseId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Questions" Relationship="WeDecideDBModel.UserQuestion" FromRole="User" ToRole="Question" />
           <NavigationProperty Name="UserResponses" Relationship="WeDecideDBModel.RespondantToUserResponse" FromRole="User" ToRole="UserResponse" />
+          <NavigationProperty Name="Questions" Relationship="WeDecideDBModel.UserQuestion" FromRole="User" ToRole="Question" />
         </EntityType>
         <EntityType Name="UserResponse">
           <Key>
@@ -109,10 +192,6 @@
             <End Role="Question" EntitySet="Questions" />
             <End Role="Response" EntitySet="Responses" />
           </AssociationSet>
-          <AssociationSet Name="UserQuestion" Association="WeDecideDBModel.UserQuestion">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Question" EntitySet="Questions" />
-          </AssociationSet>
           <AssociationSet Name="ResponseUserResponse" Association="WeDecideDBModel.ResponseUserResponse">
             <End EntitySet="Responses" Role="Response" />
             <End EntitySet="UserResponses" Role="UserResponse" />
@@ -120,6 +199,10 @@
           <AssociationSet Name="RespondantToUserResponse" Association="WeDecideDBModel.RespondantToUserResponse">
             <End Role="User" EntitySet="Users" />
             <End Role="UserResponse" EntitySet="UserResponses" />
+          </AssociationSet>
+          <AssociationSet Name="UserQuestion" Association="WeDecideDBModel.UserQuestion">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Question" EntitySet="Questions" />
           </AssociationSet>
           </EntityContainer>
         <Association Name="QuestionUserResponse">
@@ -143,18 +226,6 @@
             </Principal>
             <Dependent Role="Response">
               <PropertyRef Name="QuestionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="UserQuestion">
-          <End Type="WeDecideDBModel.User" Role="User" Multiplicity="1" />
-          <End Type="WeDecideDBModel.Question" Role="Question" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Question">
-              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -182,6 +253,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="UserQuestion">
+          <End Type="WeDecideDBModel.User" Role="User" Multiplicity="1" />
+          <End Type="WeDecideDBModel.Question" Role="Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -195,6 +278,7 @@
           <ScalarProperty Name="Text" ColumnName="Text" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="FreeResponseEnabled" ColumnName="FreeResponseEnabled" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -204,6 +288,7 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
           <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -221,6 +306,9 @@
       <EntityTypeMapping TypeName="IsTypeOf(WeDecideDBModel.UserResponse)">
         <MappingFragment StoreEntitySet="UserResponses">
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+          <ScalarProperty Name="ResponseId" ColumnName="ResponseId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

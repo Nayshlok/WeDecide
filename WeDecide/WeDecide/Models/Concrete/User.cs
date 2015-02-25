@@ -16,8 +16,8 @@ namespace WeDecide.Models.Concrete
     {
         public User()
         {
-            this.Questions = new HashSet<Question>();
             this.UserResponses = new HashSet<UserResponse>();
+            this.Questions = new HashSet<Question>();
         }
     
         public int Id { get; set; }
@@ -25,7 +25,7 @@ namespace WeDecide.Models.Concrete
         public int QuestionId { get; set; }
         public int ResponseId { get; set; }
     
-        public virtual ICollection<Question> Questions { get; set; }
         public virtual ICollection<UserResponse> UserResponses { get; set; }
+        public virtual ICollection<Question> Questions { get; set; }
     }
 }
