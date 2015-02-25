@@ -39,8 +39,8 @@ namespace WeDecide.Infrastructure
             kernel.Bind<IMembershipDAL>().To<CustomMembershipDAL>();
             // Just dependency inject the things you need.
             // No longer do we have to waste resources on "newing up" the context object.
-            kernel.Bind<Entities>().ToMethod<Entities>(
-                (context) => { return Entities.Create(); }
+            kernel.Bind<QuestionDbContext>().ToMethod<QuestionDbContext>(
+                (context) => { return QuestionDbContext.Create(); }
             );
 
             kernel.Bind<IQuestionDAL>().To<MemoryQuestionDAL>();

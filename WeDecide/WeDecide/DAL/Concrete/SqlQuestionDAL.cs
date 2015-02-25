@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using WeDecide.DAL.Abstract;
 using WeDecide.Models.Concrete;
 
@@ -10,10 +9,10 @@ namespace WeDecide.DAL.Concrete
 {
     public class SqlQuestionDAL : IQuestionDAL
     {
-        Entities dbContext;
+        QuestionDbContext dbContext;
         public SqlQuestionDAL()
         {
-            dbContext = Entities.Create();
+            dbContext = QuestionDbContext.Create();
         }
 
         #region IQuestionDAL Members
@@ -29,27 +28,43 @@ namespace WeDecide.DAL.Concrete
 
         public bool Create(Question entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                dbContext.Questions.Add(entity);
+                return true;
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("There was an exception");
+                return false;
+            }
         }
 
         public Question Get(int id)
         {
-            throw new NotImplementedException();
+            return dbContext.Questions.Find(id);
         }
 
         public Question Delete(int id)
         {
-            throw new NotImplementedException();
+            var question = Get(id);
+            // Safe removal
+            dbContext.Questions.Remove(question);
+
+            return question;
         }
 
         public Question Update(int id, Models.Concrete.Question entity)
         {
-            throw new NotImplementedException();
+            var toUpdate = Get(id);
+            Question.CopyProperties(ref toUpdate, ref entity);
+
+            return toUpdate;
         }
 
         public IEnumerable<Question> GetAll(Func<Question, bool> predicate)
         {
-            throw new NotImplementedException();
+            return dbContext.Questions.Where(predicate);
         }
 
         #endregion

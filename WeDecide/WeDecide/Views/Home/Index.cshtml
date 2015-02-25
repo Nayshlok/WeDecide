@@ -5,8 +5,18 @@
 }
 
 <section class="home-page">
-    <h1>This is the Home Page.</h1>
-    <h1>@User.Identity.Name</h1>
-    @Html.Partial("_MakeQuestionPartial");
+
+    <div class="quick-profile-view">
+        <div class="profile_pic shadowed"></div>
+        <div class="info-panel shadowed">
+            <h2 class="small-header">Friends</h2>
+        </div>
+    </div>
+    <section class="welcome-header shadowed">
+        <h1>Welcome Back, User.</h1>
+    </section>
+    <section class="content-feed">
+
+    </section>
 </section>
 

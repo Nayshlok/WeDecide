@@ -55,12 +55,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.0-alpha1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNet.SignalR.Core">
-      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb">
-      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.0\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin">
       <HintPath>..\packages\Microsoft.Owin.3.0.0\lib\net45\Microsoft.Owin.dll</HintPath>
@@ -148,15 +142,65 @@
     <Content Include="App_Data\WeDecideDB_log.ldf">
       <DependentUpon>WeDecideDB.mdf</DependentUpon>
     </Content>
+    <Content Include="bin\EntityFramework.dll" />
+    <Content Include="bin\EntityFramework.SqlServer.dll" />
+    <Content Include="bin\EntityFramework.SqlServer.xml" />
+    <Content Include="bin\EntityFramework.xml" />
+    <Content Include="bin\Images\placeholder-headshot.jpg" />
+    <Content Include="bin\Microsoft.AspNet.Identity.Core.dll" />
+    <Content Include="bin\Microsoft.AspNet.Identity.Core.xml" />
+    <Content Include="bin\Microsoft.AspNet.Identity.EntityFramework.dll" />
+    <Content Include="bin\Microsoft.AspNet.Identity.EntityFramework.xml" />
+    <Content Include="bin\Microsoft.AspNet.Identity.Owin.dll" />
+    <Content Include="bin\Microsoft.AspNet.Identity.Owin.xml" />
+    <Content Include="bin\Microsoft.Owin.dll" />
+    <Content Include="bin\Microsoft.Owin.Host.SystemWeb.dll" />
+    <Content Include="bin\Microsoft.Owin.Host.SystemWeb.xml" />
+    <Content Include="bin\Microsoft.Owin.Security.Cookies.dll" />
+    <Content Include="bin\Microsoft.Owin.Security.Cookies.xml" />
+    <Content Include="bin\Microsoft.Owin.Security.dll" />
+    <Content Include="bin\Microsoft.Owin.Security.OAuth.dll" />
+    <Content Include="bin\Microsoft.Owin.Security.OAuth.xml" />
+    <Content Include="bin\Microsoft.Owin.Security.xml" />
+    <Content Include="bin\Microsoft.Owin.xml" />
+    <Content Include="bin\Newtonsoft.Json.dll" />
+    <Content Include="bin\Newtonsoft.Json.xml" />
+    <Content Include="bin\Ninject.dll" />
+    <Content Include="bin\Ninject.xml" />
+    <Content Include="bin\Owin.dll" />
+    <Content Include="bin\System.Net.Http.Formatting.dll" />
+    <Content Include="bin\System.Net.Http.Formatting.xml" />
+    <Content Include="bin\System.Web.Helpers.dll" />
+    <Content Include="bin\System.Web.Helpers.xml" />
+    <Content Include="bin\System.Web.Http.dll" />
+    <Content Include="bin\System.Web.Http.Owin.dll" />
+    <Content Include="bin\System.Web.Http.Owin.xml" />
+    <Content Include="bin\System.Web.Http.xml" />
+    <Content Include="bin\System.Web.Mvc.dll" />
+    <Content Include="bin\System.Web.Mvc.xml" />
+    <Content Include="bin\System.Web.Razor.dll" />
+    <Content Include="bin\System.Web.Razor.xml" />
+    <Content Include="bin\System.Web.Webpages.Deployment.dll" />
+    <Content Include="bin\System.Web.Webpages.Deployment.xml" />
+    <Content Include="bin\System.Web.Webpages.dll" />
+    <Content Include="bin\System.Web.Webpages.Razor.dll" />
+    <Content Include="bin\System.Web.Webpages.Razor.xml" />
+    <Content Include="bin\System.Web.Webpages.xml" />
+    <Content Include="bin\WeDecide.dll" />
+    <Content Include="bin\WeDecide.pdb" />
     <Content Include="Content\site.css" />
     <Content Include="Global.asax" />
     <EntityDeploy Include="Models\Concrete\Question.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Question.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Images\placeholder-headshot.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Models\Concrete\Question.edmx.diagram">
       <DependentUpon>Question.edmx</DependentUpon>
     </Content>
+    <Content Include="bin\WeDecide.dll.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Models\Concrete\Question.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -164,34 +208,20 @@
       <LastGenOutput>Question.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\Concrete\Question.edmx.sql" />
-    <Content Include="Models\Concrete\Question.tt">
+    <Content Include="Models\Concrete\QuestionContext.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>QuestionContext.cs</LastGenOutput>
       <DependentUpon>Question.edmx</DependentUpon>
-      <LastGenOutput>Question1.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.6.4.js" />
-    <Content Include="Scripts\jquery-1.6.4.min.js" />
-    <Content Include="Scripts\jquery.signalR-2.2.0.js" />
-    <Content Include="Scripts\jquery.signalR-2.2.0.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\knockout-3.2.0.debug.js" />
-    <Content Include="Scripts\knockout-3.2.0.js" />
     <Content Include="Scripts\MakeQuestion.js" />
-    <Content Include="Scripts\moment-with-locales.js" />
-    <Content Include="Scripts\moment-with-locales.min.js" />
-    <Content Include="Scripts\moment.js" />
-    <Content Include="Scripts\moment.min.js" />
-    <Content Include="Scripts\notification.js" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -207,8 +237,8 @@
     <Compile Include="Controllers\QuestionResponseController.cs" />
     <Compile Include="DAL\Concrete\MemoryQuestionDAL.cs" />
     <Compile Include="DAL\Concrete\SqlQuestionDAL.cs" />
-    <Compile Include="Hubs\NotificationHub.cs" />
-    <Compile Include="Infrastructure\ValidateResponses.cs" />
+    <Compile Include="Infrastructure\Annotations\ValidateResponses.cs" />
+    <Compile Include="Infrastructure\Annotations\ValidateTimeToAnswer.cs" />
     <Compile Include="Models\Concrete\IdentityModels.cs" />
     <Compile Include="Models\Concrete\PartialClasses.cs" />
     <Compile Include="Models\Concrete\Question.Context.cs">
@@ -221,13 +251,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Question.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Concrete\Question1.cs">
+    <Compile Include="Models\Concrete\QuestionContext.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Question.tt</DependentUpon>
+      <DependentUpon>QuestionContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Concrete\User.cs">
-      <DependentUpon>Question.tt</DependentUpon>
+      <DependentUpon>QuestionContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Concrete\WeDecideDbContextCustom.cs" />
     <Compile Include="Startup.cs" />
@@ -244,20 +274,22 @@
     <Compile Include="Models\Account\Profile.cs" />
     <Compile Include="Models\Account\User.cs" />
     <Compile Include="Models\Concrete\Question.cs">
-      <DependentUpon>Question.tt</DependentUpon>
+      <DependentUpon>QuestionContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Concrete\Response.cs">
-      <DependentUpon>Question.tt</DependentUpon>
+      <DependentUpon>QuestionContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Concrete\UserResponse.cs">
-      <DependentUpon>Question.tt</DependentUpon>
+      <DependentUpon>QuestionContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MakeQuestionViewModel.cs" />
+    <Compile Include="ViewModels\QuestionPollingViewModel.cs" />
     <Compile Include="ViewModels\QuestionViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\RespondToQuestionViewModel.cs" />
+    <Compile Include="ViewModels\UserResponseViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -272,6 +304,10 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\QuestionResponse\Response.cshtml" />
     <Content Include="Views\Home\Testpage.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\LandingPage.cshtml" />
+    <Content Include="Views\Shared\_QuestionPollPartial.cshtml" />
+    <Content Include="Views\QuestionAnalytics\QuestionPoll.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -284,7 +320,6 @@
     <Folder Include="Views\Feed\" />
     <Folder Include="Views\Profile\" />
     <Folder Include="Views\Query\" />
-    <Folder Include="Views\QuestionAnalytics\" />
     <Folder Include="Views\Question\" />
   </ItemGroup>
   <ItemGroup>
