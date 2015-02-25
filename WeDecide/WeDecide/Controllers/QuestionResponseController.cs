@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Microsoft.AspNet.Identity;
 using System.Web.Mvc;
 using WeDecide.DAL.Abstract;
 using WeDecide.DAL.Concrete;
@@ -18,9 +19,11 @@ namespace WeDecide.Controllers
 
         // GET: QuestionResponse
         [HttpGet]
-        public ActionResult QuestionResponse(QuestionViewModel question)
+        public ActionResult QuestionResponse(int id)
         {
-            return View("~/View/Shared/_ResponseToQuestionPartial.cshtml", question);
+            Question question = Qdal.Get(id);
+            RespondToQuestionViewModel vm = new RespondToQuestionViewModel(question);
+            return View("~/Views/QuestionResponse/Response.cshtml", vm);
         }
 
         [HttpPost]
@@ -28,13 +31,15 @@ namespace WeDecide.Controllers
         {
             //Make New UserResponse with given string and question id
             Question AffectedQuestion = Qdal.Get(QuestionId);
-            //UserResponse NewUR = new UserResponse(new Response(AffectedQuestion, ChosenResponse), User);
-            //AffectedQuestion.UserResponses.Add(NewUR);
+            Response Resp = AffectedQuestion.Responses.First(x => x.Text.Equals(ChosenResponse));
+            UserResponse NewUR = new UserResponse() { Question = AffectedQuestion, QuestionId = AffectedQuestion.Id, Response = Resp, ResponseId = Resp.Id};
+            //If User has responded between
+            AffectedQuestion.UserResponses.Add(NewUR);
             Qdal.Update(QuestionId, AffectedQuestion);
             
             //Add UserResponse to Question
             //Would like to have this not actually return, as the Partial View will always be a part of something else
-            return View();
+            return View(QuestionId);
         }
     }
 }
