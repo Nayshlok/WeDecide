@@ -8,11 +8,12 @@
         <EntityTypeShape EntityType="WeDecideDBModel.Question" Width="2.625" PointX="2.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="WeDecideDBModel.Response" Width="2.125" PointX="6.375" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="WeDecideDBModel.User" Width="2.375" PointX="2.5" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="WeDecideDBModel.UserResponse" Width="2.5" PointX="5.375" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WeDecideDBModel.UserResponse" Width="2.5" PointX="6" PointY="4.125" IsExpanded="true" />
         <AssociationConnector Association="WeDecideDBModel.QuestionUserResponse" />
         <AssociationConnector Association="WeDecideDBModel.QuestionResponse" />
         <AssociationConnector Association="WeDecideDBModel.UserQuestion" />
         <AssociationConnector Association="WeDecideDBModel.ResponseUserResponse" />
+        <AssociationConnector Association="WeDecideDBModel.RespondantToUserResponse" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
