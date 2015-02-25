@@ -132,6 +132,71 @@ header a {
 
 /*End Home Page Styling*/ 
 
+/*Profile Page Styling*/
+.profile-view {
+    background-image: url("../Images/default_background.jpg");
+	background-size: cover;
+	height: 500px;
+	margin: 30px auto;
+	width: 100%;
+ }
+ 
+.personal-info {
+	overflow-y: hidden;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+    text-align: center;
+ }
+
+.personal-info img {
+	border-radius: 100%;
+	height: 300px;
+	width: 300px;
+    margin: auto;
+ }
+ 
+.personal-info h1 {
+	color: #FFF;
+	font-family: 'Lobster', sans-serif;
+	font-size: 36px;
+	margin: 0;
+ }
+
+.info-box-holder {
+	height: 275px;
+	margin: 0 auto;
+	width: 95%;
+    text-align: center;
+ }
+
+.info-box {
+	background-color: #FCFFF5;
+	color: #FCFFF5;
+	display: inline-block;
+	height: 250px;
+	margin: 10px 5px 10px 5px;
+	overflow-y: auto;
+	width: 30%;
+ }
+ 
+	.info-box div {
+		color: #000;
+		font-family: 'Raleway', sans-serif;
+		padding: 10px;
+	 }
+
+    .info-box header {
+        text-align: center;
+    }
+ 
+		.info-box h2 {
+            font-family: 'Lobster', 'Arial', sans-serif;
+            margin-top: 5px;
+		}
+
+/*End Profile Page Styling*/
+
 /*General Shared Styling*/
 .shadowed {
 	-moz-box-shadow: 3px 3px 4px 2px #ccc;
