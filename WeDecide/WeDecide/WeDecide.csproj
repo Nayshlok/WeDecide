@@ -260,6 +260,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\LandingPage.cshtml" />
     <Content Include="Views\Shared\_QuestionPollPartial.cshtml" />
+    <Content Include="Views\QuestionAnalytics\QuestionPoll.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -272,7 +273,6 @@
     <Folder Include="Views\Feed\" />
     <Folder Include="Views\Profile\" />
     <Folder Include="Views\Query\" />
-    <Folder Include="Views\QuestionAnalytics\" />
     <Folder Include="Views\Question\" />
   </ItemGroup>
   <ItemGroup>

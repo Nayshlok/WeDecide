@@ -1,1 +1,11 @@
-﻿
+﻿@model WeDecide.ViewModels.QuestionPollingViewModel
+
+<section name="poll-question">
+    <p>@Model.Question</p>
+    <ul>
+        @foreach (string Respone in Model.Polls.Keys)
+        {
+            <li>@Model.Polls[Response] @Response</li>
+        }
+    </ul>
+</section>

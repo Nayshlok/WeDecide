@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using WeDecide.DAL.Abstract;
 using WeDecide.DAL.Concrete;
 using WeDecide.Models.Concrete;
@@ -30,6 +31,7 @@ namespace WeDecide.Controllers
                 //Construct the Question
                 Question NewQuestion = q.GetQuestion();
                 //Add current user to question
+                //NewQuestion.UserId = User.Identity.GetUserId();
                 //Save the Question
                 Qdal.Create(NewQuestion);
                 //Don't know what to return yet, so returning response page

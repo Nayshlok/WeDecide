@@ -29,10 +29,10 @@
                     <input type="radio" name="ChosenRespose" onclick="this.form.submit()"/>
                     <p>Don't like any of these answers? Submit your own : <input type="text"/></p>
                 }
-                      TimeSpan ts = DateTime.Now - Model.EndDate;
-                      string TimeLeft = "Hours : " + ((int)ts.TotalHours) + ", Minutes : " + ts.Minutes;
-                      @:Time left : @TimeLeft
-                  }
+                 TimeSpan ts = Model.EndDate - DateTime.Now;
+                 string TimeLeft = "Hours : " + ((int)ts.TotalHours) + ", Minutes : " + ts.Minutes;
+                 @:Time left : @TimeLeft
+             }
 
             @*<input type="submit" value="Save Response" />*@
         </section>
