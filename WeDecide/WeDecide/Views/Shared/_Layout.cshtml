@@ -10,14 +10,24 @@
 </head>
 <body>
     <header>
-        <h1>@Html.ActionLink("WeDecide", "Index", "Home")</h1>
+        <h2>@Html.ActionLink("WeDecide", "Index", "Home")</h2>
+        <nav>
+            <ul>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="gallery.html">Friends</a></li>
+            </ul>
+        </nav>
+        <div class="icons">
+            <i class="fa fa-power-off"></i>
+        </div>
+        <div class="profile-pic-thumb"></div>
     </header>
 
     <section class="main">
         @RenderBody()
     </section>
 
-    <footer>
+    <footer class="fixed-footer">
         <p>&copy; @DateTime.Now.Year  - WeDecide</p>
     </footer>
 
