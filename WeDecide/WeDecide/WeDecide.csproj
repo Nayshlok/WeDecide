@@ -158,10 +158,10 @@
       <LastGenOutput>Question.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\Concrete\Question.edmx.sql" />
-    <Content Include="Models\Concrete\Question.tt">
+    <Content Include="Models\Concrete\QuestionContext.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>QuestionContext.cs</LastGenOutput>
       <DependentUpon>Question.edmx</DependentUpon>
-      <LastGenOutput>Question1.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -200,13 +200,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Question.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Concrete\Question1.cs">
+    <Compile Include="Models\Concrete\QuestionContext.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Question.tt</DependentUpon>
+      <DependentUpon>QuestionContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Concrete\User.cs">
-      <DependentUpon>Question.tt</DependentUpon>
+      <DependentUpon>QuestionContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Concrete\WeDecideDbContextCustom.cs" />
     <Compile Include="Startup.cs" />
@@ -223,13 +223,13 @@
     <Compile Include="Models\Account\Profile.cs" />
     <Compile Include="Models\Account\User.cs" />
     <Compile Include="Models\Concrete\Question.cs">
-      <DependentUpon>Question.tt</DependentUpon>
+      <DependentUpon>QuestionContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Concrete\Response.cs">
-      <DependentUpon>Question.tt</DependentUpon>
+      <DependentUpon>QuestionContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Concrete\UserResponse.cs">
-      <DependentUpon>Question.tt</DependentUpon>
+      <DependentUpon>QuestionContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />

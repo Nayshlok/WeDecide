@@ -5,13 +5,13 @@ using System.Linq;
 
 namespace WeDecide.Models.Concrete
 {
-    public partial class Entities : DbContext
+    public partial class QuestionDbContext : DbContext
     {
-        private static Entities s_instance;
-        public static Entities Create()
+        private static QuestionDbContext s_instance;
+        public static QuestionDbContext Create()
         {
             if (s_instance == null)
-                s_instance = new Entities();
+                s_instance = new QuestionDbContext();
             return s_instance;
         }
     }

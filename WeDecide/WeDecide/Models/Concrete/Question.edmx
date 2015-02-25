@@ -94,7 +94,7 @@
           <NavigationProperty Name="Response" Relationship="WeDecideDBModel.ResponseUserResponse" FromRole="UserResponse" ToRole="Response" />
           <Property Name="ResponseId" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="QuestionDbContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Questions" EntityType="Self.Question" />
           <EntitySet Name="Responses" EntityType="Self.Response" />
           <EntitySet Name="Users" EntityType="Self.User" />
@@ -169,7 +169,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="WeDecideDBModelStoreContainer" CdmEntityContainer="Entities">
+  <EntityContainerMapping StorageEntityContainer="WeDecideDBModelStoreContainer" CdmEntityContainer="QuestionDbContext">
     <EntitySetMapping Name="Questions">
       <EntityTypeMapping TypeName="IsTypeOf(WeDecideDBModel.Question)">
         <MappingFragment StoreEntitySet="Questions">
