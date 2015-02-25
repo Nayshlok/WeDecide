@@ -82,19 +82,21 @@
           <Property Name="QuestionId" Type="Int32" Nullable="false" />
           <Property Name="ResponseId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Questions" Relationship="WeDecideDBModel.UserQuestion" FromRole="User" ToRole="Question" />
+          <NavigationProperty Name="UserResponses" Relationship="WeDecideDBModel.RespondantToUserResponse" FromRole="User" ToRole="UserResponse" />
         </EntityType>
         <EntityType Name="UserResponse">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RespontdantId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Question" Relationship="WeDecideDBModel.QuestionUserResponse" FromRole="UserResponse" ToRole="Question" />
           <Property Name="QuestionId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Response" Relationship="WeDecideDBModel.ResponseUserResponse" FromRole="UserResponse" ToRole="Response" />
           <Property Name="ResponseId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="WeDecideDBModel.RespondantToUserResponse" FromRole="UserResponse" ToRole="User" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="QuestionDbContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Questions" EntityType="Self.Question" />
           <EntitySet Name="Responses" EntityType="Self.Response" />
           <EntitySet Name="Users" EntityType="Self.User" />
@@ -114,6 +116,10 @@
           <AssociationSet Name="ResponseUserResponse" Association="WeDecideDBModel.ResponseUserResponse">
             <End EntitySet="Responses" Role="Response" />
             <End EntitySet="UserResponses" Role="UserResponse" />
+          </AssociationSet>
+          <AssociationSet Name="RespondantToUserResponse" Association="WeDecideDBModel.RespondantToUserResponse">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserResponse" EntitySet="UserResponses" />
           </AssociationSet>
           </EntityContainer>
         <Association Name="QuestionUserResponse">
@@ -164,12 +170,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="RespondantToUserResponse">
+          <End Type="WeDecideDBModel.User" Role="User" Multiplicity="1" />
+          <End Type="WeDecideDBModel.UserResponse" Role="UserResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserResponse">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="WeDecideDBModelStoreContainer" CdmEntityContainer="Entities">
+  <EntityContainerMapping StorageEntityContainer="WeDecideDBModelStoreContainer" CdmEntityContainer="QuestionDbContext">
     <EntitySetMapping Name="Questions">
       <EntityTypeMapping TypeName="IsTypeOf(WeDecideDBModel.Question)">
         <MappingFragment StoreEntitySet="Questions">
@@ -203,7 +221,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(WeDecideDBModel.UserResponse)">
         <MappingFragment StoreEntitySet="UserResponses">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="RespontdantId" ColumnName="RespontdantId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

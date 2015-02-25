@@ -11,7 +11,7 @@ namespace WeDecide.Controllers
         // GET: Profile
         public ActionResult Index()
         {
-            return View();
+            return View("ProfileView");
         }
     }
 }
