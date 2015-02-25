@@ -32,8 +32,9 @@ namespace WeDecide.Controllers
             //Make New UserResponse with given string and question id
             Question AffectedQuestion = Qdal.Get(QuestionId);
             Response Resp = AffectedQuestion.Responses.First(x => x.Text.Equals(ChosenResponse));
-            //UserResponse NewUR = new UserResponse() { Question = AffectedQuestion, QuestionId = AffectedQuestion.Id, Response = Resp, ResponseId = Resp.Id, RespontdantId = User.Identity.GetUserId() };
-            //AffectedQuestion.UserResponses.Add(NewUR);
+            UserResponse NewUR = new UserResponse() { Question = AffectedQuestion, QuestionId = AffectedQuestion.Id, Response = Resp, ResponseId = Resp.Id};
+            //If User has responded between
+            AffectedQuestion.UserResponses.Add(NewUR);
             Qdal.Update(QuestionId, AffectedQuestion);
             
             //Add UserResponse to Question
