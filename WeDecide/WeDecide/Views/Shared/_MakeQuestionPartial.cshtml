@@ -1,8 +1,6 @@
 ﻿@model WeDecide.ViewModels.MakeQuestionViewModel
 
 <section class="make-question">
-    @if (@Model != null)
-    {
         @using (Html.BeginForm("CreateQuestion", "Question"))
         {
             <h1>Make a New Question</h1>
@@ -38,10 +36,5 @@
             <p>Hours: <input type="text" value="0" name="Hours"/> Minutes : <input type="text" value="10" name="Minutes"/></p>
             <input type="submit" value="Make Question" />
         }
-    }
-    else
-    {
-        <p>Sorry, you need to access</p>
-    }
     
 </section>

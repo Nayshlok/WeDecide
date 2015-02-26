@@ -3,39 +3,41 @@
 <form id="form_responses" name="Responses">
     @if (@Model != null)
     {
-    <section class="RespondToQuestion">
-        <h3>@Model.Question</h3>
+        <section class="RespondToQuestion">
+            <h3>@Model.Question</h3>
 
-        @Html.HiddenFor(x => x.QuestionId)
+            @Html.HiddenFor(x => x.QuestionId)
 
-        <ul>
-            @foreach (string Response in @Model.Responses)
+            <ul>
+                @foreach (string Response in @Model.Responses)
+                {
+                    <li>
+                        @if (DateTime.Now.CompareTo(Model.EndDate) < 0)
+                        {
+                            <input type="radio" name="ChosenResponse" value="@Response" onclick="this.form.submit()" />
+                        }
+                        <p>@Response</p>
+                    </li>
+                }
+            </ul>
+
+            @if (DateTime.Now.CompareTo(Model.EndDate) < 0)
             {
-                <li>
-                    @if (DateTime.Now.CompareTo(Model.EndDate) < 0)
-                    {
-                        <input type="radio" name="ChosenResponse" value="@Response" onclick="this.form.submit()" />
-                    }
-                    <p>@Response</p>
-                </li>
+                if (Model.FreeResponseEnabled)
+                {
+                    <input type="radio" name="ChosenResponse" onclick="this.form.submit()" />
+                    <p>Don't like any of these answers? Submit your own : <input type="text" /></p>
+                }
+                TimeSpan ts = Model.EndDate - DateTime.Now;
+                string TimeLeft = "Hours : " + ((int)ts.TotalHours) + ", Minutes : " + ts.Minutes;
+                @:Time left : @TimeLeft
             }
-        </ul>
 
-        @if (DateTime.Now.CompareTo(Model.EndDate) < 0)
-        {
-            if (Model.FreeResponseEnabled)
-            {
-                <input type="radio" name="ChosenResponse" onclick="this.form.submit()" />
-                <p>Don't like any of these answers? Submit your own : <input type="text" /></p>
-            }
-            TimeSpan ts = Model.EndDate - DateTime.Now;
-            string TimeLeft = "Hours : " + ((int)ts.TotalHours) + ", Minutes : " + ts.Minutes;
-            @:Time left : @TimeLeft
-        }
-
-            @*<input type="submit" value="Save Response" />*@
-    
-        <script src="~/Scripts/RespondToQuestion.js"></script>
-        </section>
-        }
+                @*<input type="submit" value="Save Response" />*@
+            </section>
+    } 
+    else
+    {
+        <p>Sorry, you seemed to have tried to access a question you are not allowed to see.</p>
+    }
  </form>
