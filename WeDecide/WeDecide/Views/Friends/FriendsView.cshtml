@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "FriendsView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="friends-page">
+    <section class="main">
+        @Html.Partial("_QuickProfilePartial")
+
+        <section class="search-friends shadowed">
+            <header>
+                <h2 class="centered-header-text">Find new Friends</h2>
+            </header>
+            <div>
+                <input type="text" class="form-control" placeholder="Search for new friends" />
+            </div>
+        </section>
+        <section class="friends-holder shadowed">
+            <header>
+                <h2 class="centered-header-text">Friends</h2>
+            </header>
+            <div>
+                @for (int i = 5; i >= 0; i-- )
+                {
+                    Html.RenderPartial("_FriendOverviewPartial");
+                }
+            </div>
+        </section>
+    </section>
+</section>
+
