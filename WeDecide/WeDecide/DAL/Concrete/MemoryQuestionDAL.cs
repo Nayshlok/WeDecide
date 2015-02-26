@@ -9,7 +9,7 @@ namespace WeDecide.DAL.Concrete
 {
     public class MemoryQuestionDAL : IQuestionDAL
     {
-        private static Dictionary<int, Question> questions = new Dictionary<int,Question>();
+        private static Dictionary<int, Question> questions = new Dictionary<int, Question>();
 
         private static int NextId = 1;
 

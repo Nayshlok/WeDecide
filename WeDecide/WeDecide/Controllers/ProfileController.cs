@@ -3,15 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WeDecide.ViewModels;
 
 namespace WeDecide.Controllers
 {
     public class ProfileController : Controller
     {
-        // GET: Profile
+        [HttpGet]
         public ActionResult Index()
         {
-            return View("ProfileView");
+            ProfileViewModel userProfile = new ProfileViewModel()
+            {
+                UserName = "Jim Bobby",
+                UserFriends = null, //Not sure how to get this yet
+                UserQuestions = null //Also not sure how to get this
+            };
+
+            return View("ProfileView", userProfile);
         }
     }
 }
