@@ -5,18 +5,29 @@
 }
 
 <section class="home-page">
-
-    <div class="quick-profile-view">
-        <div class="profile_pic shadowed"></div>
-        <div class="info-panel shadowed">
-            <h2 class="small-header">Friends</h2>
-        </div>
-    </div>
+    @Html.Partial("_QuickProfilePartial")
     <section class="welcome-header shadowed">
         <h1>Welcome Back, User.</h1>
     </section>
     <section class="content-feed">
 
     </section>
+    <div class="filter-feed shadowed">
+        <div class="checkbox">
+            <label>
+                <input type="checkbox"> Friends
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox"> Local
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox"> Global
+            </label>
+        </div>
+    </div>
 </section>
 

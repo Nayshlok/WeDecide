@@ -1,8 +1,7 @@
 ﻿@model WeDecide.ViewModels.RespondToQuestionViewModel
 
-@using (Html.BeginForm())
-{
-    if (@Model != null)
+<form id="form_responses" name="Responses">
+    @if (@Model != null)
     {
         <section class="RespondToQuestion">
             <h3>@Model.Question</h3>
@@ -10,7 +9,7 @@
             @Html.HiddenFor(x => x.QuestionId)
 
             <ul>
-                @foreach(string Response in @Model.Responses)
+                @foreach (string Response in @Model.Responses)
                 {
                     <li>
                         @if (DateTime.Now.CompareTo(Model.EndDate) < 0)
@@ -26,15 +25,19 @@
             {
                 if (Model.FreeResponseEnabled)
                 {
-                    <input type="radio" name="ChosenRespose" onclick="this.form.submit()"/>
-                    <p>Don't like any of these answers? Submit your own : <input type="text"/></p>
+                    <input type="radio" name="ChosenResponse" onclick="this.form.submit()" />
+                    <p>Don't like any of these answers? Submit your own : <input type="text" /></p>
                 }
-                 TimeSpan ts = Model.EndDate - DateTime.Now;
-                 string TimeLeft = "Hours : " + ((int)ts.TotalHours) + ", Minutes : " + ts.Minutes;
-                 @:Time left : @TimeLeft
-             }
+                TimeSpan ts = Model.EndDate - DateTime.Now;
+                string TimeLeft = "Hours : " + ((int)ts.TotalHours) + ", Minutes : " + ts.Minutes;
+                @:Time left : @TimeLeft
+            }
 
-            @*<input type="submit" value="Save Response" />*@
-        </section>
+                @*<input type="submit" value="Save Response" />*@
+            </section>
+    } 
+    else
+    {
+        <p>Sorry, you seemed to have tried to access a question you are not allowed to see.</p>
     }
-}
+ </form>
