@@ -16,7 +16,7 @@ namespace WeDecide.Infrastructure.Annotations
             if (value is MakeQuestionViewModel)
             {
                 MakeQuestionViewModel CastValue = (MakeQuestionViewModel) value;
-                Valid = (CastValue.Hours + CastValue.Minutes) > 0;
+                Valid = (CastValue.Hours >= 0) && (CastValue.Minutes >= 0);
             }
             return Valid;
         }

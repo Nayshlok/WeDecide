@@ -20,7 +20,7 @@ namespace WeDecide.Models.Concrete
             this.Questions = new HashSet<Question>();
         }
     
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
         public int QuestionId { get; set; }
         public int ResponseId { get; set; }

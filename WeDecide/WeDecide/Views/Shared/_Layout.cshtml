@@ -4,8 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
-    <link href="~/Content/site.css" rel="stylesheet" type="text/css" />
+    @Styles.Render("~/Content/css")
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
 <body>
@@ -14,7 +13,7 @@
         <nav>
             <ul>
                 <li>@Html.ActionLink("Profile", "Index", "Profile")</li>
-                <li><a href="gallery.html">Friends</a></li>
+                <li>@Html.ActionLink("Friends", "Index", "Friends")</li>
             </ul>
         </nav>
         <div class="icons">
@@ -31,8 +30,6 @@
         <p>&copy; @DateTime.Now.Year  - WeDecide</p>
     </footer>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
-    <script src="~/Scripts/MakeQuestion.js"></script>
+    @Scripts.Render("~/Scripts/MakeQuestion")
 </body>
 </html>

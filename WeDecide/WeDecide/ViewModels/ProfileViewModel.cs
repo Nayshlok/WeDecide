@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using WeDecide.Models.Account;
+using WeDecide.Models.Concrete;
+
+namespace WeDecide.ViewModels
+{
+    public class ProfileViewModel
+    {
+        public string UserName { get; set; }
+
+        public IEnumerable<WeDecide.Models.Account.User> UserFriends { get; set; }
+
+        public IEnumerable<Question> UserQuestions { get; set; }
+    }
+}

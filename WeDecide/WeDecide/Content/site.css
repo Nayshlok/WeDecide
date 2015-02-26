@@ -43,9 +43,9 @@ nav {
 	 }
  
 	nav li {
+		color: #FFF;
 		display: inline-block;
 		margin: 0 2.5% 0 2.5%;
-        color: #FFF;
 	 }
  
 		nav li:hover {text-decoration: underline;}
@@ -54,8 +54,8 @@ header a {
 	color: #FFF;
 	text-decoration: none;
  }
-/*End Layout Styling*/
  
+/*End Layout Styling*/
 .make-question {
 	border: 1px solid #000;
 	min-height: 350px;
@@ -76,7 +76,7 @@ header a {
 		display: block;
 		margin: 30px auto;
 	 }
-
+ 
 /*Home Page styling*/
 .quick-profile-view {
 	height: 500px;
@@ -85,13 +85,15 @@ header a {
 	top: 10%;
 	width: 175px;
  }
+ 
 .profile_pic {
-    background-image: url("../Images/placeholder-headshot.jpg");
-    background-size: cover;
+	background-image: url("../Images/placeholder-headshot.jpg");
+	background-size: cover;
 	height: 175px;
 	position: absolute;
 	width: 100%;
  }
+ 
 .info-panel {
 	background-color: #FCFFF5;
 	bottom: 0;
@@ -108,7 +110,7 @@ header a {
 	padding: 0;
 	text-align: center;
  }
-
+ 
 .welcome-header {
 	background-color: #FCFFF5;
 	color: #193441;
@@ -121,7 +123,7 @@ header a {
 	transform: translateX(-50%);
 	width: 50%;
  }
-
+ 
 .content-feed {
 	left: 50%;
 	position: relative;
@@ -129,12 +131,18 @@ header a {
 	transform: translateX(-50%);
 	width: 50%;
  }
-
-/*End Home Page Styling*/ 
-
+ 
+.filter-feed {
+	padding-left: 5px;
+	position: fixed;
+	right: 15%;
+	width: 75px;
+ }
+ 
+/*End Home Page Styling*/
 /*Profile Page Styling*/
 .profile-view {
-    background-image: url("../Images/default_background.jpg");
+	background-image: url("../Images/default_background.jpg");
 	background-size: cover;
 	height: 500px;
 	margin: 30px auto;
@@ -144,32 +152,32 @@ header a {
 .personal-info {
 	overflow-y: hidden;
 	position: relative;
+	text-align: center;
 	top: 50%;
 	transform: translateY(-50%);
-    text-align: center;
- }
-
-.personal-info img {
-	border-radius: 100%;
-	height: 300px;
-	width: 300px;
-    margin: auto;
  }
  
-.personal-info h1 {
-	color: #FFF;
-	font-family: 'Lobster', sans-serif;
-	font-size: 36px;
-	margin: 0;
- }
-
+	.personal-info img {
+		border-radius: 100%;
+		height: 300px;
+		margin: auto;
+		width: 300px;
+	 }
+ 
+	.personal-info h1 {
+		color: #FFF;
+		font-family: 'Lobster', sans-serif;
+		font-size: 36px;
+		margin: 0;
+	 }
+ 
 .info-box-holder {
 	height: 275px;
 	margin: 0 auto;
+	text-align: center;
 	width: 95%;
-    text-align: center;
  }
-
+ 
 .info-box {
 	background-color: #FCFFF5;
 	color: #FCFFF5;
@@ -185,26 +193,120 @@ header a {
 		font-family: 'Raleway', sans-serif;
 		padding: 10px;
 	 }
-
-    .info-box header {
-        text-align: center;
-    }
  
-		.info-box h2 {
-            font-family: 'Lobster', 'Arial', sans-serif;
-            margin-top: 5px;
-		}
-
+	.info-box header {text-align: center;}
+ 
+	.info-box h2 {
+		font-family: 'Lobster', 'Arial', sans-serif;
+		margin-top: 5px;
+	 }
+ 
 /*End Profile Page Styling*/
-
+/*Friends Page Styling*/
+.search-friends {
+	margin: 30px auto;
+	width: 50%;
+ }
+ 
+	.search-friends header {height: 30px;}
+ 
+		.search-friends header h2 {font-size: 18px;}
+ 
+	.search-friends div {padding: 10px 20px 10px 20px;}
+ 
+.friends-holder {
+	height: 700px;
+	margin: 0 auto;
+	position: relative;
+	width: 50%;
+ }
+ 
+	.friends-holder header {text-align: center;}
+ 
+.small-friend-img {
+	height: 50px;
+	width: 50px;
+ }
+ 
+.friend-overview {padding-bottom: 20px;}
+ 
+	.friend-overview h4 {
+		display: inline-block;
+		margin: 15px 0 10px 10px;
+	 }
+ 
+	.friend-overview button {
+		position: relative;
+		top: 15px;
+	 }
+ 
+/*End Friends Page Styling*/
 /*General Shared Styling*/
 .shadowed {
 	-moz-box-shadow: 3px 3px 4px 2px #ccc;
 	-webkit-box-shadow: 3px 3px 4px 2px #ccc;
 	box-shadow: 3px 3px 4px 2px #ccc;
  }
+ 
+.black_overlay {
+	background-color: #000;
+	display: none;
+	filter: blur(3px) opacity(80%);
+	height: 100%;
+	left: 0%;
+	margin-bottom: 12px;
+	margin-top: 65px;
+	opacity: .80;
+	position: fixed;
+	top: 0%;
+	width: 100%;
+	z-index: 1001;
+ }
+ 
+.white_content {
+	background-color: white;
+	display: none;
+	left: 50%;
+	overflow: auto;
+	position: fixed;
+	top: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	width: 80%;
+	z-index: 1002;
+ }
+ 
+	.white_content header {text-align: center;}
+ 
+		.white_content header h2 {
+			color: #FFF;
+			font-family: Arial, sans-serif;
+			margin: 10px auto;
+		 }
+ 
+	.white_content div {padding: 10px 20px 10px 20px;}
+ 
+.bottom-btn {
+	display: block;
+	margin: 0 auto;
+ }
+ 
+.centered-header-text {
+	color: #FFF;
+	font-family: Arial, sans-serif;
+	margin-top: 10px;
+ }
+ 
+.input-validation-error {
+	background-color: #FEE;
+	border: 1px solid #F00;
+ }
+ 
+.field-validation-error {
+	color: #F00;
+	font-weight: bold;
+ }
+ 
 /*End General Shared Styling*/
-
 /*Layout Styling*/
 footer {
 	background-color: #3E606F;
@@ -229,4 +331,6 @@ footer {
  }
  
 	.fixed-footer p {top: 20%;}
+ 
+ 
 /*End Layout Styling*/
