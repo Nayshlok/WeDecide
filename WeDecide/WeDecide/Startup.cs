@@ -9,6 +9,7 @@ namespace WeDecide
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            app.MapSignalR();
         }
     }
 }
