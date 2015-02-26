@@ -1,6 +1,8 @@
-﻿
+﻿@using WeDecide.ViewModels
+@model ProfileViewModel
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = Model.UserName + "'s Profile";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -8,8 +10,12 @@
     <div class="profile-view">
         <section class="personal-info">
             <img src="~/Images/placeholder-headshot.jpg" />
-            <h1>Random User</h1>
+            <h1>@Model.UserName</h1>
+            <input id="editBtn" class="btn btn-info btn-sm" type="button" value="Edit Profile" />
         </section>
+    </div>
+    <div>
+        @Html.Partial("_ProfileEditPartial");
     </div>
     <div class="info-box-holder">
         <section class="info-box shadowed">
