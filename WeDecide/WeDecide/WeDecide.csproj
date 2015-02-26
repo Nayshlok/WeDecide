@@ -233,6 +233,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-3.2.0.debug.js" />
     <Content Include="Scripts\knockout-3.2.0.js" />
+    <Content Include="Scripts\LiveQuestion.js" />
     <Content Include="Scripts\MakeQuestion.js" />
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />
@@ -328,6 +329,7 @@
     <Content Include="Views\Home\LandingPage.cshtml" />
     <Content Include="Views\Shared\_QuestionPollPartial.cshtml" />
     <Content Include="Views\QuestionAnalytics\QuestionPoll.cshtml" />
+    <Content Include="Views\Question\LiveQuestionView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -340,7 +342,6 @@
     <Folder Include="Views\Feed\" />
     <Folder Include="Views\Profile\" />
     <Folder Include="Views\Query\" />
-    <Folder Include="Views\Question\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

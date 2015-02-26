@@ -32,10 +32,16 @@ function loadQuestion() {
     });
 }
 
+function loadSingleQuestion(id) {
+    $.get('api/question/' + id, function (data) {
+        //Not implemented
+    });
+}
+
 $(function () {
     var hub = $.connection.questionHub;
     $.connection.hub.start().done(function () {
-        loadQuestion()
+        loadQuestion();
     });
 
     hub.client.receivedNewQuestion = function (id, text, username, endDate) {
@@ -44,6 +50,6 @@ $(function () {
     }
 
     hub.client.receivedResponse = function () {
-        
+        loadQuestion();
     };
 })
