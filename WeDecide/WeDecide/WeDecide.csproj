@@ -55,6 +55,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.0-alpha1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.0\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin">
       <HintPath>..\packages\Microsoft.Owin.3.0.0\lib\net45\Microsoft.Owin.dll</HintPath>
@@ -208,19 +214,35 @@
       <LastGenOutput>Question.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\Concrete\Question.edmx.sql" />
-    <Content Include="Models\Concrete\Question.tt">
+    <Content Include="Models\Concrete\QuestionContext.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>QuestionContext.cs</LastGenOutput>
       <DependentUpon>Question.edmx</DependentUpon>
-      <LastGenOutput>Question1.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.6.4.js" />
+    <Content Include="Scripts\jquery-1.6.4.min.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.0.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.0.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\knockout-3.2.0.debug.js" />
+    <Content Include="Scripts\knockout-3.2.0.js" />
+    <Content Include="Scripts\LiveQuestion.js" />
     <Content Include="Scripts\MakeQuestion.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\notification.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Scripts\RespondToQuestion.js" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -247,18 +269,27 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Question.Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Concrete\Question.cs">
+      <DependentUpon>QuestionContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Concrete\Question.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Question.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Concrete\Question1.cs">
+    <Compile Include="Models\Concrete\QuestionContext.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Question.tt</DependentUpon>
+      <DependentUpon>QuestionContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Concrete\Response.cs">
+      <DependentUpon>QuestionContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Concrete\User.cs">
-      <DependentUpon>Question.tt</DependentUpon>
+      <DependentUpon>QuestionContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Concrete\UserResponse.cs">
+      <DependentUpon>QuestionContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Concrete\WeDecideDbContextCustom.cs" />
     <Compile Include="Startup.cs" />
@@ -274,15 +305,6 @@
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\Account\Profile.cs" />
     <Compile Include="Models\Account\User.cs" />
-    <Compile Include="Models\Concrete\Question.cs">
-      <DependentUpon>Question.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Concrete\Response.cs">
-      <DependentUpon>Question.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Concrete\UserResponse.cs">
-      <DependentUpon>Question.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MakeQuestionViewModel.cs" />
@@ -309,6 +331,7 @@
     <Content Include="Views\Home\LandingPage.cshtml" />
     <Content Include="Views\Shared\_QuestionPollPartial.cshtml" />
     <Content Include="Views\QuestionAnalytics\QuestionPoll.cshtml" />
+    <Content Include="Views\Question\LiveQuestionView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -321,7 +344,6 @@
     <Folder Include="Views\Feed\" />
     <Folder Include="Views\Profile\" />
     <Folder Include="Views\Query\" />
-    <Folder Include="Views\Question\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

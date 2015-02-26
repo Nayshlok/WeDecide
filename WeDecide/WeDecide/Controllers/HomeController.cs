@@ -10,8 +10,8 @@ namespace WeDecide.Controllers
 {
     public class HomeController : Controller
     {
-        private Entities _Context;
-        public HomeController(Entities context)
+        private QuestionDbContext _Context;
+        public HomeController(QuestionDbContext context)
         {
             _Context = context;
         }

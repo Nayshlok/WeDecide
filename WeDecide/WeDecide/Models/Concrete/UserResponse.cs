@@ -15,11 +15,12 @@ namespace WeDecide.Models.Concrete
     public partial class UserResponse
     {
         public int Id { get; set; }
-        public int RespontdantId { get; set; }
         public int QuestionId { get; set; }
         public int ResponseId { get; set; }
+        public int UserId { get; set; }
     
         public virtual Question Question { get; set; }
         public virtual Response Response { get; set; }
+        public virtual User User { get; set; }
     }
 }

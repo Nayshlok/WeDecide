@@ -4,15 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9f2516d7e8864db4927439a256e324bb" Name="Diagram1">
-        <EntityTypeShape EntityType="WeDecideDBModel.Question" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WeDecideDBModel.Response" Width="1.5" PointX="3.375" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="WeDecideDBModel.User" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="WeDecideDBModel.UserResponse" Width="1.5" PointX="3.125" PointY="4" IsExpanded="true" />
+      <Diagram DiagramId="9f2516d7e8864db4927439a256e324bb" Name="Diagram1" DisplayType="true">
+        <EntityTypeShape EntityType="WeDecideDBModel.Question" Width="2.625" PointX="2.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="WeDecideDBModel.Response" Width="2.125" PointX="6.375" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WeDecideDBModel.User" Width="2.375" PointX="2.5" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WeDecideDBModel.UserResponse" Width="2.5" PointX="6" PointY="4.125" IsExpanded="true" />
         <AssociationConnector Association="WeDecideDBModel.QuestionUserResponse" />
         <AssociationConnector Association="WeDecideDBModel.QuestionResponse" />
-        <AssociationConnector Association="WeDecideDBModel.UserQuestion" />
         <AssociationConnector Association="WeDecideDBModel.ResponseUserResponse" />
+        <AssociationConnector Association="WeDecideDBModel.RespondantToUserResponse" />
+        <AssociationConnector Association="WeDecideDBModel.UserQuestion" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

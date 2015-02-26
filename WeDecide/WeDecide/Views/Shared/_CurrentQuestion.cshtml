@@ -1,0 +1,28 @@
+﻿@using WeDecide.Models.Concrete
+
+@model Question
+
+@section Ajax{
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js">
+        function reloadPoll() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange() = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    document.getElementsByName("Responses")
+                }
+            }
+        }
+    </script>
+}
+
+@if (Model != null)
+{
+    @Model.Text <br />
+    <div name="Responses">
+    @foreach (Response r in Model.Responses)
+    {
+        @:@r.Text has @r.UserResponses.Count votes <br />
+    }
+    </div>
+}
+
