@@ -3,9 +3,13 @@
 <section name="poll-question">
     <p>@Model.Question</p>
     <ul>
-        @foreach (string Respone in Model.Polls.Keys)
+        @foreach (string Response in Model.Polls.Keys)
         {
-            <li>@Model.Polls[Response] @Response</li>
+            int NumVotes = 0;
+            if (Model.Polls.TryGetValue(Response, out NumVotes))
+            {
+                <li>@NumVotes @Response</li>
+            }
         }
     </ul>
 </section>

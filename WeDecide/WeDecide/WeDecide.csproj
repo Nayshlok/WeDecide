@@ -221,6 +221,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\MakeQuestion.js" />
+    <Content Include="Scripts\RespondToQuestion.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

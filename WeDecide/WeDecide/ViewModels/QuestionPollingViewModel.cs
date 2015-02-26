@@ -14,14 +14,14 @@ namespace WeDecide.ViewModels
 
         public QuestionPollingViewModel()
         {
-
         }
 
         public QuestionPollingViewModel(Question question)
         {
             this.Question = question.Text;
 
-            Polls = question.Responses.ToDictionary((x => x.Text), (x => x.UserResponses.Count));
+            Polls = question.Responses.ToDictionary((x => x.Text), (x => x.UserResponses.Count()));
+
         }
     }
 }
