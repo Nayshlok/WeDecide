@@ -112,6 +112,10 @@
     <Reference Include="System.Web.Http.Owin">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Owin.5.2.3\lib\net45\System.Web.Http.Owin.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.2\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -256,8 +260,10 @@
     <Compile Include="Controllers\QuestionAnalyticsController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\QuestionResponseController.cs" />
+    <Compile Include="Controllers\QuestionViewController.cs" />
     <Compile Include="DAL\Concrete\MemoryQuestionDAL.cs" />
     <Compile Include="DAL\Concrete\SqlQuestionDAL.cs" />
+    <Compile Include="DAL\Concrete\TestDal.cs" />
     <Compile Include="Infrastructure\Annotations\ValidateResponses.cs" />
     <Compile Include="Infrastructure\Annotations\ValidateTimeToAnswer.cs" />
     <Compile Include="Models\Concrete\IdentityModels.cs" />
@@ -302,7 +308,6 @@
     </Compile>
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\Account\Profile.cs" />
-    <Compile Include="Models\Account\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MakeQuestionViewModel.cs" />

@@ -1,4 +1,10 @@
 ﻿
-<div>
-
+<div data-bind="foreach: questions">
+    <p data-bind="text: message"></p>
+    <p data-bind="text: username"></p>
+    <p data-bind="text: endDate"></p>
+    <div data-bind="foreach: responses">
+        <p data-bind="text: text"></p>
+        <p data-bind="text: count"></p>
+    </div>
 </div>
