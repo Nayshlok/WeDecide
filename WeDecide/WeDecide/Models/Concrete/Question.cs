@@ -24,7 +24,7 @@ namespace WeDecide.Models.Concrete
         public string Text { get; set; }
         public bool IsActive { get; set; }
         public bool FreeResponseEnabled { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
     
         public virtual ICollection<UserResponse> UserResponses { get; set; }
         public virtual ICollection<Response> Responses { get; set; }

@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WeDecide.ViewModels;
 using WeDecide.Models.Concrete;
+using WeDecide.DAL.Abstract;
 
 namespace WeDecide.Controllers
 {
@@ -18,15 +19,23 @@ namespace WeDecide.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private IMembershipDAL _membershipDAL;
+
+        public IMembershipDAL MembershipDAL
+        {
+            get { return _membershipDAL; }
+            set { _membershipDAL = value; }
+        }
 
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IMembershipDAL membershipDAL)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            MembershipDAL = membershipDAL;
         }
 
         public ApplicationSignInManager SignInManager
@@ -105,6 +114,7 @@ namespace WeDecide.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    MembershipDAL.AddUser(model.Email, User.Identity.GetUserId());
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771

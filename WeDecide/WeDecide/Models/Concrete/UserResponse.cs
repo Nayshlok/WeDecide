@@ -17,7 +17,7 @@ namespace WeDecide.Models.Concrete
         public int Id { get; set; }
         public int QuestionId { get; set; }
         public int ResponseId { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
     
         public virtual Question Question { get; set; }
         public virtual Response Response { get; set; }
