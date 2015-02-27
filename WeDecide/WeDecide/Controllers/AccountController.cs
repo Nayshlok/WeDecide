@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 using WeDecide.ViewModels;
 using WeDecide.Models.Concrete;
 using WeDecide.DAL.Abstract;
+using WeDecide.DAL.Concrete;
 
 namespace WeDecide.Controllers
 {
@@ -29,13 +30,14 @@ namespace WeDecide.Controllers
 
         public AccountController()
         {
+
+            MembershipDAL = new CustomMembershipDAL();
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IMembershipDAL membershipDAL)
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IMembershipDAL membership)
         {
             UserManager = userManager;
             SignInManager = signInManager;
-            MembershipDAL = membershipDAL;
         }
 
         public ApplicationSignInManager SignInManager
@@ -125,7 +127,7 @@ namespace WeDecide.Controllers
 
                     return RedirectToAction("Index", "Home");
                 }
-                AddErrors(result);
+                //AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
