@@ -10,6 +10,7 @@
     <h4>TestViewModel</h4>
     <hr />
     <dl class="dl-horizontal"></dl>
+
     @{
         @: @Model.TheQuestion
         <h3>Responses</h3>
@@ -27,8 +28,20 @@
             </p>
         }
     }
+
+    <br />
+    <br />
+    @Html.Partial("_LiveQuestionView");
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+@section scripts {
+    <script src="~/Scripts/moment.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
+    <script src="~/signalr/Hubs"></script>
+    <script src="~/Scripts/knockout-3.2.0.js"></script>
+    <script src="~/Scripts/LiveQuestion.js"></script>
+}

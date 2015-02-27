@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Microsoft.AspNet.Identity;
 using WeDecide.Models.Concrete;
 using WeDecide.DAL.Abstract;
 
@@ -58,10 +59,10 @@ namespace WeDecide.Controllers
         }
 
         // GET api/<controller>
-        public IEnumerable<string> Get()
-        {
-            IEnumerable<Question> questions = QuestionAccess.GetAll();
-            return new string[] { "value1", "value2" };
+        public IEnumerable<Question> Get()
+        {            
+            IEnumerable<Question> questions = QuestionAccess.GetAll(x => x.UserId == User.Identity.GetUserId());
+            return questions;
         }
 
         // GET api/<controller>/5

@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using WeDecide.Models.Concrete;
 using WeDecide.ViewModels;
+using WeDecide.DAL.Abstract;
+using WeDecide.DAL.Concrete;
 
 namespace WeDecide.Controllers
 {
@@ -15,6 +17,8 @@ namespace WeDecide.Controllers
         {
             _Context = context;
         }
+
+        //private IQuestionDAL _Context = new TestDal();
 
         // GET: Home
         [HttpGet]
