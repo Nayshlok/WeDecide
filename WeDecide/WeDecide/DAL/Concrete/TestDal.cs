@@ -27,18 +27,6 @@ namespace WeDecide.DAL.Concrete
             User user1 = new User { Id = "2", Name = "test1"};
             User user2 = new User { Id = "3", Name = "test2"};
             User user3 = new User { Id = "4", Name = "test3"};
-
-            Response[] responses = new Response[] {
-                new Response{ Id= 1, Owner=question, OwnerId=question.Id, Text="yes"},
-                new Response{Id=2, Owner=question, OwnerId=question.Id, Text="no"}
-            };
-            UserResponse response1 = new UserResponse { Id = 1, Question = question, Response = responses[0], User = user1 };
-            UserResponse response2 = new UserResponse { Id = 2, Question = question, Response = responses[0], User = user2 };
-            UserResponse response3 = new UserResponse { Id = 3, Question = question, Response = responses[1], User = user3 };
-            responses[0].UserResponses = new List<UserResponse> { response1, response2 };
-            responses[1].UserResponses = new List<UserResponse> { response3 };
-
-            question.Responses = responses;
             return question;
         }
 
@@ -60,17 +48,6 @@ namespace WeDecide.DAL.Concrete
             User user2 = new User { Id = "3", Name = "test2" };
             User user3 = new User { Id = "4", Name = "test3" };
 
-            Response[] responses = new Response[] {
-                new Response{ Id= 1, Owner=question, OwnerId=question.Id, Text="yes"},
-                new Response{Id=2, Owner=question, OwnerId=question.Id, Text="no"}
-            };
-            UserResponse response1 = new UserResponse { Id = 1, Question = question, Response = responses[0], User = user1 };
-            UserResponse response2 = new UserResponse { Id = 2, Question = question, Response = responses[0], User = user2 };
-            UserResponse response3 = new UserResponse { Id = 3, Question = question, Response = responses[1], User = user3 };
-            responses[0].UserResponses = new List<UserResponse> { response1, response2 };
-            responses[1].UserResponses = new List<UserResponse> { response3 };
-
-            question.Responses = responses;
             return new List<Question> { question };
         }
     }
