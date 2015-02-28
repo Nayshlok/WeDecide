@@ -1,16 +1,20 @@
-﻿<div class="overlay-box">
+﻿@model WeDecide.ViewModels.ProfileViewModel
+
+<div class="overlay-box">
     <div id="editBox" class="white_content">
         <header>
             <h2>Edit Your Profile</h2>
         </header>
         <div>
-            <form>
+            @using (Html.BeginForm("UpdateProfile", "Profile"))
+            {
                 <div class="form-group">
                     <label for="nameEdit">Name</label>
-                    <input id="nameEdit" type="text" placeholder="name" class="form-control" />
+                    @Html.ValidationMessageFor(x => x.UserName)
+                    @Html.TextBoxFor(x => x.UserName, new { @id = "nameEdit", @class = "form-control", @name = "nameEdit", @placeholder = "Ex: John Doe" })
                 </div>
-            </form>
-            <button class="bottom-btn btn btn-default" type="submit">Update Profile</button>
+                <input class="bottom-btn btn btn-default" type="submit" value="Update Profile" />
+            }
         </div>
     </div>
     <section id="fade" class="black_overlay"></section>

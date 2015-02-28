@@ -59,11 +59,7 @@ header a {
  
 /*End Layout Styling*/
 .make-question {
-	border: 1px solid #000;
-	min-height: 350px;
-	padding: 15px;
-	text-align: center;
-	width: 400px;
+	z-index: 100;
  }
  
 	.make-question h1 {
@@ -141,6 +137,11 @@ header a {
 	width: 75px;
  }
  
+.add-question {
+    margin: 40px auto;
+    width: 50%;
+}
+
 /*End Home Page Styling*/
 /*Profile Page Styling*/
 .profile-view {
@@ -187,7 +188,7 @@ header a {
 	height: 250px;
 	margin: 10px 5px 10px 5px;
 	overflow-y: auto;
-	width: 30%;
+	width: 45%;
  }
  
 	.info-box div {
@@ -273,7 +274,7 @@ header a {
 	position: fixed;
 	top: 50%;
 	transform: translateX(-50%) translateY(-50%);
-	width: 80%;
+	width: 757px;
 	z-index: 1002;
  }
  

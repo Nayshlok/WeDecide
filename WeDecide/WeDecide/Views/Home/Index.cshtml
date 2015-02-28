@@ -9,8 +9,11 @@
     <section class="welcome-header shadowed">
         <h2>Welcome back, User.</h2>
     </section>
+    <div>
+        @Html.Partial("_MakeQuestionPartial")
+    </div>
     <section class="content-feed">
-        <button type="button" class="btn btn-primary btn-lg btn-block" value="Make a new question" />
+        
     </section>
     <div class="filter-feed shadowed">
         <div class="checkbox">
@@ -28,6 +31,9 @@
                 <input type="checkbox"> Global
             </label>
         </div>
+    </div>
+    <div class="add-question">
+        <button id="btnNewQuestion" type="button" class="bottom-btn btn-primary btn-lg btn-block">Create New Question</button>
     </div>
 </section>
 

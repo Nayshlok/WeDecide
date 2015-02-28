@@ -14,9 +14,24 @@
         });
 
         profileEdit.fade.on('click', function () {
-            window.console.log("You clicked the fade");
             profileEdit.editBox.css('display', 'none');
             profileEdit.fade.css('display', 'none');
+        });
+
+        profileEdit.onEditFailure = function () {
+            profileEdit.editBox.css('display', 'block');
+            profileEdit.fade.css('display', 'block');
+        };
+
+        $('form').submit(function () {
+            if ($(this).valid()) {
+                $.ajax({
+                    url: this.action,
+                    type: this.method,
+                    data: $(this).serialize()
+                })
+            }
+            return false;
         });
     }
 });
