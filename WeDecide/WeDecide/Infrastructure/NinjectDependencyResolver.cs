@@ -43,8 +43,9 @@ namespace WeDecide.Infrastructure
                 (context) => { return QuestionDbContext.Create(); }
             );
 
-            kernel.Bind<IQuestionDAL>().To<MemoryQuestionDAL>();
+            kernel.Bind<IQuestionDAL>().To<TestDal>();
             kernel.Bind<IMembershipDAL>().To<CustomMembershipDAL>();
+            
         }
 
     }

@@ -16,15 +16,14 @@ namespace WeDecide.Models.Concrete
     {
         public Response()
         {
-            this.UserResponses = new HashSet<UserResponse>();
+            this.Users = new HashSet<User>();
         }
     
         public int Id { get; set; }
-        public int OwnerId { get; set; }
         public string Text { get; set; }
         public int QuestionId { get; set; }
     
-        public virtual Question Owner { get; set; }
-        public virtual ICollection<UserResponse> UserResponses { get; set; }
+        public virtual Question Question { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

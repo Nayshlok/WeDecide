@@ -127,6 +127,10 @@
     <Reference Include="System.Web.Optimization">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.2\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -159,36 +163,36 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\WeDecideDB.mdf" />
-    <Content Include="App_Data\WeDecideDB_log.ldf">
-      <DependentUpon>WeDecideDB.mdf</DependentUpon>
+    <Content Include="App_Data\QuestionDB.mdf" />
+    <Content Include="App_Data\QuestionDB_log.ldf">
+      <DependentUpon>QuestionDB.mdf</DependentUpon>
     </Content>
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\site.css" />
     <Content Include="Global.asax" />
-    <EntityDeploy Include="Models\Concrete\Question.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Question.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <Content Include="Images\default_background.jpg" />
     <Content Include="Images\placeholder-headshot.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <EntityDeploy Include="Models\Concrete\Question.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Question.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Concrete\Question2.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Question.edmx</DependentUpon>
+      <LastGenOutput>Question2.Context.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\Concrete\Question.edmx.diagram">
       <DependentUpon>Question.edmx</DependentUpon>
     </Content>
+    <Content Include="Models\Concrete\Question2.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Question2.cs</LastGenOutput>
+      <DependentUpon>Question.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Models\Concrete\Question.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Question.edmx</DependentUpon>
-      <LastGenOutput>Question.Context.cs</LastGenOutput>
-    </Content>
     <Content Include="Models\Concrete\Question.edmx.sql" />
-    <Content Include="Models\Concrete\QuestionContext.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>QuestionContext.cs</LastGenOutput>
-      <DependentUpon>Question.edmx</DependentUpon>
-    </Content>
     <Content Include="Scripts\EditProfile.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -233,38 +237,40 @@
     <Compile Include="Controllers\QuestionAnalyticsController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\QuestionResponseController.cs" />
+    <Compile Include="Controllers\QuestionViewController.cs" />
     <Compile Include="DAL\Concrete\MemoryQuestionDAL.cs" />
     <Compile Include="DAL\Concrete\SqlQuestionDAL.cs" />
+    <Compile Include="DAL\Concrete\TestDal.cs" />
+    <Compile Include="Hubs\NotificationHub.cs" />
+    <Compile Include="Hubs\questionHub.cs" />
     <Compile Include="Infrastructure\Annotations\ValidateResponses.cs" />
     <Compile Include="Infrastructure\Annotations\ValidateTimeToAnswer.cs" />
+    <Compile Include="Models\Account\User.cs" />
     <Compile Include="Models\Concrete\IdentityModels.cs" />
     <Compile Include="Models\Concrete\PartialClasses.cs" />
-    <Compile Include="Models\Concrete\Question.Context.cs">
+    <Compile Include="Models\Concrete\Question.cs">
+      <DependentUpon>Question2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Concrete\Question2.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Question.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Concrete\Question.cs">
-      <DependentUpon>QuestionContext.tt</DependentUpon>
+      <DependentUpon>Question2.Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Concrete\Question.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Question.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Concrete\QuestionContext.cs">
+    <Compile Include="Models\Concrete\Question2.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>QuestionContext.tt</DependentUpon>
+      <DependentUpon>Question2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Concrete\Response.cs">
-      <DependentUpon>QuestionContext.tt</DependentUpon>
+      <DependentUpon>Question2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Concrete\User.cs">
-      <DependentUpon>QuestionContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Concrete\UserResponse.cs">
-      <DependentUpon>QuestionContext.tt</DependentUpon>
+      <DependentUpon>Question2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Concrete\WeDecideDbContextCustom.cs" />
     <Compile Include="Startup.cs" />
@@ -279,7 +285,6 @@
     </Compile>
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\Account\Profile.cs" />
-    <Compile Include="Models\Account\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MakeQuestionViewModel.cs" />
@@ -307,7 +312,7 @@
     <Content Include="Views\Home\LandingPage.cshtml" />
     <Content Include="Views\Shared\_QuestionPollPartial.cshtml" />
     <Content Include="Views\QuestionAnalytics\QuestionPoll.cshtml" />
-    <Content Include="Views\Question\LiveQuestionView.cshtml" />
+    <Content Include="Views\Shared\_LiveQuestionView.cshtml" />
     <Content Include="Views\Friends\FriendsView.cshtml" />
     <Content Include="Views\Question\CreateQuestion.cshtml" />
     <Content Include="Views\Profile\ProfileView.cshtml" />
