@@ -29,7 +29,10 @@ namespace WeDecide.DAL.Concrete
 
         public List<Models.Concrete.User> Search(string Search)
         {
-            throw new NotImplementedException();
+            //Very simple search to match names, will add more to it later.
+            var relevantUsers = db.Users.Where(u => u.Name.ToLower() == Search.ToLower());
+
+            return relevantUsers.ToList<User>();
         }
 
         public List<Models.Concrete.User> GetFriends(string Id)

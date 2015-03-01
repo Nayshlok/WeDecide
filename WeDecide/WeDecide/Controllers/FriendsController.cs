@@ -13,5 +13,11 @@ namespace WeDecide.Controllers
         {
             return View("FriendsView");
         }
+
+        public ActionResult SearchFriends(string friendsQuery)
+        {
+
+            return View("FriendsView");
+        }
     }
 }
