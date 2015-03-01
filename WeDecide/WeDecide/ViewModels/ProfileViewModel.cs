@@ -14,7 +14,7 @@ namespace WeDecide.ViewModels
         [Required(ErrorMessage = "Everyone has a name, please input yours.", AllowEmptyStrings = false)]
         public string UserName { get; set; }
 
-        public IEnumerable<WeDecide.Models.Account.User> UserFriends { get; set; }
+        public IEnumerable<WeDecide.Models.Concrete.User> UserFriends { get; set; }
 
         public IEnumerable<Question> UserQuestions { get; set; }
     }

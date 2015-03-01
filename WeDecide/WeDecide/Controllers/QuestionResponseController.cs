@@ -8,7 +8,6 @@ using WeDecide.DAL.Abstract;
 using WeDecide.DAL.Concrete;
 using WeDecide.Models.Concrete;
 using WeDecide.ViewModels;
-using Microsoft.AspNet.Identity;
 
 namespace WeDecide.Controllers
 {

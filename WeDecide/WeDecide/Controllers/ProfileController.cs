@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WeDecide.DAL.Abstract;
+using Microsoft.AspNet.Identity;
 using WeDecide.ViewModels;
 
 namespace WeDecide.Controllers
@@ -11,16 +12,18 @@ namespace WeDecide.Controllers
     public class ProfileController : Controller
     {
         private IMembershipDAL memberDal;
+        private IQuestionDAL questionDal;
 
         [HttpGet]
         public ActionResult Index()
         {
-            //Need to be able to get the current logged in user
-            //ProfileViewModel userProfile = new ProfileViewModel()
+            //Models.Concrete.User currentUser = memberDal.GetUser(User.Identity.GetUserId());
+
+            //ProfileViewModel userprofile = new ProfileViewModel()
             //{
-            //    UserName = memberDal.GetUser(1),
-            //    UserFriends = memberDal.GetFriends(1), //Not sure how to get this yet
-            //    UserQuestions = null //Also not sure how to get this
+            //    UserName = currentUser.Name,
+            //    UserFriends = memberDal.GetFriends(currentUser.Id),
+            //    UserQuestions = questionDal.GetAll(x => x.UserId == currentUser.Id)
             //};
 
             ProfileViewModel userProfile = new ProfileViewModel()
