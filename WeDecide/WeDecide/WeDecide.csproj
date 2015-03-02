@@ -322,6 +322,7 @@
     <Content Include="Views\Shared\_FriendOverviewPartial.cshtml" />
     <Content Include="Views\Shared\_QuickProfilePartial.cshtml" />
     <Content Include="Views\Shared\_ProfileEditPartial.cshtml" />
+    <Content Include="Views\Shared\_EditQuestionPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

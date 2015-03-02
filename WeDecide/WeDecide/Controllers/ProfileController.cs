@@ -33,7 +33,8 @@ namespace WeDecide.Controllers
                 UserQuestions = null //Also not sure how to get this
             };
 
-            return View("ProfileView", userProfile);
+            //, userProfile
+            return View("ProfileView");
         }
 
         public ActionResult UpdateProfile(ProfileViewModel pvm)

@@ -26,6 +26,8 @@ namespace WeDecide.ViewModels
 
         public bool FreeResponseEnabled { get; set; }
 
+        public int QuestionId { get; set; }
+
         public EditQuestionViewModel()
         {
 
@@ -34,6 +36,7 @@ namespace WeDecide.ViewModels
         public EditQuestionViewModel(Question QuestionToEdit)
         {
             Question = QuestionToEdit.Text;
+            QuestionId = QuestionToEdit.Id;
             Responses = new HashSet<string>(QuestionToEdit.Responses.ToList().ConvertAll(x => x.Text));
             QuestionScope = QuestionToEdit.QuestionScope;
             FreeResponseEnabled = QuestionToEdit.FreeResponseEnabled;
