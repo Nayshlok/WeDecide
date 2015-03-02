@@ -4,258 +4,46 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="WeDecideDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityContainer Name="WeDecideDBModelStoreContainer">
-    <EntitySet Name="Questions" EntityType="WeDecideDBModel.Store.Questions" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Responses" EntityType="WeDecideDBModel.Store.Responses" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Users" EntityType="WeDecideDBModel.Store.Users" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="UserResponses" EntityType="WeDecideDBModel.Store.UserResponses" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="QuestionUserResponse" Association="WeDecideDBModel.Store.QuestionUserResponse">
-      <End Role="Question" EntitySet="Questions" />
-      <End Role="UserResponse" EntitySet="UserResponses" />
-    </AssociationSet>
-    <AssociationSet Name="QuestionResponse" Association="WeDecideDBModel.Store.QuestionResponse">
-      <End Role="Question" EntitySet="Questions" />
-      <End Role="Response" EntitySet="Responses" />
-    </AssociationSet>
-    <AssociationSet Name="ResponseUserResponse" Association="WeDecideDBModel.Store.ResponseUserResponse">
-      <End Role="Response" EntitySet="Responses" />
-      <End Role="UserResponse" EntitySet="UserResponses" />
-    </AssociationSet>
-    <AssociationSet Name="RespondantToUserResponse" Association="WeDecideDBModel.Store.RespondantToUserResponse">
-      <End Role="User" EntitySet="Users" />
-      <End Role="UserResponse" EntitySet="UserResponses" />
-    </AssociationSet>
-    <AssociationSet Name="UserQuestion" Association="WeDecideDBModel.Store.UserQuestion">
-      <End Role="User" EntitySet="Users" />
-      <End Role="Question" EntitySet="Questions" />
-    </AssociationSet>
-  </EntityContainer>
-  <EntityType Name="Questions">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Text" Type="varchar(max)" Nullable="false" />
-    <Property Name="IsActive" Type="bit" Nullable="false" />
-    <Property Name="FreeResponseEnabled" Type="bit" Nullable="false" />
-    <Property Name="UserId" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Responses">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="OwnerId" Type="int" Nullable="false" />
-    <Property Name="Text" Type="nchar" Nullable="false" MaxLength="10" />
-    <Property Name="QuestionId" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Users">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="20" />
-    <Property Name="QuestionId" Type="int" Nullable="false" />
-    <Property Name="ResponseId" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="UserResponses">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="QuestionId" Type="int" Nullable="false" />
-    <Property Name="ResponseId" Type="int" Nullable="false" />
-    <Property Name="UserId" Type="int" Nullable="false" />
-  </EntityType>
-  <Association Name="QuestionUserResponse">
-    <End Role="Question" Type="WeDecideDBModel.Store.Questions" Multiplicity="1" />
-    <End Role="UserResponse" Type="WeDecideDBModel.Store.UserResponses" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Question">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="UserResponse">
-        <PropertyRef Name="QuestionId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="QuestionResponse">
-    <End Role="Question" Type="WeDecideDBModel.Store.Questions" Multiplicity="1" />
-    <End Role="Response" Type="WeDecideDBModel.Store.Responses" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Question">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Response">
-        <PropertyRef Name="QuestionId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="ResponseUserResponse">
-    <End Role="Response" Type="WeDecideDBModel.Store.Responses" Multiplicity="1" />
-    <End Role="UserResponse" Type="WeDecideDBModel.Store.UserResponses" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Response">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="UserResponse">
-        <PropertyRef Name="ResponseId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="RespondantToUserResponse">
-    <End Role="User" Type="WeDecideDBModel.Store.Users" Multiplicity="1" />
-    <End Role="UserResponse" Type="WeDecideDBModel.Store.UserResponses" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="User">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="UserResponse">
-        <PropertyRef Name="UserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="UserQuestion">
-    <End Role="User" Type="WeDecideDBModel.Store.Users" Multiplicity="1" />
-    <End Role="Question" Type="WeDecideDBModel.Store.Questions" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="User">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Question">
-        <PropertyRef Name="UserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-</Schema></edmx:StorageModels>
-    <!-- CSDL content -->
-    <edmx:ConceptualModels>
-      <Schema Namespace="WeDecideDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+    <Schema Namespace="QuestionDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Question">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="FreeResponseEnabled" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="UserResponses" Relationship="WeDecideDBModel.QuestionUserResponse" FromRole="Question" ToRole="UserResponse" />
-          <NavigationProperty Name="Responses" Relationship="WeDecideDBModel.QuestionResponse" FromRole="Question" ToRole="Response" />
-          <NavigationProperty Name="User" Relationship="WeDecideDBModel.UserQuestion" FromRole="Question" ToRole="User" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Text" Type="text" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="FreeResponseEnabled" Type="bit" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="QScope" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Response">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="OwnerId" Type="Int32" Nullable="false" />
-          <Property Name="Text" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Owner" Relationship="WeDecideDBModel.QuestionResponse" FromRole="Response" ToRole="Question" />
-          <Property Name="QuestionId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="UserResponses" Relationship="WeDecideDBModel.ResponseUserResponse" FromRole="Response" ToRole="UserResponse" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Text" Type="text" Nullable="false" />
+          <Property Name="QuestionId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="QuestionId" Type="Int32" Nullable="false" />
-          <Property Name="ResponseId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="UserResponses" Relationship="WeDecideDBModel.RespondantToUserResponse" FromRole="User" ToRole="UserResponse" />
-          <NavigationProperty Name="Questions" Relationship="WeDecideDBModel.UserQuestion" FromRole="User" ToRole="Question" />
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="40" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'C:\USERS\DAVID BORLAND\SOURCE\REPOS\WEDECIDE\WEDECIDE\WEDECIDE\APP_DATA\QUESTIONDB.MDF.dbo.UserResponse' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="UserResponse">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="ResponseId" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Question" Relationship="WeDecideDBModel.QuestionUserResponse" FromRole="UserResponse" ToRole="Question" />
-          <Property Name="QuestionId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Response" Relationship="WeDecideDBModel.ResponseUserResponse" FromRole="UserResponse" ToRole="Response" />
-          <Property Name="ResponseId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="WeDecideDBModel.RespondantToUserResponse" FromRole="UserResponse" ToRole="User" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ResponseId" Type="int" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="QuestionDbContext" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Questions" EntityType="Self.Question" />
-          <EntitySet Name="Responses" EntityType="Self.Response" />
-          <EntitySet Name="Users" EntityType="Self.User" />
-          <EntitySet Name="UserResponses" EntityType="Self.UserResponse" />
-          <AssociationSet Name="QuestionUserResponse" Association="WeDecideDBModel.QuestionUserResponse">
-            <End Role="Question" EntitySet="Questions" />
-            <End Role="UserResponse" EntitySet="UserResponses" />
-          </AssociationSet>
-          <AssociationSet Name="QuestionResponse" Association="WeDecideDBModel.QuestionResponse">
-            <End Role="Question" EntitySet="Questions" />
-            <End Role="Response" EntitySet="Responses" />
-          </AssociationSet>
-          <AssociationSet Name="ResponseUserResponse" Association="WeDecideDBModel.ResponseUserResponse">
-            <End EntitySet="Responses" Role="Response" />
-            <End EntitySet="UserResponses" Role="UserResponse" />
-          </AssociationSet>
-          <AssociationSet Name="RespondantToUserResponse" Association="WeDecideDBModel.RespondantToUserResponse">
-            <End Role="User" EntitySet="Users" />
-            <End Role="UserResponse" EntitySet="UserResponses" />
-          </AssociationSet>
-          <AssociationSet Name="UserQuestion" Association="WeDecideDBModel.UserQuestion">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Question" EntitySet="Questions" />
-          </AssociationSet>
-          </EntityContainer>
-        <Association Name="QuestionUserResponse">
-          <End Type="WeDecideDBModel.Question" Role="Question" Multiplicity="1" />
-          <End Type="WeDecideDBModel.UserResponse" Role="UserResponse" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Question">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserResponse">
-              <PropertyRef Name="QuestionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="QuestionResponse">
-          <End Type="WeDecideDBModel.Question" Role="Question" Multiplicity="1" />
-          <End Type="WeDecideDBModel.Response" Role="Response" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Question">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Response">
-              <PropertyRef Name="QuestionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="ResponseUserResponse">
-          <End Type="WeDecideDBModel.Response" Multiplicity="1" Role="Response" />
-          <End Type="WeDecideDBModel.UserResponse" Multiplicity="*" Role="UserResponse" />
-          <ReferentialConstraint>
-            <Principal Role="Response">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserResponse">
-              <PropertyRef Name="ResponseId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="RespondantToUserResponse">
-          <End Type="WeDecideDBModel.User" Role="User" Multiplicity="1" />
-          <End Type="WeDecideDBModel.UserResponse" Role="UserResponse" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserResponse">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="UserQuestion">
-          <End Type="WeDecideDBModel.User" Role="User" Multiplicity="1" />
-          <End Type="WeDecideDBModel.Question" Role="Question" Multiplicity="*" />
+        <Association Name="FK_Questions_Users">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Question" Type="Self.Question" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="Id" />
@@ -265,55 +53,196 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        </Schema>
+        <Association Name="FK_Response_Questions">
+          <End Role="Question" Type="Self.Question" Multiplicity="1" />
+          <End Role="Response" Type="Self.Response" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Response">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserResponse_Response">
+          <End Role="Response" Type="Self.Response" Multiplicity="1" />
+          <End Role="UserResponse" Type="Self.UserResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Response">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserResponse">
+              <PropertyRef Name="ResponseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserResponse_Users">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserResponse" Type="Self.UserResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserResponse">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QuestionDBModelStoreContainer">
+          <EntitySet Name="Question" EntityType="Self.Question" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Response" EntityType="Self.Response" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserResponse" EntityType="Self.UserResponse" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UserResponse].[UserId] AS [UserId], 
+    [UserResponse].[ResponseId] AS [ResponseId]
+    FROM [dbo].[UserResponse] AS [UserResponse]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Questions_Users" Association="Self.FK_Questions_Users">
+            <End Role="User" EntitySet="User" />
+            <End Role="Question" EntitySet="Question" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Response_Questions" Association="Self.FK_Response_Questions">
+            <End Role="Question" EntitySet="Question" />
+            <End Role="Response" EntitySet="Response" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserResponse_Response" Association="Self.FK_UserResponse_Response">
+            <End Role="Response" EntitySet="Response" />
+            <End Role="UserResponse" EntitySet="UserResponse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserResponse_Users" Association="Self.FK_UserResponse_Users">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserResponse" EntitySet="UserResponse" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QuestionDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="FreeResponseEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Questions_Users" FromRole="Question" ToRole="User" />
+          <NavigationProperty Name="Responses" Relationship="Self.FK_Response_Questions" FromRole="Question" ToRole="Response" />
+          <Property Name="QScope" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Response">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="QuestionId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Question" Relationship="Self.FK_Response_Questions" FromRole="Response" ToRole="Question" />
+          <NavigationProperty Name="Users" Relationship="Self.UserResponse" FromRole="Response" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Questions" Relationship="Self.FK_Questions_Users" FromRole="User" ToRole="Question" />
+          <NavigationProperty Name="Responses" Relationship="Self.UserResponse" FromRole="User" ToRole="Response" />
+        </EntityType>
+        <Association Name="FK_Questions_Users">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Question" Type="Self.Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Response_Questions">
+          <End Role="Question" Type="Self.Question" Multiplicity="1" />
+          <End Role="Response" Type="Self.Response" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Response">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserResponse">
+          <End Role="Response" Type="Self.Response" Multiplicity="*" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="QuestionDbContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Questions" EntityType="Self.Question" />
+          <EntitySet Name="Responses" EntityType="Self.Response" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_Questions_Users" Association="Self.FK_Questions_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Question" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Response_Questions" Association="Self.FK_Response_Questions">
+            <End Role="Question" EntitySet="Questions" />
+            <End Role="Response" EntitySet="Responses" />
+          </AssociationSet>
+          <AssociationSet Name="UserResponse" Association="Self.UserResponse">
+            <End Role="Response" EntitySet="Responses" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="WeDecideDBModelStoreContainer" CdmEntityContainer="QuestionDbContext">
-    <EntitySetMapping Name="Questions">
-      <EntityTypeMapping TypeName="IsTypeOf(WeDecideDBModel.Question)">
-        <MappingFragment StoreEntitySet="Questions">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Text" ColumnName="Text" />
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-          <ScalarProperty Name="FreeResponseEnabled" ColumnName="FreeResponseEnabled" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Responses">
-      <EntityTypeMapping TypeName="IsTypeOf(WeDecideDBModel.Response)">
-        <MappingFragment StoreEntitySet="Responses">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
-          <ScalarProperty Name="Text" ColumnName="Text" />
-          <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Users">
-      <EntityTypeMapping TypeName="IsTypeOf(WeDecideDBModel.User)">
-        <MappingFragment StoreEntitySet="Users">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
-          <ScalarProperty Name="ResponseId" ColumnName="ResponseId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="UserResponses">
-      <EntityTypeMapping TypeName="IsTypeOf(WeDecideDBModel.UserResponse)">
-        <MappingFragment StoreEntitySet="UserResponses">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
-          <ScalarProperty Name="ResponseId" ColumnName="ResponseId" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-  </EntityContainerMapping>
-</Mapping></edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QuestionDBModelStoreContainer" CdmEntityContainer="QuestionDbContext">
+          <EntitySetMapping Name="Questions">
+            <EntityTypeMapping TypeName="QuestionDbModel.Question">
+              <MappingFragment StoreEntitySet="Question">
+                <ScalarProperty Name="QScope" ColumnName="QScope" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="FreeResponseEnabled" ColumnName="FreeResponseEnabled" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Responses">
+            <EntityTypeMapping TypeName="QuestionDbModel.Response">
+              <MappingFragment StoreEntitySet="Response">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="QuestionDbModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="UserResponse" TypeName="QuestionDbModel.UserResponse" StoreEntitySet="UserResponse">
+            <EndProperty Name="Response">
+              <ScalarProperty Name="Id" ColumnName="ResponseId" />
+            </EndProperty>
+            <EndProperty Name="User">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -327,7 +256,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

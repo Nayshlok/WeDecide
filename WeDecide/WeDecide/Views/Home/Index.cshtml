@@ -7,10 +7,33 @@
 <section class="home-page">
     @Html.Partial("_QuickProfilePartial")
     <section class="welcome-header shadowed">
-        <h1>Welcome Back, User.</h1>
+        <h1>Welcome Back, @User.Identity.Name.</h1>
     </section>
+    <div>
+        @Html.Partial("_MakeQuestionPartial")
+    </div>
     <section class="content-feed">
-
+        
     </section>
+    <div class="filter-feed shadowed">
+        <div class="checkbox">
+            <label>
+                <input type="checkbox"> Friends
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox"> Local
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox"> Global
+            </label>
+        </div>
+    </div>
+    <div class="add-question">
+        <button id="btnNewQuestion" type="button" class="bottom-btn btn-primary btn-lg btn-block">Create New Question</button>
+    </div>
 </section>
 

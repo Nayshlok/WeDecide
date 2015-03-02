@@ -11,5 +11,7 @@ namespace WeDecide.DAL.Abstract
         //IEnumerable<Question> GetQuestions(Func<Question, bool> predicate);
         void SaveAllQuestions();
 
+
+
     }
 }

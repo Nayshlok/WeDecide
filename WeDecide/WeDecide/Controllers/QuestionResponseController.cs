@@ -15,6 +15,7 @@ namespace WeDecide.Controllers
     {
         //Until we have the DAL injection done
         private static IQuestionDAL Qdal = new MemoryQuestionDAL();
+        private static IMembershipDAL Mdal = new CustomMembershipDAL();
 
         // GET: QuestionResponse
         [HttpGet]
@@ -45,7 +46,8 @@ namespace WeDecide.Controllers
             Question AffectedQuestion = Qdal.Get(QuestionId);
             Response Resp = AffectedQuestion.Responses.First(x => x.Text.Equals(ChosenResponse));
 
-            //Make New UserResponse with given string and question id
+
+            //Add User Response to AffectedQuestion
             MakeUserResponse(AffectedQuestion, Resp);
 
             Qdal.Update(QuestionId, AffectedQuestion);
@@ -57,6 +59,8 @@ namespace WeDecide.Controllers
 
         private void MakeUserResponse(Question question, Response response)
         {
+            User currentUser = Mdal.GetUser(User.Identity.GetUserId());
+
             //If Response is new and FreeResponse is enabled
             if (CanAddFreeResponse(question, response))
             {
@@ -66,39 +70,44 @@ namespace WeDecide.Controllers
             //If User has responded to question before
             if(UserHasRespondedBefore(question, response))
             {
+                Response oldResponse = question.Responses.First(x => x.Users.Contains(currentUser));
+                oldResponse.Users.Remove(currentUser);
+                response.Users.Add(currentUser);
                 //Adjust existing UserResponse to point to new Response
             }
             //Else
             else {
                 //Make new UserResponse                
-                UserResponse NewUR = new UserResponse() { Question = question, QuestionId = question.Id, Response = response, ResponseId = response.Id };
-                AddUserResponse(question, response, NewUR);
+                //UserResponse NewUR = new UserResponse() { Question = question, QuestionId = question.Id, Response = response, ResponseId = response.Id };
+                //AddUserResponse(question, response, NewUR);
+
+                response.Users.Add(currentUser);
             }
         }
 
-        private UserResponse GetUserResponse(Response response)
-        {
-            //return response.UserResponses.First(x => x.Id == UsersId)
-            return null;
-        }
+        //private UserResponse GetUserResponse(Response response)
+        //{
+        //    //return response.UserResponses.First(x => x.Id == UsersId)
+        //    return null;
+        //}
 
-        private void AddUserResponse(Question question, Response response, UserResponse userResponse)
-        {
-            //Add new UserResponse to Question
-            question.UserResponses.Add(userResponse);
-            //Add new UserResponse to Respone
-            response.UserResponses.Add(userResponse);
-        }
+        //private void AddUserResponse(Question question, Response response, UserResponse userResponse)
+        //{
+        //    //Add new UserResponse to Question
+        //    question.UserResponses.Add(userResponse);
+        //    //Add new UserResponse to Respone
+        //    response.UserResponses.Add(userResponse);
+        //}
 
-        private void UpdateUserResponse(Question question, Response response, UserResponse userResponse)
-        {
-            //Remove userResponse from its current response
-            userResponse.Response.UserResponses.Remove(userResponse);
-            //Change userResponse's response to the passed in response
-            userResponse.Response = response;
-            //Add userResponse to passed int response
-            response.UserResponses.Add(userResponse);
-        }
+        //private void UpdateUserResponse(Question question, Response response, UserResponse userResponse)
+        //{
+        //    //Remove userResponse from its current response
+        //    userResponse.Response.UserResponses.Remove(userResponse);
+        //    //Change userResponse's response to the passed in response
+        //    userResponse.Response = response;
+        //    //Add userResponse to passed int response
+        //    response.UserResponses.Add(userResponse);
+        //}
 
         private bool CanAddFreeResponse(Question question, Response response)
         {
@@ -108,7 +117,18 @@ namespace WeDecide.Controllers
         //TODO: Implement this method for realsies 
         private bool UserHasRespondedBefore(Question question, Response response)
         {
-            return false;
+            bool responded = false;
+
+            foreach (Response r in question.Responses)
+            {
+                if (r.Users.Contains(Mdal.GetUser(User.Identity.GetUserId())))
+                {
+                    responded = true;
+                    break;
+                }
+            }
+
+            return responded;
         }
     }
 }

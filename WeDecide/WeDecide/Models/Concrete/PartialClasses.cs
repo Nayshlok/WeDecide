@@ -16,7 +16,17 @@ namespace WeDecide.Models.Concrete
 
         public DateTime EndDate { get; set; }
 
-        public Scope QuestionScope { get; set; }
+        public Scope QuestionScope
+        {
+            get
+            {
+                return (Scope)QScope;
+            }
+            set
+            {
+                QScope = (int)value;
+            }
+        }
 
         /// <summary>
         /// Copy the properties of the right question to the left

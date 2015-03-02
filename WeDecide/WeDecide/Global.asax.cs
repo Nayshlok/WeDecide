@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Optimization;
 using System.Web.Routing;
 using WeDecide.Infrastructure;
 
@@ -16,6 +17,8 @@ namespace WeDecide
 
             DependencyResolver.SetResolver(new NinjectDependencyResolver());
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
+
         }
     }
 }

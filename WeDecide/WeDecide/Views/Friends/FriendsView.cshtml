@@ -12,19 +12,23 @@
             <header>
                 <h2 class="centered-header-text">Find new Friends</h2>
             </header>
-            <div>
-                <input type="text" class="form-control" placeholder="Search for new friends" />
-            </div>
+            @using (Html.BeginForm("SearchFriends", "Friends", FormMethod.Get))
+            {
+                <div class="form-group">
+                    @Html.TextBox("friendsQuery", "", new { @class = "form-control", @placeholder = "Search for new friends" })
+                    <input type="submit" class="btn btn-primary btn-sm" value="Search" />
+                </div>
+            }
+            <form method="get">
+               
+            </form>
         </section>
         <section class="friends-holder shadowed">
             <header>
                 <h2 class="centered-header-text">Friends</h2>
             </header>
             <div>
-                @for (int i = 5; i >= 0; i-- )
-                {
-                    Html.RenderPartial("_FriendOverviewPartial");
-                }
+                
             </div>
         </section>
     </section>

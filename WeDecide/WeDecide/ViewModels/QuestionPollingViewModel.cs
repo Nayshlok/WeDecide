@@ -20,7 +20,7 @@ namespace WeDecide.ViewModels
         {
             this.Question = question.Text;
 
-            Polls = question.Responses.ToDictionary((x => x.Text), (x => x.UserResponses.Count()));
+            Polls = question.Responses.ToDictionary((x => x.Text), (x => x.Users.Count));
 
         }
     }
