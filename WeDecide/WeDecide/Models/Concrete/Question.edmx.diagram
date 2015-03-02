@@ -4,17 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9f2516d7e8864db4927439a256e324bb" Name="Diagram1" DisplayType="true">
-        <EntityTypeShape EntityType="WeDecideDBModel.Question" Width="2.625" PointX="2.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="WeDecideDBModel.Response" Width="2.125" PointX="6.375" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="WeDecideDBModel.User" Width="2.375" PointX="2.5" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="WeDecideDBModel.UserResponse" Width="2.5" PointX="6" PointY="4.125" IsExpanded="true" />
-        <AssociationConnector Association="WeDecideDBModel.QuestionUserResponse" />
-        <AssociationConnector Association="WeDecideDBModel.QuestionResponse" />
-        <AssociationConnector Association="WeDecideDBModel.ResponseUserResponse" />
-        <AssociationConnector Association="WeDecideDBModel.RespondantToUserResponse" />
-        <AssociationConnector Association="WeDecideDBModel.UserQuestion" />
-        </Diagram>
+      <Diagram DiagramId="da4409a6b08f4250a6c011f4f64c207b" Name="Diagram1">
+        <EntityTypeShape EntityType="QuestionDbModel.Question" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuestionDbModel.Response" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuestionDbModel.User" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="QuestionDbModel.FK_Questions_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="QuestionDbModel.FK_Response_Questions" ManuallyRouted="false" />
+        <AssociationConnector Association="QuestionDbModel.UserResponse" ManuallyRouted="false" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

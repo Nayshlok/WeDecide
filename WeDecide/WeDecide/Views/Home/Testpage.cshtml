@@ -18,13 +18,8 @@
         {
             <p>
                 @response
-            </p>
-        }
-        <h3>User Response</h3>
-        foreach (var userResp in Model.UserResponses)
-        {
-            <p>
-                @userResp
+                <br />
+                @response.Users.Count
             </p>
         }
     }

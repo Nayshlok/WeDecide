@@ -16,7 +16,6 @@ namespace WeDecide.Models.Concrete
     {
         public Question()
         {
-            this.UserResponses = new HashSet<UserResponse>();
             this.Responses = new HashSet<Response>();
         }
     
@@ -25,9 +24,9 @@ namespace WeDecide.Models.Concrete
         public bool IsActive { get; set; }
         public bool FreeResponseEnabled { get; set; }
         public string UserId { get; set; }
+        private int QScope { get; set; }
     
-        public virtual ICollection<UserResponse> UserResponses { get; set; }
-        public virtual ICollection<Response> Responses { get; set; }
         public virtual User User { get; set; }
+        public virtual ICollection<Response> Responses { get; set; }
     }
 }
