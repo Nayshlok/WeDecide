@@ -7,6 +7,9 @@ using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using WeDecide.Models.Concrete;
 using WeDecide.DAL.Abstract;
+using Microsoft.AspNet.SignalR;
+using WeDecide.Hubs;
+using Microsoft.AspNet.SignalR.Hubs;
 
 namespace WeDecide.Controllers
 {
@@ -22,7 +25,6 @@ namespace WeDecide.Controllers
         // GET api/<controller>
         public IEnumerable<string> Get()
         {
-            IEnumerable<Question> questions = QuestionAccess.GetAll(x => true);
             return new string[] { "value1", "value2" };
         }
 
@@ -66,9 +68,9 @@ namespace WeDecide.Controllers
         }
 
         // GET api/<controller>/5
-        public string Get(int id)
+        public Question Get(int id)
         {
-            return "value";
+            return QuestionAccess.Get(id);
         }
 
         // POST api/<controller>

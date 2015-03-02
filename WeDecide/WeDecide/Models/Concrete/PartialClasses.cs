@@ -14,7 +14,19 @@ namespace WeDecide.Models.Concrete
             Global
         }
 
-        public DateTime EndDate { get; set; }
+        //public DateTime EndDate { get; set; }
+
+        public bool IsActive
+        {
+            get
+            {
+                return DateTime.Now > EndDate;
+            }
+            set
+            {
+
+            }
+        }
 
         public Scope QuestionScope
         {

@@ -21,10 +21,10 @@ namespace WeDecide.Models.Concrete
     
         public int Id { get; set; }
         public string Text { get; set; }
-        public bool IsActive { get; set; }
         public bool FreeResponseEnabled { get; set; }
         public string UserId { get; set; }
-        private int QScope { get; set; }
+        public int QScope { get; set; }
+        public System.DateTime EndDate { get; set; }
     
         public virtual User User { get; set; }
         public virtual ICollection<Response> Responses { get; set; }

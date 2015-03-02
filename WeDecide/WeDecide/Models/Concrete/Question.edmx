@@ -11,10 +11,10 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Text" Type="text" Nullable="false" />
-          <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="FreeResponseEnabled" Type="bit" Nullable="false" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="QScope" Type="int" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Response">
           <Key>
@@ -126,12 +126,12 @@ warning 6002: The table/view 'C:\USERS\DAVID BORLAND\SOURCE\REPOS\WEDECIDE\WEDEC
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="FreeResponseEnabled" Type="Boolean" Nullable="false" />
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="User" Relationship="Self.FK_Questions_Users" FromRole="Question" ToRole="User" />
           <NavigationProperty Name="Responses" Relationship="Self.FK_Response_Questions" FromRole="Question" ToRole="Response" />
           <Property Name="QScope" Type="Int32" Nullable="false" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="Response">
           <Key>
@@ -206,10 +206,10 @@ warning 6002: The table/view 'C:\USERS\DAVID BORLAND\SOURCE\REPOS\WEDECIDE\WEDEC
           <EntitySetMapping Name="Questions">
             <EntityTypeMapping TypeName="QuestionDbModel.Question">
               <MappingFragment StoreEntitySet="Question">
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
                 <ScalarProperty Name="QScope" ColumnName="QScope" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Text" ColumnName="Text" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="FreeResponseEnabled" ColumnName="FreeResponseEnabled" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>

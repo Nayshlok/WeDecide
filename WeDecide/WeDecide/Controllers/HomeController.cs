@@ -41,17 +41,21 @@ namespace WeDecide.Controllers
         {
             // Use a viewmodel that holds Question, its responses, and those user responses
             TestViewModel testVm = new TestViewModel();
-            User currentUser = Mdal.GetUser(User.Identity.GetUserId());
 
-            Question quest = new Question { UserId = currentUser.Id, QuestionScope = Question.Scope.Friends, IsActive = true, Text = "Do I work?", EndDate = new DateTime(2015, 3, 1) };
-            Response[] responses = new Response[]{
-                new Response{ QuestionId = quest.Id, Text="Yes", Users = new List<User>{currentUser} },
-                new Response{ QuestionId = quest.Id, Text="No", Users = new List<User>() },
+            //Question question = _Context.Questions.First();
+            //WeDecide.Models.Concrete.Response response1 = new WeDecide.Models.Concrete.Response { Question = question, Text="yes"};
+            //WeDecide.Models.Concrete.Response response2 = new WeDecide.Models.Concrete.Response { Question = question, Text = "no" };
+            //_Context.Responses.Add(response1);
+            //_Context.Responses.Add(response2);
+            //_Context.SaveChanges();
 
-            };
+            testVm.TheQuestion = _Context.Questions.First();
+            testVm.Responses = testVm.TheQuestion.Responses;
 
-            testVm.TheQuestion = _Context.Questions.Find(1);
-            testVm.Responses = _Context.Responses.ToList();
+            //if (User != null)
+            //{
+            //    testVm.TheQuestion.Responses.First().Users.Add(Mdal.GetUser(User.Identity.GetUserId()));
+            //}
 
             return View(testVm);
         }

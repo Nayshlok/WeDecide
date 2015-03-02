@@ -8,13 +8,16 @@ using WeDecide.DAL.Abstract;
 using WeDecide.DAL.Concrete;
 using WeDecide.Models.Concrete;
 using WeDecide.ViewModels;
-using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.SignalR.Hubs;
+using Microsoft.AspNet.SignalR;
+using WeDecide.Hubs;
 
 namespace WeDecide.Controllers
 {
     public class QuestionResponseController : Controller
     {
 
+        private readonly static IHubConnectionContext<dynamic> HubContext = GlobalHost.ConnectionManager.GetHubContext<questionHub>().Clients;
         //Until we have the DAL injection done
         private static IQuestionDAL Qdal = new MemoryQuestionDAL();
         private static IMembershipDAL Mdal = new CustomMembershipDAL();
@@ -53,7 +56,8 @@ namespace WeDecide.Controllers
             MakeUserResponse(AffectedQuestion, Resp);
 
             Qdal.Update(QuestionId, AffectedQuestion);
-
+            HubContext.User(User.Identity.GetUserId()).receivedResponse(QuestionId, Resp);
+            //Clients.User(UserId).receivedResponse(question.Id, question.Responses);
             //Would like to have this not actually return, as the Partial View will always be a part of something else
             //return RedirectToAction("QuestionResponse", new { id = QuestionId });
         }

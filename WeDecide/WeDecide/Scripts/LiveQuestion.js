@@ -22,9 +22,9 @@ function loadQuestion() {
     $.get('api/UsersQuestion', function (data) {
         var questionArray = [];
         $.each(data, function (i, p) {
-            var newQuestion = new question(p.id, p.text, p.username, p.endDate);
+            var newQuestion = new question(p.Id, p.Text, p.User.Name, p.EndDate);
             $.each(p.responses, function (j, r) {
-                var newResponse = new response(r.id, r.text, r.count);
+                var newResponse = new response(r.Id, r.Text, r.Count);
                 newQuestion.responses.push(newResponse);
             });
             LiveQuestionView.questions.push(newQuestion);
@@ -49,7 +49,16 @@ $(function () {
         LiveQuestionView.questions.unshift(newQuestion);
     }
 
-    hub.client.receivedResponse = function () {
-        loadQuestion();
+    hub.client.receivedResponse = function (questionId, response) {
+        var questionFilter = $.grep(LiveQuestionView.questions, function (q){
+            return q.id === questionId;
+        });
+        var thisQuestion = questionFilter[0];
+
+        var responseFilter = $.grep(thisQuestion.responses, function (x) {
+                return x.id === response.Id;
+            });
+        var singleResponse = responseFilter[0];
+        singleResponse.Count = response.Count;
     };
 })
