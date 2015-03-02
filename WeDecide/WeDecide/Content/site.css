@@ -242,6 +242,16 @@ header a {
 		position: relative;
 		top: 15px;
 	 }
+
+.form-group .form-control {
+    display: inline-block;
+    width: 80%;
+}
+
+.form-group .btn {
+    display: inline-block;
+    width: auto;
+}
  
 /*End Friends Page Styling*/
 /*General Shared Styling*/

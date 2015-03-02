@@ -29,8 +29,8 @@ namespace WeDecide.DAL.Concrete
 
         public List<Models.Concrete.User> Search(string Search)
         {
-            //Very simple search to match names, will add more to it later.
-            var relevantUsers = db.Users.Where(u => u.Name.ToLower() == Search.ToLower());
+            //Very simple search to match names
+            var relevantUsers = db.Users.Where(u => u.Name.ToLower().Contains(Search.ToLower()));
 
             return relevantUsers.ToList<User>();
         }

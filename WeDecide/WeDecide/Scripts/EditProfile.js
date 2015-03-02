@@ -9,19 +9,12 @@
         profileEdit.editBtn = $('#editBtn');
 
         profileEdit.editBtn.on('click', function () {
-            profileEdit.editBox.css('display', 'block');
-            profileEdit.fade.css('display', 'block');
+            profileEdit.togglePopup(true);
         });
 
         profileEdit.fade.on('click', function () {
-            profileEdit.editBox.css('display', 'none');
-            profileEdit.fade.css('display', 'none');
+            profileEdit.togglePopup(false);
         });
-
-        profileEdit.onEditFailure = function () {
-            profileEdit.editBox.css('display', 'block');
-            profileEdit.fade.css('display', 'block');
-        };
 
         $('form').submit(function () {
             if ($(this).valid()) {
@@ -33,5 +26,15 @@
             }
             return false;
         });
+
+        profileEdit.togglePopup = function(show) {
+            if(show) {
+                profileEdit.editBox.css('display', 'block');
+                profileEdit.fade.css('display', 'block');
+            } else {
+                profileEdit.editBox.css('display', 'none');
+                profileEdit.fade.css('display', 'none');
+            }
+        }
     }
 });
