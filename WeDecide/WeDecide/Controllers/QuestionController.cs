@@ -15,6 +15,7 @@ namespace WeDecide.Controllers
     {
         //Until we have the DAL injection done
         private static IQuestionDAL Qdal = new MemoryQuestionDAL();
+        private static IMembershipDAL Mdal = new CustomMembershipDAL();
 
         [HttpGet]
         public ViewResult CreateQuestion()
@@ -31,8 +32,7 @@ namespace WeDecide.Controllers
                 //Construct the Question
                 Question NewQuestion = q.GetQuestion();
                 //Add current user to question
-
-                //NewQuestion.UserId = User.Identity.GetUserId();
+                NewQuestion.User = Mdal.GetUser(User.Identity.GetUserId());
                 //Save the Question
                 Qdal.Create(NewQuestion);
                 //Don't know what to return yet, so returning response page
@@ -43,29 +43,46 @@ namespace WeDecide.Controllers
         }
         
         [HttpGet]
-        public ViewResult EditQuestion(int ID)
+        public ViewResult EditQuestion(int Id)
         {
             //Retrieve the question and allow user to change properties.
-            return View();
+            EditQuestionViewModel vm = new EditQuestionViewModel(Qdal.Get(Id));
+            return View(vm);
         }
 
         [HttpPost]
-        public ActionResult EditQuestion(QuestionViewModel q)
+        public ActionResult EditQuestion(EditQuestionViewModel q)
         {
             if(ModelState.IsValid)
             {
-            //Take in the edited question from the user and change the original question.
+                Question UpdatedQuestion = q.GetQuestion();
+                //If current User and Question's User are the same
+                if (IsUsersQuestion(q.QuestionId))
+                {
+                    //Update the question
+                    UpdatedQuestion.User = Mdal.GetUser(User.Identity.GetUserId());
+                    Qdal.Update(q.QuestionId, UpdatedQuestion);
+                }
             }
-            
             return View();
         }
 
         [HttpPost]
-        public ActionResult RemoveQuestion(int ID)
+        public ActionResult RemoveQuestion(int Id)
         {
             //Retrieve the question and remove it from the database.
-            //Send user back to some default view.
+            if (IsUsersQuestion(Id))
+            {
+                Qdal.Delete(Id);
+            }
+            //Not sure what to return here
             return View();
+        }
+        
+        private bool IsUsersQuestion(int QuestionId)
+        {
+            Question SavedQuestion = Qdal.Get(QuestionId);
+            return User.Identity.GetUserId().Equals(SavedQuestion.UserId);
         }
     }
 }
