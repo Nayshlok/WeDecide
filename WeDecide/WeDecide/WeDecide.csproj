@@ -163,6 +163,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\DefaultConnection.mdf" />
+    <Content Include="App_Data\DefaultConnection_log.ldf">
+      <DependentUpon>DefaultConnection.mdf</DependentUpon>
+    </Content>
     <Content Include="App_Data\WeDecideDB.mdf" />
     <Content Include="App_Data\WeDecideDB_log.ldf">
       <DependentUpon>WeDecideDB.mdf</DependentUpon>
