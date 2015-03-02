@@ -1,5 +1,7 @@
-﻿<div class="list-group-item friend-overview">
+﻿@model WeDecide.Models.Concrete.User
+
+<div class="list-group-item friend-overview">
     <img src="~/Images/placeholder-headshot.jpg" class="img-responsive small-friend-img pull-left" />
-    <h4>Name of User</h4>
+    <h4>@Model.Name</h4>
     <button class="btn btn-primary btn-sm pull-right">Add</button>
 </div>

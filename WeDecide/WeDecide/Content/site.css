@@ -243,12 +243,12 @@ header a {
 		top: 15px;
 	 }
 
-.form-group .form-control {
+.search-friends .form-group .form-control {
     display: inline-block;
     width: 80%;
 }
 
-.form-group .btn {
+.search-friends .form-group .btn {
     display: inline-block;
     width: auto;
 }

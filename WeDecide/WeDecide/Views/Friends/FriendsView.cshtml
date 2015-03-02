@@ -1,4 +1,6 @@
-﻿
+﻿@using WeDecide.Models.Concrete
+@model WeDecide.ViewModels.FriendsViewModel
+
 @{
     ViewBag.Title = "FriendsView";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -19,16 +21,30 @@
                     <input type="submit" class="btn btn-primary btn-sm" value="Search" />
                 </div>
             }
-            <form method="get">
-               
-            </form>
         </section>
         <section class="friends-holder shadowed">
             <header>
                 <h2 class="centered-header-text">Friends</h2>
             </header>
             <div>
-                
+                @if(Model != null && Model.PotentialFriends != null)
+                {
+                    if(Model.PotentialFriends.Count() > 0)
+                    {
+                        foreach (User pf in Model.PotentialFriends)
+                        {
+                            Html.RenderPartial("_FriendOverviewPartial", pf);
+                        }              
+                    }
+                    else
+                    {
+                        <h4>There is no one by that name.</h4>
+                    }
+                }
+                else
+                {
+                    <h4>Nothing to display.</h4>
+                }
             </div>
         </section>
     </section>

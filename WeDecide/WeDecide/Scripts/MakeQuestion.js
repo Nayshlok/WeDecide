@@ -14,20 +14,7 @@
         togglePopup(false);
     });
 
-    $('form').submit(function () {
-        if ($(this).valid()) {
-            $.ajax({
-                url: this.action,
-                type: this.method,
-                data: $(this).serialize()
-            })
-        }
-        return false;
-    });
-
 function showMakeQuestion() {
-    //Add a JQuery UI datepicker to end date field
-    $('#EndDate').datepicker();
     togglePopup(true);
 
     var questionElement = {}
@@ -42,6 +29,17 @@ function showMakeQuestion() {
     //Handle new response button clicks
     questionElement.addResponseBtn.on('click', function () {
         questionElement.addResponse();
+    });
+
+    $('form').submit(function () {
+        if ($(this).valid()) {
+            $.ajax({
+                url: this.action,
+                type: this.method,
+                data: $(this).serialize()
+            })
+        }
+        return false;
     });
 }
 

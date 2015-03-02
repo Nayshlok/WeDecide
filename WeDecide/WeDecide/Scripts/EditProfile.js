@@ -16,17 +16,6 @@
             profileEdit.togglePopup(false);
         });
 
-        $('form').submit(function () {
-            if ($(this).valid()) {
-                $.ajax({
-                    url: this.action,
-                    type: this.method,
-                    data: $(this).serialize()
-                })
-            }
-            return false;
-        });
-
         profileEdit.togglePopup = function(show) {
             if(show) {
                 profileEdit.editBox.css('display', 'block');
