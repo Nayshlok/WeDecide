@@ -15,15 +15,35 @@ namespace WeDecide.Controllers
     {
         private IMembershipDAL memberDal;
 
+        //View model for all pages
+        private static FriendsViewModel fvm;
+
         public FriendsController()
         {
             memberDal = new CustomMembershipDAL();
+
+            //---TESTING ONLY--//
+            //Filled with temporary values to test page functionality
+            fvm = new FriendsViewModel()
+            {
+                UserProfile = new ProfileViewModel()
+                {
+                    UserName = "Jim Bobby",
+                    UserFriends = new List<User>()
+                    {
+                        new User{Name = "David Wright", Id = "01"},
+                        new User{Name = "John Blake", Id = "02"},
+                        new User{Name = "William Blake", Id = "03"}
+                    }
+                },
+                PotentialFriends = null
+            };
         }
 
         // GET: Friends
         public ActionResult Index()
         {
-            return View("FriendsView");
+            return View("FriendsView", fvm);
         }
 
         [HttpGet]
@@ -32,22 +52,24 @@ namespace WeDecide.Controllers
             //Find users relevant to the users search
             List<User> potentialFriends = memberDal.Search(friendsQuery);
 
-            //Get the current user and create a new view model for the friends page.
+            //Get the current user and update the view model for the friends page.
             //Should be a better way to do this.
-            User currentUser = memberDal.GetUser(User.Identity.GetUserId()); 
-            FriendsViewModel fvm = new FriendsViewModel()
-            {
-                //UserName = currentUser.Name,
-                //UserFriends = memberDal.GetFriends(currentUser.Id),
-                PotentialFriends = potentialFriends
-            };
+            User currentUser = memberDal.GetUser(User.Identity.GetUserId());
+            fvm.PotentialFriends = potentialFriends;
 
             return View("FriendsView", fvm);
         }
 
-        public ActionResult AddFriend()
+        public ActionResult AddFriend(string Id)
         {
-            return View();
+            //User currentUser = memberDal.GetUser(User.Identity.GetUserId());
+            //memberDal.GetFriends(currentUser.Id).Add(memberDal.GetUser(Id));
+
+            //---TESTING ONLY--//
+            fvm.UserProfile.UserFriends.ToList().Add(fvm.PotentialFriends.Where(i => i.Id == Id).Single());
+            fvm.PotentialFriends.ToList().Remove(fvm.PotentialFriends.Where(i => i.Id == Id).Single());
+
+            return View("FriendsView", fvm);
         }
     }
 }

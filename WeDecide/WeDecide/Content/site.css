@@ -91,13 +91,23 @@ header a {
 	position: absolute;
 	width: 100%;
  }
+
+.friend-thumb {
+    background-image: url("../Images/placeholder-headshot.jpg");
+	background-size: cover;
+	display: inline-block;
+	height: 50px;
+	width: 50px;
+ }
  
 .info-panel {
 	background-color: #FCFFF5;
 	bottom: 0;
 	height: 300px;
 	position: absolute;
+    padding: 5px;
 	width: 100%;
+    text-align: center;
  }
  
 .small-header {
