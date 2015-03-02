@@ -306,8 +306,10 @@
     <Compile Include="Models\Account\Profile.cs" />
     <Compile Include="Models\Account\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\EditQuestionViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MakeQuestionViewModel.cs" />
+    <Compile Include="ViewModels\ProfileViewModel.cs" />
     <Compile Include="ViewModels\QuestionPollingViewModel.cs" />
     <Compile Include="ViewModels\QuestionViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
@@ -332,6 +334,11 @@
     <Content Include="Views\Shared\_QuestionPollPartial.cshtml" />
     <Content Include="Views\QuestionAnalytics\QuestionPoll.cshtml" />
     <Content Include="Views\Question\LiveQuestionView.cshtml" />
+    <Content Include="Views\Shared\_CurrentQuestion.cshtml" />
+    <Content Include="Views\Shared\_FriendOverviewPartial.cshtml" />
+    <Content Include="Views\Shared\_ProfileEditPartial.cshtml" />
+    <Content Include="Views\Shared\_QuickProfilePartial.cshtml" />
+    <Content Include="Views\Shared\EditQuestionPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

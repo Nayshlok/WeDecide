@@ -9,7 +9,6 @@ namespace WeDecide.Infrastructure.Annotations
 {
     public class ValidateTimeToAnswer : ValidationAttribute
     {
-
         public override bool IsValid(object value)
         {
             bool Valid = false;

@@ -12,14 +12,15 @@ namespace WeDecide.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            ProfileViewModel userProfile = new ProfileViewModel()
-            {
-                UserName = "Jim Bobby",
-                UserFriends = null, //Not sure how to get this yet
-                UserQuestions = null //Also not sure how to get this
-            };
+            //ProfileViewModel userProfile = new ProfileViewModel()
+            //{
+            //    UserName = "Jim Bobby",
+            //    UserFriends = null, //Not sure how to get this yet
+            //    UserQuestions = null //Also not sure how to get this
+            //};
 
-            return View("ProfileView", userProfile);
+            //, userProfile
+            return View("ProfileView");
         }
     }
 }
