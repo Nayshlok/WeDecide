@@ -1,0 +1,43 @@
+﻿@model WeDecide.ViewModels.EditQuestionViewModel
+
+<section class="make-question">
+    @using (Html.BeginForm("EditQuestion", "Question"))
+    {
+        <h1>Make a New Question</h1>
+        
+        @Html.HiddenFor(x => x.QuestionId, new { @Value = Model.Question })
+
+        @Html.ValidationMessageFor(x => x.Question)
+        <p>Question Text: </p>
+        @Html.TextBoxFor(x => x.Question, new { @Value = Model.Question })
+        <br />
+
+        @Html.ValidationMessageFor(x => x.Responses)
+        <ul id="responseHolder">
+            @foreach (String ResponseText in Model.Responses)
+            {
+            <li class="response">
+                <p>Response: </p>
+                <input type="text" name="Responses" value="@ResponseText"/>
+            </li>
+            }
+        </ul>
+        <input id="addResponse" type="button" value="Add More Responses" />
+
+        @Html.ValidationMessageFor(x => x.QuestionScope)
+        @Html.EnumDropDownListFor(x => x.QuestionScope, new { @Value = Model.QuestionScope })
+        <br />
+
+        <p>
+            @Html.CheckBoxFor(x => x.FreeResponseEnabled, new { @Value = Model.FreeResponseEnabled })
+        Allow free response on my question.
+    </p>
+        <br />
+
+        @Html.ValidationMessageFor(x => x)
+        <p>The question should be available for: </p>
+        <p>Hours: <input type="text" value="@Model.Hours" name="Hours" /> Minutes : <input type="text" value="@Model.Minutes" name="Minutes" /></p>
+        <input type="submit" value="Make Question" />
+    }
+
+</section>

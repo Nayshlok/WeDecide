@@ -1,14 +1,17 @@
 ﻿$(document).ready(function () {
-    $("input[name=ChosenResponse]").click(function () {
-        $.post()
-        //$.ajax({
-        //    type: "POST",
-        //    contentType: 'application/json; charset=UTF-8'
-        //})
-    })
-    //$("#form_responses".ajaxSubmit(function () {
-    //    $.ajax({
-    //        type: "Post"
-    //    })
-    //}))
+    $('input[type=radio]').click(function () {
+        var ThisButton = $(this);
+        $.ajax({
+            url: document.location.pathname,
+            type: 'POST',
+            data:
+            {
+                ChosenResponse: ThisButton.val(),
+                QuestionId: $("#QuestionId").val()
+            }, success: function () {
+                ThisButton.prop("checked", true);
+            }
+        });
+        return false;
+    });
 })

@@ -45,9 +45,9 @@ namespace WeDecide.Controllers
         }
 
         [HttpPost]
-        public void QuestionResponse(string ChosenResponse, int QuestionId)
+        public ActionResult QuestionResponse(string ChosenResponse, int QuestionId)
         {
-            //Make New UserResponse with given string and question id
+            //Get the Question and Response chosen
             Question AffectedQuestion = Qdal.Get(QuestionId);
             Response Resp = AffectedQuestion.Responses.First(x => x.Text.Equals(ChosenResponse));
 
@@ -60,6 +60,7 @@ namespace WeDecide.Controllers
             //Clients.User(UserId).receivedResponse(question.Id, question.Responses);
             //Would like to have this not actually return, as the Partial View will always be a part of something else
             //return RedirectToAction("QuestionResponse", new { id = QuestionId });
+            return new EmptyResult();
         }
 
         private void MakeUserResponse(Question question, Response response)
