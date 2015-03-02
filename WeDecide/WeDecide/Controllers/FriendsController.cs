@@ -54,8 +54,14 @@ namespace WeDecide.Controllers
 
             //Get the current user and update the view model for the friends page.
             //Should be a better way to do this.
-            User currentUser = memberDal.GetUser(User.Identity.GetUserId());
-            fvm.PotentialFriends = potentialFriends;
+            //User currentUser = memberDal.GetUser(User.Identity.GetUserId());
+            fvm.PotentialFriends = new List<User>()
+            {
+                new User{Name = "John Jake"}
+            };
+
+            //Working on Async Json returns
+            //return Json(fvm, JsonRequestBehavior.AllowGet);
 
             return View("FriendsView", fvm);
         }
@@ -66,8 +72,8 @@ namespace WeDecide.Controllers
             //memberDal.GetFriends(currentUser.Id).Add(memberDal.GetUser(Id));
 
             //---TESTING ONLY--//
-            fvm.UserProfile.UserFriends.ToList().Add(fvm.PotentialFriends.Where(i => i.Id == Id).Single());
-            fvm.PotentialFriends.ToList().Remove(fvm.PotentialFriends.Where(i => i.Id == Id).Single());
+            //fvm.UserProfile.UserFriends.ToList().Add(fvm.PotentialFriends.Where(i => i.Id == Id).Single());
+            //fvm.PotentialFriends.ToList().Remove(fvm.PotentialFriends.Where(i => i.Id == Id).Single());
 
             return View("FriendsView", fvm);
         }

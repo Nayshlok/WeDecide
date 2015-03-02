@@ -12,5 +12,6 @@ namespace WeDecide.ViewModels
         public ProfileViewModel UserProfile { get; set; }
 
         public IEnumerable<User> PotentialFriends { get; set; }
+
     }
 }

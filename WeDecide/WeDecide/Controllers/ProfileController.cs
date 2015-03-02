@@ -29,12 +29,11 @@ namespace WeDecide.Controllers
             ProfileViewModel userProfile = new ProfileViewModel()
             {
                 UserName = "Jim Bobby",
-                UserFriends = null, //Not sure how to get this yet
-                UserQuestions = null //Also not sure how to get this
+                UserFriends = null,
+                UserQuestions = null
             };
 
-            //, userProfile
-            return View("ProfileView");
+            return View("ProfileView", userProfile);
         }
 
         public ActionResult UpdateProfile(ProfileViewModel pvm)

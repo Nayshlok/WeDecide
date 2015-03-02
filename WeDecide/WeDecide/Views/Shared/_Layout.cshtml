@@ -6,7 +6,10 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    @Scripts.Render("~/Scripts/modernizr-2.6.2.js")
+    @Scripts.Render("~/Scripts/jquery-1.11.2.min.js")
+    @Scripts.Render("~/Scripts/jquery.validate.js")
+    @Scripts.Render("~/Scripts/jquery.validate.unobtrusive.js")
 </head>
 <body>
     <header>
@@ -14,7 +17,7 @@
         <nav>
             <ul>
                 <li>@Html.ActionLink("Profile", "Index", "Profile")</li>
-                <li>@Html.ActionLink("Friends", "Index", "Friends")</li>
+                <li>@Html.ActionLink("People", "Index", "Friends")</li>
             </ul>
         </nav>
         <div class="icons">
@@ -31,10 +34,6 @@
         <p>&copy; @DateTime.Now.Year  - WeDecide</p>
     </footer>
 
-    @Scripts.Render("~/Scripts/jquery-1.11.2.min.js")
-    @Scripts.Render("~/Scripts/jquery.validate.js")
-    @Scripts.Render("~/Scripts/jquery.validate.unobtrusive.js")
-    @Scripts.Render("~/Scripts/MakeQuestion.js")
     @RenderSection("scripts", required: false)
 </body>
 </html>
