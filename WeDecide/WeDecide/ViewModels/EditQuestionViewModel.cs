@@ -42,7 +42,7 @@ namespace WeDecide.ViewModels
             FreeResponseEnabled = QuestionToEdit.FreeResponseEnabled;
             TimeSpan TimeLeft = (QuestionToEdit.EndDate - DateTime.Now);
             Hours = (int) TimeLeft.TotalHours;
-            Hours = TimeLeft.Minutes;
+            Minutes = TimeLeft.Minutes;
         }
 
         public Question GetQuestion()
@@ -55,7 +55,7 @@ namespace WeDecide.ViewModels
                 Text = this.Question
             };
 
-            ReturnValue.Responses = this.Responses.ToList().ConvertAll(x => new Response() { Text = x, Owner = ReturnValue });
+            ReturnValue.Responses = this.Responses.ToList().ConvertAll(x => new Response() { Text = x, Question = ReturnValue });
 
             return ReturnValue;
         }
