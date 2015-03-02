@@ -14,7 +14,7 @@
                     <li>
                         @if (DateTime.Now.CompareTo(Model.EndDate) < 0)
                         {
-                            <input type="radio" name="ChosenResponse" value="@Response" @*onclick="this.form.submit()"*@ />
+                            <input type="radio" name="ChosenResponse" value="@Response" />
                         }
                         <p>@Response</p>
                     </li>
@@ -25,8 +25,8 @@
             {
                 if (Model.FreeResponseEnabled)
                 {
-                    <input type="radio" name="ChosenResponse" @*onclick="this.form.submit()"*@ />
-                    <p>Don't like any of these answers? Submit your own : <input type="text" /></p>
+                    <input type="radio" name="ChosenResponse" id="FreeResponse" />
+                    <p>Don't like any of these answers? Submit your own : <input type="text" id="FreeResponseChoice" /></p>
                 }
                 TimeSpan ts = Model.EndDate - DateTime.Now;
                 string TimeLeft = "Hours : " + ((int)ts.TotalHours) + ", Minutes : " + ts.Minutes;
