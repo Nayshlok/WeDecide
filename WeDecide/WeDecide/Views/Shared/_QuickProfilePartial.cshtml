@@ -1,6 +1,16 @@
-﻿<div class="quick-profile-view">
+﻿@using WeDecide.Models.Concrete
+@model WeDecide.ViewModels.ProfileViewModel
+
+<div class="quick-profile-view">
     <div class="profile_pic shadowed"></div>
     <div class="info-panel shadowed">
         <h2 class="small-header">Friends</h2>
+        @if (Model != null)
+        {
+            foreach (User f in Model.UserFriends)
+            {
+                <div class="friend-thumb" title="@f.Name"></div>
+            }
+        }
     </div>
 </div>

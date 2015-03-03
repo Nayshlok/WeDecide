@@ -14,37 +14,37 @@
         togglePopup(false);
     });
 
-    $('form').submit(function () {
-        if ($(this).valid()) {
-            $.ajax({
-                url: this.action,
-                type: this.method,
-                data: $(this).serialize()
-            })
-        }
-        return false;
-    });
-
 function showMakeQuestion() {
     togglePopup(true);
 
     var questionElement = {}
     questionElement.responseHolder = $('#responseHolder');
-    questionElement.newResponse = "<li class='response'><label for='Responses'>Response: </label><input type='text' name='Responses' class='form-control' placeholder='Possible question response' /></li>";
+        var newResponse = "<li class='response'><label for='Responses'>Response: </label><input type='text' name='Responses' class='form-control' placeholder='Possible question response' /></li>";
     questionElement.addResponseBtn = $('#addResponse');
 
     questionElement.addResponse = function () {
-        questionElement.responseHolder.append(questionElement.newResponse);
+            questionElement.responseHolder.append(newResponse);
     };
 
     //Handle new response button clicks
-    questionElement.addResponseBtn.on('click', function () {
+        /*questionElement.addResponseBtn.on('click', function () {
         questionElement.addResponse();
+        });*/
+
+        $('form').submit(function () {
+            if ($(this).valid()) {
+                $.ajax({
+                    url: this.action,
+                    type: this.method,
+                    data: $(this).serialize()
+                })
+            }
+            return false;
     });
 }
 
 function togglePopup(show) {
-    if(show) {
+        if (show) {
         editBox.css('display', 'block');
         fade.css('display', 'block');
     } else {

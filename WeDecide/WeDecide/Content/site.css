@@ -58,6 +58,115 @@ header a {
  }
  
 /*End Layout Styling*/
+
+/*Landing page Styling*/
+.background-container {
+	height: 100%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index: -2;
+ }
+ 
+.layer {
+	background-image: url("../Images/landing-background_2.jpg");
+	background-position: center;
+	background-size: cover;
+	height: 100%;
+	width: 100%;
+ }
+ 
+.blur {
+    -webkit-filter: blur(10px);
+    filter: blur(10px);
+}
+
+.color-layer {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #3E606F;
+    opacity: 0.50;
+    z-index: -1;
+}
+
+.login-container {
+    width: 800px;
+    height: 450px;
+	left: 50%;
+	position: fixed;
+	text-align: center;
+	top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+}
+
+.login-box {
+	font-family: 'Arial', sans-serif;
+	width: 250px;
+    display: inline-block;
+    float: right;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+ }
+
+.login-box label {
+    margin: 0;
+}
+ 
+	.login-box h2 {
+		color: #FFF;
+		font-size: 42px;
+		margin: 0 0 20px 0;
+		padding: 0;
+	 }
+ 
+	.login-box input[type=text], input[type=password], input[type=submit] {
+		display: block;
+		height: 35px;
+		margin: 10px auto;
+		width: 250px;
+	 }
+
+    .login-box input[type=text], input[type=password] {
+        opacity: 0.70;
+    }
+
+    .login-box label {
+        color: #FFF;
+    }
+
+.global-feed {
+    display: inline-block;
+    float: left;
+    text-align: center;
+}
+
+.global-feed header {
+    text-align: center;
+}
+
+.global-feed h2 {
+    margin: 0 auto 20px auto;
+    color: #FFF;
+    font-family: Arial, sans-serif;
+    font-size: 32px;
+}
+
+.global-feed div {
+    height: 400px;
+    width: 400px;
+    background-color: #FFF;
+    overflow-y: auto;
+    opacity: 0.75;
+}
+
+/*End Landing Page Styling*/
+
 .make-question {
 	z-index: 100;
  }
@@ -91,13 +200,23 @@ header a {
 	position: absolute;
 	width: 100%;
  }
+
+.friend-thumb {
+    background-image: url("../Images/placeholder-headshot.jpg");
+	background-size: cover;
+	display: inline-block;
+	height: 50px;
+	width: 50px;
+ }
  
 .info-panel {
 	background-color: #FCFFF5;
 	bottom: 0;
 	height: 300px;
 	position: absolute;
+    padding: 5px;
 	width: 100%;
+    text-align: center;
  }
  
 .small-header {
@@ -140,6 +259,13 @@ header a {
 .add-question {
     margin: 40px auto;
     width: 50%;
+}
+
+.overflowdiv {
+    height: 500px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    width: auto;
 }
 
 /*End Home Page Styling*/
@@ -243,12 +369,12 @@ header a {
 		top: 15px;
 	 }
 
-.form-group .form-control {
+.search-friends .form-group .form-control {
     display: inline-block;
     width: 80%;
 }
 
-.form-group .btn {
+.search-friends .form-group .btn {
     display: inline-block;
     width: auto;
 }
@@ -264,7 +390,7 @@ header a {
 .black_overlay {
 	background-color: #000;
 	display: none;
-	filter: blur(3px) opacity(80%);
+	filter: opacity(80%);
 	height: 100%;
 	left: 0%;
 	margin-bottom: 12px;
@@ -277,10 +403,11 @@ header a {
  }
  
 .white_content {
+    max-height: 600px;
 	background-color: white;
 	display: none;
 	left: 50%;
-	overflow: auto;
+	overflow-y: auto;
 	position: fixed;
 	top: 50%;
 	transform: translateX(-50%) translateY(-50%);

@@ -10,6 +10,7 @@ using WeDecide.DAL.Abstract;
 
 namespace WeDecide.Controllers
 {
+    [Authorize]
     public class QuestionViewController : ApiController
     {
         private IQuestionDAL QuestionAccess;
@@ -23,7 +24,7 @@ namespace WeDecide.Controllers
         public IEnumerable<string> Get()
         {
             IEnumerable<Question> questions = QuestionAccess.GetAll(x => true);
-            return new string[] { "value1", "value2" };
+            return questions.Select(question => question.Text);
         }
 
         // GET api/<controller>/5
@@ -66,9 +67,9 @@ namespace WeDecide.Controllers
         }
 
         // GET api/<controller>/5
-        public string Get(int id)
+        public Question Get(int id)
         {
-            return "value";
+            return QuestionAccess.Get(id);
         }
 
         // POST api/<controller>

@@ -163,14 +163,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\QuestionDB.mdf" />
-    <Content Include="App_Data\QuestionDB_log.ldf">
-      <DependentUpon>QuestionDB.mdf</DependentUpon>
+    <Content Include="App_Data\DefaultConnection.mdf" />
+    <Content Include="App_Data\DefaultConnection_log.ldf">
+      <DependentUpon>DefaultConnection.mdf</DependentUpon>
+    </Content>
+    <Content Include="App_Data\WeDecideDB.mdf" />
+    <Content Include="App_Data\WeDecideDB_log.ldf">
+      <DependentUpon>WeDecideDB.mdf</DependentUpon>
     </Content>
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\site.css" />
     <Content Include="Global.asax" />
     <Content Include="Images\default_background.jpg" />
+    <Content Include="Images\landing-background.jpg" />
     <Content Include="Images\placeholder-headshot.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -178,6 +183,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Question.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Images\landing-background_2.jpg" />
     <Content Include="Models\Concrete\Question2.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Question.edmx</DependentUpon>
@@ -193,8 +199,13 @@
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Models\Concrete\Question.edmx.sql" />
-    <Content Include="Scripts\EditProfile.js" />
-    <Content Include="Scripts\Friends.js" />
+    <Content Include="Scripts\angular-cookies.js" />
+    <Content Include="Scripts\angular-cookies.min.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\app\EditProfile.js" />
+    <Content Include="Scripts\app\Friends.js" />
+    <Content Include="Scripts\app\questionsViaAngular.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -212,6 +223,7 @@
     <Content Include="Scripts\knockout-3.2.0.debug.js" />
     <Content Include="Scripts\knockout-3.2.0.js" />
     <Content Include="Scripts\LiveQuestion.js" />
+    <Content Include="Scripts\Login.js" />
     <Content Include="Scripts\MakeQuestion.js" />
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />
@@ -221,7 +233,7 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Scripts\RespondToQuestion.js" />
+    <Content Include="Scripts\app\RespondToQuestion.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -248,6 +260,7 @@
     <Compile Include="Infrastructure\Annotations\ValidateTimeToAnswer.cs" />
     <Compile Include="Models\Account\User.cs" />
     <Compile Include="Models\Concrete\IdentityModels.cs" />
+    <Compile Include="Models\Concrete\MyIdProvider.cs" />
     <Compile Include="Models\Concrete\PartialClasses.cs" />
     <Compile Include="Models\Concrete\Question.cs">
       <DependentUpon>Question2.tt</DependentUpon>
@@ -288,6 +301,9 @@
     <Compile Include="Models\Account\Profile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\EditQuestionViewModel.cs" />
+    <Compile Include="ViewModels\FriendsViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MakeQuestionViewModel.cs" />
     <Compile Include="ViewModels\ProfileViewModel.cs" />
@@ -342,6 +358,9 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
@@ -349,7 +368,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>53780</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
@@ -359,6 +378,9 @@
           <CustomServerUrl>
           </CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+          <servers defaultServer="SelfHostServer">
+            <server name="SelfHostServer" exePath="" cmdArgs="" url="http://localhost:53780/" workingDir="" />
+          </servers>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>
