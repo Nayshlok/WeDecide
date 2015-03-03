@@ -4,7 +4,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Threading.Tasks;
+using System.Web.Http.Description;
+
 using Microsoft.AspNet.Identity;
+
 using WeDecide.Models.Concrete;
 using WeDecide.DAL.Abstract;
 
@@ -20,7 +24,7 @@ namespace WeDecide.Controllers
             this.QuestionAccess = DataAccess;
         }
 
-        // GET api/<controller>
+        // GET api/questionview
         public IEnumerable<string> Get()
         {
             IEnumerable<Question> questions = QuestionAccess.GetAll(x => true);
@@ -28,9 +32,15 @@ namespace WeDecide.Controllers
         }
 
         // GET api/<controller>/5
-        public string Get(int id)
+        [ResponseType(typeof(Models.Concrete.Question))]
+        public async Task<IHttpActionResult> Get(int id)
         {
-            return "value";
+            var question = await Task.Factory.StartNew<Question>(() => QuestionAccess.Get(id));
+
+            if (question == null)
+                return NotFound();
+
+            return Ok(question);
         }
 
         // POST api/<controller>
