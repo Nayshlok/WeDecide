@@ -15,7 +15,7 @@ namespace WeDecide.Controllers
     {
         //Until we have the DAL injection done
         private static IQuestionDAL Qdal = new MemoryQuestionDAL();
-        private static IMembershipDAL Mdal = new CustomMembershipDAL();
+        private static IMembershipDAL Mdal;// = new CustomMembershipDAL();
 
         [HttpGet]
         public ViewResult CreateQuestion()

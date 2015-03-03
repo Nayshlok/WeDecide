@@ -27,5 +27,11 @@ namespace WeDecide.DAL.Concrete
         {
             throw new NotImplementedException();
         }
+
+
+        public Models.Concrete.User GetUserByName(string name)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

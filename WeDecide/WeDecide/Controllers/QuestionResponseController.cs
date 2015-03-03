@@ -20,7 +20,7 @@ namespace WeDecide.Controllers
         private readonly static IHubConnectionContext<dynamic> HubContext = GlobalHost.ConnectionManager.GetHubContext<questionHub>().Clients;
         //Until we have the DAL injection done
         private static IQuestionDAL Qdal = new MemoryQuestionDAL();
-        private static IMembershipDAL Mdal = new CustomMembershipDAL();
+        private static IMembershipDAL Mdal;// = new CustomMembershipDAL();
 
         // GET: QuestionResponse
         [HttpGet]
