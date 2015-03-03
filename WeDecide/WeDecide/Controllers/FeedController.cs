@@ -8,6 +8,7 @@ using WeDecide.DAL.Concrete;
 
 namespace WeDecide.Controllers
 {
+    [Authorize]
     public class FeedController : Controller
     {
         //private IQuestionDAL = new SqlQuestionDAL();

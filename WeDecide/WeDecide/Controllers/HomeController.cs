@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity;
 
 namespace WeDecide.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
 

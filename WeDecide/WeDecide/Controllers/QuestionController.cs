@@ -11,6 +11,7 @@ using WeDecide.ViewModels;
 
 namespace WeDecide.Controllers
 {
+    [Authorize]
     public class QuestionController : Controller
     {
         //Until we have the DAL injection done

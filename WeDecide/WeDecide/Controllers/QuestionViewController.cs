@@ -10,6 +10,7 @@ using WeDecide.DAL.Abstract;
 
 namespace WeDecide.Controllers
 {
+    [Authorize]
     public class QuestionViewController : ApiController
     {
         private IQuestionDAL QuestionAccess;

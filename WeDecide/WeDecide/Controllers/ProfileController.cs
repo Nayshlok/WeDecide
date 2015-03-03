@@ -9,6 +9,7 @@ using WeDecide.ViewModels;
 
 namespace WeDecide.Controllers
 {
+    [Authorize]
     public class ProfileController : Controller
     {
         private IMembershipDAL memberDal;
