@@ -175,6 +175,7 @@
     <Content Include="Content\site.css" />
     <Content Include="Global.asax" />
     <Content Include="Images\default_background.jpg" />
+    <Content Include="Images\landing-background.jpg" />
     <Content Include="Images\placeholder-headshot.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -182,6 +183,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Question.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Images\landing-background_2.jpg" />
     <Content Include="Models\Concrete\Question2.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Question.edmx</DependentUpon>
@@ -216,6 +218,7 @@
     <Content Include="Scripts\knockout-3.2.0.debug.js" />
     <Content Include="Scripts\knockout-3.2.0.js" />
     <Content Include="Scripts\LiveQuestion.js" />
+    <Content Include="Scripts\Login.js" />
     <Content Include="Scripts\MakeQuestion.js" />
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />
