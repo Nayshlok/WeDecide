@@ -9,17 +9,14 @@
         login.loginBtn = $('#loginBtn');
 
         $(login.email).keypress(function () {
-            window.console.log("validating email");
             btnValidation();
         });
 
         $(login.password).keypress(function () {
-            window.console.log("validating password");
             btnValidation();
         });
 
         $(login.passwordConfirm).keypress(function () {
-            window.console.log("validating password confirm");
             btnValidation();
         });
 
