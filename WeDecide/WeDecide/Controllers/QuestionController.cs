@@ -38,7 +38,8 @@ namespace WeDecide.Controllers
                 Qdal.Create(NewQuestion);
                 //Don't know what to return yet, so returning response page
                 RespondToQuestionViewModel model = new RespondToQuestionViewModel(NewQuestion);
-                return RedirectToAction("QuestionResponse", "QuestionResponse", new { id = NewQuestion.Id });
+                //return RedirectToAction("QuestionResponse", "QuestionResponse", new { id = NewQuestion.Id });
+                return new EmptyResult();
             }
             return View();
         }

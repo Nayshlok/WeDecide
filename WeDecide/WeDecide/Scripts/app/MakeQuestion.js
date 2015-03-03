@@ -2,7 +2,7 @@
     var makeQuestion = $('.make-question'),
         makeQuestionBtn = $('#btnNewQuestion'),
         editBox = $('#editBox');
-    fade = $('#fade');
+        fade = $('#fade');
 
     makeQuestionBtn.on('click', function () {
         if (makeQuestion.length) {
@@ -14,21 +14,21 @@
         togglePopup(false);
     });
 
-    function showMakeQuestion() {
-        togglePopup(true);
+function showMakeQuestion() {
+    togglePopup(true);
 
-        var questionElement = {}
-        questionElement.responseHolder = $('#responseHolder');
+    var questionElement = {}
+    questionElement.responseHolder = $('#responseHolder');
         var newResponse = "<li class='response'><label for='Responses'>Response: </label><input type='text' name='Responses' class='form-control' placeholder='Possible question response' /></li>";
-        questionElement.addResponseBtn = $('#addResponse');
+    questionElement.addResponseBtn = $('#addResponse');
 
-        questionElement.addResponse = function () {
+    questionElement.addResponse = function () {
             questionElement.responseHolder.append(newResponse);
-        };
+    };
 
-        //Handle new response button clicks
+    //Handle new response button clicks
         /*questionElement.addResponseBtn.on('click', function () {
-            questionElement.addResponse();
+        questionElement.addResponse();
         });*/
 
         $('form').submit(function () {
@@ -40,16 +40,16 @@
                 })
             }
             return false;
-        });
-    }
+    });
+}
 
-    function togglePopup(show) {
+function togglePopup(show) {
         if (show) {
-            editBox.css('display', 'block');
-            fade.css('display', 'block');
-        } else {
-            editBox.css('display', 'none');
-            fade.css('display', 'none');
-        }
+        editBox.css('display', 'block');
+        fade.css('display', 'block');
+    } else {
+        editBox.css('display', 'none');
+        fade.css('display', 'none');
     }
+}
 });
