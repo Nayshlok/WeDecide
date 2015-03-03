@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.Http;
 
 using Ninject;
 using WeDecide.DAL.Abstract;
@@ -45,7 +46,8 @@ namespace WeDecide.Infrastructure
 
             kernel.Bind<IQuestionDAL>().To<TestDal>();
             //kernel.Bind<IMembershipDAL>().To<CustomMembershipDAL>();
-            
+            kernel.Bind<IQuestionDAL>().To<SqlQuestionDAL>()
+                .WhenInjectedInto<ApiController>();
         }
 
     }
