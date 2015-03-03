@@ -197,8 +197,13 @@
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Models\Concrete\Question.edmx.sql" />
-    <Content Include="Scripts\EditProfile.js" />
-    <Content Include="Scripts\Friends.js" />
+    <Content Include="Scripts\angular-cookies.js" />
+    <Content Include="Scripts\angular-cookies.min.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\app\EditProfile.js" />
+    <Content Include="Scripts\app\Friends.js" />
+    <Content Include="Scripts\app\questionsViaAngular.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -215,8 +220,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-3.2.0.debug.js" />
     <Content Include="Scripts\knockout-3.2.0.js" />
-    <Content Include="Scripts\LiveQuestion.js" />
-    <Content Include="Scripts\MakeQuestion.js" />
+    <Content Include="Scripts\app\LiveQuestion.js" />
+    <Content Include="Scripts\app\MakeQuestion.js" />
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
@@ -225,7 +230,7 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Scripts\RespondToQuestion.js" />
+    <Content Include="Scripts\app\RespondToQuestion.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

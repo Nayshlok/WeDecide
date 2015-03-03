@@ -1,29 +1,31 @@
 ﻿@model WeDecide.ViewModels.MakeQuestionViewModel
 
+@* TODO: Make this modal dialogue not suck*@
+
 <div class="make-question">
     <div id="editBox" class="white_content">
         <header>
             <h2>Make a New Question</h2>
         </header>
-        <div>
+        <div ng-app="questionApp">
             @using (Html.BeginForm("CreateQuestion", "Question"))
             {
-                <div class="form-group">
+                <div class="form-group overflowdiv" ng-controller="UxCtrl">
                     @Html.ValidationMessageFor(x => x.Question)
                     <label>Question Text: </label>
                     @Html.TextBoxFor(x => x.Question, new { @class = "form-control", @name = "questionInput", @placeholder = "What's on your mind?" })
 
                     @Html.ValidationMessageFor(x => x.Responses)
                     <ul id="responseHolder">
-                        @for (int i = 0; i < 2; i++)
-                        {
-                            <li class="response">
-                                <label for="Responses">Response: </label>
-                                <input type="text" name="Responses" class="form-control" placeholder="Possible question response" />
-                            </li>
-                        }
+                        <li class="response" ng-repeat="resp in responses">
+                            <label for="Responses">Response: </label> <input type="text" name="Responses" class="form-control" ng-model="resp" />
+                            <a href="" ng-click="removeResponse(resp)">X</a>
+                        </li>
                     </ul>
-                    <button id="addResponse" type="button" class="btn btn-default">Add More Responses</button>
+                    <input type="text" name="Responses" class="form-control" placeholder="Possible question response"
+                           ng-model="newResp" />
+
+                    <button id="addResponse" type="button" class="btn btn-default" ng-click="addResponse()">Add More Responses</button>
 
                     @Html.ValidationMessageFor(x => x.QuestionScope)
                     @Html.EnumDropDownListFor(x => x.QuestionScope)
@@ -44,4 +46,6 @@
         </div>
     </div>
     <section id="fade" class="black_overlay"></section>
+
+    @Scripts.Render("~/Scripts/Angular")
 </div>

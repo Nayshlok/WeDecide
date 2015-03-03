@@ -23,7 +23,7 @@ namespace WeDecide.Controllers
         public IEnumerable<string> Get()
         {
             IEnumerable<Question> questions = QuestionAccess.GetAll(x => true);
-            return new string[] { "value1", "value2" };
+            return questions.Select(question => question.Text);
         }
 
         // GET api/<controller>/5

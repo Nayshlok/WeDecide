@@ -152,6 +152,13 @@ header a {
     width: 50%;
 }
 
+.overflowdiv {
+    height: 500px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    width: auto;
+}
+
 /*End Home Page Styling*/
 /*Profile Page Styling*/
 .profile-view {
