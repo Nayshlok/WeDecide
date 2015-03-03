@@ -44,7 +44,7 @@ namespace WeDecide.Infrastructure
             );
 
             kernel.Bind<IQuestionDAL>().To<TestDal>();
-            kernel.Bind<IMembershipDAL>().To<CustomMembershipDAL>();
+            //kernel.Bind<IMembershipDAL>().To<CustomMembershipDAL>();
             
         }
 

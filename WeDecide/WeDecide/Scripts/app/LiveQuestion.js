@@ -19,7 +19,7 @@ var LiveQuestionView = {
 ko.applyBindings(LiveQuestionView);
 
 function loadQuestion() {
-    $.get('api/UsersQuestion', function (data) {
+    $.get('/UsersQuestion/Get', function (data) {
         var questionArray = [];
         $.each(data, function (i, p) {
             var newQuestion = new question(p.Id, p.Text, p.User.Name, p.EndDate);

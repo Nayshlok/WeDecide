@@ -19,9 +19,9 @@ namespace WeDecide.Controllers
         //View model for all pages
         private static FriendsViewModel fvm;
 
-        public FriendsController()
+        public FriendsController(IMembershipDAL dal)
         {
-            memberDal = new CustomMembershipDAL();
+            memberDal = dal;
 
             //---TESTING ONLY--//
             //Filled with temporary values to test page functionality

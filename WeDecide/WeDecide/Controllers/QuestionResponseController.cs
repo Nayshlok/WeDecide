@@ -14,7 +14,7 @@ using WeDecide.Hubs;
 
 namespace WeDecide.Controllers
 {
-    [Authorize]
+    [System.Web.Mvc.Authorize]
     public class QuestionResponseController : Controller
     {
 
