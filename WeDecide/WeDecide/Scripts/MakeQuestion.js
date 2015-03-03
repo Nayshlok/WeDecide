@@ -26,8 +26,6 @@
     });
 
 function showMakeQuestion() {
-    //Add a JQuery UI datepicker to end date field
-    $('#EndDate').datepicker();
     togglePopup(true);
 
     var questionElement = {}

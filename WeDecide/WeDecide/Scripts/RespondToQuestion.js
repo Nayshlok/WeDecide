@@ -1,13 +1,12 @@
 ﻿$(document).ready(function () {
     $('input[type=radio]').click(function () {
         var ThisButton = $(this);
-        var Value = (ThisButton === $("#FreeResponse")) ? $("#FreeResponseChoice").val() : ThisButton.val();
         $.ajax({
             url: document.location.pathname,
             type: 'POST',
             data:
             {
-                ChosenResponse: Value,
+                ChosenResponse: ThisButton.val(),
                 QuestionId: $("#QuestionId").val()
             }, success: function () {
                 ThisButton.prop("checked", true);
@@ -15,4 +14,20 @@
         });
         return false;
     });
+
+    $("#FreeResponse").click(function () {
+        var ThisButton = $(this);
+        $.ajax({
+            url: document.location.pathname,
+            type: 'POST',
+            data:
+            {
+                ChosenResponse: $("#FreeResponseChoice").val(),
+                QuestionId: $("#QuestionId").val()
+            }, success: function () {
+                ThisButton.prop("checked", true);
+            }
+        });
+        return false;
+    })
 })

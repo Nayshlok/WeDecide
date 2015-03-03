@@ -30,12 +30,14 @@ namespace WeDecide.Controllers
                 //Return the RespondToQuestionViewModel
                 vm = new RespondToQuestionViewModel(question);
             }
+
             return View("~/Views/QuestionResponse/Response.cshtml", vm);
         }
 
 
         private bool UserCanRespondTo(Question question)
         {
+            return true; // Just to get to the response page
             bool UserInScope = UserInQuestionScope(question);
             return UserInQuestionScope(question) && User.Identity.GetUserId().Equals(question.UserId);
         }
@@ -63,11 +65,10 @@ namespace WeDecide.Controllers
         {
             //Get the Question and Response chosen
             Question AffectedQuestion = Qdal.Get(QuestionId);
-            Response Resp = AffectedQuestion.Responses.First(x => x.Text.Equals(ChosenResponse));
 
 
             //Add User Response to AffectedQuestion
-            MakeUserResponse(AffectedQuestion, Resp);
+            MakeUserResponse(AffectedQuestion, ChosenResponse);
 
             Qdal.Update(QuestionId, AffectedQuestion);
 
@@ -76,31 +77,32 @@ namespace WeDecide.Controllers
             return new EmptyResult();
         }
 
-        private void MakeUserResponse(Question question, Response response)
+        private void MakeUserResponse(Question question, String responseText)
         {
             User currentUser = Mdal.GetUser(User.Identity.GetUserId());
 
             //If Response is new and FreeResponse is enabled
-            if (CanAddFreeResponse(question, response))
+            if (CanAddFreeResponse(question, responseText))
             {
+                Response response = new Response() { Question = question, Text = responseText, Users = new List<User>()};
                 //Add Response to question
                 question.Responses.Add(response);
                 response.Users.Add(currentUser);
             }
             //If User has responded to question before
-            if(UserHasRespondedBefore(question, response))
+            if(UserHasRespondedBefore(question))
             {
                 Response oldResponse = question.Responses.First(x => x.Users.Contains(currentUser));
                 oldResponse.Users.Remove(currentUser);
-                response.Users.Add(currentUser);
-                //Adjust existing UserResponse to point to new Response
+                Response newResponse = question.Responses.First(x => x.Text.Equals(responseText));
+                newResponse.Users.Add(currentUser);
             }
             //Else
             else {
                 //Make new UserResponse                
                 //UserResponse NewUR = new UserResponse() { Question = question, QuestionId = question.Id, Response = response, ResponseId = response.Id };
                 //AddUserResponse(question, response, NewUR);
-
+                Response response = question.Responses.First(x => x.Text.Equals(responseText));
                 response.Users.Add(currentUser);
             }
         }
@@ -129,13 +131,12 @@ namespace WeDecide.Controllers
         //    response.UserResponses.Add(userResponse);
         //}
 
-        private bool CanAddFreeResponse(Question question, Response response)
+        private bool CanAddFreeResponse(Question question, String response)
         {
-            return question.FreeResponseEnabled && question.Responses.Count(x => x.Text.Equals(response.Text)) > 0;
+            return question.FreeResponseEnabled && question.Responses.Count(x => x.Text.Equals(response)) < 1;
         }
 
-        //TODO: Implement this method for realsies 
-        private bool UserHasRespondedBefore(Question question, Response response)
+        private bool UserHasRespondedBefore(Question question)
         {
             bool responded = false;
 
