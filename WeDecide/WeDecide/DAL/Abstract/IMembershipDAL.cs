@@ -13,6 +13,8 @@ namespace WeDecide.DAL.Abstract
 
         User GetUser(string Id);
 
+        User GetUserByName(string name);
+
         List<User> Search(string Search);
 
         List<User> GetFriends(string Id);

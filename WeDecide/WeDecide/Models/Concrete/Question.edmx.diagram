@@ -11,6 +11,7 @@
         <AssociationConnector Association="QuestionDbModel.FK_Questions_Users" ManuallyRouted="false" />
         <AssociationConnector Association="QuestionDbModel.FK_Response_Questions" ManuallyRouted="false" />
         <AssociationConnector Association="QuestionDbModel.UserResponse" ManuallyRouted="false" />
+        <AssociationConnector Association="QuestionDbModel.Friend" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

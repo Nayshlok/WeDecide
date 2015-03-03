@@ -9,6 +9,7 @@ using WeDecide.ViewModels;
 
 namespace WeDecide.Controllers
 {
+    [Authorize]
     public class ProfileController : Controller
     {
         private IMembershipDAL memberDal;
@@ -29,8 +30,8 @@ namespace WeDecide.Controllers
             ProfileViewModel userProfile = new ProfileViewModel()
             {
                 UserName = "Jim Bobby",
-                UserFriends = null,
-                UserQuestions = null
+                UserFriends = null, //Not sure how to get this yet
+                UserQuestions = null //Also not sure how to get this
             };
 
             return View("ProfileView", userProfile);

@@ -199,8 +199,13 @@
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Models\Concrete\Question.edmx.sql" />
-    <Content Include="Scripts\EditProfile.js" />
-    <Content Include="Scripts\Friends.js" />
+    <Content Include="Scripts\angular-cookies.js" />
+    <Content Include="Scripts\angular-cookies.min.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\app\EditProfile.js" />
+    <Content Include="Scripts\app\Friends.js" />
+    <Content Include="Scripts\app\questionsViaAngular.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -228,7 +233,7 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Scripts\RespondToQuestion.js" />
+    <Content Include="Scripts\app\RespondToQuestion.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -255,6 +260,7 @@
     <Compile Include="Infrastructure\Annotations\ValidateTimeToAnswer.cs" />
     <Compile Include="Models\Account\User.cs" />
     <Compile Include="Models\Concrete\IdentityModels.cs" />
+    <Compile Include="Models\Concrete\MyIdProvider.cs" />
     <Compile Include="Models\Concrete\PartialClasses.cs" />
     <Compile Include="Models\Concrete\Question.cs">
       <DependentUpon>Question2.tt</DependentUpon>

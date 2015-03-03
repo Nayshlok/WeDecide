@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace WeDecide.Controllers
 {
+    [Authorize]
     public class QueryController : Controller
     {
         // GET: Query

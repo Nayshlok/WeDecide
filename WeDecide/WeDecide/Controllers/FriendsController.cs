@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity;
 
 namespace WeDecide.Controllers
 {
+    [Authorize]
     public class FriendsController : Controller
     {
         private IMembershipDAL memberDal;
@@ -18,9 +19,9 @@ namespace WeDecide.Controllers
         //View model for all pages
         private static FriendsViewModel fvm;
 
-        public FriendsController()
+        public FriendsController(IMembershipDAL dal)
         {
-            memberDal = new CustomMembershipDAL();
+            memberDal = dal;
 
             //---TESTING ONLY--//
             //Filled with temporary values to test page functionality

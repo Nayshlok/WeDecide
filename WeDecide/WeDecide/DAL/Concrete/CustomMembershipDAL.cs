@@ -12,18 +12,29 @@ namespace WeDecide.DAL.Concrete
 {
     public class CustomMembershipDAL : IMembershipDAL
     {
-        QuestionDbContext db = QuestionDbContext.Create();
+        QuestionDbContext db;
+
+        public CustomMembershipDAL(QuestionDbContext context)
+        {
+            db = context;
+        }
+
         public void AddUser(string name, string id)
         {
-            db.Users.Add(new User { 
-            Name = name,
-            Id = id
-            });
+            User newUser = new User { Name = name, Id = id };
+            db.Users.Add(newUser);
+            db.SaveChanges();
         }
 
         public Models.Concrete.User GetUser(string Id)
         {
             var user = db.Users.Where(x => x.Id == Id).FirstOrDefault();
+            return user;
+        }
+
+        public User GetUserByName(string name)
+        {
+            var user = db.Users.FirstOrDefault(x => x.Name == name);
             return user;
         }
 

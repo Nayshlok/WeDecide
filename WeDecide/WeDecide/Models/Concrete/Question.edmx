@@ -5,16 +5,24 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="QuestionDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Friend">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="FriendId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="FriendId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
         <EntityType Name="Question">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Text" Type="text" Nullable="false" />
-          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="Text" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="FreeResponseEnabled" Type="bit" Nullable="false" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="QScope" Type="int" Nullable="false" />
+          <Property Name="EndDate" Type="datetime2" Precision="7" Nullable="false" />
         </EntityType>
         <EntityType Name="Response">
           <Key>
@@ -31,8 +39,6 @@
           <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="40" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'C:\USERS\DAVID BORLAND\SOURCE\REPOS\WEDECIDE\WEDECIDE\WEDECIDE\APP_DATA\QUESTIONDB.MDF.dbo.UserResponse' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="UserResponse">
           <Key>
             <PropertyRef Name="UserId" />
@@ -41,6 +47,30 @@ warning 6002: The table/view 'C:\USERS\DAVID BORLAND\SOURCE\REPOS\WEDECIDE\WEDEC
           <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="ResponseId" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Friend_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Friend" Type="Self.Friend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Friend">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Friend_User1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Friend" Type="Self.Friend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Friend">
+              <PropertyRef Name="FriendId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Questions_Users">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Question" Type="Self.Question" Multiplicity="*" />
@@ -90,15 +120,19 @@ warning 6002: The table/view 'C:\USERS\DAVID BORLAND\SOURCE\REPOS\WEDECIDE\WEDEC
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="QuestionDBModelStoreContainer">
+          <EntitySet Name="Friend" EntityType="Self.Friend" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Question" EntityType="Self.Question" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Response" EntityType="Self.Response" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserResponse" EntityType="Self.UserResponse" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [UserResponse].[UserId] AS [UserId], 
-    [UserResponse].[ResponseId] AS [ResponseId]
-    FROM [dbo].[UserResponse] AS [UserResponse]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="UserResponse" EntityType="Self.UserResponse" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Friend_User" Association="Self.FK_Friend_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Friend" EntitySet="Friend" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Friend_User1" Association="Self.FK_Friend_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Friend" EntitySet="Friend" />
+          </AssociationSet>
           <AssociationSet Name="FK_Questions_Users" Association="Self.FK_Questions_Users">
             <End Role="User" EntitySet="User" />
             <End Role="Question" EntitySet="Question" />
@@ -125,13 +159,13 @@ warning 6002: The table/view 'C:\USERS\DAVID BORLAND\SOURCE\REPOS\WEDECIDE\WEDEC
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="Text" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="FreeResponseEnabled" Type="Boolean" Nullable="false" />
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="User" Relationship="Self.FK_Questions_Users" FromRole="Question" ToRole="User" />
           <NavigationProperty Name="Responses" Relationship="Self.FK_Response_Questions" FromRole="Question" ToRole="Response" />
           <Property Name="QScope" Type="Int32" Nullable="false" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="7" />
         </EntityType>
         <EntityType Name="Response">
           <Key>
@@ -151,7 +185,9 @@ warning 6002: The table/view 'C:\USERS\DAVID BORLAND\SOURCE\REPOS\WEDECIDE\WEDEC
           <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Questions" Relationship="Self.FK_Questions_Users" FromRole="User" ToRole="Question" />
           <NavigationProperty Name="Responses" Relationship="Self.UserResponse" FromRole="User" ToRole="Response" />
-        </EntityType>
+          <NavigationProperty Name="UserFriends" Relationship="QuestionDbModel.Friend" FromRole="User" ToRole="User1" />
+          <NavigationProperty Name="FriendsOfUser" Relationship="QuestionDbModel.Friend" FromRole="User1" ToRole="User" />
+          </EntityType>
         <Association Name="FK_Questions_Users">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Question" Type="Self.Question" Multiplicity="*" />
@@ -196,7 +232,15 @@ warning 6002: The table/view 'C:\USERS\DAVID BORLAND\SOURCE\REPOS\WEDECIDE\WEDEC
             <End Role="Response" EntitySet="Responses" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
+          <AssociationSet Name="Friend" Association="QuestionDbModel.Friend">
+            <End Role="User" EntitySet="Users" />
+            <End Role="User1" EntitySet="Users" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="Friend">
+          <End Type="QuestionDbModel.User" Role="User" Multiplicity="*" />
+          <End Type="QuestionDbModel.User" Role="User1" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -206,10 +250,10 @@ warning 6002: The table/view 'C:\USERS\DAVID BORLAND\SOURCE\REPOS\WEDECIDE\WEDEC
           <EntitySetMapping Name="Questions">
             <EntityTypeMapping TypeName="QuestionDbModel.Question">
               <MappingFragment StoreEntitySet="Question">
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
                 <ScalarProperty Name="QScope" ColumnName="QScope" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Text" ColumnName="Text" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="FreeResponseEnabled" ColumnName="FreeResponseEnabled" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
@@ -235,6 +279,14 @@ warning 6002: The table/view 'C:\USERS\DAVID BORLAND\SOURCE\REPOS\WEDECIDE\WEDEC
           <AssociationSetMapping Name="UserResponse" TypeName="QuestionDbModel.UserResponse" StoreEntitySet="UserResponse">
             <EndProperty Name="Response">
               <ScalarProperty Name="Id" ColumnName="ResponseId" />
+            </EndProperty>
+            <EndProperty Name="User">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Friend" TypeName="QuestionDbModel.Friend" StoreEntitySet="Friend">
+            <EndProperty Name="User1">
+              <ScalarProperty Name="Id" ColumnName="FriendId" />
             </EndProperty>
             <EndProperty Name="User">
               <ScalarProperty Name="Id" ColumnName="UserId" />
