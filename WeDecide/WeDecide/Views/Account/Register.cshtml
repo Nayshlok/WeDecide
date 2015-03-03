@@ -25,15 +25,15 @@
             {
                 @Html.ValidationSummary(true, "")
                 <div class="form-group">
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email", @id = "emailField" })
                 </div>
                 <div class="form-group">
-                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", @id = "passwordField"})
                 </div>
                 <div class="form-group">
-                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password" })
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password", @id = "passwordConfirm" })
                 </div>
-                <input type="submit" value="Log me in" class="btn btn-success" />
+                <input type="submit" value="Log me in" class="btn btn-danger" id="loginBtn" disabled />
             }
             @Html.ActionLink("Already a user?", "Login")
         </section>
@@ -44,5 +44,9 @@
             </div>
         </div>
     </div>
+    @Scripts.Render("~/Scripts/jquery-1.11.2.min.js")
+    @Scripts.Render("~/Scripts/jquery.validate.js")
+    @Scripts.Render("~/Scripts/jquery.validate.unobtrusive.js")
+    @Scripts.Render("~/Scripts/Login.js")
 </body>
 </html>

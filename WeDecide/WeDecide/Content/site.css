@@ -443,6 +443,7 @@ header a {
  
 .field-validation-error {
 	color: #F00;
+    font-size: 12px;
 	font-weight: bold;
  }
  
@@ -471,6 +472,4 @@ footer {
  }
  
 	.fixed-footer p {top: 20%;}
- 
- 
 /*End Layout Styling*/
