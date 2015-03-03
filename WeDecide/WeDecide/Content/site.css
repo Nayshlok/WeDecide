@@ -91,13 +91,23 @@ header a {
 	position: absolute;
 	width: 100%;
  }
+
+.friend-thumb {
+    background-image: url("../Images/placeholder-headshot.jpg");
+	background-size: cover;
+	display: inline-block;
+	height: 50px;
+	width: 50px;
+ }
  
 .info-panel {
 	background-color: #FCFFF5;
 	bottom: 0;
 	height: 300px;
 	position: absolute;
+    padding: 5px;
 	width: 100%;
+    text-align: center;
  }
  
 .small-header {
@@ -140,6 +150,13 @@ header a {
 .add-question {
     margin: 40px auto;
     width: 50%;
+}
+
+.overflowdiv {
+    height: 500px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    width: auto;
 }
 
 /*End Home Page Styling*/
@@ -243,12 +260,12 @@ header a {
 		top: 15px;
 	 }
 
-.form-group .form-control {
+.search-friends .form-group .form-control {
     display: inline-block;
     width: 80%;
 }
 
-.form-group .btn {
+.search-friends .form-group .btn {
     display: inline-block;
     width: auto;
 }

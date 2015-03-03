@@ -11,6 +11,7 @@ using WeDecide.ViewModels;
 
 namespace WeDecide.Controllers
 {
+    [Authorize]
     public class QuestionAnalyticsController : Controller
     {
         IQuestionDAL Qdal = new MemoryQuestionDAL();

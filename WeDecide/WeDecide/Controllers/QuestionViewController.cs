@@ -7,12 +7,10 @@ using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using WeDecide.Models.Concrete;
 using WeDecide.DAL.Abstract;
-using Microsoft.AspNet.SignalR;
-using WeDecide.Hubs;
-using Microsoft.AspNet.SignalR.Hubs;
 
 namespace WeDecide.Controllers
 {
+    [Authorize]
     public class QuestionViewController : ApiController
     {
         private IQuestionDAL QuestionAccess;
@@ -25,7 +23,8 @@ namespace WeDecide.Controllers
         // GET api/<controller>
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            IEnumerable<Question> questions = QuestionAccess.GetAll(x => true);
+            return questions.Select(question => question.Text);
         }
 
         // GET api/<controller>/5
