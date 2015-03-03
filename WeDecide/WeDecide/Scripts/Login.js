@@ -8,24 +8,20 @@
         login.passwordConfirm = $('#passwordConfirm');
         login.loginBtn = $('#loginBtn');
 
-        $(login.email).keypress(function () {
-            window.console.log("validating email");
+        $(login.email).keyup(function () {
             btnValidation();
         });
 
-        $(login.password).keypress(function () {
-            window.console.log("validating password");
+        $(login.password).keyup(function () {
             btnValidation();
         });
 
-        $(login.passwordConfirm).keypress(function () {
-            window.console.log("validating password confirm");
+        $(login.passwordConfirm).keyup(function () {
             btnValidation();
         });
 
         function btnValidation() {
             if ($('form').valid()) {
-                window.console.log("form is valid");
                 login.loginBtn.removeClass('btn-danger');
                 login.loginBtn.addClass('btn-success');
                 login.loginBtn.removeAttr('disabled');

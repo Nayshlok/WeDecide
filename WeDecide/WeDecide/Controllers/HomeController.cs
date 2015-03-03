@@ -14,7 +14,6 @@ namespace WeDecide.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-
         private QuestionDbContext _Context;
         private IMembershipDAL Mdal;
 
