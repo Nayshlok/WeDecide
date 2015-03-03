@@ -84,12 +84,12 @@ namespace WeDecide.Controllers
             //question3.Responses.Add(q3response4);
             //_Context.Questions.Add(question2);
             //_Context.Questions.Add(question3);
-            Question holder = _Context.Questions.FirstOrDefault(x => x.Text.Equals("question2"));
+            //Question holder = _Context.Questions.FirstOrDefault(x => x.Text.Equals("question2"));
 
-            holder.Responses.First().Users.Add(user1);
-            holder.Responses.First().Users.Add(user2);
+            //holder.Responses.First().Users.Add(user1);
+            //holder.Responses.First().Users.Add(user2);
 
-            _Context.SaveChanges();
+            //_Context.SaveChanges();
 
             //User newUser = new User { Id = User.Identity.GetUserId(), Name = "david" };
             //_Context.Users.Add(newUser);
