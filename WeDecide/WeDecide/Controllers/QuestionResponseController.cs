@@ -43,7 +43,6 @@ namespace WeDecide.Controllers
 
         private bool UserCanRespondTo(Question question)
         {
-            return true; // Just to get to the response page
             bool UserInScope = UserInQuestionScope(question);
             return UserInQuestionScope(question) && User.Identity.GetUserId().Equals(question.UserId);
         }
@@ -72,9 +71,8 @@ namespace WeDecide.Controllers
             //Get the Question and Response chosen
             Question AffectedQuestion = Qdal.Get(QuestionId);
 
-
             //Add User Response to AffectedQuestion
-            MakeUserResponse(AffectedQuestion, ChosenResponse);
+            Response Resp = MakeUserResponse(AffectedQuestion, ChosenResponse);
 
             Qdal.Update(QuestionId, AffectedQuestion);
             HubContext.User(User.Identity.GetUserId()).receivedResponse(QuestionId, Resp);
@@ -84,14 +82,15 @@ namespace WeDecide.Controllers
             return new EmptyResult();
         }
 
-        private void MakeUserResponse(Question question, String responseText)
+        private Response MakeUserResponse(Question question, String responseText)
         {
             User currentUser = Mdal.GetUser(User.Identity.GetUserId());
+            Response response = null;
 
             //If Response is new and FreeResponse is enabled
             if (CanAddFreeResponse(question, responseText))
             {
-                Response response = new Response() { Question = question, Text = responseText, Users = new List<User>()};
+                response = new Response() { Question = question, Text = responseText, Users = new List<User>()};
                 //Add Response to question
                 question.Responses.Add(response);
                 response.Users.Add(currentUser);
@@ -101,17 +100,18 @@ namespace WeDecide.Controllers
             {
                 Response oldResponse = question.Responses.First(x => x.Users.Contains(currentUser));
                 oldResponse.Users.Remove(currentUser);
-                Response newResponse = question.Responses.First(x => x.Text.Equals(responseText));
-                newResponse.Users.Add(currentUser);
+                response = question.Responses.First(x => x.Text.Equals(responseText));
+                response.Users.Add(currentUser);
             }
             //Else
             else {
                 //Make new UserResponse                
                 //UserResponse NewUR = new UserResponse() { Question = question, QuestionId = question.Id, Response = response, ResponseId = response.Id };
                 //AddUserResponse(question, response, NewUR);
-                Response response = question.Responses.First(x => x.Text.Equals(responseText));
+                response = question.Responses.First(x => x.Text.Equals(responseText));
                 response.Users.Add(currentUser);
             }
+            return response;
         }
 
         //private UserResponse GetUserResponse(Response response)
