@@ -8,6 +8,7 @@ using Ninject;
 using WeDecide.DAL.Abstract;
 using WeDecide.DAL.Concrete;
 using WeDecide.Models.Concrete;
+using WeDecide.Controllers;
 
 namespace WeDecide.Infrastructure
 {
@@ -46,8 +47,6 @@ namespace WeDecide.Infrastructure
 
             kernel.Bind<IQuestionDAL>().To<TestDal>();
             //kernel.Bind<IMembershipDAL>().To<CustomMembershipDAL>();
-            kernel.Bind<IQuestionDAL>().To<SqlQuestionDAL>()
-                .WhenInjectedInto<ApiController>();
         }
 
     }
