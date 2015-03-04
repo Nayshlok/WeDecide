@@ -24,29 +24,6 @@ namespace WeDecide.Controllers
             memberDal = dal;
         }
 
-<<<<<<< HEAD
-            //---TESTING ONLY--//
-            //Filled with temporary values to test page functionality
-            //fvm = new FriendsViewModel()
-            //{
-            //    UserProfile = new ProfileViewModel()
-            //    {
-            //        UserName = User.Identity.GetUserId(),
-            //        UserFriends = memberDal.GetFriends(User.Identity.GetUserId())   
-            //    },
-            //    PotentialFriends = null
-            //};
-
-            fvm = new FriendsViewModel();
-            fvm.UserProfile = new ProfileViewModel();
-        }
-
-        // GET: Friends
-        public ActionResult Index()
-        {
-            User.Identity.GetUserId();
-            fvm.UserProfile.UserFriends = memberDal.GetFriends(User.Identity.GetUserId());
-=======
         // GET: Friends
         public ActionResult Index()
         {
@@ -61,7 +38,6 @@ namespace WeDecide.Controllers
                 PotentialFriends = null
             };
 
->>>>>>> ce2f4eebdcc05f0ab2c4c31cadb994c7ceffb702
             return View("FriendsView", fvm);
         }
 
@@ -73,19 +49,8 @@ namespace WeDecide.Controllers
 
             //Get the current user and update the view model for the friends page.
             //Should be a better way to do this.
-<<<<<<< HEAD
-            //User currentUser = memberDal.GetUser(User.Identity.GetUserId());
-            fvm.PotentialFriends = potentialFriends;
-            //{
-            //    new User{Name = "John Jake"}
-            //};
-
-            //Working on Async Json returns
-            //return Json(fvm, JsonRequestBehavior.AllowGet);
-=======
             User currentUser = memberDal.GetUser(User.Identity.GetUserId());
             fvm.PotentialFriends = potentialFriends;
->>>>>>> ce2f4eebdcc05f0ab2c4c31cadb994c7ceffb702
 
             return View("FriendsView", fvm);
         }
