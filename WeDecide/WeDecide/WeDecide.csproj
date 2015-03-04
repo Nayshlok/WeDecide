@@ -179,13 +179,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\QuestionDB.mdf" />
-    <Content Include="App_Data\QuestionDB_log.ldf">
-      <DependentUpon>QuestionDB.mdf</DependentUpon>
-    </Content>
-    <Content Include="App_Data\SecurityConnection.mdf" />
-    <Content Include="App_Data\SecurityConnection_log.ldf">
-      <DependentUpon>SecurityConnection.mdf</DependentUpon>
-    </Content>
+    <Content Include="App_Data\QuestionDB_log.ldf" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\jquery-ui.css" />
