@@ -27,7 +27,7 @@ namespace WeDecide.Controllers
         // GET: Friends
         public ActionResult Index()
         {
-            Models.Concrete.User currentUser = memberDal.GetUser(User.Identity.GetUserId());
+            User currentUser = memberDal.GetUser(User.Identity.GetUserId());
             fvm = new FriendsViewModel()
             {
                 UserProfile = new ProfileViewModel()
@@ -58,16 +58,7 @@ namespace WeDecide.Controllers
         public ActionResult AddFriend(string UserID)
         {
             User currentUser = memberDal.GetUser(User.Identity.GetUserId());
-<<<<<<< HEAD
             memberDal.AddFriend(currentUser.Id, UserID);
-=======
-            memberDal.GetFriends(currentUser.Id).Add(memberDal.GetUser(Id));
-
-            //---TESTING ONLY--//
-            fvm.UserProfile.UserFriends.ToList().Add(fvm.PotentialFriends.Where(i => i.Id == Id).Single());
-            fvm.PotentialFriends.ToList().Remove(fvm.PotentialFriends.Where(i => i.Id == Id).Single());
->>>>>>> 30feea596b389a95f70edbee17de206680fee7f2
-
             return RedirectToAction("Index");
         }
     }

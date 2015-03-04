@@ -328,6 +328,7 @@
     <Compile Include="ViewModels\FriendsViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ViewModels\IndexViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MakeQuestionViewModel.cs" />
     <Compile Include="ViewModels\ProfileViewModel.cs" />

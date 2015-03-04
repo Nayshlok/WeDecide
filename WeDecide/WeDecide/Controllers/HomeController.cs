@@ -29,8 +29,17 @@ namespace WeDecide.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            //If the user is logged in, take him to the home page with feed.  
-            return View();
+            User currentUser = Mdal.GetUser(User.Identity.GetUserId());
+            IndexViewModel ivm = new IndexViewModel()
+            {
+                User = new ProfileViewModel()
+                {
+                    UserName = currentUser.Name,
+                    UserFriends = Mdal.GetFriends(currentUser.Id)
+                }
+            };
+  
+            return View(ivm);
         }
 
         public ActionResult LandingPage()
