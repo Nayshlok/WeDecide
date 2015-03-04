@@ -55,10 +55,10 @@ namespace WeDecide.Controllers
             return View("FriendsView", fvm);
         }
 
-        public ActionResult AddFriend(string UserId)
+        public ActionResult AddFriend(string UserID)
         {
             User currentUser = memberDal.GetUser(User.Identity.GetUserId());
-            memberDal.AddFriend(currentUser.Id, UserId);
+            memberDal.AddFriend(currentUser.Id, UserID);
             return RedirectToAction("Index");
         }
     }

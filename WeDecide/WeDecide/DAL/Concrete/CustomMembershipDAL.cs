@@ -51,11 +51,10 @@ namespace WeDecide.DAL.Concrete
             return GetUser(Id).FriendsOfUser.ToList();
         }
 
-        public void AddFriend(string UserId, string friendId)
+        public void AddFriend(string userId, string friendId)
         {
-            GetUser(UserId).FriendsOfUser.Add(GetUser(friendId));
+            GetUser(userId).FriendsOfUser.Add(GetUser(friendId));
             db.SaveChanges();
-
         }
     }
 }
