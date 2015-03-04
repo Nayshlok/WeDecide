@@ -137,7 +137,7 @@ namespace WeDecide.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login");
         }
 
         private void AddErrors(IdentityResult result)

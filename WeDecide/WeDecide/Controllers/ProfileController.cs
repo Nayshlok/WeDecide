@@ -15,23 +15,22 @@ namespace WeDecide.Controllers
         private IMembershipDAL memberDal;
         private IQuestionDAL questionDal;
 
+        public ProfileController(IMembershipDAL memberDalParam, IQuestionDAL questionDalParam)
+        {
+            memberDal = memberDalParam;
+            questionDal = questionDalParam;
+        }
+
         [HttpGet]
         public ActionResult Index()
         {
-            //Models.Concrete.User currentUser = memberDal.GetUser(User.Identity.GetUserId());
-
-            //ProfileViewModel userprofile = new ProfileViewModel()
-            //{
-            //    UserName = currentUser.Name,
-            //    UserFriends = memberDal.GetFriends(currentUser.Id),
-            //    UserQuestions = questionDal.GetAll(x => x.UserId == currentUser.Id)
-            //};
+            Models.Concrete.User currentUser = memberDal.GetUser(User.Identity.GetUserId());
 
             ProfileViewModel userProfile = new ProfileViewModel()
             {
-                UserName = "Jim Bobby",
-                UserFriends = null, //Not sure how to get this yet
-                UserQuestions = null //Also not sure how to get this
+                UserName = currentUser.Name,
+                UserFriends = memberDal.GetFriends(currentUser.Id),
+                UserQuestions = questionDal.GetAll(x => x.UserId == currentUser.Id)
             };
 
             return View("ProfileView", userProfile);

@@ -22,28 +22,22 @@ namespace WeDecide.Controllers
         public FriendsController(IMembershipDAL dal)
         {
             memberDal = dal;
-
-            //---TESTING ONLY--//
-            //Filled with temporary values to test page functionality
-            fvm = new FriendsViewModel()
-            {
-                UserProfile = new ProfileViewModel()
-                {
-                    UserName = "Jim Bobby",
-                    UserFriends = new List<User>()
-                    {
-                        new User{Name = "David Wright", Id = "01"},
-                        new User{Name = "John Blake", Id = "02"},
-                        new User{Name = "William Blake", Id = "03"}
-                    }
-                },
-                PotentialFriends = null
-            };
         }
 
         // GET: Friends
         public ActionResult Index()
         {
+            Models.Concrete.User currentUser = memberDal.GetUser(User.Identity.GetUserId());
+            fvm = new FriendsViewModel()
+            {
+                UserProfile = new ProfileViewModel()
+                {
+                    UserName = currentUser.Name,
+                    UserFriends = memberDal.GetFriends(currentUser.Id),
+                },
+                PotentialFriends = null
+            };
+
             return View("FriendsView", fvm);
         }
 
@@ -55,14 +49,8 @@ namespace WeDecide.Controllers
 
             //Get the current user and update the view model for the friends page.
             //Should be a better way to do this.
-            //User currentUser = memberDal.GetUser(User.Identity.GetUserId());
-            fvm.PotentialFriends = new List<User>()
-            {
-                new User{Name = "John Jake"}
-            };
-
-            //Working on Async Json returns
-            //return Json(fvm, JsonRequestBehavior.AllowGet);
+            User currentUser = memberDal.GetUser(User.Identity.GetUserId());
+            fvm.PotentialFriends = potentialFriends;
 
             return View("FriendsView", fvm);
         }

@@ -20,7 +20,9 @@ header {
 		display: inline-block;
 		font-family: 'Lobster', cursive;
 		font-size: 32px;
+        float: left;
 		left: 2%;
+        top: 10%;
 		margin: 0;
 		padding: 0;
 		position: relative;
@@ -33,7 +35,9 @@ nav {
 	font-family: 'Raleway', sans-serif;
 	font-size: 18px;
 	font-weight: bold;
+    float: left;
 	left: 5%;
+    top: 20%;
 	position: relative;
 	text-align: center;
 	width: 150px;
@@ -56,6 +60,20 @@ header a {
 	color: #FFF;
 	text-decoration: none;
  }
+
+.icons {
+	color: #FFF;
+    font-size: 1.20em;
+	display: inline-block;
+	position: relative;
+	right: 25px;
+	top: 30%;
+    width: 50px;
+    float: right;
+    cursor: pointer;
+ }
+ 
+	.icons i {margin: 0 2px 0 2px;}
  
 /*End Layout Styling*/
 
