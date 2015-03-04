@@ -11,11 +11,14 @@
 </head>
 <body>
     <header>
-        <h2>@Html.ActionLink("WeDecide", "Index", "Home")</h2>
+        @*<h2>@Html.ActionLink("WeDecide", "Index", "Home")</h2>*@
+        <h2><a href="/">WeDecide</a></h2>
         <nav>
             <ul>
-                <li>@Html.ActionLink("Profile", "Index", "Profile")</li>
-                <li>@Html.ActionLink("People", "Index", "Friends")</li>
+                @*<li>@Html.ActionLink("Profile", "Index", "Profile")</li>*@
+                <li><a href="/Profile">Profile</a></li>
+                @*<li>@Html.ActionLink("People", "Index", "Friends")</li>*@
+                <li><a href="/Friends">People</a></li>
             </ul>
         </nav>
         <div class="icons">

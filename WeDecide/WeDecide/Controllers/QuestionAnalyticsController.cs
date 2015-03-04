@@ -17,9 +17,9 @@ namespace WeDecide.Controllers
         IQuestionDAL Qdal = new MemoryQuestionDAL();
 
         // GET: QuestionAnalytics
-        public ActionResult QuestionPoll(int id)
+        public ActionResult QuestionPoll(int QuestionId)
         {
-            Question PolledQuestion = Qdal.Get(id);
+            Question PolledQuestion = Qdal.Get(QuestionId);
 
             QuestionPollingViewModel vm = new QuestionPollingViewModel(PolledQuestion);
 

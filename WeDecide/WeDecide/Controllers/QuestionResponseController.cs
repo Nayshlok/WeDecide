@@ -25,9 +25,9 @@ namespace WeDecide.Controllers
 
         // GET: QuestionResponse
         [HttpGet]
-        public ActionResult QuestionResponse(int id)
+        public ActionResult QuestionResponse(int QuestionId)
         {
-            Question question = Qdal.Get(id);
+            Question question = Qdal.Get(QuestionId);
 
             RespondToQuestionViewModel vm = null;
             //Check if current user can respond to the Question

@@ -70,12 +70,12 @@ namespace WeDecide.Controllers
         }
 
         [HttpPost]
-        public ActionResult RemoveQuestion(int Id)
+        public ActionResult RemoveQuestion(int QuestionId)
         {
             //Retrieve the question and remove it from the database.
-            if (IsUsersQuestion(Id))
+            if (IsUsersQuestion(QuestionId))
             {
-                Qdal.Delete(Id);
+                Qdal.Delete(QuestionId);
             }
             //Not sure what to return here
             return View();

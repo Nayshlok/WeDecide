@@ -8,41 +8,43 @@
             <h2>Make a New Question</h2>
         </header>
         <div ng-app="questionApp">
-            @using (Html.BeginForm("CreateQuestion", "Question"))
-            {
-                <div class="form-group overflowdiv" ng-controller="UxCtrl">
-                    @Html.ValidationMessageFor(x => x.Question)
-                    <label>Question Text: </label>
-                    @Html.TextBoxFor(x => x.Question, new { @class = "form-control", @name = "questionInput", @placeholder = "What's on your mind?" })
+            <form action="/Question/New" method="post">
+                @*@using (Html.BeginForm("CreateQuestion", "Question"))
+                {*@
+                    <div class="form-group overflowdiv" ng-controller="UxCtrl">
+                        @Html.ValidationMessageFor(x => x.Question)
+                        <label>Question Text: </label>
+                        @Html.TextBoxFor(x => x.Question, new { @class = "form-control", @name = "questionInput", @placeholder = "What's on your mind?" })
 
-                    @Html.ValidationMessageFor(x => x.Responses)
-                    <ul id="responseHolder">
-                        <li class="response" ng-repeat="resp in responses">
-                            <label for="Responses">Response: </label> <input type="text" name="Responses" class="form-control" ng-model="resp" />
-                            <a href="" ng-click="removeResponse(resp)">X</a>
-                        </li>
-                    </ul>
-                    <input type="text" name="Responses" class="form-control" placeholder="Possible question response"
-                           ng-model="newResp" />
+                        @Html.ValidationMessageFor(x => x.Responses)
+                        <ul id="responseHolder">
+                            <li class="response" ng-repeat="resp in responses">
+                                <label for="Responses">Response: </label> <input type="text" name="Responses" class="form-control" ng-model="resp" />
+                                <a href="" ng-click="removeResponse(resp)">X</a>
+                            </li>
+                        </ul>
+                        <input type="text" name="Responses" class="form-control" placeholder="Possible question response"
+                               ng-model="newResp" />
 
-                    <button id="addResponse" type="button" class="btn btn-default" ng-click="addResponse()">Add More Responses</button>
+                        <button id="addResponse" type="button" class="btn btn-default" ng-click="addResponse()">Add More Responses</button>
 
-                    @Html.ValidationMessageFor(x => x.QuestionScope)
-                    @Html.EnumDropDownListFor(x => x.QuestionScope)
-                    <br />
+                        @Html.ValidationMessageFor(x => x.QuestionScope)
+                        @Html.EnumDropDownListFor(x => x.QuestionScope)
+                        <br />
 
-                    <p>
-                        @Html.CheckBoxFor(x => x.FreeResponseEnabled)
-                        Allow free response on my question.
-                    </p>
-                    <br />
+                        <p>
+                            @Html.CheckBoxFor(x => x.FreeResponseEnabled)
+                            Allow free response on my question.
+                        </p>
+                        <br />
 
-                    @Html.ValidationMessageFor(x => x)
-                    <p>The question should be available for: </p>
-                    <p>Hours: <input type="text" value="0" name="Hours" /> Minutes : <input type="text" value="10" name="Minutes" /></p>
-                    <input type="submit" value="Make Question" class="btn btn-success" />
-                </div>
-            }
+                        @Html.ValidationMessageFor(x => x)
+                        <p>The question should be available for: </p>
+                        <p>Hours: <input type="text" value="0" name="Hours" /> Minutes : <input type="text" value="10" name="Minutes" /></p>
+                        <input type="submit" value="Make Question" class="btn btn-success" />
+                    </div>
+                @*}*@
+            </form>
         </div>
     </div>
     <section id="fade" class="black_overlay"></section>

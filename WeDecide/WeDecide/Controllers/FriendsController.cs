@@ -67,7 +67,7 @@ namespace WeDecide.Controllers
             return View("FriendsView", fvm);
         }
 
-        public ActionResult AddFriend(string Id)
+        public ActionResult AddFriend(string UserId)
         {
             //User currentUser = memberDal.GetUser(User.Identity.GetUserId());
             //memberDal.GetFriends(currentUser.Id).Add(memberDal.GetUser(Id));
