@@ -38,12 +38,20 @@ namespace WeDecide.Controllers
 
         public ActionResult UpdateProfile(ProfileViewModel pvm)
         {
+            Models.Concrete.User currentUser = memberDal.GetUser(User.Identity.GetUserId());
             if(ModelState.IsValid)
             {
-                //TODO: Update the profile of the user.
+                currentUser.Name = pvm.UserName;  
             }
 
-            return View("ProfileView", pvm);
+            ProfileViewModel userProfile = new ProfileViewModel()
+            {
+                UserName = currentUser.Name,
+                UserFriends = memberDal.GetFriends(currentUser.Id),
+                UserQuestions = questionDal.GetAll(x => x.UserId == currentUser.Id)
+            };
+
+            return View("ProfileView", userProfile);
         }
     }
 }

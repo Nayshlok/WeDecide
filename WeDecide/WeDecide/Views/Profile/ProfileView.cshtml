@@ -1,4 +1,5 @@
-﻿@using WeDecide.ViewModels
+﻿@using WeDecide.Models.Concrete
+@using WeDecide.ViewModels
 @model ProfileViewModel
 
 @{
@@ -21,7 +22,13 @@
         <section class="info-box shadowed">
             <header><h2>Friends</h2></header>
             <div>
-
+                @if (Model != null)
+                {
+                    foreach (User f in Model.UserFriends)
+                    {
+                        <div class="friend-thumb" title="@f.Name"></div>
+                    }
+                }
             </div>
         </section>
         <section class="info-box shadowed">
@@ -31,5 +38,6 @@
             </div>
         </section>
     </div>
+    @Scripts.Render("~/Scripts/app/EditProfile.js")
 </section>
 
