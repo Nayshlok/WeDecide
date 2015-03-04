@@ -1,16 +1,18 @@
-﻿
+﻿@using WeDecide.ViewModels
+@model IndexViewModel
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <section class="home-page">
-    @Html.Partial("_QuickProfilePartial")
+    @Html.Partial("_QuickProfilePartial", @Model.User)
     <section class="welcome-header shadowed">
-        <h1>Welcome, @User.Identity.Name.</h1>
+        <h1>Welcome, @Model.User.UserName</h1>
     </section>
     <div>
-        @Html.Partial("_MakeQuestionPartial")
+        @Html.Partial("_MakeQuestionPartial", new MakeQuestionViewModel { })
     </div>
     <section class="content-feed">
         

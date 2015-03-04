@@ -55,6 +55,7 @@ namespace WeDecide.DAL.Concrete
         {
             GetUser(UserId).FriendsOfUser.Add(GetUser(friendId));
             db.SaveChanges();
+
         }
     }
 }

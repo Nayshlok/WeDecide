@@ -27,7 +27,7 @@ namespace WeDecide.Controllers
         // GET: Friends
         public ActionResult Index()
         {
-            Models.Concrete.User currentUser = memberDal.GetUser(User.Identity.GetUserId());
+            User currentUser = memberDal.GetUser(User.Identity.GetUserId());
             fvm = new FriendsViewModel()
             {
                 UserProfile = new ProfileViewModel()
