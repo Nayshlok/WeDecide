@@ -59,10 +59,6 @@ namespace WeDecide.Controllers
         {
             User currentUser = memberDal.GetUser(User.Identity.GetUserId());
             memberDal.AddFriend(currentUser.Id, UserID);
-<<<<<<< HEAD
-=======
-
->>>>>>> a00398e6ccb1b2c025e7101b2d2098135aeda81e
             return RedirectToAction("Index");
         }
     }
