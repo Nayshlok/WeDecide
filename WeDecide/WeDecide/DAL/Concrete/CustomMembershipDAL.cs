@@ -48,18 +48,13 @@ namespace WeDecide.DAL.Concrete
 
         public List<Models.Concrete.User> GetFriends(string Id)
         {
-<<<<<<< HEAD
             return GetUser(Id).FriendsOfUser.ToList();
         }
 
-        public void AddFriend(string userId, string friendId)
+        public void AddFriend(string UserId, string friendId)
         {
-            GetUser(userId).FriendsOfUser.Add(GetUser(friendId));
+            GetUser(UserId).FriendsOfUser.Add(GetUser(friendId));
             db.SaveChanges();
-=======
-            var userFriends = db.Users.Where(x => x.Id == Id).FirstOrDefault().FriendsOfUser;
-            return userFriends.ToList<User>();
->>>>>>> 30feea596b389a95f70edbee17de206680fee7f2
         }
     }
 }
