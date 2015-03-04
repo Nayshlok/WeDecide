@@ -28,8 +28,11 @@
             } else {
                 login.loginBtn.removeClass('btn-success');
                 login.loginBtn.addClass('btn-danger');
-                login.loginBtn.attr('disabled','disabled');
+                //login.loginBtn.attr('disabled','disabled');
             }
         }
+
+        //Run once for auto fill of fields
+        btnValidation();
     }
 });

@@ -22,7 +22,9 @@ namespace WeDecide.Controllers
         public FriendsController(IMembershipDAL dal)
         {
             memberDal = dal;
+        }
 
+<<<<<<< HEAD
             //---TESTING ONLY--//
             //Filled with temporary values to test page functionality
             //fvm = new FriendsViewModel()
@@ -44,6 +46,22 @@ namespace WeDecide.Controllers
         {
             User.Identity.GetUserId();
             fvm.UserProfile.UserFriends = memberDal.GetFriends(User.Identity.GetUserId());
+=======
+        // GET: Friends
+        public ActionResult Index()
+        {
+            Models.Concrete.User currentUser = memberDal.GetUser(User.Identity.GetUserId());
+            fvm = new FriendsViewModel()
+            {
+                UserProfile = new ProfileViewModel()
+                {
+                    UserName = currentUser.Name,
+                    UserFriends = memberDal.GetFriends(currentUser.Id),
+                },
+                PotentialFriends = null
+            };
+
+>>>>>>> ce2f4eebdcc05f0ab2c4c31cadb994c7ceffb702
             return View("FriendsView", fvm);
         }
 
@@ -55,6 +73,7 @@ namespace WeDecide.Controllers
 
             //Get the current user and update the view model for the friends page.
             //Should be a better way to do this.
+<<<<<<< HEAD
             //User currentUser = memberDal.GetUser(User.Identity.GetUserId());
             fvm.PotentialFriends = potentialFriends;
             //{
@@ -63,6 +82,10 @@ namespace WeDecide.Controllers
 
             //Working on Async Json returns
             //return Json(fvm, JsonRequestBehavior.AllowGet);
+=======
+            User currentUser = memberDal.GetUser(User.Identity.GetUserId());
+            fvm.PotentialFriends = potentialFriends;
+>>>>>>> ce2f4eebdcc05f0ab2c4c31cadb994c7ceffb702
 
             return View("FriendsView", fvm);
         }

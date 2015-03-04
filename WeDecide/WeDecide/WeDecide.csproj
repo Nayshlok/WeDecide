@@ -186,8 +186,11 @@
     <Content Include="App_Data\SecurityConnection_log.ldf">
       <DependentUpon>SecurityConnection.mdf</DependentUpon>
     </Content>
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\site.css" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Images\default_background.jpg" />
     <Content Include="Images\landing-background.jpg" />
@@ -212,6 +215,10 @@
       <LastGenOutput>Question2.cs</LastGenOutput>
       <DependentUpon>Question.edmx</DependentUpon>
     </Content>
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Models\Concrete\Question.edmx.sql" />
     <Content Include="Scripts\angular-cookies.js" />
