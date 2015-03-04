@@ -48,7 +48,8 @@ namespace WeDecide.DAL.Concrete
 
         public List<Models.Concrete.User> GetFriends(string Id)
         {
-            throw new NotImplementedException();
+            var userFriends = db.Users.Where(x => x.Id == Id).FirstOrDefault().FriendsOfUser;
+            return userFriends.ToList<User>();
         }
     }
 }

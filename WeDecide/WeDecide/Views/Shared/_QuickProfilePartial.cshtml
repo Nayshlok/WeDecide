@@ -5,7 +5,7 @@
     <div class="profile_pic shadowed"></div>
     <div class="info-panel shadowed">
         <h2 class="small-header">Friends</h2>
-        @if (Model != null)
+        @if (Model != null && Model.UserFriends != null)
         {
             foreach (User f in Model.UserFriends)
             {

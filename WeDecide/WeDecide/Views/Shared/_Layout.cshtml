@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/font-awesome.min.css")
     @Styles.Render("~/Content/css")
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     @Scripts.Render("~/Scripts/modernizr-2.6.2.js")
@@ -22,7 +23,10 @@
             </ul>
         </nav>
         <div class="icons">
-            <i class="fa fa-power-off"></i>
+            @using (Html.BeginForm("LogOff", "Account"))
+            {
+                <i class="fa fa-sign-out" title="Log Out" onclick="javascript:this.parentNode.submit();"></i>
+            }
         </div>
         <div class="profile-pic-thumb"></div>
     </header>
