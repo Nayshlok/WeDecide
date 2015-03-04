@@ -48,7 +48,14 @@ namespace WeDecide.DAL.Concrete
 
         public List<Models.Concrete.User> GetFriends(string Id)
         {
-            throw new NotImplementedException();
+            return GetUser(Id).FriendsOfUser.ToList();
+        }
+
+        public void AddFriend(string userId, string friendId)
+        {
+            GetUser(userId).FriendsOfUser.Add(GetUser(friendId));
+            db.SaveChanges();
+
         }
     }
 }

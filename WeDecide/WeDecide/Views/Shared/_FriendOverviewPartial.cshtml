@@ -3,7 +3,7 @@
 <div class="list-group-item friend-overview">
     @using (Html.BeginForm("AddFriend", "Friends"))
     {
-        Html.HiddenFor(x => x.Id);
+        <input type="hidden" name="UserID" value="@Model.Id" />
         <img src="~/Images/placeholder-headshot.jpg" class="img-responsive small-friend-img pull-left" />
         <h4>@Model.Name</h4>
         <input type="submit" class="btn btn-primary btn-sm pull-right" value="Add" />
