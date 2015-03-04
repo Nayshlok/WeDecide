@@ -227,6 +227,7 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\EditProfile.js" />
     <Content Include="Scripts\app\Friends.js" />
+    <Content Include="Scripts\app\GlobalFeed.js" />
     <Content Include="Scripts\app\questionsViaAngular.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -363,6 +364,7 @@
     <Content Include="Views\Shared\_QuickProfilePartial.cshtml" />
     <Content Include="Views\Shared\_ProfileEditPartial.cshtml" />
     <Content Include="Views\Shared\_EditQuestionPartial.cshtml" />
+    <Content Include="Views\Shared\_GlobalFeedPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
