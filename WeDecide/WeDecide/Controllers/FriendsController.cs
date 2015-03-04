@@ -25,25 +25,25 @@ namespace WeDecide.Controllers
 
             //---TESTING ONLY--//
             //Filled with temporary values to test page functionality
-            fvm = new FriendsViewModel()
-            {
-                UserProfile = new ProfileViewModel()
-                {
-                    UserName = "Jim Bobby",
-                    UserFriends = new List<User>()
-                    {
-                        new User{Name = "David Wright", Id = "01"},
-                        new User{Name = "John Blake", Id = "02"},
-                        new User{Name = "William Blake", Id = "03"}
-                    }
-                },
-                PotentialFriends = null
-            };
+            //fvm = new FriendsViewModel()
+            //{
+            //    UserProfile = new ProfileViewModel()
+            //    {
+            //        UserName = User.Identity.GetUserId(),
+            //        UserFriends = memberDal.GetFriends(User.Identity.GetUserId())   
+            //    },
+            //    PotentialFriends = null
+            //};
+
+            fvm = new FriendsViewModel();
+            fvm.UserProfile = new ProfileViewModel();
         }
 
         // GET: Friends
         public ActionResult Index()
         {
+            User.Identity.GetUserId();
+            fvm.UserProfile.UserFriends = memberDal.GetFriends(User.Identity.GetUserId());
             return View("FriendsView", fvm);
         }
 
@@ -56,10 +56,10 @@ namespace WeDecide.Controllers
             //Get the current user and update the view model for the friends page.
             //Should be a better way to do this.
             //User currentUser = memberDal.GetUser(User.Identity.GetUserId());
-            fvm.PotentialFriends = new List<User>()
-            {
-                new User{Name = "John Jake"}
-            };
+            fvm.PotentialFriends = potentialFriends;
+            //{
+            //    new User{Name = "John Jake"}
+            //};
 
             //Working on Async Json returns
             //return Json(fvm, JsonRequestBehavior.AllowGet);
@@ -69,12 +69,12 @@ namespace WeDecide.Controllers
 
         public ActionResult AddFriend(string Id)
         {
-            //User currentUser = memberDal.GetUser(User.Identity.GetUserId());
-            //memberDal.GetFriends(currentUser.Id).Add(memberDal.GetUser(Id));
+            User currentUser = memberDal.GetUser(User.Identity.GetUserId());
+            memberDal.GetFriends(currentUser.Id).Add(memberDal.GetUser(Id));
 
             //---TESTING ONLY--//
-            //fvm.UserProfile.UserFriends.ToList().Add(fvm.PotentialFriends.Where(i => i.Id == Id).Single());
-            //fvm.PotentialFriends.ToList().Remove(fvm.PotentialFriends.Where(i => i.Id == Id).Single());
+            fvm.UserProfile.UserFriends.ToList().Add(fvm.PotentialFriends.Where(i => i.Id == Id).Single());
+            fvm.PotentialFriends.ToList().Remove(fvm.PotentialFriends.Where(i => i.Id == Id).Single());
 
             return View("FriendsView", fvm);
         }
