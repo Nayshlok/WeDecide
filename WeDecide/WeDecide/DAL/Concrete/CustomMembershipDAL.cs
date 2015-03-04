@@ -55,6 +55,10 @@ namespace WeDecide.DAL.Concrete
         {
             GetUser(userId).FriendsOfUser.Add(GetUser(friendId));
             db.SaveChanges();
+<<<<<<< HEAD
+=======
+
+>>>>>>> a00398e6ccb1b2c025e7101b2d2098135aeda81e
         }
     }
 }
