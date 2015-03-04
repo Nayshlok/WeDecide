@@ -14,7 +14,6 @@ namespace WeDecide.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-
         private QuestionDbContext _Context;
         private IMembershipDAL Mdal;
 
@@ -46,10 +45,10 @@ namespace WeDecide.Controllers
             TestViewModel testVm = new TestViewModel();
 
             //User currentUser = Mdal.GetUser(User.Identity.GetUserId());
-
-            User user1 = Mdal.GetUserByName("test1@test.com");
-            User user2 = Mdal.GetUserByName("test2@test.com");
-            User user3 = Mdal.GetUserByName("test3@test.com");
+            
+            //User user1 = Mdal.GetUserByName("test1@test.com");
+            //User user2 = Mdal.GetUserByName("test2@test.com");
+            //User user3 = Mdal.GetUserByName("test3@test.com");
 
             //Question question1 = new Question { User = user1, Text = "Question1", QuestionScope = Question.Scope.Friends, EndDate = new DateTime(2015, 3, 15) };
             //Response response1 = new Response { Question = question1, Text = "Response1Q1" };
@@ -84,6 +83,7 @@ namespace WeDecide.Controllers
             //question3.Responses.Add(q3response4);
             //_Context.Questions.Add(question2);
             //_Context.Questions.Add(question3);
+            //_Context.SaveChanges();
             //Question holder = _Context.Questions.FirstOrDefault(x => x.Text.Equals("question2"));
 
             //holder.Responses.First().Users.Add(user1);
