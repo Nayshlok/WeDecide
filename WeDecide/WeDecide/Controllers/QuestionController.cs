@@ -18,7 +18,8 @@ namespace WeDecide.Controllers
         private static IQuestionDAL Qdal = new MemoryQuestionDAL();
         private static IMembershipDAL Mdal;//= new CustomMembershipDAL();
 
-        public QuestionController(IMembershipDAL NewMdal) {
+        public QuestionController(IMembershipDAL NewMdal) 
+        {
             Mdal = NewMdal;
         }
 
