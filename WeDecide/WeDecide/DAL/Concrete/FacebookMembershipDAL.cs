@@ -33,5 +33,11 @@ namespace WeDecide.DAL.Concrete
         {
             throw new NotImplementedException();
         }
+
+
+        public void AddFriend(string userId, string friendId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

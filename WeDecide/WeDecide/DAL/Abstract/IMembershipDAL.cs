@@ -18,5 +18,8 @@ namespace WeDecide.DAL.Abstract
         List<User> Search(string Search);
 
         List<User> GetFriends(string Id);
+
+        //May be another way to do this
+        void AddFriend(string userId, string friendId);
     }
 }

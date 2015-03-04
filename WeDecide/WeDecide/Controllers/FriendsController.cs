@@ -55,16 +55,20 @@ namespace WeDecide.Controllers
             return View("FriendsView", fvm);
         }
 
-        public ActionResult AddFriend(string Id)
+        public ActionResult AddFriend(string UserID)
         {
             User currentUser = memberDal.GetUser(User.Identity.GetUserId());
+<<<<<<< HEAD
+            memberDal.AddFriend(currentUser.Id, UserID);
+=======
             memberDal.GetFriends(currentUser.Id).Add(memberDal.GetUser(Id));
 
             //---TESTING ONLY--//
             fvm.UserProfile.UserFriends.ToList().Add(fvm.PotentialFriends.Where(i => i.Id == Id).Single());
             fvm.PotentialFriends.ToList().Remove(fvm.PotentialFriends.Where(i => i.Id == Id).Single());
+>>>>>>> 30feea596b389a95f70edbee17de206680fee7f2
 
-            return View("FriendsView", fvm);
+            return RedirectToAction("Index");
         }
     }
 }

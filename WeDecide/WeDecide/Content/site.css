@@ -315,7 +315,7 @@ header a {
 		color: #FFF;
 		font-family: 'Lobster', sans-serif;
 		font-size: 36px;
-		margin: 0;
+		margin: 0 auto 15px auto;
 	 }
  
 .info-box-holder {
@@ -357,7 +357,11 @@ header a {
  
 	.search-friends header {height: 30px;}
  
-		.search-friends header h2 {font-size: 18px;}
+		.search-friends header h2 {
+            font-size: 18px;
+            position: relative;
+            top: 0;
+		}
  
 	.search-friends div {padding: 10px 20px 10px 20px;}
  
@@ -382,9 +386,9 @@ header a {
 		margin: 15px 0 10px 10px;
 	 }
  
-	.friend-overview button {
+	.friend-overview input {
 		position: relative;
-		top: 15px;
+        width: 80px;
 	 }
 
 .search-friends .form-group .form-control {
