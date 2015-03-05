@@ -13,6 +13,17 @@
           <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="FriendId" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SenderId" Type="nvarchar" MaxLength="128" />
+          <Property Name="ReceiverId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Message" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="IsPending" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="Question">
           <Key>
             <PropertyRef Name="Id" />
@@ -71,6 +82,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Notification_ReceiveUser">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="ReceiverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notification_SenderUser">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="SenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Questions_Users">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Question" Type="Self.Question" Multiplicity="*" />
@@ -121,6 +156,7 @@
         </Association>
         <EntityContainer Name="QuestionDBModelStoreContainer">
           <EntitySet Name="Friend" EntityType="Self.Friend" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Question" EntityType="Self.Question" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Response" EntityType="Self.Response" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
@@ -132,6 +168,14 @@
           <AssociationSet Name="FK_Friend_User1" Association="Self.FK_Friend_User1">
             <End Role="User" EntitySet="User" />
             <End Role="Friend" EntitySet="Friend" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notification_ReceiveUser" Association="Self.FK_Notification_ReceiveUser">
+            <End Role="User" EntitySet="User" />
+            <End Role="Notification" EntitySet="Notification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notification_SenderUser" Association="Self.FK_Notification_SenderUser">
+            <End Role="User" EntitySet="User" />
+            <End Role="Notification" EntitySet="Notification" />
           </AssociationSet>
           <AssociationSet Name="FK_Questions_Users" Association="Self.FK_Questions_Users">
             <End Role="User" EntitySet="User" />
@@ -187,6 +231,8 @@
           <NavigationProperty Name="Responses" Relationship="Self.UserResponse" FromRole="User" ToRole="Response" />
           <NavigationProperty Name="UserFriends" Relationship="QuestionDbModel.Friend" FromRole="User" ToRole="User1" />
           <NavigationProperty Name="FriendsOfUser" Relationship="QuestionDbModel.Friend" FromRole="User1" ToRole="User" />
+          <NavigationProperty Name="NotificationsReceived" Relationship="QuestionDbModel.FK_Notification_ReceiveUser" FromRole="User" ToRole="Notification" />
+          <NavigationProperty Name="NotificationsSent" Relationship="QuestionDbModel.FK_Notification_SenderUser" FromRole="User" ToRole="Notification" />
           </EntityType>
         <Association Name="FK_Questions_Users">
           <End Role="User" Type="Self.User" Multiplicity="1" />
@@ -236,10 +282,56 @@
             <End Role="User" EntitySet="Users" />
             <End Role="User1" EntitySet="Users" />
           </AssociationSet>
+          <EntitySet Name="Notifications" EntityType="QuestionDbModel.Notification" />
+          <AssociationSet Name="FK_Notification_ReceiveUser" Association="QuestionDbModel.FK_Notification_ReceiveUser">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notification_SenderUser" Association="QuestionDbModel.FK_Notification_SenderUser">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="Friend">
           <End Type="QuestionDbModel.User" Role="User" Multiplicity="*" />
           <End Type="QuestionDbModel.User" Role="User1" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SenderId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ReceiverId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ReceivingUser" Relationship="QuestionDbModel.FK_Notification_ReceiveUser" FromRole="Notification" ToRole="User" />
+          <NavigationProperty Name="SendingUser" Relationship="QuestionDbModel.FK_Notification_SenderUser" FromRole="Notification" ToRole="User" />
+          <Property Name="IsPending" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Notification_ReceiveUser">
+          <End Type="QuestionDbModel.User" Role="User" Multiplicity="1" />
+          <End Type="QuestionDbModel.Notification" Role="Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="ReceiverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notification_SenderUser">
+          <End Type="QuestionDbModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="QuestionDbModel.Notification" Role="Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="SenderId" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -292,6 +384,18 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="QuestionDbModel.Notification">
+              <MappingFragment StoreEntitySet="Notification">
+                <ScalarProperty Name="IsPending" ColumnName="IsPending" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="ReceiverId" ColumnName="ReceiverId" />
+                <ScalarProperty Name="SenderId" ColumnName="SenderId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
