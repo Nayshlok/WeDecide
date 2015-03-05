@@ -115,7 +115,7 @@ namespace WeDecide.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    MembershipDAL.AddUser(model.Email, user.Id);
+                    MembershipDAL.AddUser(model.UserName, model.Email, user.Id);
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771

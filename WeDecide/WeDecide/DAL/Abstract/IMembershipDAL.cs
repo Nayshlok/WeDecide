@@ -9,7 +9,7 @@ namespace WeDecide.DAL.Abstract
 {
     public interface IMembershipDAL // : IDAL<Account>
     {
-        void AddUser(string Name, string id);
+        void AddUser(string Name, string UserName, string id);
 
         IEnumerable<User> GetUsers();
 
@@ -17,7 +17,7 @@ namespace WeDecide.DAL.Abstract
 
         User GetUserByName(string name);
 
-        List<User> Search(string Search);
+        List<User> Search(User currentUser, string Search);
 
         List<User> GetFriends(string Id);
 

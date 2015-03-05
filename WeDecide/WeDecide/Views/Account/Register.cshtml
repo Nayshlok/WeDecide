@@ -25,10 +25,13 @@
             {
                 @Html.ValidationSummary(false, "")
                 <div class="form-group">
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email", @id = "emailField" })
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email", @id = "emailField", maxlength = 40 })
                 </div>
                 <div class="form-group">
-                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", @id = "passwordField"})
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "User Name", @id = "nameField", maxlength = 40 })
+                </div>
+                <div class="form-group">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", @id = "passwordField" })
                 </div>
                 <div class="form-group">
                     @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password", @id = "passwordConfirm" })
