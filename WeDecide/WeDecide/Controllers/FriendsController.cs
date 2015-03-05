@@ -44,12 +44,12 @@ namespace WeDecide.Controllers
         [HttpGet]
         public ActionResult SearchFriends(string friendsQuery)
         {
+            User currentUser = memberDal.GetUser(User.Identity.GetUserId());
             //Find users relevant to the users search
-            List<User> potentialFriends = memberDal.Search(friendsQuery);
+            List<User> potentialFriends = memberDal.Search(currentUser, friendsQuery);
 
             //Get the current user and update the view model for the friends page.
             //Should be a better way to do this.
-            User currentUser = memberDal.GetUser(User.Identity.GetUserId());
             fvm.PotentialFriends = potentialFriends;
 
             return View("FriendsView", fvm);

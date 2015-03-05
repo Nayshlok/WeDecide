@@ -11,7 +11,7 @@
     @Scripts.Render("~/Scripts/jquery")
 </head>
 <body>
-    <header>
+    <header class="fixed-header shadowed">
         <h2>@Html.ActionLink("WeDecide", "Index", "Home")</h2>
         <nav>
             <ul>
@@ -32,7 +32,7 @@
         @RenderBody()
     </section>
 
-    <footer class="fixed-footer">
+    <footer>
         <p>&copy; @DateTime.Now.Year  - WeDecide</p>
     </footer>
 

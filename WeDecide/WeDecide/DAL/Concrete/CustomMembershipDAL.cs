@@ -19,9 +19,9 @@ namespace WeDecide.DAL.Concrete
             db = context;
         }
 
-        public void AddUser(string name, string id)
+        public void AddUser(string name, string email, string id)
         {
-            User newUser = new User { Name = name, Id = id };
+            User newUser = new User { Name = name, Email = email,  Id = id };
             db.Users.Add(newUser);
             db.SaveChanges();
         }
@@ -38,10 +38,11 @@ namespace WeDecide.DAL.Concrete
             return user;
         }
 
-        public List<Models.Concrete.User> Search(string Search)
+        public List<Models.Concrete.User> Search(User currentUser, string Search)
         {
             //Very simple search to match names
-            var relevantUsers = db.Users.Where(u => u.Name.ToLower().Contains(Search.ToLower()));
+            var relevantUsers = db.Users.Where(u => u.Name.ToLower().Contains(Search.ToLower()) && u.Id != currentUser.Id).ToList();
+            relevantUsers.RemoveAll(u => currentUser.FriendsOfUser.Contains(GetUser(u.Id)));
 
             return relevantUsers.ToList<User>();
         }
