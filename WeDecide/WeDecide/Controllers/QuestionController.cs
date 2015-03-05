@@ -16,7 +16,12 @@ namespace WeDecide.Controllers
     {
         //Until we have the DAL injection done
         private static IQuestionDAL Qdal = new MemoryQuestionDAL();
-        private static IMembershipDAL Mdal;// = new CustomMembershipDAL();
+        private static IMembershipDAL Mdal;//= new CustomMembershipDAL();
+
+        public QuestionController(IMembershipDAL NewMdal) 
+        {
+            Mdal = NewMdal;
+        }
 
         [HttpGet]
         public ViewResult CreateQuestion()
@@ -70,12 +75,12 @@ namespace WeDecide.Controllers
         }
 
         [HttpPost]
-        public ActionResult RemoveQuestion(int Id)
+        public ActionResult RemoveQuestion(int QuestionId)
         {
             //Retrieve the question and remove it from the database.
-            if (IsUsersQuestion(Id))
+            if (IsUsersQuestion(QuestionId))
             {
-                Qdal.Delete(Id);
+                Qdal.Delete(QuestionId);
             }
             //Not sure what to return here
             return View();

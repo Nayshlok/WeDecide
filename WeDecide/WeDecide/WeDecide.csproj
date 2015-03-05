@@ -282,6 +282,9 @@
     <Compile Include="Models\Account\User.cs" />
     <Compile Include="Models\Concrete\IdentityModels.cs" />
     <Compile Include="Models\Concrete\MyIdProvider.cs" />
+    <Compile Include="Models\Concrete\Notification.cs">
+      <DependentUpon>Question2.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Concrete\PartialClasses.cs" />
     <Compile Include="Models\Concrete\Question.cs">
       <DependentUpon>Question2.tt</DependentUpon>

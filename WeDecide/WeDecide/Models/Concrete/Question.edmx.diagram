@@ -12,6 +12,9 @@
         <AssociationConnector Association="QuestionDbModel.FK_Response_Questions" ManuallyRouted="false" />
         <AssociationConnector Association="QuestionDbModel.UserResponse" ManuallyRouted="false" />
         <AssociationConnector Association="QuestionDbModel.Friend" />
+        <EntityTypeShape EntityType="QuestionDbModel.Notification" Width="1.5" PointX="7.5" PointY="1.375" />
+        <AssociationConnector Association="QuestionDbModel.FK_Notification_ReceiveUser" />
+        <AssociationConnector Association="QuestionDbModel.FK_Notification_SenderUser" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -6,15 +6,17 @@
             <h2>Edit Your Profile</h2>
         </header>
         <div>
-            @using (Html.BeginForm("UpdateProfile", "Profile"))
-            {
+            <form action="/Profile/Update" method="post">
+                @*@using (Html.BeginForm("UpdateProfile", "Profile"))
+            {*@
                 <div class="form-group">
                     <label for="nameEdit">Name</label>
                     @Html.ValidationMessageFor(x => x.UserName)
                     @Html.TextBoxFor(x => x.UserName, new { @id = "nameEdit", @class = "form-control", @name = "nameEdit", @placeholder = "Ex: John Doe" })
                 </div>
                 <input class="bottom-btn btn btn-default" type="submit" value="Update Profile" />
-            }
+                @*}*@
+            </form>
         </div>
     </div>
     <section id="fade" class="black_overlay"></section>
