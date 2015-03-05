@@ -13,10 +13,13 @@ namespace WeDecide.DAL.Concrete
     public class CustomMembershipDAL : IMembershipDAL
     {
         QuestionDbContext db;
+        //IDentity DataBase
+        IdentityManager manager;
 
         public CustomMembershipDAL(QuestionDbContext context)
         {
             db = context;
+            manager = new IdentityManager();
         }
 
         public void AddUser(string name, string id)
@@ -55,6 +58,40 @@ namespace WeDecide.DAL.Concrete
         {
             GetUser(userId).FriendsOfUser.Add(GetUser(friendId));
             db.SaveChanges();
+        }
+
+
+        public bool RemoveUser(string userId)
+        {
+            User toRemove = db.Users.SingleOrDefault(x => x.Id == userId);
+            if (toRemove != null)
+            {
+                var responses = db.Responses.Where(x => x.Users.Contains(toRemove));
+                foreach (Response r in responses)
+                {
+                    r.Users.Remove(toRemove);
+                }
+
+            }
+            return false;
+        }
+
+
+        public IEnumerable<User> GetUsers()
+        {
+            return db.Users.ToList();
+        }
+
+
+        public bool SetRole(string userId, UserRoles role)
+        {
+            manager.ClearUserRoles(userId);
+            return manager.AddUserToRole(userId, role);
+        }
+
+        public void RemoveRoles(string userId)
+        {
+            manager.ClearUserRoles(userId);
         }
     }
 }

@@ -44,6 +44,9 @@ namespace WeDecide.Infrastructure
             kernel.Bind<QuestionDbContext>().ToMethod<QuestionDbContext>(
                 (context) => { return QuestionDbContext.Create(); }
             );
+            kernel.Bind<ApplicationDbContext>().ToMethod<ApplicationDbContext>(
+                context => { return ApplicationDbContext.Create(); }
+            );
 
             kernel.Bind<IQuestionDAL>().To<TestDal>();
             //kernel.Bind<IMembershipDAL>().To<CustomMembershipDAL>();

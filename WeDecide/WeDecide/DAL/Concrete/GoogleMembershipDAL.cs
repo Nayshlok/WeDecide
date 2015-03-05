@@ -39,5 +39,28 @@ namespace WeDecide.DAL.Concrete
         {
             throw new NotImplementedException();
         }
+
+
+        public bool RemoveUser(string userId)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public IEnumerable<Models.Concrete.User> GetUsers()
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public bool SetRole(string userId, Models.Concrete.UserRoles role)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveRoles(string userId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
