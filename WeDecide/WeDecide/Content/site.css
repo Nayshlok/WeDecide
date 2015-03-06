@@ -74,11 +74,25 @@ header a {
 	display: inline-block;
 	position: relative;
 	right: 25px;
-	top: 30%;
-    width: 50px;
+	top: 35%;
+    width: 60px;
+    float: right;
+ }
+
+.icons form {
+    width: 17px;
+    display: inline-block;
+}
+
+.icons .fa-sign-out {
+    float: left;
+    cursor: pointer;
+}
+
+.icons .fa-bell {
     float: right;
     cursor: pointer;
- }
+}
  
 	.icons i {margin: 0 2px 0 2px;}
  
