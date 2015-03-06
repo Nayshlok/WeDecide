@@ -11,14 +11,8 @@
     @Scripts.Render("~/Scripts/jquery")
 </head>
 <body>
-<<<<<<< HEAD
     <header class="fixed-header shadowed">
         <h2>@Html.ActionLink("WeDecide", "Index", "Home")</h2>
-=======
-    <header>
-        @*<h2>@Html.ActionLink("WeDecide", "Index", "Home")</h2>*@
-        <h2><a href="/">WeDecide</a></h2>
->>>>>>> 723cf02bc4556bdb697119557d1076db8b82885e
         <nav>
             <ul>
                 @*<li>@Html.ActionLink("Profile", "Index", "Profile")</li>*@
@@ -35,6 +29,7 @@
             <i class="fa fa-bell"></i>
         </div>
         <div class="profile-pic-thumb"></div>
+        @Html.Partial("_NotificationsPartial")
     </header>
 
     <section class="main">

@@ -318,6 +318,7 @@ header a {
 }
 
 /*End Home Page Styling*/
+
 /*Profile Page Styling*/
 .profile-view {
 	background-image: url("../Images/default_background.jpg");
@@ -444,6 +445,12 @@ header a {
 	-webkit-box-shadow: 3px 3px 4px 2px #ccc;
 	box-shadow: 3px 3px 4px 2px #ccc;
  }
+
+.bottom-shadow {
+    -moz-box-shadow: 3px 0px 4px 2px #ccc;
+	-webkit-box-shadow: 3px 0px 4px 2px #ccc;
+	box-shadow: 0px 2px 2px 1px #ccc;
+}
  
 .black_overlay {
 	background-color: #000;
@@ -505,6 +512,29 @@ header a {
 	font-weight: bold;
  }
  
+.notification-panel {
+    height: 420px;
+    width: 250px;
+    z-index: 2000;
+    position: fixed;
+    right: 1%;
+    top: 65px;
+    background-color: #FFF;
+    padding: 5px;
+    text-align: center;
+}
+
+.notification-panel h3 {
+    margin: 0px;
+}
+
+.notification {
+    margin: 20px auto 20px auto;
+    text-align: left;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
 /*End General Shared Styling*/
 /*Layout Styling*/
 footer {

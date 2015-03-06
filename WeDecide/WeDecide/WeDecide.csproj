@@ -368,6 +368,7 @@
     <Content Include="Views\Shared\_EditQuestionPartial.cshtml" />
     <Content Include="Views\Shared\_GlobalFeedPartial.cshtml" />
     <Content Include="Views\Account\AdminUsers.cshtml" />
+    <Content Include="Views\Shared\_NotificationsPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
