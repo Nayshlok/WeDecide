@@ -123,6 +123,7 @@ namespace WeDecide.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            Console.WriteLine("Registering");
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
