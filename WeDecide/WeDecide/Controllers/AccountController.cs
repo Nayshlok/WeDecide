@@ -239,7 +239,6 @@ namespace WeDecide.Controllers
             return View();
         }
 
-
         private void AddToRole(ApplicationUser user, UserRoles role)
         {
             string roleName = Enum.GetName(typeof(UserRoles), role);
