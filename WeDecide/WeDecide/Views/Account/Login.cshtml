@@ -44,6 +44,11 @@
             }
             @Html.ActionLink("Register as a new user", "Register")
         </section>
+        <div class="external-logins">
+            <section id="socialLoginForm">
+                @Html.Partial("_ExternalLoginsListPartial", new { Action = "ExternalLogin", ReturnUrl = ViewBag.ReturnUrl })
+            </section>
+        </div>
         <div class="global-feed">
             <h2>See what you are missing.</h2>
             <div>

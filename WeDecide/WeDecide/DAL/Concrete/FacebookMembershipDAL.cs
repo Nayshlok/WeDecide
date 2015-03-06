@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using Facebook;
 using WeDecide.DAL.Abstract;
 using WeDecide.Models.Concrete;
+using Microsoft.Owin.Security.Facebook;
 
 namespace WeDecide.DAL.Concrete
 {
     public class FacebookMembershipDAL : IMembershipDAL
     {
+
         public void AddUser(string Name, string UserName, string id)
         {
             throw new NotImplementedException();
