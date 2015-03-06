@@ -43,9 +43,12 @@
                 <input type="submit" value="Log me in" class="btn btn-danger" id="loginBtn" disabled />
             }
             @Html.ActionLink("Register as a new user", "Register")
-            @*@Scripts.Render("~/Scripts/app/FacebookSDK")
-            <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"/>*@
         </section>
+        <div class="external-logins">
+            <section id="socialLoginForm">
+                @Html.Partial("_ExternalLoginsListPartial", new { Action = "ExternalLogin", ReturnUrl = ViewBag.ReturnUrl })
+            </section>
+        </div>
         <div class="global-feed">
             <h2>See what you are missing.</h2>
             <div>
