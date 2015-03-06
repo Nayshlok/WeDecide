@@ -359,6 +359,7 @@
     <Compile Include="ViewModels\AdminViewModel.cs" />
     <Compile Include="ViewModels\EditQuestionViewModel.cs" />
     <Compile Include="ViewModels\ExternalLoginConfirmationViewModel.cs" />
+    <Compile Include="ViewModels\ExternalLoginViewModel.cs" />
     <Compile Include="ViewModels\FriendsViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
