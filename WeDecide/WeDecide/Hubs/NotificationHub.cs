@@ -32,8 +32,8 @@ namespace WeDecide.Hubs
             User reciever = MembershipDAL.GetUserByName(recieverId);
             //write request to database
             MembershipDAL.AddNotification(sender, reciever, Notification.NotificationType.FriendRequest);
-            //change senders add button
             //notify reciever
+            Clients.User(reciever.Id).notify();
         }
 
         public void PostTimeUp()
