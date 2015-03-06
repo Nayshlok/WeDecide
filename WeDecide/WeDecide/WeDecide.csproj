@@ -250,6 +250,7 @@
     <Content Include="Scripts\app\GlobalFeed.js" />
     <Content Include="Scripts\app\LiveQuestion.js" />
     <Content Include="Scripts\app\MakeQuestion.js" />
+    <Content Include="Scripts\app\Notifications.js" />
     <Content Include="Scripts\app\questionsViaAngular.js" />
     <Content Include="Scripts\app\FacebookSDK.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -288,7 +289,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\FacebookConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
@@ -360,6 +360,7 @@
     <Compile Include="ViewModels\AdminViewModel.cs" />
     <Compile Include="ViewModels\EditQuestionViewModel.cs" />
     <Compile Include="ViewModels\ExternalLoginConfirmationViewModel.cs" />
+    <Compile Include="ViewModels\ExternalLoginViewModel.cs" />
     <Compile Include="ViewModels\FriendsViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -402,6 +403,9 @@
     <Content Include="Views\Shared\_GlobalFeedPartial.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\AdminUsers.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Shared\_NotificationsPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -436,7 +440,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>53780</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:53780/</IISUrl>
+          <IISUrl>https://localhost:44300/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
