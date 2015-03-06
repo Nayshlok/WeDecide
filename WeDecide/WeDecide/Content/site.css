@@ -4,11 +4,20 @@
 	padding: 0;
  }
  
+html {
+    background-color: #FCFFF5;
+}
+
 body {
 	margin: 0 auto;
 	width: 100%;
     min-width: 900px;
+    background-color: #FCFFF5;
  }
+
+.main {
+    background-color: #FCFFF5;
+}
 
 /*Layout Styling*/
 header {
@@ -82,15 +91,16 @@ header a {
 .icons form {
     width: 17px;
     display: inline-block;
-}
-
-.icons .fa-sign-out {
-    float: left;
+    float: right;
     cursor: pointer;
 }
 
-.icons .fa-bell {
+.icons .fa-sign-out {
     float: right;
+}
+
+.icons .fa-bell {
+    float: left;
     cursor: pointer;
 }
  
@@ -301,7 +311,7 @@ header a {
 .filter-feed {
 	padding-left: 5px;
 	position: fixed;
-	right: 15%;
+	left: 76%;
 	width: 75px;
  }
  
@@ -519,9 +529,10 @@ header a {
     position: fixed;
     right: 1%;
     top: 65px;
-    background-color: #FFF;
+    background-color: #FCFFF5;
     padding: 5px;
     text-align: center;
+    display: none;
 }
 
 .notification-panel h3 {
@@ -544,7 +555,6 @@ footer {
 	position: static;
 	text-align: center;
 	width: 100%;
-    margin-top: 20px;
  }
  
 	footer p {

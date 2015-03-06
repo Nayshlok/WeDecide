@@ -250,6 +250,7 @@
     <Content Include="Scripts\app\GlobalFeed.js" />
     <Content Include="Scripts\app\LiveQuestion.js" />
     <Content Include="Scripts\app\MakeQuestion.js" />
+    <Content Include="Scripts\app\Notifications.js" />
     <Content Include="Scripts\app\questionsViaAngular.js" />
     <Content Include="Scripts\app\FacebookSDK.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

@@ -15,20 +15,17 @@
         <h2>@Html.ActionLink("WeDecide", "Index", "Home")</h2>
         <nav>
             <ul>
-                @*<li>@Html.ActionLink("Profile", "Index", "Profile")</li>*@
                 <li><a href="/Profile">Profile</a></li>
-                @*<li>@Html.ActionLink("People", "Index", "Friends")</li>*@
                 <li><a href="/Friends">People</a></li>
             </ul>
         </nav>
         <div class="icons">
+            <i id="notificationBtn" class="fa fa-bell"></i>
             @using (Html.BeginForm("LogOff", "Account"))
             {
                 <i class="fa fa-sign-out" title="Log Out" onclick="javascript:this.parentNode.submit();"></i>
             }
-            <i class="fa fa-bell"></i>
         </div>
-        <div class="profile-pic-thumb"></div>
         @Html.Partial("_NotificationsPartial")
     </header>
 
@@ -41,5 +38,6 @@
     </footer>
 
     @RenderSection("scripts", required: false)
+    @Scripts.Render("~/Scripts/app/Notifications.js")
 </body>
 </html>
