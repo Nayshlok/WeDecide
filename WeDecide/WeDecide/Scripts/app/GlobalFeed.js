@@ -86,4 +86,9 @@
         pullQuestions();
 
     }]);
+
+    feedApp.controller('PersonalCtrl', ['$scope', '$http', function ($scope, $http) {
+        // I need a body
+    }])
+
 })();
