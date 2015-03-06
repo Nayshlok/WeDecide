@@ -23,6 +23,5 @@ namespace WeDecide.Models.Concrete
     
         public virtual User ReceivingUser { get; set; }
         public virtual User SendingUser { get; set; }
-
     }
 }

@@ -69,7 +69,8 @@ namespace WeDecide.Controllers
         public ActionResult RemoveUser()
         {
             string id = Request.Form["userId"];
-            //Remove User
+            MembershipDAL.DeleteUser(id);
+
             return new RedirectResult("UserAdmin");
         }
 
