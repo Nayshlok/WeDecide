@@ -4,11 +4,20 @@
 	padding: 0;
  }
  
+html {
+    background-color: #FCFFF5;
+}
+
 body {
 	margin: 0 auto;
 	width: 100%;
     min-width: 900px;
+    background-color: #FCFFF5;
  }
+
+.main {
+    background-color: #FCFFF5;
+}
 
 /*Layout Styling*/
 header {
@@ -82,15 +91,16 @@ header a {
 .icons form {
     width: 17px;
     display: inline-block;
-}
-
-.icons .fa-sign-out {
-    float: left;
+    float: right;
     cursor: pointer;
 }
 
-.icons .fa-bell {
+.icons .fa-sign-out {
     float: right;
+}
+
+.icons .fa-bell {
+    float: left;
     cursor: pointer;
 }
  
@@ -301,7 +311,7 @@ header a {
 .filter-feed {
 	padding-left: 5px;
 	position: fixed;
-	right: 15%;
+	left: 76%;
 	width: 75px;
  }
  
@@ -318,6 +328,7 @@ header a {
 }
 
 /*End Home Page Styling*/
+
 /*Profile Page Styling*/
 .profile-view {
 	background-image: url("../Images/default_background.jpg");
@@ -444,6 +455,12 @@ header a {
 	-webkit-box-shadow: 3px 3px 4px 2px #ccc;
 	box-shadow: 3px 3px 4px 2px #ccc;
  }
+
+.bottom-shadow {
+    -moz-box-shadow: 3px 0px 4px 2px #ccc;
+	-webkit-box-shadow: 3px 0px 4px 2px #ccc;
+	box-shadow: 0px 2px 2px 1px #ccc;
+}
  
 .black_overlay {
 	background-color: #000;
@@ -505,6 +522,30 @@ header a {
 	font-weight: bold;
  }
  
+.notification-panel {
+    height: 420px;
+    width: 250px;
+    z-index: 2000;
+    position: fixed;
+    right: 1%;
+    top: 65px;
+    background-color: #FCFFF5;
+    padding: 5px;
+    text-align: center;
+    display: none;
+}
+
+.notification-panel h3 {
+    margin: 0px;
+}
+
+.notification {
+    margin: 20px auto 20px auto;
+    text-align: left;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
 /*End General Shared Styling*/
 /*Layout Styling*/
 footer {
@@ -514,7 +555,6 @@ footer {
 	position: static;
 	text-align: center;
 	width: 100%;
-    margin-top: 20px;
  }
  
 	footer p {
