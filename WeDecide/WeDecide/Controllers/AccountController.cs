@@ -239,6 +239,17 @@ namespace WeDecide.Controllers
             return View();
         }
 
+
+        private void AddToRole(ApplicationUser user, UserRoles role)
+        {
+            string roleName = Enum.GetName(typeof(UserRoles), role);
+            if (!RoleManager.RoleExists(roleName))
+            {
+                RoleManager.Create(new IdentityRole(roleName));
+            }
+            UserManager.AddToRole(user.Id, roleName);
+        }
+
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
@@ -285,15 +296,6 @@ namespace WeDecide.Controllers
                 LoginProvider = provider;
                 RedirectUri = redirectUri;
                 UserId = userId;
-        }
-        private void AddToRole(ApplicationUser user, UserRoles role)
-        {
-            string roleName = Enum.GetName(typeof(UserRoles), role);
-            if (!RoleManager.RoleExists(roleName))
-            {
-                RoleManager.Create(new IdentityRole(roleName));
-            }
-            UserManager.AddToRole(user.Id, roleName);
         }
 
             public string LoginProvider { get; set; }
