@@ -31,7 +31,8 @@ function showMakeQuestion() {
         questionElement.addResponse();
         });*/
 
-        $('form').submit(function () {
+    $('form').submit(function () {
+        togglePopup(false);
             if ($(this).valid()) {
                 $.ajax({
                     url: this.action,

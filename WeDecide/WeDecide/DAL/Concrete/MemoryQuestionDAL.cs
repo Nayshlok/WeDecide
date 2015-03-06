@@ -31,7 +31,12 @@ namespace WeDecide.DAL.Concrete
 
         public Question Get(int id)
         {
-            return questions[id];
+            Question ReturnQuestion = null;
+            if (id < questions.Count)
+            {
+                ReturnQuestion = questions[id];
+            }
+            return ReturnQuestion;
         }
 
         public Question Delete(int id)

@@ -32,4 +32,10 @@ namespace WeDecide.Models.Concrete
             return new ApplicationDbContext();
         }
     }
+
+    public enum UserRoles
+    {
+        User, Admin
+    }
+
 }

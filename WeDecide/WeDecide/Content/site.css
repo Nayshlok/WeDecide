@@ -7,14 +7,21 @@
 body {
 	margin: 0 auto;
 	width: 100%;
+    min-width: 900px;
  }
- 
+
 /*Layout Styling*/
 header {
 	background-color: #3E606F;
 	height: 65px;
 	width: 100%;
  }
+
+.fixed-header {
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
  
 	header h2 {
 		display: inline-block;
@@ -67,11 +74,25 @@ header a {
 	display: inline-block;
 	position: relative;
 	right: 25px;
-	top: 30%;
-    width: 50px;
+	top: 35%;
+    width: 60px;
+    float: right;
+ }
+
+.icons form {
+    width: 17px;
+    display: inline-block;
+}
+
+.icons .fa-sign-out {
+    float: left;
+    cursor: pointer;
+}
+
+.icons .fa-bell {
     float: right;
     cursor: pointer;
- }
+}
  
 	.icons i {margin: 0 2px 0 2px;}
  
@@ -257,7 +278,16 @@ header a {
 	top: 30px;
 	transform: translateX(-50%);
 	width: 50%;
+    max-height: 120px;
+    margin-top: 70px;
  }
+
+.welcome-header h1 {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 5px;
+}
  
 .content-feed {
 	left: 50%;
@@ -265,6 +295,7 @@ header a {
 	text-align: center;
 	transform: translateX(-50%);
 	width: 50%;
+    height: 700px;
  }
  
 .filter-feed {
@@ -292,7 +323,7 @@ header a {
 	background-image: url("../Images/default_background.jpg");
 	background-size: cover;
 	height: 500px;
-	margin: 30px auto;
+	margin: 100px auto 30px auto;
 	width: 100%;
  }
  
@@ -351,7 +382,7 @@ header a {
 /*End Profile Page Styling*/
 /*Friends Page Styling*/
 .search-friends {
-	margin: 30px auto;
+	margin: 90px auto 0 auto;
 	width: 50%;
  }
  
@@ -370,6 +401,7 @@ header a {
 	margin: 0 auto;
 	position: relative;
 	width: 50%;
+    min-width: 475px;
  }
  
 	.friends-holder header {text-align: center;}
@@ -384,6 +416,10 @@ header a {
 	.friend-overview h4 {
 		display: inline-block;
 		margin: 15px 0 10px 10px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        max-width: 300px;
 	 }
  
 	.friend-overview input {
@@ -478,6 +514,7 @@ footer {
 	position: static;
 	text-align: center;
 	width: 100%;
+    margin-top: 20px;
  }
  
 	footer p {
@@ -487,11 +524,4 @@ footer {
 		position: relative;
 		top: 25%;
 	 }
- 
-.fixed-footer {
-	bottom: 0;
-	position: fixed;
- }
- 
-	.fixed-footer p {top: 20%;}
 /*End Layout Styling*/

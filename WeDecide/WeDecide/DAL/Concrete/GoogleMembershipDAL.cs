@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 
 using WeDecide.DAL.Abstract;
+using WeDecide.Models.Concrete;
 
 namespace WeDecide.DAL.Concrete
 {
     public class GoogleMembershipDAL : IMembershipDAL
     {
-        public void AddUser(string Name, string id)
+        public void AddUser(string Name, string UserName, string id)
         {
             throw new NotImplementedException();
         }
@@ -18,7 +19,7 @@ namespace WeDecide.DAL.Concrete
             throw new NotImplementedException();
         }
 
-        public List<Models.Concrete.User> Search(string Search)
+        public List<Models.Concrete.User> Search(User currentUser, string Search)
         {
             throw new NotImplementedException();
         }
@@ -41,19 +42,16 @@ namespace WeDecide.DAL.Concrete
         }
 
 
-        public void MarkNotPending(int id)
+        public bool RemoveUser(string userId)
         {
             throw new NotImplementedException();
         }
 
-        public void AddNotification(Models.Concrete.User sender, Models.Concrete.User reciever, Models.Concrete.Notification.NotificationType t)
+
+        public IEnumerable<Models.Concrete.User> GetUsers()
         {
             throw new NotImplementedException();
         }
 
-        public List<Models.Concrete.Notification> GetNotifications(string userId)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

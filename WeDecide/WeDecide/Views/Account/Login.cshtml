@@ -32,7 +32,7 @@
                 </div>
                 <div class="form-group">
                     @Html.ValidationMessageFor(m => m.Password, "")
-                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", @id = "passwordField" })
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", @id = "passwordField"})
                 </div>
                 <div class="checkbox">
                     <label>
@@ -44,6 +44,11 @@
             }
             @Html.ActionLink("Register as a new user", "Register")
         </section>
+        <div class="external-logins">
+            <section id="socialLoginForm">
+                @Html.Partial("_ExternalLoginsListPartial", new { Action = "ExternalLogin", ReturnUrl = ViewBag.ReturnUrl })
+            </section>
+        </div>
         <div class="global-feed">
             <h2>See what you are missing.</h2>
             <div>

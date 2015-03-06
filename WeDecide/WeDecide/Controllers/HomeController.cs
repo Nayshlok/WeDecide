@@ -17,10 +17,15 @@ namespace WeDecide.Controllers
         private QuestionDbContext _Context;
         private IMembershipDAL Mdal;
 
-        public HomeController(QuestionDbContext context)
+        public HomeController(IMembershipDAL dal)
+        {
+            Mdal = dal;
+        }
+
+        public HomeController(QuestionDbContext context, IMembershipDAL Mdal)
         {
             _Context = context;
-            Mdal = new CustomMembershipDAL(context);
+            this.Mdal = Mdal;
         }
 
         //private IQuestionDAL _Context = new TestDal();
@@ -42,22 +47,17 @@ namespace WeDecide.Controllers
             return View(ivm);
         }
 
-        public ActionResult LandingPage()
-        {
-            //Take the user to the landing page if not logged in our if not yet registered.
-            return View();
-        }
-
         public ActionResult Testpage()
         {
             // Use a viewmodel that holds Question, its responses, and those user responses
             TestViewModel testVm = new TestViewModel();
 
             //User currentUser = Mdal.GetUser(User.Identity.GetUserId());
-            
-            //User user1 = Mdal.GetUserByName("test1@test.com");
-            //User user2 = Mdal.GetUserByName("test2@test.com");
-            //User user3 = Mdal.GetUserByName("test3@test.com");
+
+            //User user1 = Mdal.GetUserByName("Test1");
+            //User user2 = Mdal.GetUserByName("Test2");
+            //User user3 = Mdal.GetUserByName("Test3");
+            //User user4 = Mdal.GetUserByName("Test4");
 
             //Question question1 = new Question { User = user1, Text = "Question1", QuestionScope = Question.Scope.Friends, EndDate = new DateTime(2015, 3, 15) };
             //Response response1 = new Response { Question = question1, Text = "Response1Q1" };
@@ -100,23 +100,12 @@ namespace WeDecide.Controllers
 
             //_Context.SaveChanges();
 
-            //User newUser = new User { Id = User.Identity.GetUserId(), Name = "david" };
-            //_Context.Users.Add(newUser);
+            //user1.UserFriends.Add(user2);
+            //user1.UserFriends.Add(user4);
+            //user3.UserFriends.Add(user2);
+            //user2.UserFriends.Add(user1);
+            //user2.UserFriends.Add(user4);
             //_Context.SaveChanges();
-
-            //User current = Mdal.GetUser(User.Identity.GetUserId());
-            //Question toEnter = new Question { User = current, Text = "Should I?", QuestionScope = Question.Scope.Friends };
-            //_Context.Questions.Add(toEnter);
-            //_Context.SaveChanges();
-
-            //Question question = _Context.Questions.First();
-            //WeDecide.Models.Concrete.Response response1 = new WeDecide.Models.Concrete.Response { Question = question, Text = "yes" };
-            //WeDecide.Models.Concrete.Response response2 = new WeDecide.Models.Concrete.Response { Question = question, Text = "no" };
-            //_Context.Responses.Add(response1);
-            //_Context.Responses.Add(response2);
-            //_Context.SaveChanges();
-
-
 
             testVm.TheQuestion = _Context.Questions.First();
             //currentUser.Responses.Add(testVm.TheQuestion.Responses.First());

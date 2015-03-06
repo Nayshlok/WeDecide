@@ -60,7 +60,7 @@ namespace WeDecide.Controllers
             {
                 case Question.Scope.Global: InScope = true; break;
 
-                //case Question.Scope.Friends: InScope = Mdal.GetFriends(question.UserId).Where(x => x.Id.Equals(User.Identity.GetUserId())).Count() > 0; break;
+                case Question.Scope.Friends: InScope = Mdal.GetFriends(question.UserId).Where(x => x.Id.Equals(User.Identity.GetUserId())).Count() > 0; break;
 
                 //Don't know how to do local yet
                 //case Question.Scope.Local: InScope;
