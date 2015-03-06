@@ -23,11 +23,5 @@ namespace WeDecide.DAL.Abstract
 
         //May be another way to do this
         void AddFriend(string userId, string friendId);
-
-        bool RemoveUser(string userId);
-
-        bool SetRole(string userId, UserRoles role);
-
-        void RemoveRoles(string userId);
     }
 }
