@@ -1,0 +1,53 @@
+﻿
+@using WeDecide.ViewModels
+@using WeDecide.Models.Concrete
+@using Microsoft.AspNet.Identity.EntityFramework
+@model AdminViewModel
+
+@if(Model != null){
+    <table>
+        <tr>
+            <td>Name</td>
+            <td>Email</td>
+            <td>Responses</td>
+            <td>CurrentRole</td>
+            <td>Role</td>
+        </tr>
+        @foreach(User u in Model.Users){
+            <tr>
+                <td>@u.Name</td>
+                <td>
+                    @{var tempUser = Model.IdUsers.SingleOrDefault(x => x.Id == u.Id);}
+                    @if(tempUser !=null){
+                        @tempUser.Email
+                }
+                </td>
+                <td>@u.Responses.Count</td>
+                <td>
+                    @if (tempUser != null)
+                    {
+                        var roleTask = Model.userManager.GetRolesAsync(u.Id);
+                        var userroles = roleTask.GetAwaiter().GetResult();
+                        foreach (string r in userroles)
+                        {
+                            @r
+                        }
+                    }
+                </td>
+                <td>
+                    @using (Html.BeginForm("ChangeRole", "Admin")){
+                        @Html.DropDownList("Role", new SelectList(Enum.GetValues(typeof(UserRoles))))
+                        @Html.Hidden("userId", u.Id)
+                        <input type="submit" value="Update Role" />
+                }
+                </td>
+                <td>
+                    @using (Html.BeginForm("RemoveUser", "Admin")){
+                        @Html.Hidden("userId", u.Id)
+                        <input type="submit" value="Delete" />
+                }
+                </td>
+            </tr>
+    }
+    </table>
+}

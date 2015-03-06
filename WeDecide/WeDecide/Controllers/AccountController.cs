@@ -12,6 +12,7 @@ using WeDecide.ViewModels;
 using WeDecide.Models.Concrete;
 using WeDecide.DAL.Abstract;
 using WeDecide.DAL.Concrete;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace WeDecide.Controllers
 {
@@ -21,6 +22,8 @@ namespace WeDecide.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private IMembershipDAL _membershipDAL;
+        private ApplicationRoleManager _roleManager;
+
 
         public IMembershipDAL MembershipDAL
         {
@@ -28,15 +31,17 @@ namespace WeDecide.Controllers
             set { _membershipDAL = value; }
         }
 
-        public AccountController(QuestionDbContext context)
+        public AccountController(IMembershipDAL dal)
         {
-            MembershipDAL = new CustomMembershipDAL(context);
+            MembershipDAL = dal;
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IMembershipDAL membership)
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, ApplicationRoleManager roleManager, IMembershipDAL membership)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            MembershipDAL = membership;
+            RoleManager = roleManager;
         }
 
         public ApplicationSignInManager SignInManager
@@ -61,6 +66,15 @@ namespace WeDecide.Controllers
             {
                 _userManager = value;
             }
+        }
+
+        public ApplicationRoleManager RoleManager
+        {
+            get
+            {
+                return this._roleManager ?? HttpContext.GetOwinContext().Get<ApplicationRoleManager>();
+            }
+            private set { this._roleManager = value; }
         }
 
         [AllowAnonymous]
@@ -115,6 +129,7 @@ namespace WeDecide.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    AddToRole(user, UserRoles.User);
                     MembershipDAL.AddUser(model.UserName, model.Email, user.Id);
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
@@ -270,7 +285,16 @@ namespace WeDecide.Controllers
                 LoginProvider = provider;
                 RedirectUri = redirectUri;
                 UserId = userId;
+        }
+        private void AddToRole(ApplicationUser user, UserRoles role)
+        {
+            string roleName = Enum.GetName(typeof(UserRoles), role);
+            if (!RoleManager.RoleExists(roleName))
+            {
+                RoleManager.Create(new IdentityRole(roleName));
             }
+            UserManager.AddToRole(user.Id, roleName);
+        }
 
             public string LoginProvider { get; set; }
             public string RedirectUri { get; set; }

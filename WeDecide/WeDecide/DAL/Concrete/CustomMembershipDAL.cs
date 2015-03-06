@@ -57,5 +57,24 @@ namespace WeDecide.DAL.Concrete
             GetUser(userId).FriendsOfUser.Add(GetUser(friendId));
             db.SaveChanges();
         }
+
+
+        public bool RemoveUser(string userId)
+        {
+            User toRemove = db.Users.SingleOrDefault(x => x.Id == userId);
+            if (toRemove != null)
+            {
+                var responses = db.Responses.Where(x => x.Users.Contains(toRemove));
+                foreach (Response r in responses)
+                {
+                }
+            }
+            return false;
+        }
+
+        public IEnumerable<User> GetUsers()
+        {
+            return db.Users.ToList();
+        }
     }
 }

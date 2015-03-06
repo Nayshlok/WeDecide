@@ -11,6 +11,8 @@ namespace WeDecide.DAL.Abstract
     {
         void AddUser(string Name, string UserName, string id);
 
+        IEnumerable<User> GetUsers();
+
         User GetUser(string Id);
 
         User GetUserByName(string name);
