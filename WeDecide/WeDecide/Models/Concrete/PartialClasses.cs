@@ -60,4 +60,13 @@ namespace WeDecide.Models.Concrete
         {
         }
     }
+
+    public partial class Notification
+    {
+        public enum NotificationType
+        {
+            FriendRequest,
+            QuestionTimeout
+        }
+    }
 }

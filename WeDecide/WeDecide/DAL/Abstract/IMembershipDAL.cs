@@ -19,7 +19,14 @@ namespace WeDecide.DAL.Abstract
 
         List<User> GetFriends(string Id);
 
-        //May be another way to do this
         void AddFriend(string userId, string friendId);
+
+        void MarkNotPending(int id);
+
+        void AddNotification(User sender, User reciever, Notification.NotificationType t);
+
+        List<Notification> GetNotifications(string userId);
+
+
     }
 }

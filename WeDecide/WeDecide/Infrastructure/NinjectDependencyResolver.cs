@@ -9,6 +9,7 @@ using WeDecide.DAL.Abstract;
 using WeDecide.DAL.Concrete;
 using WeDecide.Models.Concrete;
 using WeDecide.Controllers;
+using WeDecide.Hubs;
 
 namespace WeDecide.Infrastructure
 {
@@ -44,7 +45,6 @@ namespace WeDecide.Infrastructure
             kernel.Bind<QuestionDbContext>().ToMethod<QuestionDbContext>(
                 (context) => { return QuestionDbContext.Create(); }
             );
-
             kernel.Bind<IQuestionDAL>().To<TestDal>();
             //kernel.Bind<IMembershipDAL>().To<CustomMembershipDAL>();
         }

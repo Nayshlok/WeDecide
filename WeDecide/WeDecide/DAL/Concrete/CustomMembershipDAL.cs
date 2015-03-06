@@ -56,5 +56,31 @@ namespace WeDecide.DAL.Concrete
             GetUser(userId).FriendsOfUser.Add(GetUser(friendId));
             db.SaveChanges();
         }
+
+        public void MarkNotPending(int id)
+        {
+            var result = db.Notifications.Where(n => n.Id == id).FirstOrDefault();
+            result.IsPending = false;
+            db.SaveChanges();
+        }
+
+        public void AddNotification(User sender, User reciever, Notification.NotificationType t)
+        {
+
+            db.Notifications.Add(new Notification()
+            {
+                IsPending = true,
+                Message = sender.Name.ToString() + " would like to add you as a friend.",
+                ReceivingUser = reciever,
+                SendingUser = sender
+            });
+            db.SaveChanges();
+        }
+
+        public List<Notification> GetNotifications(string userId)
+        {
+            var result = db.Notifications.Where(n => n.IsPending == true);
+            return result.ToList<Notification>();
+        }
     }
 }
