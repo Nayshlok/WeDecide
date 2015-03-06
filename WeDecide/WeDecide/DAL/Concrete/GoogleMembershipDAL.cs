@@ -53,5 +53,21 @@ namespace WeDecide.DAL.Concrete
             throw new NotImplementedException();
         }
 
+
+
+        public void MarkNotPending(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddNotification(User sender, User reciever, Notification.NotificationType t)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Notification> GetNotifications(string userId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

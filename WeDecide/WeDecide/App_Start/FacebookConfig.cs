@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNet.Facebook;
+using Microsoft.AspNet.Facebook.Authorization;
+using System;
 using System.Web.Mvc;
-using Microsoft.AspNet.Mvc.Facebook;
-using Microsoft.AspNet.Mvc.Facebook.Authorization;
 
 namespace WeDecide
 {
