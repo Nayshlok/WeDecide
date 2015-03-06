@@ -40,5 +40,18 @@ namespace WeDecide.DAL.Concrete
         {
             throw new NotImplementedException();
         }
+
+
+        public bool RemoveUser(string userId)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public IEnumerable<Models.Concrete.User> GetUsers()
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }
