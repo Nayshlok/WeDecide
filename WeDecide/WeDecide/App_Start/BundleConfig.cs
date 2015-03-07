@@ -28,7 +28,8 @@ namespace WeDecide
                 //"~/Scripts/angular.min.js",
                 "~/Scripts/app/questionsViaAngular.js"));
 
-            bundles.Add(new ScriptBundle("~/Scripts/Feed").Include(
+            bundles.Add(new ScriptBundle("~/Scripts/Globals").Include(
+                "~/Scripts/app/functions.js",
                 "~/Scripts/app/GlobalFeed.js"));
         }
     }

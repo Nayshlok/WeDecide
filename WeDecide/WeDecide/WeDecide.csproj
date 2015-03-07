@@ -116,9 +116,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.7.0.1-beta1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Ninject.3.2.3-unstable-012\lib\net45-full\Ninject.dll</HintPath>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
@@ -247,6 +246,7 @@
     <Content Include="Scripts\app\EditProfile.js" />
     <Content Include="Scripts\app\FriendRequest.js" />
     <Content Include="Scripts\app\Friends.js" />
+    <Content Include="Scripts\app\functions.js" />
     <Content Include="Scripts\app\GlobalFeed.js" />
     <Content Include="Scripts\app\LiveQuestion.js" />
     <Content Include="Scripts\app\MakeQuestion.js" />
