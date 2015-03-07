@@ -85,7 +85,14 @@ namespace WeDecide.DAL.Concrete
 
         public void AddNotification(User sender, User reciever, Notification.NotificationType t)
         {
-            throw new NotImplementedException();
+            db.Notifications.Add(new Notification(){
+                SendingUser = sender,
+                ReceivingUser = reciever,
+                Type = (int)t,
+                IsPending = true,
+                Message = sender.Name + " would like to add you as a friend."
+        });
+            db.SaveChanges();
         }
 
         public List<Notification> GetNotifications(string userId)
