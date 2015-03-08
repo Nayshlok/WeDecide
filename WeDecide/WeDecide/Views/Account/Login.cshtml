@@ -46,7 +46,7 @@
         </section>
         <div class="external-logins">
             <section id="socialLoginForm">
-                @Html.Partial("_ExternalLoginsListPartial", new { Action = "ExternalLogin", ReturnUrl = ViewBag.ReturnUrl })
+                @Html.Partial("_ExternalLoginsListPartial", new WeDecide.ViewModels.ExternalLoginViewModel { Action = "ExternalLogin", ReturnUrl = ViewBag.ReturnUrl })
             </section>
         </div>
         <div class="global-feed">
