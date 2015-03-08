@@ -13,6 +13,7 @@ using WeDecide.Models.Concrete;
 using WeDecide.DAL.Abstract;
 using WeDecide.DAL.Concrete;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Facebook;
 
 namespace WeDecide.Controllers
 {
@@ -213,6 +214,8 @@ namespace WeDecide.Controllers
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);
                     if (result.Succeeded)
                     {
+                        MembershipDAL.AddUser(user.UserName, user.Email, user.Id);
+                        AddFriendsFromExternalLogin(info, user);
                         await SignInAsync(user, isPersistent: false);
                         return RedirectToLocal(returnUrl);
                     }
@@ -222,6 +225,19 @@ namespace WeDecide.Controllers
 
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
+        }
+
+        private void AddFriendsFromExternalLogin(ExternalLoginInfo info, ApplicationUser user)
+        {
+            //If facebook
+            if("facebook".Equals(info.Login.LoginProvider.ToLower()))
+            {
+                //I hope one of these works
+                FacebookClient fb = new FacebookClient(UserManager.GenerateUserToken("", user.Id));
+                //FacebookClient fb = new FacebookClient(Session["AccessToken"].ToString());
+
+                dynamic friends = fb.Get("me/friends");
+            }
         }
 
         [HttpPost]
