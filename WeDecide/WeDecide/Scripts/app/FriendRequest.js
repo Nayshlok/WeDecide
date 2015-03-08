@@ -5,6 +5,7 @@ $.connection.hub.start()
     .done(function () {
         console.log("connected, " + $.connection.hub.id);
         $(".btn").click(function (event) {
+            console.log("Id");
             console.log($(this).attr('id'));
             console.log($.connection.hub.id);
             var id = $(this).attr('id');
