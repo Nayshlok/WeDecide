@@ -6,6 +6,7 @@
  
 html {
     background-color: #FCFFF5;
+    min-width: 900px;
 }
 
 body {
