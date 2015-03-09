@@ -19,6 +19,7 @@ namespace WeDecide.Controllers
         private IMembershipDAL _membershipDAL;
         private ApplicationRoleManager _roleManager;
 
+        public IQuestionDAL QuestionDAL { get; set; }
 
         public IMembershipDAL MembershipDAL
         {
@@ -26,16 +27,20 @@ namespace WeDecide.Controllers
             set { _membershipDAL = value; }
         }
 
-        public AdminController(IMembershipDAL dal)
+
+
+        public AdminController(IMembershipDAL dal, IQuestionDAL qdal)
         {
             MembershipDAL = dal;
+            QuestionDAL = qdal;
         }
 
-        public AdminController(ApplicationUserManager userManager, ApplicationRoleManager roleManager, IMembershipDAL membership)
+        public AdminController(ApplicationUserManager userManager, ApplicationRoleManager roleManager, IMembershipDAL membership, IQuestionDAL qdal)
         {
             UserManager = userManager;
             MembershipDAL = membership;
             RoleManager = roleManager;
+            QuestionDAL = qdal;
         }
 
         public ApplicationUserManager UserManager
@@ -63,13 +68,14 @@ namespace WeDecide.Controllers
         public ActionResult UserAdmin()
         {
             AdminViewModel model = new AdminViewModel(UserManager) { Users = MembershipDAL.GetUsers() };
-            return View("~/Views/Account/AdminUsers.cshtml", model);
+            return View("AdminUsers", model);
         }
 
         public ActionResult RemoveUser()
         {
             string id = Request.Form["userId"];
-            //Remove User
+            MembershipDAL.DeleteUser(id);
+
             return new RedirectResult("UserAdmin");
         }
 
@@ -96,6 +102,28 @@ namespace WeDecide.Controllers
             {
                 UserManager.RemoveFromRole(userId, RoleManager.Roles.Single(x => x.Id == role.RoleId).Name);
             }
+        }
+
+        public ActionResult QuestionAdmin()
+        {
+            AdminViewModel model = new AdminViewModel(null) {Questions = QuestionDAL.GetAll(x => !x.IsDeleted)};
+            return View(model);
+        }
+
+        public ActionResult RemoveQuestion()
+        {
+            int id;
+            int.TryParse(Request.Form["questionId"], out id);
+            QuestionDAL.Delete(id);
+            return new RedirectResult("QuestionAdmin");
+        }
+
+        public ActionResult RemoveResponse()
+        {
+            int id;
+            int.TryParse(Request.Form["responseId"], out id);
+            QuestionDAL.RemoveResponse(id);
+            return new RedirectResult("QuestionAdmin");
         }
     }
 }

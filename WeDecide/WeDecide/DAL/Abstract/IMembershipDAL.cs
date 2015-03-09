@@ -30,5 +30,7 @@ namespace WeDecide.DAL.Abstract
         List<Notification> GetNotifications(string userId);
 
 
+
+        void DeleteUser(string id);
     }
 }

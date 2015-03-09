@@ -50,5 +50,16 @@ namespace WeDecide.DAL.Concrete
 
             return new List<Question> { question };
         }
+
+
+        public void AddResponse(int QuestionId, Response response)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveResponse(int responseId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -25,6 +25,7 @@ namespace WeDecide.Models.Concrete
         public string UserId { get; set; }
         public int QScope { get; set; }
         public System.DateTime EndDate { get; set; }
+        public bool IsDeleted { get; set; }
     
         public virtual User User { get; set; }
         public virtual ICollection<Response> Responses { get; set; }

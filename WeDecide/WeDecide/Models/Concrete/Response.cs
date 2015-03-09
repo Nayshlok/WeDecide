@@ -22,6 +22,7 @@ namespace WeDecide.Models.Concrete
         public int Id { get; set; }
         public string Text { get; set; }
         public int QuestionId { get; set; }
+        public bool IsDeleted { get; set; }
     
         public virtual Question Question { get; set; }
         public virtual ICollection<User> Users { get; set; }

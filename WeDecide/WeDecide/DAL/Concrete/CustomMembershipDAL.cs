@@ -21,20 +21,20 @@ namespace WeDecide.DAL.Concrete
 
         public void AddUser(string name, string email, string id)
         {
-            User newUser = new User { Name = name, Email = email,  Id = id };
+            User newUser = new User { Name = name,  Id = id };
             db.Users.Add(newUser);
             db.SaveChanges();
         }
 
         public Models.Concrete.User GetUser(string Id)
         {
-            var user = db.Users.Where(x => x.Id == Id).FirstOrDefault();
+            var user = db.Users.Where(x => x.Id == Id && !x.IsDeleted).FirstOrDefault();
             return user;
         }
 
         public User GetUserByName(string name)
         {
-            var user = db.Users.FirstOrDefault(x => x.Name == name);
+            var user = db.Users.FirstOrDefault(x => x.Name == name && !x.IsDeleted);
             return user;
         }
 
@@ -98,6 +98,14 @@ namespace WeDecide.DAL.Concrete
         public List<Notification> GetNotifications(string userId)
         {
             throw new NotImplementedException();
+        }
+
+
+        public void DeleteUser(string id)
+        {
+            var target = GetUser(id);
+            target.IsDeleted = true;
+            db.SaveChanges();
         }
     }
 }

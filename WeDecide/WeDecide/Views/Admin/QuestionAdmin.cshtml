@@ -1,0 +1,49 @@
+﻿Q
+@{
+    ViewBag.Title = "QuestionAdmin";
+}
+@using WeDecide.ViewModels
+@using WeDecide.Models.Concrete
+@using Microsoft.AspNet.Identity.EntityFramework
+@model AdminViewModel
+
+@if (Model != null)
+{
+    <table>
+        <tr>
+            <td>Id</td>
+            <td>Text</td>
+        </tr>
+        @foreach (Question q in Model.Questions)
+        {
+            <tr>
+                <td>@q.Id</td>
+                <td>
+                    @q.Text
+                </td>
+                <td>
+                    @using (Html.BeginForm("RemoveQuestion", "Admin"))
+                    {
+                        @Html.Hidden("questionId", q.Id)
+                        <input type="submit" value="Delete" />
+                    }
+                </td>
+            </tr>
+            var activeResponses = q.Responses.Where(x => !x.IsDeleted);
+            foreach (Response r in activeResponses)
+            {
+                <tr>
+                    <td></td>
+                    <td>@r.Text</td>
+                    <td>
+                        @using (Html.BeginForm("RemoveResponse", "Admin"))
+                        {
+                            @Html.Hidden("responseId", r.Id)
+                            <input type="submit" value="Delete" />
+                        }
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+}

@@ -23,7 +23,8 @@ namespace WeDecide.ViewModels
         {
             userManager = manager;
             RoleList = CreateRoleList();
-            IdUsers = manager.Users;
+            if(manager != null)
+                IdUsers = manager.Users;
         }
 
         public SelectList CreateRoleList()
