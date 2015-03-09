@@ -14,27 +14,28 @@
     <div>
         @Html.Partial("_MakeQuestionPartial", new MakeQuestionViewModel { })
     </div>
-    <div class="filter-feed shadowed">
-        <div class="checkbox">
-            <label>
-                <input type="checkbox"> Friends
-            </label>
-        </div>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox"> Local
-            </label>
-        </div>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox"> Global
-            </label>
-        </div>
-    </div>
     <div class="add-question">
         <button id="btnNewQuestion" type="button" class="bottom-btn btn-primary btn-lg btn-block">Create New Question</button>
     </div>
-    <section class="content-feed shadowed"></section>
+    <section class="content-feed shadowed">
+        <div class="filter-feed">
+            <div class="checkbox-inline">
+                <label>
+                    <input type="checkbox"> Friends
+                </label>
+            </div>
+            <div class="checkbox-inline">
+                <label>
+                    <input type="checkbox"> Local
+                </label>
+            </div>
+            <div class="checkbox-inline">
+                <label>
+                    <input type="checkbox"> Global
+                </label>
+            </div>
+        </div>
+    </section>
 
     @Scripts.Render("~/Scripts/MakeQuestion")
 </section>

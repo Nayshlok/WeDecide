@@ -6,14 +6,14 @@
  
 html {
     background-color: #FCFFF5;
-    min-width: 900px;
+    min-width: 400px;
 }
 
 body {
 	margin: 0 auto;
 	width: 100%;
-    min-width: 900px;
     background-color: #FCFFF5;
+    min-width: 400px;
  }
 
 .main {
@@ -31,6 +31,7 @@ header {
     position: fixed;
     top: 0;
     z-index: 1000;
+    min-width: 400px;
 }
  
 	header h2 {
@@ -143,26 +144,34 @@ header a {
     z-index: -1;
 }
 
-.login-container {
-    width: 800px;
-    height: 450px;
-	left: 50%;
-	position: fixed;
-	text-align: center;
-	top: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 100;
-}
+@media only screen and (min-width: 800px) {
+    .login-container {
+        width: 800px;
+        height: 450px;
+	    left: 50%;
+	    position: fixed;
+	    text-align: center;
+	    top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 100;
+    }   
+    
+    .login-box {
+	    font-family: 'Arial', sans-serif;
+	    width: 250px;
+        display: inline-block;
+        float: right;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+    }
 
-.login-box {
-	font-family: 'Arial', sans-serif;
-	width: 250px;
-    display: inline-block;
-    float: right;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
- }
+    .global-feed {
+        display: inline-block;
+        float: left;
+        text-align: center;
+    }
+}
 
 .login-box label {
     margin: 0;
@@ -190,12 +199,6 @@ header a {
         color: #FFF;
     }
 
-.global-feed {
-    display: inline-block;
-    float: left;
-    text-align: center;
-}
-
 .global-feed header {
     text-align: center;
 }
@@ -213,6 +216,32 @@ header a {
     background-color: #FFF;
     overflow-y: auto;
     opacity: 0.75;
+}
+
+@media only screen and (max-width: 800px) {
+    .login-container {
+	    left: 50%;
+	    position: fixed;
+	    text-align: center;
+	    top: 5%;
+        transform: translateX(-50%);
+        z-index: 100;
+    }
+
+    .login-box {
+	    font-family: 'Arial', sans-serif;
+	    width: 250px;
+        display: block;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        margin: 200px auto 0 auto;
+    }
+
+    .global-feed {
+        display: block;
+        text-align: center;
+    }
 }
 
 /*End Landing Page Styling*/
@@ -235,13 +264,77 @@ header a {
 	 }
  
 /*Home Page styling*/
-.quick-profile-view {
-	height: 500px;
-	left: 2%;
-	position: fixed;
-	top: 10%;
-	width: 175px;
- }
+@media only screen and (min-width: 800px) {
+    .quick-profile-view {
+	    height: 500px;
+	    left: 2%;
+	    position: fixed;
+	    top: 10%;
+	    width: 175px;
+    }
+
+    .welcome-header {
+	    background-color: #FCFFF5;
+	    color: #193441;
+	    font-family: 'Raleway', sans-serif;
+	    font-size: 32px;
+	    left: 50%;
+	    position: relative;
+	    text-align: center;
+	    top: 30px;
+	    transform: translateX(-50%);
+	    width: 50%;
+        max-height: 120px;
+        margin-top: 70px;
+    }
+
+    .content-feed {
+	    left: 50%;
+	    position: relative;
+	    text-align: center;
+	    transform: translateX(-50%);
+	    width: 50%;
+        height: 700px;
+        margin-bottom: 40px;
+    }
+ 
+    .add-question {
+        margin: 40px auto;
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .quick-profile-view {
+	    display: none;
+    }
+    
+    .welcome-header {
+	    background-color: #FCFFF5;
+	    color: #193441;
+	    font-family: 'Raleway', sans-serif;
+	    font-size: 32px;
+	    position: relative;
+	    text-align: center;
+	    top: 30px;
+	    width: 90%;
+        max-height: 120px;
+        margin: 70px auto 0 auto;
+    }
+
+    .content-feed {
+	    position: relative;
+	    text-align: center;
+	    width: 90%;
+        height: 700px;
+        margin: 0 auto 40px auto;
+    }
+ 
+    .add-question {
+        margin: 40px auto;
+        width: 90%;
+    }  
+}
  
 .profile_pic {
 	background-image: url("../Images/placeholder-headshot.jpg");
@@ -277,21 +370,6 @@ header a {
 	padding: 0;
 	text-align: center;
  }
- 
-.welcome-header {
-	background-color: #FCFFF5;
-	color: #193441;
-	font-family: 'Raleway', sans-serif;
-	font-size: 32px;
-	left: 50%;
-	position: relative;
-	text-align: center;
-	top: 30px;
-	transform: translateX(-50%);
-	width: 50%;
-    max-height: 120px;
-    margin-top: 70px;
- }
 
 .welcome-header h1 {
     text-overflow: ellipsis;
@@ -299,27 +377,15 @@ header a {
     white-space: nowrap;
     padding: 5px;
 }
- 
-.content-feed {
-	left: 50%;
-	position: relative;
-	text-align: center;
-	transform: translateX(-50%);
-	width: 50%;
-    height: 700px;
- }
- 
+
 .filter-feed {
 	padding-left: 5px;
-	position: fixed;
-	left: 76%;
-	width: 75px;
- }
- 
-.add-question {
-    margin: 40px auto;
-    width: 50%;
-}
+	position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 0 auto;
+    text-align: center;
+   }
 
 .overflowdiv {
     height: 500px;
@@ -361,22 +427,42 @@ header a {
 		margin: 0 auto 15px auto;
 	 }
  
-.info-box-holder {
-	height: 275px;
-	margin: 0 auto;
-	text-align: center;
-	width: 95%;
- }
+@media only screen and (min-width: 800px) {
+    .info-box-holder {
+	    height: 275px;
+	    margin: 0 auto;
+	    text-align: center;
+	    width: 95%;
+    }
  
-.info-box {
-	background-color: #FCFFF5;
-	color: #FCFFF5;
-	display: inline-block;
-	height: 250px;
-	margin: 10px 5px 10px 5px;
-	overflow-y: auto;
-	width: 45%;
- }
+    .info-box {
+	    background-color: #FCFFF5;
+	    color: #FCFFF5;
+	    display: inline-block;
+	    height: 250px;
+	    margin: 10px 5px 10px 5px;
+	    overflow-y: auto;
+	    width: 45%;
+    }        
+}
+
+@media only screen and (max-width: 800px) {
+    .info-box-holder {
+	    margin: 0 auto 40px auto;
+	    text-align: center;
+	    width: 95%;
+    }
+ 
+    .info-box {
+	    background-color: #FCFFF5;
+	    color: #FCFFF5;
+	    display: block;
+	    height: 250px;
+	    margin: 10px auto 20px auto;
+	    overflow-y: auto;
+	    width: 90%;
+    }
+}
  
 	.info-box div {
 		color: #000;
@@ -393,10 +479,34 @@ header a {
  
 /*End Profile Page Styling*/
 /*Friends Page Styling*/
-.search-friends {
-	margin: 90px auto 0 auto;
-	width: 50%;
- }
+@media only screen and (min-width: 800px) {
+    .search-friends {
+	    margin: 90px auto 0 auto;
+	    width: 50%;
+        text-align: center;
+    }
+ 
+	.search-friends header {height: 30px;}
+ 
+		.search-friends header h2 {
+            font-size: 18px;
+            position: relative;
+            top: 0;
+		}
+
+    .friends-holder {
+	    height: 700px;
+	    position: relative;
+	    width: 50%;
+        margin: 0 auto 40px auto;
+     }    
+}
+
+@media only screen and (max-width: 800px) {
+    .search-friends {
+	    margin: 90px auto 0 auto;
+	    width: 90%;
+    }
  
 	.search-friends header {height: 30px;}
  
@@ -408,13 +518,13 @@ header a {
  
 	.search-friends div {padding: 10px 20px 10px 20px;}
  
-.friends-holder {
-	height: 700px;
-	margin: 0 auto;
-	position: relative;
-	width: 50%;
-    min-width: 475px;
- }
+    .friends-holder {
+	    height: 700px;
+	    position: relative;
+	    width: 90%;
+        margin: 0 auto 40px auto;
+     }    
+}
  
 	.friends-holder header {text-align: center;}
  
