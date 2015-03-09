@@ -10,7 +10,7 @@ namespace WeDecide.Models.Concrete
         {
             Friends,
             Local,
-            Regional,
+            //Regional, // Depricated
             Global
         }
 
