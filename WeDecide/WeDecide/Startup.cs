@@ -4,7 +4,6 @@ using Owin;
 using WeDecide.Models.Concrete;
 using WeDecide.Hubs;
 using WeDecide.DAL.Concrete;
-using WeDecide.Models.Concrete;
 
 [assembly: OwinStartupAttribute(typeof(WeDecide.Startup))]
 namespace WeDecide

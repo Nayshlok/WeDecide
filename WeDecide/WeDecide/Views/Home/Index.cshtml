@@ -15,49 +15,29 @@
     <div>
         @Html.Partial("_MakeQuestionPartial", new MakeQuestionViewModel { })
     </div>
-    <section ng-app="feedApp">
-        <div ng-controller="HomePageCtrl">
-            <div class="filter-feed shadowed">
-                <div class="checkbox">
-                    <label>
+    <div class="add-question">
+        <button id="btnNewQuestion" type="button" class="bottom-btn btn-primary btn-lg btn-block">Create New Question</button>
+    </div>
+    <section class="content-feed shadowed">
+        <div class="filter-feed">
+            <div class="checkbox-inline">
+            <label>
                         <input type="checkbox" id="checkbox_Friends"> Friends
-                    </label>
-                </div>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" id="checkbox_Local"> Local
-                    </label>
-                </div>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" id="checkbox_Global"> Global
-                    </label>
-                </div>
-            </div>
-            <div class="add-question">
-                <button id="btnNewQuestion" type="button" class="bottom-btn btn-primary btn-lg btn-block">Create New Question</button>
-            </div>
-
-            <section class="content-feed shadowed">
-                <div ng-repeat="q in questions">
-                    <a href="Users/{{q.Id}}">Answer this question</a> <!--FIXME: is this route even a thing?-->
-                    <ul>
-                        <li>
-                            {{q.QuestionText}}
-                        </li>
-                        <li>
-                            Active: {{q.IsActive}}
-                        </li>
-                        <li>
-                            <label>Ends: {{q.EndTime}}</label>
-                        </li>
-                    </ul>
-                    @*<label>{{q.QuestionText}}</label>
-                    <label>Active: {{q.IsActive}}</label>*@
-                </div>
-            </section>
+            </label>
         </div>
-        
+            <div class="checkbox-inline">
+            <label>
+                        <input type="checkbox" id="checkbox_Local"> Local
+            </label>
+        </div>
+            <div class="checkbox-inline">
+            <label>
+                        <input type="checkbox" id="checkbox_Global"> Global
+            </label>
+        </div>
+    </div>
+    <section class="content-feed shadowed"></section>
+
     </section>
     @Scripts.Render("~/Scripts/Globals")
     @Scripts.Render("~/Scripts/MakeQuestion")

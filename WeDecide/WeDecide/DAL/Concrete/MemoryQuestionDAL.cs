@@ -79,5 +79,16 @@ namespace WeDecide.DAL.Concrete
         }
 
         #endregion
+
+
+        public void AddResponse(int QuestionId, Response response)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveResponse(int responseId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

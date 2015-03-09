@@ -30,15 +30,14 @@ namespace WeDecide.Hubs
             string currentId = HttpContext.Current.User.Identity.GetUserId();
             User sender = MembershipDAL.GetUser(currentId);
             User reciever = MembershipDAL.GetUserByName(recieverId);
-            //write request to database
             MembershipDAL.AddNotification(sender, reciever, Notification.NotificationType.FriendRequest);
             //notify reciever
-            Clients.User(reciever.Id).notify();
+            Clients.User(reciever.Id).addNotification();
         }
 
         public void PostTimeUp()
         {
-            
+            throw new NotImplementedException();
         }
     }
 }

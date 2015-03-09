@@ -1,7 +1,11 @@
 ﻿<section id="notificationPanel" class="notification-panel bottom-shadow">
-    <h3>Notifications</h3>
+    <h3 class="notifications">Notifications</h3>
     <section class="notification bottom-shadow">
         <h4>User Name</h4>
         <p>The Notification</p>
     </section>
 </section>
+<script src="~/scripts/jquery-2.1.3.min.js"></script>
+@Scripts.Render("~/Scripts/jquery.signalR-2.2.0.min.js");
+@Scripts.Render("~/signalr/hubs");
+@Scripts.Render("~/Scripts/app/FriendRequest.js");

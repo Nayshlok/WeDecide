@@ -34,6 +34,7 @@
           <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="QScope" Type="int" Nullable="false" />
           <Property Name="EndDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Response">
           <Key>
@@ -42,6 +43,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Text" Type="text" Nullable="false" />
           <Property Name="QuestionId" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -49,6 +51,7 @@
           </Key>
           <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="UserResponse">
           <Key>
@@ -210,6 +213,7 @@
           <NavigationProperty Name="Responses" Relationship="Self.FK_Response_Questions" FromRole="Question" ToRole="Response" />
           <Property Name="QScope" Type="Int32" Nullable="false" />
           <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Response">
           <Key>
@@ -220,6 +224,7 @@
           <Property Name="QuestionId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Question" Relationship="Self.FK_Response_Questions" FromRole="Response" ToRole="Question" />
           <NavigationProperty Name="Users" Relationship="Self.UserResponse" FromRole="Response" ToRole="User" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -233,6 +238,7 @@
           <NavigationProperty Name="FriendsOfUser" Relationship="QuestionDbModel.Friend" FromRole="User1" ToRole="User" />
           <NavigationProperty Name="NotificationsReceived" Relationship="QuestionDbModel.FK_Notification_ReceiveUser" FromRole="User" ToRole="Notification" />
           <NavigationProperty Name="NotificationsSent" Relationship="QuestionDbModel.FK_Notification_SenderUser" FromRole="User" ToRole="Notification" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           </EntityType>
         <Association Name="FK_Questions_Users">
           <End Role="User" Type="Self.User" Multiplicity="1" />
@@ -342,6 +348,7 @@
           <EntitySetMapping Name="Questions">
             <EntityTypeMapping TypeName="QuestionDbModel.Question">
               <MappingFragment StoreEntitySet="Question">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="EndDate" ColumnName="EndDate" />
                 <ScalarProperty Name="QScope" ColumnName="QScope" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -354,6 +361,7 @@
           <EntitySetMapping Name="Responses">
             <EntityTypeMapping TypeName="QuestionDbModel.Response">
               <MappingFragment StoreEntitySet="Response">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Text" ColumnName="Text" />
                 <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
@@ -363,6 +371,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="QuestionDbModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
