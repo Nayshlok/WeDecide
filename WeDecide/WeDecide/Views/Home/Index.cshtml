@@ -6,6 +6,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@Scripts.Render("~/Scripts/Angular")
 <section class="home-page">
     @Html.Partial("_QuickProfilePartial", @Model.User)
     <section class="welcome-header shadowed">
@@ -14,28 +15,31 @@
     <div>
         @Html.Partial("_MakeQuestionPartial", new MakeQuestionViewModel { })
     </div>
-    <div class="filter-feed shadowed">
-        <div class="checkbox">
-            <label>
-                <input type="checkbox"> Friends
-            </label>
-        </div>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox"> Local
-            </label>
-        </div>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox"> Global
-            </label>
-        </div>
-    </div>
     <div class="add-question">
         <button id="btnNewQuestion" type="button" class="bottom-btn btn-primary btn-lg btn-block">Create New Question</button>
     </div>
+    <section class="content-feed shadowed">
+        <div class="filter-feed">
+            <div class="checkbox-inline">
+            <label>
+                        <input type="checkbox" id="checkbox_Friends"> Friends
+            </label>
+        </div>
+            <div class="checkbox-inline">
+            <label>
+                        <input type="checkbox" id="checkbox_Local"> Local
+            </label>
+        </div>
+            <div class="checkbox-inline">
+            <label>
+                        <input type="checkbox" id="checkbox_Global"> Global
+            </label>
+        </div>
+    </div>
     <section class="content-feed shadowed"></section>
 
+    </section>
+    @Scripts.Render("~/Scripts/Globals")
     @Scripts.Render("~/Scripts/MakeQuestion")
 </section>
 

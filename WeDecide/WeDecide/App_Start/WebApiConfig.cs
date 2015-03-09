@@ -12,6 +12,12 @@ namespace WeDecide
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
+                name: "filterOnString",
+                routeTemplate: "api/{controller}/{action}/{filter}",
+                defaults: new { filter = "" }
+            );
+
+            config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }

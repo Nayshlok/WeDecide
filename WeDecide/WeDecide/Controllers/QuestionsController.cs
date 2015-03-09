@@ -12,11 +12,23 @@ using System.Web.Http.Description;
 using WeDecide.DAL.Abstract;
 using WeDecide.DAL.Concrete;
 using WeDecide.Models.Concrete;
+using Extension_Lab;
 
 namespace WeDecide.Controllers
 {
+    //[Authorize]
     public class QuestionsController : ApiController
     {
+
+        private Func<Question, QuestionDTO> questionToDTO =
+            q => new QuestionDTO()
+            {
+                Id = q.Id,
+                QuestionText = q.Text,
+                IsActive = q.IsActive,
+                EndTime = q.EndDate
+            };
+
         [Required]
         private IQuestionDAL _questionLayer;
 
@@ -28,13 +40,36 @@ namespace WeDecide.Controllers
         // GET: api/Questions
         public IEnumerable<QuestionDTO> GetQuestion()
         {
-            return _questionLayer.GetAll(x => true)
-                .Select(q => new QuestionDTO() {
-                    Id  = q.Id,
-                    QuestionText = q.Text,
-                    IsActive = q.IsActive,
-                    EndTime = q.EndDate
-                });
+            return GetFilteredQuestions(null);
+        }
+
+        // GET: api/Questions/GetFilteredQuestions/{filter}
+        public IEnumerable<QuestionDTO> GetFilteredQuestions(string filter)
+        {
+            Question.Scope scope = (Question.Scope)Enum.Parse(typeof(Question.Scope),
+                String.IsNullOrEmpty(filter) ? "Global" : filter.ToLower().Capitalize());
+
+            var scopeValues = Enum.GetValues(typeof(Question.Scope));
+            bool hasFilter = false;
+
+            // Check is the Array contains it
+            foreach (var s in scopeValues)
+                hasFilter |= ((Question.Scope)s) == scope;
+
+            IEnumerable<QuestionDTO> questionsDtos = null;
+
+            if (hasFilter)
+            {
+                questionsDtos = _questionLayer
+                    .GetAll(q => q.QuestionScope == scope)
+                    .Select(questionToDTO);
+            }
+            else
+                questionsDtos = _questionLayer
+                    .GetAll(q => true) // catch all
+                    .Select(questionToDTO);
+
+            return questionsDtos;
         }
 
         // GET: api/Questions/5
@@ -42,7 +77,8 @@ namespace WeDecide.Controllers
         public async Task<IHttpActionResult> GetQuestion(int id)
         {
             var question = await Task.Factory
-                .StartNew<QuestionDTO>(() => {
+                .StartNew<QuestionDTO>(() =>
+                {
                     var innerQ = _questionLayer.Get(id);
 
                     return new QuestionDTO

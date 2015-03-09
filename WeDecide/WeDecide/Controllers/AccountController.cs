@@ -108,7 +108,7 @@ namespace WeDecide.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("", "Username does not match the password");
                     return View(model);
             }
         }
@@ -164,7 +164,7 @@ namespace WeDecide.Controllers
         //
         // GET: /Account/ExternalLoginCallback
         [AllowAnonymous]
-        [FacebookAuthorize("email", "user_friends")]
+        //[FacebookAuthorize("email", "user_friends")]
         public async Task<ActionResult> ExternalLoginCallback(FacebookContext context, string returnUrl)
         {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();

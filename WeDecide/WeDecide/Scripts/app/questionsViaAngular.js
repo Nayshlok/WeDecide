@@ -4,7 +4,7 @@ var questionApp = angular.module('questionApp',[]);
 
 questionApp.controller('UxCtrl', function ($scope, $http) {
 
-    $scope.responses = ['Test', 'Test2'];
+    $scope.responses = [];
 
     $scope.addResponse = function () {
         var itemToAdd = $scope.newResp;
