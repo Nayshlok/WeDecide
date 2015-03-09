@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Facebook;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,7 +16,7 @@ namespace WeDecide
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-
+            FacebookConfig.Register(GlobalFacebookConfiguration.Configuration);
             GlobalConfiguration.Configure(WebApiConfig.Register);
             DependencyResolver.SetResolver(new NinjectDependencyResolver());
             RouteConfig.RegisterRoutes(RouteTable.Routes);
