@@ -70,5 +70,11 @@ namespace WeDecide.DAL.Concrete
         {
             throw new NotImplementedException();
         }
+
+
+        public void DeleteUser(string id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
