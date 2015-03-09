@@ -11,7 +11,9 @@ namespace WeDecide.DAL.Abstract
         //IEnumerable<Question> GetQuestions(Func<Question, bool> predicate);
         void SaveAllQuestions();
 
+        void AddResponse(int QuestionId, Response response);
 
+        void RemoveResponse(int responseId);
 
     }
 }

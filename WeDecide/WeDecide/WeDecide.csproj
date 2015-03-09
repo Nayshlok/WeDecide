@@ -402,10 +402,11 @@
     <Content Include="Views\Shared\_EditQuestionPartial.cshtml" />
     <Content Include="Views\Shared\_GlobalFeedPartial.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Account\AdminUsers.cshtml" />
+    <Content Include="Views\Admin\AdminUsers.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
     <Content Include="Views\Shared\_NotificationsPartial.cshtml" />
+    <Content Include="Views\Admin\QuestionAdmin.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -415,7 +416,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\Abstract\" />
-    <Folder Include="Views\Admin\" />
     <Folder Include="Views\Feed\" />
     <Folder Include="Views\Query\" />
   </ItemGroup>

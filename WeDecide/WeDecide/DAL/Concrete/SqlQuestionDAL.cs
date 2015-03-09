@@ -31,6 +31,7 @@ namespace WeDecide.DAL.Concrete
             try
             {
                 dbContext.Questions.Add(entity);
+                dbContext.SaveChanges();
                 return true;
             }
             catch (Exception)
@@ -49,8 +50,12 @@ namespace WeDecide.DAL.Concrete
         {
             var question = Get(id);
             // Safe removal
-            dbContext.Questions.Remove(question);
-
+            question.IsDeleted = true;
+            foreach (Response r in question.Responses)
+            {
+                r.IsDeleted = true;
+            }
+            dbContext.SaveChanges();
             return question;
         }
 
@@ -58,7 +63,7 @@ namespace WeDecide.DAL.Concrete
         {
             var toUpdate = Get(id);
             Question.CopyProperties(ref toUpdate, ref entity);
-
+            dbContext.SaveChanges();
             return toUpdate;
         }
 
@@ -68,5 +73,20 @@ namespace WeDecide.DAL.Concrete
         }
 
         #endregion
+
+
+        public void AddResponse(int QuestionId, Response response)
+        {
+            Question quest = dbContext.Questions.SingleOrDefault(x => x.Id == QuestionId);
+            quest.Responses.Add(response);
+            dbContext.SaveChanges();
+        }
+
+        public void RemoveResponse(int responseId)
+        {
+            Response resp = dbContext.Responses.SingleOrDefault(x => x.Id == responseId);
+            resp.IsDeleted = true;
+            dbContext.SaveChanges();
+        }
     }
 }
