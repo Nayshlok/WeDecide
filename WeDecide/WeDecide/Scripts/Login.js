@@ -33,6 +33,8 @@
         }
 
         //Run once for auto fill of fields
-        btnValidation();
+        if (login.email.val().length) {
+            btnValidation();
+        }
     }
 });

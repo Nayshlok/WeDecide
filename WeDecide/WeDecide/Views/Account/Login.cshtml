@@ -10,8 +10,8 @@
 <html>
 <head>
     <title>Welcome to WeDecide</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/bootstrap.min.css")
+    @Styles.Render("~/Content/site.css")
 </head>
 <body>
     <div class="background-container">
@@ -21,6 +21,12 @@
     </div>
 
     <div class="login-container">
+        <div class="global-feed">
+            <h2>See what you are missing.</h2>
+            <div>
+                @Html.Partial("_GlobalFeedPartial")
+            </div>
+        </div>
         <section class="login-box">
             <h2>Login</h2>
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
@@ -42,19 +48,13 @@
                 </div>
                 <input type="submit" value="Log me in" class="btn btn-danger" id="loginBtn" disabled />
             }
+            <div class="external-logins">
+                <section id="socialLoginForm">
+                    @Html.Partial("_ExternalLoginsListPartial", new WeDecide.ViewModels.ExternalLoginViewModel { Action = "ExternalLogin", ReturnUrl = ViewBag.ReturnUrl })
+                </section>
+            </div>
             @Html.ActionLink("Register as a new user", "Register")
         </section>
-        <div class="external-logins">
-            <section id="socialLoginForm">
-                @Html.Partial("_ExternalLoginsListPartial", new WeDecide.ViewModels.ExternalLoginViewModel { Action = "ExternalLogin", ReturnUrl = ViewBag.ReturnUrl })
-            </section>
-        </div>
-        <div class="global-feed">
-            <h2>See what you are missing.</h2>
-            <div>
-                @Html.Partial("_GlobalFeedPartial")
-            </div>
-        </div>
     </div>
     @Scripts.Render("~/Scripts/jquery")
     @Scripts.Render("~/Scripts/Login.js")

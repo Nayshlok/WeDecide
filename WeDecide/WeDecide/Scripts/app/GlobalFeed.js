@@ -1,18 +1,6 @@
 ﻿(function () {
+    /// <reference path="Scripts/app/functions.js" />
     /// <reference path="Scripts/angular.js" />
-
-    // think public static String format(this String format, params string[] matches){...}
-    if (!String.prototype.format) {
-        String.prototype.format = function () {
-            var args = arguments;
-            return this.replace(/{(\d+)}/g, function (match, number) {
-                return typeof args[number] != 'undefined'
-                  ? args[number]
-                  : match
-                ;
-            });
-        };
-    }
 
     var feedApp = angular.module('feedApp', []);
 
@@ -24,12 +12,7 @@
         self.singleQuestionURL = '/api/questions/{0}';
 
         $scope.questions = [
-            {
-                Id: 1,
-                QuestionText: "Test question",
-                IsActive: true,
-                EndTime: Date.now()
-            }
+            //{ Id: 1, QuestionText: "Test question", IsActive: true, EndTime: Date.now() }
         ];
 
         function pullQuestions() {
@@ -48,6 +31,7 @@
             }).
             error(function (data, status, headers, config) {
                 // things
+                console.log("Failures:\n{0}".format(data));
             });
         }
 
@@ -81,7 +65,6 @@
         //            // or server returns response with an error status.
         //        });
         //};
-
 
         pullQuestions();
 

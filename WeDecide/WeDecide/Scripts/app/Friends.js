@@ -21,7 +21,7 @@
                         displayPeople(data.PotentialFriends);
                     },
                     error: function (jqXHR, status, error) {
-                        window.console.log("Something went wrong with the request!\n" + "Status: " + status + "\nError: " + error);
+                        window.console.log("Something went wrong with the request!\nStatus: {0} Error: {1}".format(status,error));
                     }
                 })
             }
