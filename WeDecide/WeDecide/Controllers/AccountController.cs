@@ -13,6 +13,8 @@ using WeDecide.Models.Concrete;
 using WeDecide.DAL.Abstract;
 using WeDecide.DAL.Concrete;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Facebook;
+using Microsoft.AspNet.Facebook;
 
 namespace WeDecide.Controllers
 {
@@ -162,7 +164,8 @@ namespace WeDecide.Controllers
         //
         // GET: /Account/ExternalLoginCallback
         [AllowAnonymous]
-        public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
+        //[FacebookAuthorize("email", "user_friends")]
+        public async Task<ActionResult> ExternalLoginCallback(FacebookContext context, string returnUrl)
         {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
             if (loginInfo == null)
@@ -191,6 +194,7 @@ namespace WeDecide.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        //[FacebookAuthorize("email", "user_friends")]
         public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
         {
             if (User.Identity.IsAuthenticated)
@@ -206,13 +210,14 @@ namespace WeDecide.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser() { UserName = model.UserName };
+                var user = new ApplicationUser() { UserName = model.UserName};
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);
                     if (result.Succeeded)
                     {
+                        AddUserFromExternalLogin(info, user);
                         await SignInAsync(user, isPersistent: false);
                         return RedirectToLocal(returnUrl);
                     }
@@ -223,6 +228,30 @@ namespace WeDecide.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
         }
+
+        private void AddUserFromExternalLogin(ExternalLoginInfo info, ApplicationUser user)
+        {
+            MembershipDAL.AddUser(user.UserName, user.Email, user.Id);
+            //If facebook
+            if("facebook".Equals(info.Login.LoginProvider.ToLower()))
+            {
+                //I hope one of these works
+                FacebookClient fb = new FacebookClient("288b1b9a9d7de9198db8fd84a9ab93c8");
+                //FacebookClient fb = new FacebookClient(Session["AccessToken"].ToString());
+                dynamic friends = fb.Get("me/friends");
+            }
+        }
+
+        public ActionResult Permissions(FacebookRedirectContext context)
+        {
+            if (ModelState.IsValid)
+            {
+                return View(context);
+            }
+
+            return View("Error");
+        }
+
 
         [HttpPost]
         public ActionResult LogOff()
