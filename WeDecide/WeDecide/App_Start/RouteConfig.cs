@@ -30,8 +30,8 @@ namespace WeDecide
 
             routes.MapRoute(
                 name: "Poll",
-                url:"Question/Poll/{QuestionId}",
-                defaults: new { controller = "QuestionAnalyticsController", action = "QuestionPoll"});
+                url:"Poll/{QuestionId}",
+                defaults: new { controller = "QuestionAnalytics", action = "QuestionPoll"});
 
             routes.MapRoute(
                 name: "Response",

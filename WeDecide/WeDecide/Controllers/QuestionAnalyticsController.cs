@@ -14,7 +14,12 @@ namespace WeDecide.Controllers
     [Authorize]
     public class QuestionAnalyticsController : Controller
     {
-        IQuestionDAL Qdal = new MemoryQuestionDAL();
+        IQuestionDAL Qdal;
+
+        public QuestionAnalyticsController(IQuestionDAL NewQdal)
+        {
+            Qdal = NewQdal;
+        }
 
         // GET: QuestionAnalytics
         public ActionResult QuestionPoll(int QuestionId)
