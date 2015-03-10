@@ -107,5 +107,11 @@ namespace WeDecide.DAL.Concrete
             target.IsDeleted = true;
             db.SaveChanges();
         }
+
+        public void SaveImagePath(string Id, string imagePath)
+        {
+            GetUser(Id).ImagePath = imagePath;
+            db.SaveChanges();
+        }
     }
 }

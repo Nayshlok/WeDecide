@@ -40,7 +40,8 @@ namespace WeDecide.Controllers
                 User = new ProfileViewModel()
                 {
                     UserName = currentUser.Name,
-                    UserFriends = Mdal.GetFriends(currentUser.Id)
+                    UserFriends = Mdal.GetFriends(currentUser.Id),
+                    ImagePath = currentUser.ImagePath
                 }
             };
   

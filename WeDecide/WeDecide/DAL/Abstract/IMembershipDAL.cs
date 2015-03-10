@@ -29,7 +29,7 @@ namespace WeDecide.DAL.Abstract
 
         List<Notification> GetNotifications(string userId);
 
-
+        void SaveImagePath(string Id, string imagePath);
 
         void DeleteUser(string id);
     }
