@@ -76,5 +76,11 @@ namespace WeDecide.DAL.Concrete
         {
             throw new NotImplementedException();
         }
+
+
+        public void SaveImagePath(string Id, string imagePath)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

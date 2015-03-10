@@ -6,7 +6,6 @@ using System.Web.Mvc;
 using WeDecide.DAL.Abstract;
 using Microsoft.AspNet.Identity;
 using WeDecide.ViewModels;
-using WeDecide.Models.Concrete;
 
 namespace WeDecide.Controllers
 {
@@ -31,7 +30,8 @@ namespace WeDecide.Controllers
             {
                 UserName = currentUser.Name,
                 UserFriends = memberDal.GetFriends(currentUser.Id),
-                UserQuestions = questionDal.GetAll(x => x.UserId == currentUser.Id)
+                UserQuestions = questionDal.GetAll(x => x.UserId == currentUser.Id),
+                ImagePath = currentUser.ImagePath
             };
 
             return View("ProfileView", userProfile);
@@ -42,6 +42,7 @@ namespace WeDecide.Controllers
             Models.Concrete.User currentUser = memberDal.GetUser(User.Identity.GetUserId());
             if(ModelState.IsValid)
             {
+                //Change the user's name
                 currentUser.Name = pvm.UserName;  
             }
 
@@ -49,15 +50,11 @@ namespace WeDecide.Controllers
             {
                 UserName = currentUser.Name,
                 UserFriends = memberDal.GetFriends(currentUser.Id),
-                UserQuestions = questionDal.GetAll(x => x.UserId == currentUser.Id)
+                UserQuestions = questionDal.GetAll(x => x.UserId == currentUser.Id),
+                ImagePath = currentUser.ImagePath
             };
 
             return View("ProfileView", userProfile);
-        }
-
-        public IEnumerable<Notification> getNotifications()
-        {
-            return memberDal.GetNotifications(User.Identity.GetUserId());
         }
     }
 }

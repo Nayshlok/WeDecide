@@ -31,18 +31,44 @@ function showMakeQuestion() {
         questionElement.addResponse();
         });*/
 
-    $('form').submit(function () {
-        togglePopup(false);
-            if ($(this).valid()) {
-                $.ajax({
-                    url: this.action,
-                    type: this.method,
-                    data: $(this).serialize()
-                })
-            }
-            return false;
-    });
+    //$('form').submit(function () {
+    //    togglePopup(false);
+    //        if ($(this).valid()) {
+    //            $.ajax({
+    //                url: this.action,
+    //                type: this.method,
+    //                data: $(this).serialize()
+    //            })
+    //        }
+    //        return false;
+    //});
 }
+
+    //Jacob Code :
+$('input[type=button]').click(function () {
+    var ThisButton = $(this);
+    var MyResponses = new Array();
+    $("input[name=Responses]").each(function () {
+        MyResponses.push($(this).val());
+    });
+    $.ajax({
+        url: "Question/New",
+        type: 'POST',
+        data : 
+        {
+            Question : $("#Question").val(),
+            Hours: $("#Hours").val(),
+            Minutes: $("#Minutes").val(),
+            QuestionScope: $("#QuestionScope").val(),
+            FreeResponseEnabled: $("#FreeResponseEnabled").is(":checked"),
+            Responses: MyResponses
+        },
+        success: function () {
+            togglePopup(false);
+        }
+    });
+    return false;
+});
 
 function togglePopup(show) {
         if (show) {

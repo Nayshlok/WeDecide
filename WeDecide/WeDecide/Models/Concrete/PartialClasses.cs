@@ -59,6 +59,11 @@ namespace WeDecide.Models.Concrete
         public Response(Question owner, string text)
         {
         }
+
+        public override string ToString()
+        {
+            return string.Format("Id: {0}, Text: {1}, QuestionId: {2}", this.Id, this.Text, this.QuestionId);
+        }
     }
 
     public partial class Notification

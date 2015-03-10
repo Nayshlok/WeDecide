@@ -6,7 +6,7 @@
             <h2>Edit Your Profile</h2>
         </header>
         <div>
-            <form action="/Profile/Update" method="post">
+            <form action="/Profile/Update" method="post" enctype="multipart/form-data">
                 @*@using (Html.BeginForm("UpdateProfile", "Profile"))
             {*@
                 <div class="form-group">
@@ -16,6 +16,14 @@
                 </div>
                 <input class="bottom-btn btn btn-default" type="submit" value="Update Profile" />
                 @*}*@
+            </form>
+            <form action="/Profile/UploadImage" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="imageUpload">Profile Picture</label>
+                    <input type="file" id="imageUpload" name="image"/>
+                    <p class="help-block">Upload your picture here.</p>
+                </div>
+                <input class="bottom-btn btn btn-default" type="submit" value="Upload Image" />
             </form>
         </div>
     </div>

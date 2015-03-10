@@ -34,6 +34,7 @@ namespace WeDecide.Controllers
                 {
                     UserName = currentUser.Name,
                     UserFriends = memberDal.GetFriends(currentUser.Id),
+                    ImagePath = currentUser.ImagePath
                 },
                 PotentialFriends = null
             };

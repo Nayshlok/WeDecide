@@ -11,3 +11,12 @@ if (!String.prototype.format) {
         });
     };
 }
+
+function printFailures(failureObj) {
+    for (var key in failureObj) {
+        var val = failureObj[key];
+        console.log("\tK: {0}, V: {1}".format(key, val))
+        if (val instanceof Object)
+            printFailures(val);
+    }
+}
