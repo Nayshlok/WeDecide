@@ -32,9 +32,9 @@ namespace WeDecide.Controllers
         [Required]
         private IQuestionDAL _questionLayer;
 
-        public QuestionsController()
+        public QuestionsController(IQuestionDAL qdal)
         {
-            _questionLayer = new SqlQuestionDAL();
+            _questionLayer = qdal;
         }
 
         // GET: api/Questions
