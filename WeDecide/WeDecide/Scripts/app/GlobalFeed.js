@@ -1,6 +1,6 @@
-﻿(function () {
-    /// <reference path="Scripts/app/functions.js" />
-    /// <reference path="Scripts/angular.js" />
+﻿/// <reference path="Scripts/app/functions.js" />
+/// <reference path="Scripts/angular.js" />
+(function () {
 
     var feedApp = angular.module('feedApp', []);
 
@@ -41,10 +41,62 @@
     }]);
 
     feedApp.controller('HomePageCtrl', ['$scope', '$http', function ($scope, $http) {
-        //
-        console.log("The controller was intitialized");
+        
+        Debug.writeln("The controller was intitialized");
+        var self = this;
+        self.allQuestionURL = '/api/questions/GetFilteredQuestions/';
+
         $scope.questions = [
             { Id: 1, QuestionText: "Test question", IsActive: true, EndTime: Date.now() }
         ];
+
+        var localCheckBox = document.getElementById('checkBox_Local'),
+            friendsCheckBox = document.getElementById('checkBox_Friends'),
+            globalCheckBox = document.getElementById('checkBox_Global');
+
+        var localQuestionPool = [],
+            friendsQuestionPool = [],
+            globalQuestionPool = [];
+
+        function ajaxQuestionLoader(searchFilter, poolInQuestion) {
+            var requestURL = self.allQuestionURL + searchFilter;
+            console.log("GETting from: {0}".format(requestURL));
+            $http.get(requestURL).
+                success(function (data, headers, status, config) {
+                    console.log("Successfully fetched {0}, with length = {1}".format(data, data.length));
+                    poolInQuestion = data; // no need for pushing, just copy the Array
+                }).
+                error(function (data, headers, status, config) {
+                    printFailures(data); // defined in functions.js
+                });
+        };
+
+        function doQuestionFlow() {
+
+            // while the box is checked, update the pools at an interval
+            if (friendsCheckBox.checked) {
+                setTimeout(function () {
+                    // refresh the friends pool
+                    //var searchFilter = "friends";
+                    //var poolInQuestion = friendsQuestionPool;
+                    ajaxQuestionLoader("friends", friendsQuestionPool);
+                }, 3000);
+            }
+
+            if (localCheckBox.checked) {
+                setTimeout(function () {
+                    // refresh the local pool
+                    ajaxQuestionLoader("local", localQuestionPool);
+                }, 5000);
+            }
+
+            if (globalCheckBox.checked) {
+                setTimeout(function () {
+                    // refresh the global pool
+                    ajaxQuestionLoader("global", globalQuestionPool);
+                }, 7000);
+            }
+        }
+
     }]);
 })();
