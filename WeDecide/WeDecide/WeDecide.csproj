@@ -248,6 +248,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Scripts\app\questionsViaAngular.min.js.map">
+      <DependentUpon>questionsViaAngular.min.js</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Models\Concrete\Question.edmx.sql" />
     <Content Include="Scripts\angular-cookies.js" />
@@ -264,6 +267,9 @@
     <Content Include="Scripts\app\Notifications.js" />
     <Content Include="Scripts\app\questionsViaAngular.js" />
     <Content Include="Scripts\app\FacebookSDK.js" />
+    <Content Include="Scripts\app\questionsViaAngular.min.js">
+      <DependentUpon>questionsViaAngular.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

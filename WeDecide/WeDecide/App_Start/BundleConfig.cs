@@ -26,7 +26,7 @@ namespace WeDecide
             bundles.Add(new ScriptBundle("~/Scripts/Angular").Include(
                 "~/Scripts/angular.js",
                 //"~/Scripts/angular.min.js",
-                "~/Scripts/app/questionsViaAngular.js"));
+                "~/Scripts/app/questionsViaAngular.min.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/Globals").Include(
                 "~/Scripts/app/functions.js",

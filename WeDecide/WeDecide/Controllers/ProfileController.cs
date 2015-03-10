@@ -41,7 +41,12 @@ namespace WeDecide.Controllers
             Models.Concrete.User currentUser = memberDal.GetUser(User.Identity.GetUserId());
             if(ModelState.IsValid)
             {
-                currentUser.Name = pvm.UserName;  
+                currentUser.Name = pvm.UserName;
+                HttpPostedFileBase postedFile = Request.Files[0];
+                string filename = System.IO.Path.GetFileName(Request.Files[0].FileName);
+                string strLocation = HttpContext.Server.MapPath("~/Images/userProfilePics");
+                Request.Files[0].SaveAs(strLocation + @"\" + filename.Replace('+', '_'));
+                //save the imagepath to the profile pic
             }
 
             ProfileViewModel userProfile = new ProfileViewModel()
