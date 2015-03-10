@@ -15,12 +15,13 @@ namespace WeDecide.Controllers
     public class QuestionController : Controller
     {
         //Until we have the DAL injection done
-        private static IQuestionDAL Qdal = new MemoryQuestionDAL();
+        private static IQuestionDAL Qdal;
         private static IMembershipDAL Mdal;//= new CustomMembershipDAL();
 
-        public QuestionController(IMembershipDAL NewMdal) 
+        public QuestionController(IMembershipDAL NewMdal, IQuestionDAL qdal) 
         {
             Mdal = NewMdal;
+            Qdal = qdal;
         }
 
         [HttpGet]

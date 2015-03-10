@@ -27,6 +27,7 @@ namespace WeDecide.Models.Concrete
         public string Id { get; set; }
         public string Name { get; set; }
         public bool IsDeleted { get; set; }
+        public string ImagePath { get; set; }
     
         public virtual ICollection<Question> Questions { get; set; }
         public virtual ICollection<Response> Responses { get; set; }

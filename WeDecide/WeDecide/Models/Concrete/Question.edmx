@@ -52,6 +52,7 @@
           <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="ImagePath" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="UserResponse">
           <Key>
@@ -239,6 +240,7 @@
           <NavigationProperty Name="NotificationsReceived" Relationship="QuestionDbModel.FK_Notification_ReceiveUser" FromRole="User" ToRole="Notification" />
           <NavigationProperty Name="NotificationsSent" Relationship="QuestionDbModel.FK_Notification_SenderUser" FromRole="User" ToRole="Notification" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="ImagePath" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           </EntityType>
         <Association Name="FK_Questions_Users">
           <End Role="User" Type="Self.User" Multiplicity="1" />
@@ -371,6 +373,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="QuestionDbModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
