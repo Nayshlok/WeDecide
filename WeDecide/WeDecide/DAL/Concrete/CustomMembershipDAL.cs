@@ -97,7 +97,7 @@ namespace WeDecide.DAL.Concrete
 
         public List<Notification> GetNotifications(string userId)
         {
-            throw new NotImplementedException();
+            return GetUser(userId).NotificationsReceived.ToList<Notification>();
         }
 
 

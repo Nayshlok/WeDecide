@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using WeDecide.DAL.Abstract;
 using Microsoft.AspNet.Identity;
 using WeDecide.ViewModels;
+using WeDecide.Models.Concrete;
 
 namespace WeDecide.Controllers
 {
@@ -52,6 +53,11 @@ namespace WeDecide.Controllers
             };
 
             return View("ProfileView", userProfile);
+        }
+
+        public IEnumerable<Notification> getNotifications()
+        {
+            return memberDal.GetNotifications(User.Identity.GetUserId());
         }
     }
 }
