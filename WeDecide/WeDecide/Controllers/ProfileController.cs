@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using WeDecide.DAL.Abstract;
 using Microsoft.AspNet.Identity;
 using WeDecide.ViewModels;
+using System.IO;
 
 namespace WeDecide.Controllers
 {
@@ -30,7 +31,8 @@ namespace WeDecide.Controllers
             {
                 UserName = currentUser.Name,
                 UserFriends = memberDal.GetFriends(currentUser.Id),
-                UserQuestions = questionDal.GetAll(x => x.UserId == currentUser.Id)
+                UserQuestions = questionDal.GetAll(x => x.UserId == currentUser.Id),
+                ImagePath = currentUser.ImagePath
             };
 
             return View("ProfileView", userProfile);
@@ -41,22 +43,50 @@ namespace WeDecide.Controllers
             Models.Concrete.User currentUser = memberDal.GetUser(User.Identity.GetUserId());
             if(ModelState.IsValid)
             {
+                //Change the user's name
                 currentUser.Name = pvm.UserName;
-                HttpPostedFileBase postedFile = Request.Files[0];
-                string filename = System.IO.Path.GetFileName(Request.Files[0].FileName);
-                string strLocation = HttpContext.Server.MapPath("~/Images/userProfilePics");
-                Request.Files[0].SaveAs(strLocation + @"\" + filename.Replace('+', '_'));
-                //save the imagepath to the profile pic
             }
 
             ProfileViewModel userProfile = new ProfileViewModel()
             {
                 UserName = currentUser.Name,
                 UserFriends = memberDal.GetFriends(currentUser.Id),
-                UserQuestions = questionDal.GetAll(x => x.UserId == currentUser.Id)
+                UserQuestions = questionDal.GetAll(x => x.UserId == currentUser.Id),
+                ImagePath = currentUser.ImagePath
             };
 
             return View("ProfileView", userProfile);
+        }
+
+        [HttpPost]
+        public ActionResult UploadImage(HttpPostedFileBase image)
+        {
+            Models.Concrete.User currentUser = memberDal.GetUser(User.Identity.GetUserId());
+
+            if(image != null)
+            {
+                string strLocation = HttpContext.Server.MapPath("~/Images/" + currentUser.Id + "/profile");
+
+                //Create directory for user images if it does not exists
+                if(!Directory.Exists(strLocation))
+                {
+                    Directory.CreateDirectory(strLocation);
+                }
+                else
+                {
+                    //Delete the old profile pic
+                    string[] existingImage = Directory.GetFiles(strLocation);
+                    if(existingImage.Length > 0)
+                    {
+                        System.IO.File.Delete(existingImage[0]);
+                    }
+                }
+
+                image.SaveAs(strLocation + @"\" + image.FileName.Replace('+', '_'));
+                memberDal.SaveImagePath(currentUser.Id, @"\Images\" + currentUser.Id + "\\profile\\" + image.FileName);
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }

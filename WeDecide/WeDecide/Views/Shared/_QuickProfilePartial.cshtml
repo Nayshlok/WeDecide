@@ -2,7 +2,7 @@
 @model WeDecide.ViewModels.ProfileViewModel
 
 <div class="quick-profile-view">
-    <div class="profile_pic shadowed"></div>
+    <img src="~/@Model.ImagePath" class="img-responsive profile_pic shadowed" />
     <div class="info-panel shadowed">
         <h2 class="small-header">Friends</h2>
         @if (Model != null && Model.UserFriends != null)
