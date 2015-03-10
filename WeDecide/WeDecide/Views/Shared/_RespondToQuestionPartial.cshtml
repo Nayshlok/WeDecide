@@ -32,12 +32,14 @@
                 string TimeLeft = "Hours : " + ((int)ts.TotalHours) + ", Minutes : " + ts.Minutes;
                 @:Time left : @TimeLeft
             }
-
                 @*<input type="submit" value="Save Response" />*@
             </section>
-    } 
+        @*@section scripts {
+            @Scripts.Render("~/Scripts/app/RespondToQuestion.js")
+        }*@ 
+    }
     else
     {
-        <p>Sorry, you seemed to have tried to access a question you are not allowed to see.</p>
+        <p>@ViewBag.ErrorMessage</p>
     }
  </form>

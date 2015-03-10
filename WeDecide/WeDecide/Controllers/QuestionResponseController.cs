@@ -20,12 +20,13 @@ namespace WeDecide.Controllers
 
         private readonly static IHubConnectionContext<dynamic> HubContext = GlobalHost.ConnectionManager.GetHubContext<questionHub>().Clients;
         //Until we have the DAL injection done
-        private static IQuestionDAL Qdal = new MemoryQuestionDAL();
+        private static IQuestionDAL Qdal;
         private static IMembershipDAL Mdal;// = new CustomMembershipDAL();
 
-        public QuestionResponseController(IMembershipDAL NewMdal)
+        public QuestionResponseController(IQuestionDAL NewQdal, IMembershipDAL NewMdal)
         {
             Mdal = NewMdal;
+            Qdal = NewQdal;
         }
 
         // GET: QuestionResponse
@@ -49,7 +50,16 @@ namespace WeDecide.Controllers
         private bool UserCanRespondTo(Question question)
         {
             bool UserInScope = UserInQuestionScope(question);
-            return UserInQuestionScope(question) && User.Identity.GetUserId().Equals(question.UserId);
+            if (UserInScope)
+            {
+                ViewBag.ErrorMessage = "You are not allowed to see this question";
+            }
+            bool IsSameUser = User.Identity.GetUserId().Equals(question.UserId);
+            if (IsSameUser)
+            {
+                ViewBag.ErrorMessage = "You cannot respond to your own question";
+            }
+            return UserInScope && IsSameUser;
         }
 
         private bool UserInQuestionScope(Question question)

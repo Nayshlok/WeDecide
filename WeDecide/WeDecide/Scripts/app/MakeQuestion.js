@@ -60,7 +60,7 @@ $('input[type=button]').click(function () {
             Hours: $("#Hours").val(),
             Minutes: $("#Minutes").val(),
             QuestionScope: $("#QuestionScope").val(),
-            FreeResponseEnabled: $("#FreeResponseEnabled").val(),
+            FreeResponseEnabled: $("#FreeResponseEnabled").is(":checked"),
             Responses: MyResponses
         },
         success: function () {

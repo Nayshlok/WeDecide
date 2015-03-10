@@ -26,21 +26,23 @@ namespace WeDecide.Controllers
                 Id = q.Id,
                 QuestionText = q.Text,
                 IsActive = q.IsActive,
-                EndTime = q.EndDate
+                EndTime = q.EndDate,
+                UserId = q.UserId,
+                ResponseIds = q.Responses.Select(r => r.Id)
             };
 
-        [Required]
+        //[Ninject.Inject] // FIXME: why doesn't injection work here?
         private IQuestionDAL _questionLayer;
 
-        public QuestionsController(IQuestionDAL qdal)
+        public QuestionsController(/*IQuestionDAL questDal*/)
         {
-            _questionLayer = qdal;
+            _questionLayer = new SqlQuestionDAL();
         }
 
         // GET: api/Questions
         public IEnumerable<QuestionDTO> GetQuestion()
         {
-            return GetFilteredQuestions(null);
+            return _questionLayer.GetAll(q => true).Select(questionToDTO);
         }
 
         // GET: api/Questions/GetFilteredQuestions/{filter}
@@ -58,16 +60,23 @@ namespace WeDecide.Controllers
 
             IEnumerable<QuestionDTO> questionsDtos = null;
 
-            if (hasFilter)
+            /*Console.WriteLine("Question scopes");
+            foreach (var q in _questionLayer.GetAll(q => true)
+                                            .Select(q => q.QuestionScope))
+            {
+                System.Diagnostics.Debug.WriteLine(q);
+            }*/
+
+            if (scope != Question.Scope.Global)
             {
                 questionsDtos = _questionLayer
-                    .GetAll(q => q.QuestionScope == scope)
-                    .Select(questionToDTO);
+                        .GetAll(q => q.QuestionScope == scope)
+                        .Select(questionToDTO); 
             }
             else
-                questionsDtos = _questionLayer
-                    .GetAll(q => true) // catch all
-                    .Select(questionToDTO);
+            {
+                questionsDtos = GetQuestion();
+            }
 
             return questionsDtos;
         }
@@ -121,5 +130,9 @@ namespace WeDecide.Controllers
         public bool IsActive { get; set; }
         public string QuestionText { get; set; }
         public DateTime EndTime { get; set; }
+
+        public string UserId { get; set; }
+
+        public IEnumerable<int> ResponseIds { get; set; }
     }
 }

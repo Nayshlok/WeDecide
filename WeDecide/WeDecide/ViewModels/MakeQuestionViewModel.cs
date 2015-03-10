@@ -9,7 +9,7 @@ using WeDecide.Models.Concrete;
 
 namespace WeDecide.ViewModels
 {
-    [ValidateTimeToAnswer(ErrorMessage="You must have at least some time for others to answer")]
+    [ValidateTimeToAnswer(ErrorMessage="You must have at least some time for others to answer.")]
     public class MakeQuestionViewModel
     {
         [Required(ErrorMessage = "Please enter a question.", AllowEmptyStrings = false)]
@@ -36,7 +36,7 @@ namespace WeDecide.ViewModels
                 Text = this.Question
             };
 
-            ReturnValue.Responses = this.Responses.ToList().ConvertAll(x => new Response() { Text = x, Question = ReturnValue });
+            ReturnValue.Responses = this.Responses.Where(x => !string.IsNullOrWhiteSpace(x)).ToList().ConvertAll(x => new Response() { Text = x, Question = ReturnValue });
 
             return ReturnValue;
         }
