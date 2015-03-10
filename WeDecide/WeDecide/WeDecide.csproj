@@ -321,7 +321,6 @@
     <Compile Include="Controllers\FeedController.cs" />
     <Compile Include="Controllers\FriendsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\IEnumberable.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\QueryController.cs" />
     <Compile Include="Controllers\QuestionAnalyticsController.cs" />
