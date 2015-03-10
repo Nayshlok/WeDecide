@@ -8,7 +8,7 @@
 
         var self = this;
 
-        self.allQuestionURL = '/api/questions';
+        self.allQuestionURL = '/api/questions/GetFilteredQuestions/';
         self.singleQuestionURL = '/api/questions/{0}';
 
         $scope.questions = [
@@ -32,6 +32,7 @@
             error(function (data, status, headers, config) {
                 // things that deal with errors
                 console.log("Failures:\n{0}".format(data));
+                printFailures(data);
             });
         }
 

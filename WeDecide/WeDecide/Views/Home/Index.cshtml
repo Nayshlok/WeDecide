@@ -7,6 +7,7 @@
 }
 
 @Scripts.Render("~/Scripts/Angular")
+@Scripts.Render("~/Scripts/Globals")
 <section class="home-page">
     @Html.Partial("_QuickProfilePartial", @Model.User)
     <section class="welcome-header shadowed">
@@ -18,27 +19,43 @@
     <div class="add-question">
         <button id="btnNewQuestion" type="button" class="bottom-btn btn-primary btn-lg btn-block">Create New Question</button>
     </div>
-    <section class="content-feed shadowed">
+    <section class="content-feed shadowed" ng-app="feedApp" >
         <div class="filter-feed">
             <div class="checkbox-inline">
-            <label>
-                        <input type="checkbox" id="checkbox_Friends"> Friends
-            </label>
-        </div>
+                <label>
+                    <input type="checkbox" id="checkbox_Friends"> Friends
+                </label>
+            </div>
             <div class="checkbox-inline">
-            <label>
-                        <input type="checkbox" id="checkbox_Local"> Local
-            </label>
-        </div>
+                <label>
+                    <input type="checkbox" id="checkbox_Local"> Local
+                </label>
+            </div>
             <div class="checkbox-inline">
-            <label>
-                        <input type="checkbox" id="checkbox_Global"> Global
-            </label>
+                <label>
+                    <input type="checkbox" id="checkbox_Global"> Global
+                </label>
+            </div>
         </div>
-    </div>
-
+        <section ng-controller="GlobalCtrl">
+            <div ng-repeat="q in questions">
+                <label>Question #{{q.Id}}</label>
+                <ul>
+                    <li>
+                        {{q.QuestionText}}
+                    </li>
+                    <li>
+                        Active: {{q.IsActive}}
+                    </li>
+                    <li>
+                        <label>Ends: {{q.EndTime}}</label>
+                    </li>
+                    <li>Owning User Id: {{q.UserId}}</li>
+                    <li>{{q.ResponseIds}}</li>
+                </ul>
+            </div>
+        </section>
     </section>
-    @Scripts.Render("~/Scripts/Globals")
     @Scripts.Render("~/Scripts/MakeQuestion")
 </section>
 
