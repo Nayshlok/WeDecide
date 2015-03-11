@@ -95,7 +95,7 @@ namespace WeDecide.DAL.Concrete
             db.SaveChanges();
         }
 
-        public List<Notification> GetNotifications(string userId)
+        public IEnumerable<Notification> GetNotifications(string userId)
         {
             return GetUser(userId).NotificationsReceived.ToList<Notification>();
         }

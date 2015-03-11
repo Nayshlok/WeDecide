@@ -39,17 +39,13 @@ $(document).ready(function () {
     $.ajax({
         type: "GET",
         url: "/Profile/getNotifications",
-        contentType: "application/json;charset=utf-8",
         dataType: "json",
-        cache: false,
         success: function (result) {
-            debugger;
-            alert(result)
+            window.console.log(result);
         },
         error: function (response) {
-            debugger;
-            console.log(result);
-            alert('eror');
+            console.log(response);
+            window.alert('error');
         }
     })
 });
