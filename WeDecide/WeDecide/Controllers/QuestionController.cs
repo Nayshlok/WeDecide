@@ -43,11 +43,12 @@ namespace WeDecide.Controllers
                 //Save the Question
                 Qdal.Create(NewQuestion);
                 //Don't know what to return yet, so returning response page
-                RespondToQuestionViewModel model = new RespondToQuestionViewModel(NewQuestion);
+                //RespondToQuestionViewModel model = new RespondToQuestionViewModel(NewQuestion);
                 //return RedirectToAction("QuestionResponse", "QuestionResponse", new { id = NewQuestion.Id });
                 return new EmptyResult();
             }
-            return View();
+            return PartialView("~/Views/Shared/_MakeQuestionPartial.cshtml");
+            //return Json(ModelState.ToDictionary(x => x.Key, x => x.Value.Errors.ToList().ConvertAll(y => y.ErrorMessage)));
         }
         
         [HttpGet]
