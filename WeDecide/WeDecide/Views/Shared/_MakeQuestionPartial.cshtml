@@ -1,4 +1,5 @@
-﻿@model WeDecide.ViewModels.MakeQuestionViewModel
+﻿@using System.Web.Mvc.Ajax;
+@model WeDecide.ViewModels.MakeQuestionViewModel
 
 <div class="make-question">
     <div id="editBox" class="white_content">
@@ -7,7 +8,7 @@
         </header>
         <div ng-app="questionApp">
             <form name="MakeQuestion" action="/Question/New" method="post">
-                @*@using (Html.BeginForm("CreateQuestion", "Question"))
+                @*@using (Ajax.BeginRouteForm("New Question", new AjaxOptions() { UpdateTargetId = "MakeQuestionPopup", HttpMethod = "POST" }))
                 {*@
                     <div class="form-group overflowdiv" ng-controller="UxCtrl">
                         @Html.ValidationMessageFor(x => x.Question)
@@ -17,7 +18,7 @@
                         @Html.ValidationMessageFor(x => x.Responses)
                         <ul id="responseHolder">
                             <li class="response" ng-repeat="resp in responses">
-                                <label for="Responses">Response: </label> <input type="text" name="Responses" class="form-control" ng-model="resp" />
+                                <label for="Responses">Response: </label> <input type="text" name="Responses" class="form-control" ng-model="resp" data-val="true" />
                                 <a href="" ng-click="removeResponse(resp)">X</a>
                             </li>
                         </ul>
@@ -38,12 +39,22 @@
 
                         @Html.ValidationMessageFor(x => x)
                         <p>The question should be available for: </p>
-                        <p>Hours: <input type="text" value="0" id="Hours" name="Hours" /> Minutes : <input type="text" value="10" id="Minutes" name="Minutes" /></p>
-                        <input type="button" value="Make Question" class="btn btn-success" />
+                        <p>Hours: <input type="text" value="0" id="Hours" name="Hours" data-val="true" /> Minutes : <input type="text" value="10" id="Minutes" name="Minutes" data-val="true" /></p>
+                        <input name="form_submit" type="button" value="Make Question" class="btn btn-success" />
+                        @*<input type="submit" value="Make Question" class="btn btn-success"/>*@
                     </div>
                 @*}*@
             </form>
         </div>
+        @*<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")" type="text/javascript"></script>*@
+        @Scripts.Render("~/Scripts/jquery")
     </div>
     <section id="fade" class="black_overlay"></section>
 </div>
+@*@section scripts {
+<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")" type="text/javascript"></script>
+}*@

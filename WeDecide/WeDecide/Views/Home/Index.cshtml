@@ -13,7 +13,7 @@
     <section class="welcome-header shadowed">
         <h1>Welcome, @Model.User.UserName</h1>
     </section>
-    <div>
+    <div id="MakeQuestionPopup">
         @Html.Partial("_MakeQuestionPartial", new MakeQuestionViewModel { })
     </div>
     <div class="add-question">

@@ -90,7 +90,9 @@ namespace WeDecide.Controllers
             Response Resp = MakeUserResponse(AffectedQuestion, ChosenResponse);
 
             Qdal.Update(QuestionId, AffectedQuestion);
-            HubContext.User(User.Identity.GetUserId()).receivedResponse(QuestionId, Resp);
+
+            Response NewResp = new Response() { Id = Resp.Id, IsDeleted = Resp.IsDeleted, Text = Resp.Text, QuestionId = Resp.QuestionId };
+            HubContext.User(User.Identity.GetUserId()).receivedResponse(QuestionId, NewResp);
             //Clients.User(UserId).receivedResponse(question.Id, question.Responses);
             //Would like to have this not actually return, as the Partial View will always be a part of something else
             //return RedirectToAction("QuestionResponse", new { id = QuestionId });

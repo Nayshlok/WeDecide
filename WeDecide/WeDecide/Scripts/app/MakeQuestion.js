@@ -4,8 +4,13 @@
         editBox = $('#editBox');
         fade = $('#fade');
 
-    makeQuestionBtn.on('click', function () {
-        if (makeQuestion.length) {
+        //$(document).on('click', makeQuestionBtn, function () {
+        //    if (makeQuestion.length) {
+        //        showMakeQuestion();
+        //    }
+        //});
+        makeQuestionBtn.on('click', function () {
+            if ($('.make-question').length) {
             showMakeQuestion();
         }
     });
@@ -19,7 +24,7 @@ function showMakeQuestion() {
 
     var questionElement = {}
     questionElement.responseHolder = $('#responseHolder');
-        var newResponse = "<li class='response'><label for='Responses'>Response: </label><input type='text' name='Responses' class='form-control' placeholder='Possible question response' /></li>";
+    var newResponse = "<li class='response'><label for='Responses'>Response: </label><input type='text' name='Responses' class='form-control' placeholder='Possible question response' /></li>";
     questionElement.addResponseBtn = $('#addResponse');
 
     questionElement.addResponse = function () {
@@ -27,10 +32,9 @@ function showMakeQuestion() {
     };
 
     //Handle new response button clicks
-        /*questionElement.addResponseBtn.on('click', function () {
+    questionElement.addResponseBtn.on('click', function () {
         questionElement.addResponse();
-        });*/
-
+    });
     //$('form').submit(function () {
     //    togglePopup(false);
     //        if ($(this).valid()) {
@@ -45,33 +49,67 @@ function showMakeQuestion() {
 }
 
     //Jacob Code :
-$('input[type=button]').click(function () {
+$('input[name=form_submit]').click(function () {
     var ThisButton = $(this);
     var MyResponses = new Array();
     $("input[name=Responses]").each(function () {
         MyResponses.push($(this).val());
     });
+    var Question = $("#Question");
+    var Hours = $("#Hours");
+    var Minutes = $("#Minutes");
+    var QuestionScope = $("#QuestionScope");
+    var FreeResponseEnabled = $("#FreeResponseEnabled");
     $.ajax({
         url: "Question/New",
         type: 'POST',
-        data : 
+        data:
         {
-            Question : $("#Question").val(),
-            Hours: $("#Hours").val(),
-            Minutes: $("#Minutes").val(),
-            QuestionScope: $("#QuestionScope").val(),
-            FreeResponseEnabled: $("#FreeResponseEnabled").is(":checked"),
+            Question: Question.val(),
+            Hours: Hours.val(),
+            Minutes: Minutes.val(),
+            QuestionScope: QuestionScope.val(),
+            FreeResponseEnabled: FreeResponseEnabled.is(":checked"),
             Responses: MyResponses
         },
-        success: function () {
-            togglePopup(false);
+        success: function (resp) {
+            if (resp.length == 0) {
+                togglePopup(false);
+                clearMakeQuestionForm();
+            }
+            else {
+                //Set the Validation Text
+            }
         }
     });
     return false;
 });
 
+//function OnMakeQuestionSuccess(resp) {
+//    alert("Called");
+//    if (resp.length == 0) {
+//        togglePopup(false);
+//        clearMakeQuestionForm();
+//    }
+//    else {
+//        alert("Check : " + resp);
+//        displayMakeQuestionErrors(resp);
+//    }
+//}
+
+function clearMakeQuestionForm() {
+    $("#Question").val("");
+    $("#Hours").val("0");
+    $("#Minutes").val("10");
+    $("#QuestionScope").val("0");
+    $("#FreeResponseEnabled").prop("checked", false);
+    $("input[name=Responses]").each(function () {
+        $(this).val("");
+    });
+}
+
 function togglePopup(show) {
-        if (show) {
+    if (show) {
         editBox.css('display', 'block');
         fade.css('display', 'block');
     } else {

@@ -17,7 +17,8 @@ namespace WeDecide
                 "~/Scripts/jquery-1.11.2.min.js",
                 "~/Scripts/jquery-ui-1.11.3.min.js",
                 "~/Scripts/jquery.validate.js",
-                "~/Scripts/jquery.validate.unobtrusive.js"));
+                "~/Scripts/jquery.validate.unobtrusive.js",
+                "~/Scripts/jquery.validate.unobtrusive.min.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/MakeQuestion").Include(
                 "~/Scripts/app/MakeQuestion.js",

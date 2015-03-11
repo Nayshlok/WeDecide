@@ -258,7 +258,6 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\EditProfile.js" />
-    <Content Include="Scripts\app\FriendRequest.js" />
     <Content Include="Scripts\app\Friends.js" />
     <Content Include="Scripts\app\functions.js" />
     <Content Include="Scripts\app\GlobalFeed.js" />
@@ -321,7 +320,6 @@
     <Compile Include="Controllers\FeedController.cs" />
     <Compile Include="Controllers\FriendsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\IEnumberable.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\QueryController.cs" />
     <Compile Include="Controllers\QuestionAnalyticsController.cs" />
