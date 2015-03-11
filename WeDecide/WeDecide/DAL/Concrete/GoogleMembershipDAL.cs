@@ -65,7 +65,7 @@ namespace WeDecide.DAL.Concrete
             throw new NotImplementedException();
         }
 
-        public List<Notification> GetNotifications(string userId)
+        public IEnumerable<Notification> GetNotifications(string userId)
         {
             throw new NotImplementedException();
         }

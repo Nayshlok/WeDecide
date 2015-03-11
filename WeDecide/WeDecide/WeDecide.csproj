@@ -248,6 +248,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Scripts\angular.ng-module.js" />
     <Content Include="Scripts\app\questionsViaAngular.min.js.map">
       <DependentUpon>questionsViaAngular.min.js</DependentUpon>
     </Content>
@@ -258,6 +259,7 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\EditProfile.js" />
+    <Content Include="Scripts\app\FriendRequest.js" />
     <Content Include="Scripts\app\Friends.js" />
     <Content Include="Scripts\app\functions.js" />
     <Content Include="Scripts\app\GlobalFeed.js" />
@@ -298,7 +300,6 @@
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
-    <Content Include="Scripts\notification.js" />
     <Content Include="Scripts\npm.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -389,6 +390,7 @@
     <Compile Include="ViewModels\IndexViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MakeQuestionViewModel.cs" />
+    <Compile Include="ViewModels\NotificationViewModel.cs" />
     <Compile Include="ViewModels\ProfileViewModel.cs" />
     <Compile Include="ViewModels\QuestionPollingViewModel.cs" />
     <Compile Include="ViewModels\QuestionViewModel.cs" />

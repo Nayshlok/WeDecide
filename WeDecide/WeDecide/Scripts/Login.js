@@ -20,6 +20,10 @@
             btnValidation();
         });
 
+        $(login.loginBtn).focus(function () {
+            btnValidation();
+        });
+
         function btnValidation() {
             if ($('form').valid()) {
                 login.loginBtn.removeClass('btn-danger');
@@ -30,11 +34,6 @@
                 login.loginBtn.addClass('btn-danger');
                 //login.loginBtn.attr('disabled','disabled');
             }
-        }
-
-        //Run once for auto fill of fields
-        if (login.email.val().length) {
-            btnValidation();
         }
     }
 });

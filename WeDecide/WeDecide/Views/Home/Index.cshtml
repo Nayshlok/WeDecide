@@ -9,6 +9,7 @@
 @Scripts.Render("~/Scripts/Angular")
 @Scripts.Render("~/Scripts/Globals")
 <section class="home-page">
+    <div ng-modules="feedApp, questionApp">
     @Html.Partial("_QuickProfilePartial", @Model.User)
     <section class="welcome-header shadowed">
         <h1>Welcome, @Model.User.UserName</h1>
@@ -19,7 +20,7 @@
     <div class="add-question">
         <button id="btnNewQuestion" type="button" class="bottom-btn btn-primary btn-lg btn-block">Create New Question</button>
     </div>
-    <section class="content-feed shadowed" ng-app="feedApp" >
+        <section class="content-feed shadowed">
         <div class="filter-feed">
             <div class="checkbox-inline">
                 <label>

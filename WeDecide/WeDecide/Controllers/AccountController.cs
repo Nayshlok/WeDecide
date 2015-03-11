@@ -26,7 +26,6 @@ namespace WeDecide.Controllers
         private IMembershipDAL _membershipDAL;
         private ApplicationRoleManager _roleManager;
 
-
         public IMembershipDAL MembershipDAL
         {
             get { return _membershipDAL; }
@@ -257,6 +256,11 @@ namespace WeDecide.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
+            //Get rid of dat cookie
+            HttpCookie cookie = new HttpCookie(".AspNet.ApplicationCookie");
+            cookie.Expires = DateTime.Now.AddYears(-1000);
+            Response.Cookies.Add(cookie);
+
             return RedirectToAction("Login");
         }
 
