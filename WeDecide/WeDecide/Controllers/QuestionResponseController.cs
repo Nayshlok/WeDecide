@@ -50,7 +50,7 @@ namespace WeDecide.Controllers
         private bool UserCanRespondTo(Question question)
         {
             bool UserInScope = UserInQuestionScope(question);
-            if (UserInScope)
+            if (!UserInScope)
             {
                 ViewBag.ErrorMessage = "You are not allowed to see this question";
             }
@@ -59,7 +59,7 @@ namespace WeDecide.Controllers
             {
                 ViewBag.ErrorMessage = "You cannot respond to your own question";
             }
-            return UserInScope && IsSameUser;
+            return !UserInScope && IsSameUser;
         }
 
         private bool UserInQuestionScope(Question question)
