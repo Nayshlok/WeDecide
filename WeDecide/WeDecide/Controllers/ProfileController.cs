@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using WeDecide.DAL.Abstract;
 using Microsoft.AspNet.Identity;
 using WeDecide.ViewModels;
+using System.IO;
+using WeDecide.Models.Concrete;
 
 namespace WeDecide.Controllers
 {
@@ -55,6 +57,51 @@ namespace WeDecide.Controllers
             };
 
             return View("ProfileView", userProfile);
+        }
+
+        [HttpPost]
+        public ActionResult UploadImage(HttpPostedFileBase image)
+        {
+            Models.Concrete.User currentUser = memberDal.GetUser(User.Identity.GetUserId());
+
+            if(image != null)
+            {
+                string strLocation = HttpContext.Server.MapPath("~/Images/" + currentUser.Id + "/profile");
+
+                //Create directory for user images if it does not exists
+                if(!Directory.Exists(strLocation))
+                {
+                    Directory.CreateDirectory(strLocation);
+                }
+                else
+                {
+                    //Delete the old profile pic
+                    string[] existingImage = Directory.GetFiles(strLocation);
+                    if(existingImage.Length > 0)
+                    {
+                        System.IO.File.Delete(existingImage[0]);
+                    }
+                }
+
+                image.SaveAs(strLocation + @"\" + image.FileName.Replace('+', '_'));
+                memberDal.SaveImagePath(currentUser.Id, @"\Images\" + currentUser.Id + "\\profile\\" + image.FileName);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public JsonResult getNotifications()
+        {
+            IEnumerable<Notification> notifications = memberDal.GetNotifications(User.Identity.GetUserId());
+
+            //Create an object that can deliver the messages through json
+            List<NotificationViewModel> nvms = new List<NotificationViewModel>();
+            foreach(Notification n in notifications)
+            {
+                nvms.Add(new NotificationViewModel { SenderName = n.SendingUser.Name, SenderID = n.SenderId, Message = n.Message });
+            }
+
+            return Json(nvms, JsonRequestBehavior.AllowGet);
         }
     }
 }

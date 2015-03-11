@@ -27,7 +27,7 @@ namespace WeDecide.DAL.Abstract
 
         void AddNotification(User sender, User reciever, Notification.NotificationType t);
 
-        List<Notification> GetNotifications(string userId);
+        IEnumerable<Notification> GetNotifications(string userId);
 
         void SaveImagePath(string Id, string imagePath);
 

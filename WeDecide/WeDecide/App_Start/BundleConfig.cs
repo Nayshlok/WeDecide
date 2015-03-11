@@ -17,7 +17,8 @@ namespace WeDecide
                 "~/Scripts/jquery-1.11.2.min.js",
                 "~/Scripts/jquery-ui-1.11.3.min.js",
                 "~/Scripts/jquery.validate.js",
-                "~/Scripts/jquery.validate.unobtrusive.js"));
+                "~/Scripts/jquery.validate.unobtrusive.js",
+                "~/Scripts/jquery.validate.unobtrusive.min.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/MakeQuestion").Include(
                 "~/Scripts/app/MakeQuestion.js",
@@ -25,12 +26,14 @@ namespace WeDecide
 
             bundles.Add(new ScriptBundle("~/Scripts/Angular").Include(
                 "~/Scripts/angular.js",
+                "~/Scripts/angular.ng-module.js",
                 //"~/Scripts/angular.min.js",
-                "~/Scripts/app/questionsViaAngular.min.js"));
+                "~/Scripts/app/questionsViaAngular.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/Globals").Include(
                 "~/Scripts/app/functions.js",
-                "~/Scripts/app/GlobalFeed.js"));
+                "~/Scripts/app/GlobalFeed.js",
+                "~/Scripts/app/Notifications.js"));
         }
     }
 }
