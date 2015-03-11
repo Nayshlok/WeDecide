@@ -7,6 +7,7 @@ using WeDecide.DAL.Abstract;
 using Microsoft.AspNet.Identity;
 using WeDecide.ViewModels;
 using System.IO;
+using WeDecide.Models.Concrete;
 
 namespace WeDecide.Controllers
 {
@@ -89,5 +90,18 @@ namespace WeDecide.Controllers
             return RedirectToAction("Index");
         }
 
+        public JsonResult getNotifications()
+        {
+            IEnumerable<Notification> notifications = memberDal.GetNotifications(User.Identity.GetUserId());
+
+            //Create an object that can deliver the messages through json
+            List<NotificationViewModel> nvms = new List<NotificationViewModel>();
+            foreach(Notification n in notifications)
+            {
+                nvms.Add(new NotificationViewModel { SenderName = n.SendingUser.Name, SenderID = n.SenderId, Message = n.Message });
+            }
+
+            return Json(nvms, JsonRequestBehavior.AllowGet);
+        }
     }
 }
