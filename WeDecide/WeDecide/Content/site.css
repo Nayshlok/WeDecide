@@ -36,26 +36,30 @@ header {
  
 	header h2 {
 		display: inline-block;
-		font-family: 'Lobster', cursive;
 		font-size: 32px;
         float: left;
 		left: 2%;
-        top: 10%;
+        top: 15%;
 		margin: 0;
 		padding: 0;
 		position: relative;
 	 }
 
+    header h2 a {
+        font-family: 'Lobster', sans-serif;
+        color: #FFF;
+        font-weight: bold;
+    }
+
     header a:hover {color: #FFF;}
  
 nav {
 	display: inline-block;
-	font-family: 'Raleway', sans-serif;
 	font-size: 18px;
 	font-weight: bold;
     float: left;
 	left: 5%;
-    top: 20%;
+    top: 25%;
 	position: relative;
 	text-align: center;
 	width: 150px;
@@ -67,6 +71,7 @@ nav {
 	 }
  
 	nav li {
+        font-family: 'Raleway', sans-serif;
 		color: #FFF;
 		display: inline-block;
 		margin: 0 2.5% 0 2.5%;
@@ -294,7 +299,7 @@ header a {
 	    text-align: center;
 	    transform: translateX(-50%);
 	    width: 50%;
-        height: 700px;
+        min-height: 700px;
         margin-bottom: 40px;
     }
  
@@ -392,6 +397,22 @@ header a {
     overflow-x: hidden;
     overflow-y: scroll;
     width: auto;
+}
+
+.ng-scope {
+    border-bottom: 1px solid #CCC;
+    border-top: 1px solid #CCC;
+    margin: 10px auto 0 auto;
+}
+
+.ng-scope label {
+    font-family: 'Lobster', sans-serif;
+    font-size: 2rem;
+}
+
+.ng-scope li {
+    list-style: none;
+    font-family: 'Raleway', sans-serif;
 }
 
 /*End Home Page Styling*/
@@ -633,7 +654,7 @@ header a {
  
 .centered-header-text {
 	color: #FFF;
-	font-family: Arial, sans-serif;
+	font-family: 'Lobster', sans-serif;
 	margin-top: 10px;
  }
  

@@ -9,6 +9,8 @@ namespace WeDecide.ViewModels
     public class NotificationViewModel
     {
         public string SenderName { get; set; }
+        
+        public string SenderID { get; set; }
 
         public string Message { get; set; }
     }

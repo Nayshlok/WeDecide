@@ -63,8 +63,8 @@ $(document).ready(function () {
         }
     }
 
-    function createNotification(sender, message) {
-        notifyPanel.append("<section class='notification bottom-shadow'><h4>" + sender + "</h4><p>" + message + "</p></section>");
+    function createNotification(sender, id, message) {
+        notifyPanel.append("<section class='notification bottom-shadow'><h4>" + sender + "</h4><form method='put' action='/Friends/AddFriend'><input type='hidden' name='userId' value=" + id + "/><p onclick='javascript:this.parentNode.submit();'>" + message + "</p></form></section>");
     }
 
     function checkForNotifications() {
@@ -74,7 +74,7 @@ $(document).ready(function () {
             dataType: "json",
             success: function (result) {
                 for (i = 0; i < result.length; i++) {
-                    createNotification(result[i].SenderName, result[i].Message);
+                    createNotification(result[i].SenderName, result[i].SenderID, result[i].Message);
                 }
             },
             error: function (response) {

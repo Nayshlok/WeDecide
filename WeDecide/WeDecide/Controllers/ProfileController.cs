@@ -98,7 +98,7 @@ namespace WeDecide.Controllers
             List<NotificationViewModel> nvms = new List<NotificationViewModel>();
             foreach(Notification n in notifications)
             {
-                nvms.Add(new NotificationViewModel { SenderName = n.SendingUser.Name, Message = n.Message });
+                nvms.Add(new NotificationViewModel { SenderName = n.SendingUser.Name, SenderID = n.SenderId, Message = n.Message });
             }
 
             return Json(nvms, JsonRequestBehavior.AllowGet);
