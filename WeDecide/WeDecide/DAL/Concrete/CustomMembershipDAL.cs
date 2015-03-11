@@ -42,19 +42,19 @@ namespace WeDecide.DAL.Concrete
         {
             //Very simple search to match names
             var relevantUsers = db.Users.Where(u => u.Name.ToLower().Contains(Search.ToLower()) && u.Id != currentUser.Id).ToList();
-            relevantUsers.RemoveAll(u => currentUser.FriendsOfUser.Contains(GetUser(u.Id)));
+            relevantUsers.RemoveAll(u => currentUser.MyFriends.Contains(GetUser(u.Id)));
 
             return relevantUsers.ToList<User>();
         }
 
         public List<Models.Concrete.User> GetFriends(string Id)
         {
-            return GetUser(Id).FriendsOfUser.ToList();
+            return GetUser(Id).MyFriends.ToList();
         }
 
         public void AddFriend(string userId, string friendId)
         {
-            GetUser(userId).FriendsOfUser.Add(GetUser(friendId));
+            GetUser(userId).MyFriends.Add(GetUser(friendId));
             db.SaveChanges();
         }
 

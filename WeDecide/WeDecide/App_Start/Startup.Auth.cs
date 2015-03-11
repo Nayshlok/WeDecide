@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security.Facebook;
 using Owin;
 using WeDecide.Models.Concrete;
 
@@ -53,9 +54,28 @@ public partial class Startup
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            app.UseFacebookAuthentication(
-               appId: "1563885207214507",
-               appSecret: "1fab0e633abd249a158594c9ccb83731");
+            //app.UseFacebookAuthentication(
+            //   appId: "1563885207214507",
+            //   appSecret: "1fab0e633abd249a158594c9ccb83731");
+
+            var FbFriends = new FacebookAuthenticationOptions();
+
+            FbFriends.Scope.Add("email");
+            FbFriends.Scope.Add("user_friends");
+            FbFriends.AppId = "1563885207214507";
+            FbFriends.AppSecret = "1fab0e633abd249a158594c9ccb83731";
+
+            FbFriends.Provider = new FacebookAuthenticationProvider()
+            {
+                OnAuthenticated = async FbContext =>
+                {
+                    FbContext.Identity.AddClaim(
+                        new System.Security.Claims.Claim("FacebookAccessToken", FbContext.AccessToken));
+                }
+            };
+
+            FbFriends.SignInAsAuthenticationType = DefaultAuthenticationTypes.ExternalCookie;
+            app.UseFacebookAuthentication(FbFriends);
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{

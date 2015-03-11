@@ -11,6 +11,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/Scripts/modernizr-2.6.2.js")
     @Scripts.Render("~/Scripts/jquery")
+    @RenderSection("scripts", required: false)
 </head>
 <body>
     <header class="fixed-header shadowed">
@@ -39,7 +40,6 @@
         <p>&copy; @DateTime.Now.Year  - WeDecide</p>
     </footer>
 
-    @RenderSection("scripts", required: false)
     @Scripts.Render("~/Scripts/app/RespondToQuestion.js")
 </body>
 </html>

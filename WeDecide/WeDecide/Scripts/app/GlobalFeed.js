@@ -71,14 +71,12 @@
                 });
         };
 
+        // TODO: set the interval function and click event on 'checkbox.checkEvent'
         function doQuestionFlow() {
-
             // while the box is checked, update the pools at an interval
             if (friendsCheckBox.checked) {
                 setTimeout(function () {
                     // refresh the friends pool
-                    //var searchFilter = "friends";
-                    //var poolInQuestion = friendsQuestionPool;
                     ajaxQuestionLoader("friends", friendsQuestionPool);
                 }, 3000);
             }
@@ -97,6 +95,5 @@
                 }, 7000);
             }
         }
-
     }]);
 })();
