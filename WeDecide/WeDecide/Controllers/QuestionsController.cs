@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Microsoft.AspNet.Identity;
 // Internal references
 using WeDecide.DAL.Abstract;
 using WeDecide.DAL.Concrete;
@@ -33,10 +34,12 @@ namespace WeDecide.Controllers
 
         //[Ninject.Inject] // FIXME: why doesn't injection work here?
         private IQuestionDAL _questionLayer;
+        private IMembershipDAL _memberLayer;
 
         public QuestionsController(/*IQuestionDAL questDal*/)
         {
             _questionLayer = new SqlQuestionDAL();
+            _memberLayer = new CustomMembershipDAL(QuestionDbContext.Create());
         }
 
         // GET: api/Questions
@@ -60,13 +63,6 @@ namespace WeDecide.Controllers
 
             IEnumerable<QuestionDTO> questionsDtos = null;
 
-            /*Console.WriteLine("Question scopes");
-            foreach (var q in _questionLayer.GetAll(q => true)
-                                            .Select(q => q.QuestionScope))
-            {
-                System.Diagnostics.Debug.WriteLine(q);
-            }*/
-
             if (scope != Question.Scope.Global)
             {
                 questionsDtos = _questionLayer
@@ -74,9 +70,9 @@ namespace WeDecide.Controllers
                         .Select(questionToDTO); 
             }
             else
-            {
                 questionsDtos = GetQuestion();
-            }
+
+            User currentUser = _memberLayer.GetUser(User.Identity.GetUserId());
 
             return questionsDtos;
         }
