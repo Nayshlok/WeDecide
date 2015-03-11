@@ -177,7 +177,9 @@ namespace WeDecide.Controllers
             var user = await UserManager.FindAsync(loginInfo.Login);
             if (user != null)
             {
+
                 await SignInAsync(user, isPersistent: false);
+                MergeFriends();
                 return RedirectToLocal(returnUrl);
             }
             else
@@ -219,6 +221,7 @@ namespace WeDecide.Controllers
                     {
                         AddUserFromExternalLogin(info, user);
                         await SignInAsync(user, isPersistent: false);
+                        MergeFriends();
                         return RedirectToLocal(returnUrl);
                     }
                 }
@@ -227,6 +230,27 @@ namespace WeDecide.Controllers
 
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
+        }
+
+        private async void MergeFriends()
+        {
+            var UserClaim = await UserManager.GetClaimsAsync(User.Identity.GetUserId());
+            var token = UserClaim.FirstOrDefault(fb => fb.Type == "FacebookAccessToken").Value;
+            var FbClient = new FacebookClient(token);
+
+            dynamic FacebookFriends = FbClient.Get("/me/friends");
+            foreach (dynamic MyFriend in FacebookFriends.data)
+            {
+                var friendId = MyFriend.Id;
+                User currentUser = MembershipDAL.GetUser(User.Identity.GetUserId());
+                if (!currentUser.UserFriends.Contains(MembershipDAL.GetUser(friendId)))
+                {
+                    if (MembershipDAL.GetUser(friendId) != null)
+                    {
+                        currentUser.UserFriends.Add(MembershipDAL.GetUser(friendId));
+                    }
+                }
+            }
         }
 
         private void AddUserFromExternalLogin(ExternalLoginInfo info, ApplicationUser user)
