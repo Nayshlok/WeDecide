@@ -18,8 +18,8 @@ namespace WeDecide.Models.Concrete
         {
             this.Questions = new HashSet<Question>();
             this.Responses = new HashSet<Response>();
-            this.UserFriends = new HashSet<User>();
-            this.FriendsOfUser = new HashSet<User>();
+            this.MyFriends = new HashSet<User>();
+            this.HasMeAsFriend = new HashSet<User>();
             this.NotificationsReceived = new HashSet<Notification>();
             this.NotificationsSent = new HashSet<Notification>();
         }
@@ -31,8 +31,8 @@ namespace WeDecide.Models.Concrete
     
         public virtual ICollection<Question> Questions { get; set; }
         public virtual ICollection<Response> Responses { get; set; }
-        public virtual ICollection<User> UserFriends { get; set; }
-        public virtual ICollection<User> FriendsOfUser { get; set; }
+        public virtual ICollection<User> MyFriends { get; set; }
+        public virtual ICollection<User> HasMeAsFriend { get; set; }
         public virtual ICollection<Notification> NotificationsReceived { get; set; }
         public virtual ICollection<Notification> NotificationsSent { get; set; }
     }

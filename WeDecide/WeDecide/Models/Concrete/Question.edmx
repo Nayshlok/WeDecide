@@ -235,8 +235,8 @@
           <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Questions" Relationship="Self.FK_Questions_Users" FromRole="User" ToRole="Question" />
           <NavigationProperty Name="Responses" Relationship="Self.UserResponse" FromRole="User" ToRole="Response" />
-          <NavigationProperty Name="UserFriends" Relationship="QuestionDbModel.Friend" FromRole="User" ToRole="User1" />
-          <NavigationProperty Name="FriendsOfUser" Relationship="QuestionDbModel.Friend" FromRole="User1" ToRole="User" />
+          <NavigationProperty Name="MyFriends" Relationship="QuestionDbModel.Friend" FromRole="User" ToRole="User1" />
+          <NavigationProperty Name="HasMeAsFriend" Relationship="QuestionDbModel.Friend" FromRole="User1" ToRole="User" />
           <NavigationProperty Name="NotificationsReceived" Relationship="QuestionDbModel.FK_Notification_ReceiveUser" FromRole="User" ToRole="Notification" />
           <NavigationProperty Name="NotificationsSent" Relationship="QuestionDbModel.FK_Notification_SenderUser" FromRole="User" ToRole="Notification" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />

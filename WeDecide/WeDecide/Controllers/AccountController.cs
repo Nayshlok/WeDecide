@@ -242,11 +242,11 @@ namespace WeDecide.Controllers
             {
                 var friendId = MyFriend.Id;
                 User currentUser = MembershipDAL.GetUser(User.Identity.GetUserId());
-                if (!currentUser.UserFriends.Contains(MembershipDAL.GetUser(friendId)))
+                if (!currentUser.MyFriends.Contains(MembershipDAL.GetUser(friendId)))
                 {
                     if (MembershipDAL.GetUser(friendId) != null)
                     {
-                        currentUser.UserFriends.Add(MembershipDAL.GetUser(friendId));
+                        currentUser.MyFriends.Add(MembershipDAL.GetUser(friendId));
                     }
                 }
             }
