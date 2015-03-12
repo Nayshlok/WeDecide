@@ -50,11 +50,7 @@ function showMakeQuestion() {
 
     //Jacob Code :
 $('input[name=form_submit]').click(function () {
-    var ThisButton = $(this);
-    var MyResponses = new Array();
-    $("input[name=Responses]").each(function () {
-        MyResponses.push($(this).val());
-    });
+    var MyResponses = getResponses();
     var Question = $("#Question");
     var Hours = $("#Hours");
     var Minutes = $("#Minutes");
@@ -85,17 +81,27 @@ $('input[name=form_submit]').click(function () {
     return false;
 });
 
-//function OnMakeQuestionSuccess(resp) {
-//    alert("Called");
-//    if (resp.length == 0) {
-//        togglePopup(false);
-//        clearMakeQuestionForm();
-//    }
-//    else {
-//        alert("Check : " + resp);
-//        displayMakeQuestionErrors(resp);
-//    }
-//}
+function getResponses() {
+    var MyResponses = new Array();
+    $("input[name=Responses]").each(function () {
+        MyResponses.push($(this).val());
+    });
+    return MyResponses;
+}
+
+function ValidResponses() {
+    var MyResponses = getResponses();
+    var ValidResponses = new Array();
+    Array.prototype.forEach(function (element, index, MyResponses) {
+        
+    });
+}
+
+function ValidTimes() {
+    var hours = $('#Hours').val();
+    var minutes = $('#Minutes').val();
+    return (hours >= 0) && (minutes >= 0) && (minutes + hours > 0);
+}
 
 function clearMakeQuestionForm() {
     $("#Question").val("");

@@ -42,7 +42,7 @@
 
     feedApp.controller('HomePageCtrl', ['$scope', '$http', function ($scope, $http) {
         
-        Debug.writeln("The controller was intitialized");
+        //Debug.writeln("The controller was intitialized");
         var self = this;
         self.allQuestionURL = '/api/questions/GetFilteredQuestions/';
 
