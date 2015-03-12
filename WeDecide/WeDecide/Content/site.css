@@ -301,6 +301,7 @@ header a {
 	    width: 50%;
         min-height: 700px;
         margin-bottom: 40px;
+        margin-top: 0;
     }
  
     .add-question {
@@ -344,6 +345,7 @@ header a {
 .profile_pic {
 	background-image: url("../Images/placeholder-headshot.jpg");
 	background-size: cover;
+    background-position: center;
 	height: 175px;
 	position: absolute;
 	width: 100%;
@@ -387,9 +389,10 @@ header a {
 	padding-left: 5px;
 	position: relative;
     width: 100%;
-    height: 50px;
     margin: 0 auto;
     text-align: center;
+    line-height: 125%;
+    padding-top: 10px;
    }
 
 .overflowdiv {
@@ -434,7 +437,10 @@ header a {
 	transform: translateY(-50%);
  }
  
-	.personal-info img {
+	.personal-info .profile-pic {
+        background-image: url("../Images/placeholder-headshot.jpg");
+        background-size: cover;
+        background-position: center;
 		border-radius: 100%;
 		height: 300px;
 		margin: auto;
@@ -695,8 +701,20 @@ header a {
 .notification {
     margin: 20px auto 20px auto;
     text-align: left;
+    padding-top: 5px;
     padding-right: 5px;
     padding-left: 5px;
+    text-align: center;
+}
+
+.notification form {
+    display: inline-block;
+    width: 45%;
+    margin: 0 2px auto 2px;
+}
+
+.notification form input[type=submit] {
+    width: 100%;
 }
 
 /*End General Shared Styling*/

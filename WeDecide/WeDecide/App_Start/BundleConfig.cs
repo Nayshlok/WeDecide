@@ -32,8 +32,7 @@ namespace WeDecide
 
             bundles.Add(new ScriptBundle("~/Scripts/Globals").Include(
                 "~/Scripts/app/functions.js",
-                "~/Scripts/app/GlobalFeed.js",
-                "~/Scripts/app/Notifications.js"));
+                "~/Scripts/app/GlobalFeed.js"));
         }
     }
 }

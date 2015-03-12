@@ -18,7 +18,8 @@
                         <span id="ValidateResponses" class="field-validation-valid" data-valmsg-for="Responses" data-valmsg-replace="true"></span>
                         <ul id="responseHolder">
                             <li class="response" ng-repeat="resp in responses">
-                                <label for="Responses">Response: </label> <input type="text" name="Responses" class="form-control" ng-model="resp" data-val="true" />
+                                <label for="Responses">Response: </label> 
+                                <input type="text" name="Responses" class="form-control" ng-model="resp" data-val="true" placeholder="Possible question response" />
                                 <a href="" ng-click="removeResponse(resp)">X</a>
                             </li>
                         </ul>

@@ -84,7 +84,7 @@ namespace WeDecide.Controllers
                 }
 
                 image.SaveAs(strLocation + @"\" + image.FileName.Replace('+', '_'));
-                memberDal.SaveImagePath(currentUser.Id, @"\Images\" + currentUser.Id + "\\profile\\" + image.FileName);
+                memberDal.SaveImagePath(currentUser.Id, @"/Images/" + currentUser.Id + "/profile/" + image.FileName);
             }
 
             return RedirectToAction("Index");
@@ -98,7 +98,10 @@ namespace WeDecide.Controllers
             List<NotificationViewModel> nvms = new List<NotificationViewModel>();
             foreach(Notification n in notifications)
             {
-                nvms.Add(new NotificationViewModel { SenderName = n.SendingUser.Name, SenderID = n.SenderId, Message = n.Message });
+                if(n.IsPending)
+                {
+                    nvms.Add(new NotificationViewModel { Id = n.Id, SenderName = n.SendingUser.Name, SenderID = n.SenderId, Message = n.Message });
+                }
             }
 
             return Json(nvms, JsonRequestBehavior.AllowGet);
