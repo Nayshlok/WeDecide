@@ -106,7 +106,7 @@ function ValidResponses() {
         }
         return ResponsesAreValid;
     }
-
+        
     function ResponsesContains(ValidResponses, CheckResponse) {
         var Contains = false;
         for (var i = 0; (i < ValidResponses.length) && !Contains; i++) {

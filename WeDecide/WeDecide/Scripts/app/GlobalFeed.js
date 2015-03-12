@@ -8,7 +8,7 @@
 
         var self = this;
 
-        self.allQuestionURL = '/api/questions/GetFilteredQuestions/';
+        self.allQuestionURL = '/api/questions/';
         self.singleQuestionURL = '/api/questions/{0}';
 
         $scope.questions = [
