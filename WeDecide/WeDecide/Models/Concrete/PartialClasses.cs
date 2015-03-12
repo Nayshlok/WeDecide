@@ -22,10 +22,6 @@ namespace WeDecide.Models.Concrete
             {
                 return DateTime.Now > EndDate;
             }
-            set
-            {
-
-            }
         }
 
         public Scope QuestionScope
