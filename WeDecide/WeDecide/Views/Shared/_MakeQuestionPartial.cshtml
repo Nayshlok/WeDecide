@@ -11,7 +11,8 @@
                 @*@using (Ajax.BeginRouteForm("New Question", new AjaxOptions() { UpdateTargetId = "MakeQuestionPopup", HttpMethod = "POST" }))
                 {*@
                     <div class="form-group overflowdiv" ng-controller="UxCtrl">
-                        @Html.ValidationMessageFor(x => x.Question)
+                        @*@Html.ValidationMessageFor(x => x.Question)*@
+                        <span id="ValidateQuestion" class="field-validation-valid" data-valmsg-for="Question" data-valmsg-replace="true"></span>
                         <label>Question Text: </label>
                         @Html.TextBoxFor(x => x.Question, new { @class = "form-control", @name = "questionInput", @placeholder = "What's on your mind?" })
 
