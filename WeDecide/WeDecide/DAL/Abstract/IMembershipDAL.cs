@@ -25,7 +25,7 @@ namespace WeDecide.DAL.Abstract
 
         void MarkNotPending(int id);
 
-        void AddNotification(User sender, User reciever, Notification.NotificationType t);
+        Notification AddNotification(User sender, User reciever, Notification.NotificationType t);
 
         IEnumerable<Notification> GetNotifications(string userId);
 

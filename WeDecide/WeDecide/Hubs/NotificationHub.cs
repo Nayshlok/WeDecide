@@ -30,9 +30,9 @@ namespace WeDecide.Hubs
             string currentId = HttpContext.Current.User.Identity.GetUserId();
             User sender = MembershipDAL.GetUser(currentId);
             User reciever = MembershipDAL.GetUserByName(recieverId);
-            MembershipDAL.AddNotification(sender, reciever, Notification.NotificationType.FriendRequest);
+            Notification n = MembershipDAL.AddNotification(sender, reciever, Notification.NotificationType.FriendRequest);
             //notify reciever
-            Clients.User(reciever.Id).addNotification();
+            Clients.User(reciever.Id).addNotification(n.Id, n.SendingUser.Name, n.SenderId, n.Message);
         }
 
         public void PostTimeUp()

@@ -354,11 +354,16 @@ header a {
 .friend-thumb {
     background-image: url("../Images/placeholder-headshot.jpg");
 	background-size: cover;
+    background-position: center;
 	display: inline-block;
 	height: 50px;
 	width: 50px;
  }
- 
+.friend-thumb-lrg {
+    height: 100px;
+    width: 100px;
+}
+
 .info-panel {
 	background-color: #FCFFF5;
 	bottom: 0;
@@ -696,6 +701,8 @@ header a {
 
 .notification-panel h3 {
     margin: 0px;
+    font-family: 'Lobster', sans-serif;
+    text-decoration: underline;
 }
 
 .notification {

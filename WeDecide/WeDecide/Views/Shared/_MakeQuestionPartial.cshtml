@@ -7,15 +7,16 @@
             <h2>Make a New Question</h2>
         </header>
         <div>
-            <form name="MakeQuestion" action="/Question/New" method="post">
+            <form name="MakeQuestion" action="Question/New" method="post">
                 @*@using (Ajax.BeginRouteForm("New Question", new AjaxOptions() { UpdateTargetId = "MakeQuestionPopup", HttpMethod = "POST" }))
                 {*@
                     <div class="form-group overflowdiv" ng-controller="UxCtrl">
-                        @Html.ValidationMessageFor(x => x.Question)
+                        @*@Html.ValidationMessageFor(x => x.Question)*@
+                        <span id="ValidateQuestion" class="field-validation-valid" data-valmsg-for="Question" data-valmsg-replace="true"></span>
                         <label>Question Text: </label>
                         @Html.TextBoxFor(x => x.Question, new { @class = "form-control", @name = "questionInput", @placeholder = "What's on your mind?" })
 
-                        @Html.ValidationMessageFor(x => x.Responses)
+                        <span id="ValidateResponses" class="field-validation-valid" data-valmsg-for="Responses" data-valmsg-replace="true"></span>
                         <ul id="responseHolder">
                             <li class="response" ng-repeat="resp in responses">
                                 <label for="Responses">Response: </label> 
@@ -38,7 +39,8 @@
                         </p>
                         <br />
 
-                        @Html.ValidationMessageFor(x => x)
+                        @*@Html.ValidationMessageFor(x => x)*@
+                        <span id="ValidateTimes" class="field-validation-valid" data-valmsg-for="" data-valmsg-replace="true"></span>
                         <p>The question should be available for: </p>
                         <p>Hours: <input type="text" value="0" id="Hours" name="Hours" data-val="true" /> Minutes : <input type="text" value="10" id="Minutes" name="Minutes" data-val="true" /></p>
                         <input name="form_submit" type="button" value="Make Question" class="btn btn-success" />
@@ -50,7 +52,6 @@
         @*<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
         <script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
         <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")" type="text/javascript"></script>*@
-        @Scripts.Render("~/Scripts/jquery")
     </div>
     <section id="fade" class="black_overlay"></section>
 </div>

@@ -35,7 +35,6 @@
                 printFailures(data);
             });
         }
-
         pullQuestions();
 
     }]);
