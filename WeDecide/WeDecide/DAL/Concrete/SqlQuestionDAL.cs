@@ -10,6 +10,12 @@ namespace WeDecide.DAL.Concrete
     public class SqlQuestionDAL : IQuestionDAL
     {
         QuestionDbContext dbContext;
+        public QuestionDbContext InnerContext
+        {
+            get { return dbContext; }
+            set { dbContext = value; }
+        }
+
         public SqlQuestionDAL()
         {
             dbContext = QuestionDbContext.Create();

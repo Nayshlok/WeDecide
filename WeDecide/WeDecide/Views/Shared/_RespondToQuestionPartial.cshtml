@@ -1,7 +1,7 @@
 ﻿@model WeDecide.ViewModels.RespondToQuestionViewModel
 
 <form id="form_responses" name="Responses" method="post">
-    @if (@Model != null)
+    @if (Model != null)
     {
         <section class="RespondToQuestion">
             <h3>@Model.Question</h3>
@@ -9,7 +9,7 @@
             @Html.HiddenFor(x => x.QuestionId)
 
             <ul>
-                @foreach (string Response in @Model.Responses)
+                @foreach (string Response in Model.Responses)
                 {
                     <li>
                         @if (DateTime.Now.CompareTo(Model.EndDate) < 0)

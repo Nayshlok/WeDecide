@@ -41,9 +41,9 @@
 
     feedApp.controller('HomePageCtrl', ['$scope', '$http', function ($scope, $http) {
         
-        //Debug.writeln("The controller was intitialized");
         var self = this;
         self.allQuestionURL = '/api/questions/GetFilteredQuestions/';
+        self.singleResponseURL = 'api/questions/GetResponse/';
 
         $scope.questions = [
             { Id: 1, QuestionText: "Test question", IsActive: true, EndTime: Date.now() }

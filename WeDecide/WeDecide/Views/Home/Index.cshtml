@@ -38,7 +38,7 @@
                     </label>
                 </div>
             </div>
-            <section ng-controller="HomePageCtrl">
+            <section ng-controller="GlobalCtrl">
                 <div ng-repeat="q in questions">
                     <label>Question #{{q.Id}}</label>
                     <ul>
@@ -51,8 +51,15 @@
                         <li>
                             <label>Ends: {{q.EndTime}}</label>
                         </li>
-                        <li>Owning User Id: {{q.UserId}}</li>
-                        <li>{{q.ResponseIds}}</li>
+                        @*<li>Owning User Id: {{q.UserId}}</li>*@
+                        <li>
+                            <label>Responses</label>
+                            <ul>
+                                <li ng-repeat="r in q.Responses">
+                                    <input type="radio" name="response" value="{{r}}" />{{r.Text}}
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </section>
