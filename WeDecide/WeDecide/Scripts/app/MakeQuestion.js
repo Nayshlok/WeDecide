@@ -93,7 +93,7 @@ function ValidResponses() {
     var MyResponses = getResponses();
     var ValidResponses = new Array();
     Array.prototype.forEach(function (element, index, MyResponses) {
-        if(String.)
+        
     });
 }
 

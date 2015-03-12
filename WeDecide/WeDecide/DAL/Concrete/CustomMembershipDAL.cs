@@ -55,6 +55,7 @@ namespace WeDecide.DAL.Concrete
         public void AddFriend(string userId, string friendId)
         {
             GetUser(userId).MyFriends.Add(GetUser(friendId));
+            GetUser(friendId).MyFriends.Add(GetUser(userId));
             db.SaveChanges();
         }
 
@@ -80,7 +81,9 @@ namespace WeDecide.DAL.Concrete
 
         public void MarkNotPending(int id)
         {
-            throw new NotImplementedException();
+            Notification notfication = db.Notifications.Where(n => n.Id == id).Single();
+            notfication.IsPending = false;
+            db.SaveChanges();
         }
 
         public void AddNotification(User sender, User reciever, Notification.NotificationType t)
@@ -99,7 +102,6 @@ namespace WeDecide.DAL.Concrete
         {
             return GetUser(userId).NotificationsReceived.ToList<Notification>();
         }
-
 
         public void DeleteUser(string id)
         {

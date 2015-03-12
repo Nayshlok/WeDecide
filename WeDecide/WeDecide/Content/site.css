@@ -695,8 +695,20 @@ header a {
 .notification {
     margin: 20px auto 20px auto;
     text-align: left;
+    padding-top: 5px;
     padding-right: 5px;
     padding-left: 5px;
+    text-align: center;
+}
+
+.notification form {
+    display: inline-block;
+    width: 45%;
+    margin: 0 2px auto 2px;
+}
+
+.notification form input[type=submit] {
+    width: 100%;
 }
 
 /*End General Shared Styling*/
