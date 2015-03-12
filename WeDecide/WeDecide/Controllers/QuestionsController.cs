@@ -30,7 +30,9 @@ namespace WeDecide.Controllers
                 IsActive = q.IsActive,
                 EndTime = q.EndDate,
                 UserId = q.UserId,
-                ResponseIds = q.Responses.Select(r => r.Id)
+                Responses = q.Responses.Select(r => {
+                    return new { Text = r.Text, Id = r.Id };
+                })
             };
 
         //[Ninject.Inject] // FIXME: why doesn't injection work here?
@@ -114,6 +116,13 @@ namespace WeDecide.Controllers
             return Ok(question);
         }
 
+        // GET: api/questions/response/id
+        [ResponseType(typeof(Response))]
+        public Response GetResponse(int id)
+        {
+            return ((SqlQuestionDAL)_questionLayer).InnerContext.Responses.Find(id);
+        }
+
         // POST: api/Questions
         [ResponseType(typeof(Question))]
         public void Post([FromBody]string value)
@@ -142,6 +151,6 @@ namespace WeDecide.Controllers
 
         public string UserId { get; set; }
 
-        public IEnumerable<int> ResponseIds { get; set; }
+        public IEnumerable<object> Responses { get; set; }
     }
 }
