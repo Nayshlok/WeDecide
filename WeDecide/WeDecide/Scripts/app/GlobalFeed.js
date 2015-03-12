@@ -16,7 +16,7 @@
         ];
 
         function pullQuestions() {
-            $http.get(self.allQuestionURL)
+            $http.get(self.allQuestionURL).
             success(function (data, status, headers, config) {
                 // things
                 console.log("Data received: {0}, data length = {1}".format(data, data.length));
