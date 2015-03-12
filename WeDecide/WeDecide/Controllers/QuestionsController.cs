@@ -14,6 +14,7 @@ using WeDecide.DAL.Abstract;
 using WeDecide.DAL.Concrete;
 using WeDecide.Models.Concrete;
 using Extension_Lab;
+using Extension_Lab.Collections;
 
 namespace WeDecide.Controllers
 {
@@ -29,7 +30,9 @@ namespace WeDecide.Controllers
                 IsActive = q.IsActive,
                 EndTime = q.EndDate,
                 UserId = q.UserId,
-                ResponseIds = q.Responses.Select(r => r.Id)
+                Responses = q.Responses.Select(r => {
+                    return new { Text = r.Text, Id = r.Id };
+                })
             };
 
         //[Ninject.Inject] // FIXME: why doesn't injection work here?
@@ -45,9 +48,12 @@ namespace WeDecide.Controllers
         // GET: api/Questions
         public IEnumerable<QuestionDTO> GetQuestion()
         {
-            return _questionLayer.GetAll(q => true).Select(questionToDTO);
-        }
+            var relaventQuestions = _questionLayer.GetAll(q => true);
 
+            return relaventQuestions.Where(q => q != null).Select(questionToDTO);
+        }
+        
+        [Authorize]
         // GET: api/Questions/GetFilteredQuestions/{filter}
         public IEnumerable<QuestionDTO> GetFilteredQuestions(string filter)
         {
@@ -63,16 +69,25 @@ namespace WeDecide.Controllers
 
             IEnumerable<QuestionDTO> questionsDtos = null;
 
+            User currentUser = _memberLayer.GetUser(User.Identity.GetUserId());
+
+            var returnables = currentUser.MyFriends.Join<User, Question, string, Question>(
+                _questionLayer
+                        .GetAll(q => q.QuestionScope == scope),
+                user => user.Id,
+                question => question.UserId, (user, question) =>
+                {
+                    return (user == question.User) ? question : null;
+                });
+
+
             if (scope != Question.Scope.Global)
             {
-                questionsDtos = _questionLayer
-                        .GetAll(q => q.QuestionScope == scope)
-                        .Select(questionToDTO); 
+                questionsDtos = returnables
+                        .Select(questionToDTO);
             }
             else
                 questionsDtos = GetQuestion();
-
-            User currentUser = _memberLayer.GetUser(User.Identity.GetUserId());
 
             return questionsDtos;
         }
@@ -99,6 +114,13 @@ namespace WeDecide.Controllers
                 return NotFound();
 
             return Ok(question);
+        }
+
+        // GET: api/questions/response/id
+        [ResponseType(typeof(Response))]
+        public Response GetResponse(int id)
+        {
+            return ((SqlQuestionDAL)_questionLayer).InnerContext.Responses.Find(id);
         }
 
         // POST: api/Questions
@@ -129,6 +151,6 @@ namespace WeDecide.Controllers
 
         public string UserId { get; set; }
 
-        public IEnumerable<int> ResponseIds { get; set; }
+        public IEnumerable<object> Responses { get; set; }
     }
 }
