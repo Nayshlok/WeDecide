@@ -30,7 +30,7 @@ namespace WeDecide.Controllers
                 IsActive = q.IsActive,
                 EndTime = q.EndDate,
                 UserId = q.UserId,
-                Responses = q.Responses.Select(r => {
+                Responses = q.Responses.Where(r => !r.IsDeleted).Select(r => {
                     return new { Text = r.Text, Id = r.Id };
                 })
             };

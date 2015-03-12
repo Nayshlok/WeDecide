@@ -56,7 +56,9 @@
                             <label>Responses</label>
                             <ul>
                                 <li ng-repeat="r in q.Responses">
-                                    <input type="radio" name="response" value="{{r}}" />{{r.Text}}
+                                    <!--for the response in the question we're currently on...-->
+                                    <!--Offer a radio button selection that is named after the question that owns it-->
+                                    <input type="radio" data-qId={{q.Id}} name="question{{q.Id}}" value="{{r.Text}}" />{{r.Text}}
                                 </li>
                             </ul>
                         </li>
