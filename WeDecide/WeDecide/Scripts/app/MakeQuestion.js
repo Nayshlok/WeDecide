@@ -99,7 +99,6 @@
                 ValidResponses.push(MyResponses[i]);
             }
         }
-        alert("Length : " + ValidResponses.length)
         var ResponsesAreValid = (ValidResponses.length > 1);
         if (!ResponsesAreValid) {
             //Add Validation message to span
@@ -122,11 +121,8 @@
     }
 
     function ValidTimes() {
-        alert("Here");
         var hours = $('#Hours').val();
         var minutes = $('#Minutes').val();
-        alert("Hours : " + hours + ", Minutes : " + minutes);
-        alert((hours >= 0) && (minutes >= 0) && (minutes + hours > 0));
         var TimesAreValid = (hours >= 0) && (minutes >= 0) && (minutes + hours > 0);
         if (!TimesAreValid) {
             //Add Validation to Span
