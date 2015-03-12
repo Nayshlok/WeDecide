@@ -10,7 +10,7 @@
 <section class="profile-page">
     <div class="profile-view">
         <section class="personal-info">
-            <img src="@Model.ImagePath" />
+            <div class="profile-pic" style="background-image: url(@Model.ImagePath), url(/Images/placeholder-headshot.jpg)"></div>
             <h1>@Model.UserName</h1>
             <input id="editBtn" class="btn btn-info btn-sm" type="button" value="Edit Profile" />
         </section>
@@ -26,7 +26,7 @@
                 {
                     foreach (User f in Model.UserFriends)
                     {
-                        <div class="friend-thumb" title="@f.Name"></div>
+                        <div class="friend-thumb" title="@f.Name" style="background-image: url(@f.ImagePath), url(/Images/placeholder-headshot.jpg)"></div>
                     }
                 }
             </div>
