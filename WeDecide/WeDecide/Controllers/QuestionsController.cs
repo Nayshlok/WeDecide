@@ -14,6 +14,7 @@ using WeDecide.DAL.Abstract;
 using WeDecide.DAL.Concrete;
 using WeDecide.Models.Concrete;
 using Extension_Lab;
+using Extension_Lab.Collections;
 
 namespace WeDecide.Controllers
 {
@@ -45,9 +46,12 @@ namespace WeDecide.Controllers
         // GET: api/Questions
         public IEnumerable<QuestionDTO> GetQuestion()
         {
-            return _questionLayer.GetAll(q => true).Select(questionToDTO);
-        }
+            var relaventQuestions = _questionLayer.GetAll(q => true);
 
+            return relaventQuestions.Where(q => q != null).Select(questionToDTO);
+        }
+        
+        [Authorize]
         // GET: api/Questions/GetFilteredQuestions/{filter}
         public IEnumerable<QuestionDTO> GetFilteredQuestions(string filter)
         {
@@ -63,16 +67,25 @@ namespace WeDecide.Controllers
 
             IEnumerable<QuestionDTO> questionsDtos = null;
 
+            User currentUser = _memberLayer.GetUser(User.Identity.GetUserId());
+
+            var returnables = currentUser.MyFriends.Join<User, Question, string, Question>(
+                _questionLayer
+                        .GetAll(q => q.QuestionScope == scope),
+                user => user.Id,
+                question => question.UserId, (user, question) =>
+                {
+                    return (user == question.User) ? question : null;
+                });
+
+
             if (scope != Question.Scope.Global)
             {
-                questionsDtos = _questionLayer
-                        .GetAll(q => q.QuestionScope == scope)
-                        .Select(questionToDTO); 
+                questionsDtos = returnables
+                        .Select(questionToDTO);
             }
             else
                 questionsDtos = GetQuestion();
-
-            User currentUser = _memberLayer.GetUser(User.Identity.GetUserId());
 
             return questionsDtos;
         }
