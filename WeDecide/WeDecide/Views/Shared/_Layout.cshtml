@@ -11,6 +11,8 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/Scripts/modernizr-2.6.2.js")
     @Scripts.Render("~/Scripts/jquery")
+    @Scripts.Render("~/Scripts/jquery.signalR-2.2.0.min.js")
+    @Scripts.Render("~/signalr/hubs")
     @RenderSection("scripts", required: false)
 </head>
 <body>
@@ -41,5 +43,6 @@
     </footer>
 
     @Scripts.Render("~/Scripts/app/RespondToQuestion.js")
+    @Scripts.Render("~/Scripts/Globals")
 </body>
 </html>

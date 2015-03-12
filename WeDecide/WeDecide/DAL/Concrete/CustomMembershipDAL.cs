@@ -86,16 +86,18 @@ namespace WeDecide.DAL.Concrete
             db.SaveChanges();
         }
 
-        public void AddNotification(User sender, User reciever, Notification.NotificationType t)
+        public Notification AddNotification(User sender, User reciever, Notification.NotificationType t)
         {
-            db.Notifications.Add(new Notification(){
+            Notification n = new Notification(){
                 SendingUser = sender,
                 ReceivingUser = reciever,
                 Type = (int)t,
                 IsPending = true,
                 Message = sender.Name + " would like to add you as a friend."
-        });
+        };
+            db.Notifications.Add(n);
             db.SaveChanges();
+            return n;
         }
 
         public IEnumerable<Notification> GetNotifications(string userId)

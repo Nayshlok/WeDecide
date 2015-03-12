@@ -259,7 +259,6 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\EditProfile.js" />
-    <Content Include="Scripts\app\FriendRequest.js" />
     <Content Include="Scripts\app\Friends.js" />
     <Content Include="Scripts\app\functions.js" />
     <Content Include="Scripts\app\GlobalFeed.js" />
@@ -366,8 +365,6 @@
     <Compile Include="DAL\Abstract\IMembershipDAL.cs" />
     <Compile Include="DAL\Abstract\IQuestionDAL.cs" />
     <Compile Include="DAL\Concrete\CustomMembershipDAL.cs" />
-    <Compile Include="DAL\Concrete\FacebookMembershipDAL.cs" />
-    <Compile Include="DAL\Concrete\GoogleMembershipDAL.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
