@@ -10,9 +10,7 @@ namespace WeDecide.Models.Concrete
         private static QuestionDbContext s_instance;
         public static QuestionDbContext Create()
         {
-            if (s_instance == null)
-                s_instance = new QuestionDbContext();
-            return s_instance;
+            return new QuestionDbContext();
         }
     }
 }
