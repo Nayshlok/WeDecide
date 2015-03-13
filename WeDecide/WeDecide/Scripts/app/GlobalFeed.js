@@ -7,7 +7,6 @@
     feedApp.controller('GlobalCtrl', ['$scope', '$http', function ($scope, $http) {
 
         var self = this;
-
         self.allQuestionURL = '/api/questions/';
         self.singleQuestionURL = '/api/questions/{0}';
 
@@ -50,14 +49,22 @@
             { Id: 1, QuestionText: "Test question", IsActive: true, EndTime: Date.now() }
         ];
 
-        var localCheckBox = document.getElementById('checkBox_Local'),
-            friendsCheckBox = document.getElementById('checkBox_Friends'),
-            globalCheckBox = document.getElementById('checkBox_Global');
+        var localCheckBox = document.getElementById('checkbox_Local'),
+            friendsCheckBox = document.getElementById('checkbox_Friends'),
+            globalCheckBox = document.getElementById('checkbox_Global');
+
+        // force it to check
+        globalCheckBox.checked = true;
 
         var localQuestionPool = [],
             friendsQuestionPool = [],
             globalQuestionPool = [];
 
+        /**
+         * Helper function to pull async json from the @constant self.allQuestionURL
+         * @param {string} searchFilter Valid: "local", "friends", "global" in any casing
+         * @param {Array} poolInQuestion
+         */
         function ajaxQuestionLoader(searchFilter, poolInQuestion) {
             var requestURL = self.allQuestionURL + searchFilter;
             console.log("GETting from: {0}".format(requestURL));
@@ -69,10 +76,14 @@
                 error(function (data, headers, status, config) {
                     printFailures(data); // defined in functions.js
                 });
+            // Update the feed with the new concerns
+            $scope.questions = poolInQuestion;
         };
 
         // TODO: set the interval function and click event on 'checkbox.checkEvent'
+        // TODO: decouple for the ng-click and pass the id into each call
         function doQuestionFlow() {
+            console.log("Down in the questionFlow");
             // while the box is checked, update the pools at an interval
             if (friendsCheckBox.checked) {
                 setTimeout(function () {
@@ -95,5 +106,7 @@
                 }, 7000);
             }
         }
+
+        setInterval(doQuestionFlow, 3000);
     }]);
 })();
