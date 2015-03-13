@@ -100,7 +100,7 @@
 
         var self = this;
 
-        self.allQuestionURL = '/api/Questions/CurrentQuestions/';
+        self.allQuestionURL = 'api/ProfileQuestion/CurrentQuestions';
         self.singleQuestionURL = '/api/questions/{0}';
 
         $scope.questions = [

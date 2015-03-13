@@ -54,15 +54,6 @@ namespace WeDecide.Controllers
         }
 
         [Authorize]
-        // GET: api/Questions/GetCurrentQuestions
-        public IEnumerable<QuestionDTO> CurrentQuestions()
-        {
-            var relaventQuestions = _questionLayer.GetAll(q => (q.User.Id == User.Identity.GetUserId() && !q.IsDeleted));
-            relaventQuestions.OrderBy(x => x.EndDate);
-            return relaventQuestions.Where(q => q != null).Select(questionToDTO);
-        }
-
-        [Authorize]
         // GET: api/Questions/GetFilteredQuestions/{filter}
         public IEnumerable<QuestionDTO> GetFilteredQuestions(string filter)
         {
