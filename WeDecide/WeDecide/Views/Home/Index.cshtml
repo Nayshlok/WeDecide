@@ -27,17 +27,17 @@
                     </label>
                 </div>
                 <div class="checkbox-inline">
-                    <label>
+                    @*<label>
                         <input type="checkbox" id="checkbox_Local"> Local
                     </label>
-                </div>
+                </div>*@
                 <div class="checkbox-inline">
                     <label>
                         <input type="checkbox" id="checkbox_Global" ng-click="doQuestionFlow('global')"> Global
                     </label>
                 </div>
             </div>
-            <section ng-controller="GlobalCtrl">
+            <section ng-controller="HomePageCtrl">
                 <div ng-repeat="q in questions">
                     @Html.Partial("_GlobalFeedPartial")
                 </div>
