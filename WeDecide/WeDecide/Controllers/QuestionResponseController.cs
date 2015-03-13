@@ -59,7 +59,13 @@ namespace WeDecide.Controllers
             {
                 ViewBag.ErrorMessage = "You cannot respond to your own question";
             }
-            return UserInScope && !IsSameUser;
+
+            bool IsActive = question.IsActive;
+            if (!IsActive)
+            {
+                ViewBag.ErrorMessage = "This question has timed out";
+            }
+            return UserInScope && !IsSameUser && question.IsActive;
         }
 
         private bool UserInQuestionScope(Question question)
@@ -101,7 +107,7 @@ namespace WeDecide.Controllers
             return new EmptyResult();
         }
 
-        private Response MakeUserResponse(Question question, String responseText)
+        private Response MakeUserResponse(Question question, string responseText)
         {
             User currentUser = Mdal.GetUser(User.Identity.GetUserId());
             Response response = null;
@@ -110,11 +116,22 @@ namespace WeDecide.Controllers
             if (CanAddFreeResponse(question, responseText))
             {
                 response = new Response() { Question = question, Text = responseText, Users = new List<User>()};
-                //Add Response to question
-                //question.Responses.Add(response);
-                //response.Users.Add(currentUser);
+                //Add Response to Question
                 Qdal.AddResponse(question.Id, response);
-                Qdal.AddUserToResponse(response.Id, currentUser.Id);
+                question.Responses.Add(response);
+                //If Has Responded Before
+                //if (UserHasRespondedBefore(question))
+                //{
+                //    int oldResponseId = question.Responses.First(x => x.Users.Contains(currentUser, new UserComparer())).Id;
+                //    //Swap the votes between the responses
+                //    Qdal.SwitchUserResponse(oldResponseId, response.Id, currentUser.Id);
+                //}
+                ////Else
+                //else
+                //{
+                //    //Add User to the Response
+                //    Qdal.AddUserToResponse(response.Id, currentUser.Id);
+                //}
             }
             //If User has responded to question before
             if(UserHasRespondedBefore(question))
@@ -160,7 +177,7 @@ namespace WeDecide.Controllers
         //    response.UserResponses.Add(userResponse);
         //}
 
-        private bool CanAddFreeResponse(Question question, String response)
+        private bool CanAddFreeResponse(Question question, string response)
         {
             return question.FreeResponseEnabled && question.Responses.Count(x => x.Text.Equals(response)) < 1;
         }
