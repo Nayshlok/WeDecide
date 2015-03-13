@@ -39,7 +39,8 @@ namespace WeDecide.Controllers
                 //Construct the Question
                 Question NewQuestion = q.GetQuestion();
                 //Add current user to question
-                NewQuestion.User = Mdal.GetUser(User.Identity.GetUserId());
+                //NewQuestion.User = Mdal.GetUser(User.Identity.GetUserId());
+                NewQuestion.UserId = (User.Identity.GetUserId());
                 //Save the Question
                 Qdal.Create(NewQuestion);
                 //Don't know what to return yet, so returning response page
