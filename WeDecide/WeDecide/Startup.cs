@@ -14,7 +14,7 @@ namespace WeDecide
         {
             ConfigureAuth(app);
             GlobalHost.DependencyResolver.Register(typeof(IUserIdProvider), () => new MyIdProvider());
-            GlobalHost.DependencyResolver.Register(typeof(NotificationHub), () => new NotificationHub(new CustomMembershipDAL(new QuestionDbContext())));
+            GlobalHost.DependencyResolver.Register(typeof(NotificationHub), () => new NotificationHub(new CustomMembershipDAL(/*new QuestionDbContext()*/)));
             app.MapSignalR();
         }
     }

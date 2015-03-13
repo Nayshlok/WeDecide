@@ -61,5 +61,35 @@ namespace WeDecide.DAL.Concrete
         {
             throw new NotImplementedException();
         }
+
+
+        public IEnumerable<Question> FriendsQuestions(User currentUser, Question.Scope scope)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public void SwitchUserResponse(int oldResponseId, int newResponseId, User user)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public void AddUserToResponse(int respondId, User user)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public void AddUserToResponse(int respondId, string userId)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public void SwitchUserResponse(int oldResponseId, int newResponseId, string userId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -34,7 +34,7 @@ namespace WeDecide.Controllers
         public ProfileQuestionController(/*IQuestionDAL questDal*/)
         {
             _questionLayer = new SqlQuestionDAL();
-            _memberLayer = new CustomMembershipDAL(QuestionDbContext.Create());
+            _memberLayer = new CustomMembershipDAL(/*QuestionDbContext.Create()*/);
         }
 
         [HttpGet]

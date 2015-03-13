@@ -12,36 +12,52 @@ namespace WeDecide.DAL.Concrete
 {
     public class CustomMembershipDAL : IMembershipDAL
     {
-        QuestionDbContext db;
+        //QuestionDbContext db;
 
-        public CustomMembershipDAL(QuestionDbContext context)
+        public CustomMembershipDAL(/*QuestionDbContext context*/)
         {
-            db = context;
+            //db = context;
         }
 
         public void AddUser(string name, string email, string id)
         {
-            User newUser = new User { Name = name,  Id = id };
-            db.Users.Add(newUser);
-            db.SaveChanges();
+            using(QuestionDbContext db = new QuestionDbContext()) 
+            {
+                User newUser = new User { Name = name,  Id = id };
+                db.Users.Add(newUser);
+                db.SaveChanges();
+            }            
         }
 
         public Models.Concrete.User GetUser(string Id)
         {
-            var user = db.Users.Where(x => x.Id == Id && !x.IsDeleted).FirstOrDefault();
+            User user = null;
+            using(QuestionDbContext db = new QuestionDbContext()) 
+            {
+                user = db.Users.Include("NotificationsReceived").Include("NotificationsSent").Include("Questions").Include("Responses").Include("MyFriends").Where(x => x.Id == Id && !x.IsDeleted).FirstOrDefault();
+            }
             return user;
         }
 
         public User GetUserByName(string name)
         {
-            var user = db.Users.FirstOrDefault(x => x.Name == name && !x.IsDeleted);
+            User user = null;
+            using(QuestionDbContext db = new QuestionDbContext()) 
+            {
+                user = db.Users.FirstOrDefault(x => x.Name == name && !x.IsDeleted);
+            }
             return user;
         }
 
         public List<Models.Concrete.User> Search(User currentUser, string Search)
         {
-            //Very simple search to match names
-            var relevantUsers = db.Users.Where(u => u.Name.ToLower().Contains(Search.ToLower()) && u.Id != currentUser.Id).ToList();
+            List<User> relevantUsers = new List<User>();
+            using(QuestionDbContext db = new QuestionDbContext()) 
+            {
+                //Very simple search to match names
+                relevantUsers = db.Users.Where(u => u.Name.ToLower().Contains(Search.ToLower()) && u.Id != currentUser.Id).ToList();
+            }
+
             relevantUsers.RemoveAll(u => currentUser.MyFriends.Contains(GetUser(u.Id)));
 
             return relevantUsers.ToList<User>();
@@ -49,41 +65,59 @@ namespace WeDecide.DAL.Concrete
 
         public List<Models.Concrete.User> GetFriends(string Id)
         {
-            return GetUser(Id).MyFriends.ToList();
+            List<User> friends = new List<User>();
+            using(QuestionDbContext db = new QuestionDbContext()) 
+            {
+                User user = db.Users.Where(x => x.Id == Id && !x.IsDeleted).FirstOrDefault();
+                friends = user.MyFriends.ToList();
+            }
+            return friends;
         }
 
         public void AddFriend(string userId, string friendId)
         {
-            GetUser(userId).MyFriends.Add(GetUser(friendId));
-            GetUser(friendId).MyFriends.Add(GetUser(userId));
-            db.SaveChanges();
+            using(QuestionDbContext db = new QuestionDbContext()) 
+            {
+                User user = db.Users.Where(x => x.Id == userId && !x.IsDeleted).FirstOrDefault();
+                User friend = db.Users.Where(x => x.Id == friendId && !x.IsDeleted).FirstOrDefault();
+                user.MyFriends.Add(friend);
+                friend.MyFriends.Add(user);
+                db.SaveChanges();
+            }
         }
 
 
         public bool RemoveUser(string userId)
         {
-            User toRemove = db.Users.SingleOrDefault(x => x.Id == userId);
-            if (toRemove != null)
+            bool Success= false;
+            using(QuestionDbContext db = new QuestionDbContext()) 
             {
-                var responses = db.Responses.Where(x => x.Users.Contains(toRemove));
-                foreach (Response r in responses)
-                {
-                }
+                User toRemove = db.Users.SingleOrDefault(x => x.Id == userId);
+                toRemove.IsDeleted = true;
+                Success = true;
             }
-            return false;
+            return Success;
         }
 
         public IEnumerable<User> GetUsers()
         {
-            return db.Users.ToList();
+            IEnumerable<User> users = new List<User>();
+            using(QuestionDbContext db = new QuestionDbContext()) 
+            {
+                users = db.Users.ToList();
+            }
+            return users;
         }
 
 
         public void MarkNotPending(int id)
         {
-            Notification notfication = db.Notifications.Where(n => n.Id == id).Single();
-            notfication.IsPending = false;
-            db.SaveChanges();
+            using(QuestionDbContext db = new QuestionDbContext()) 
+            {
+                Notification notfication = db.Notifications.Where(n => n.Id == id).Single();
+                notfication.IsPending = false;
+                db.SaveChanges();
+            }
         }
 
         public Notification AddNotification(User sender, User reciever, Notification.NotificationType t)
@@ -95,27 +129,38 @@ namespace WeDecide.DAL.Concrete
                 IsPending = true,
                 Message = sender.Name + " would like to add you as a friend."
         };
-            db.Notifications.Add(n);
-            db.SaveChanges();
+            using(QuestionDbContext db = new QuestionDbContext()) 
+            {
+                db.Notifications.Add(n);
+                db.SaveChanges();
+            }
             return n;
         }
 
         public IEnumerable<Notification> GetNotifications(string userId)
         {
-            return GetUser(userId).NotificationsReceived.ToList<Notification>();
+            IEnumerable<Notification> notifications = new List<Notification>();
+            using (QuestionDbContext db = new QuestionDbContext())
+            {
+                User user = db.Users.Where(x => x.Id == userId && !x.IsDeleted).FirstOrDefault();
+                notifications = user.NotificationsReceived.ToList<Notification>();
+            }
+            return notifications;            
         }
 
         public void DeleteUser(string id)
         {
-            var target = GetUser(id);
-            target.IsDeleted = true;
-            db.SaveChanges();
+            RemoveUser(id);
         }
 
         public void SaveImagePath(string Id, string imagePath)
         {
-            GetUser(Id).ImagePath = imagePath;
-            db.SaveChanges();
+            using(QuestionDbContext db = new QuestionDbContext()) 
+            {
+                User user = db.Users.Where(x => x.Id == Id && !x.IsDeleted).FirstOrDefault();
+                user.ImagePath = imagePath;
+                db.SaveChanges();
+            }
         }
     }
 }
