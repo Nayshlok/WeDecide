@@ -18,7 +18,7 @@
         </section>
     </div>
     <div>
-        @Html.Partial("_ProfileEditPartial");
+        @Html.Partial("_ProfileEditPartial")
     </div>
     <div class="info-box-holder">
         <section class="info-box shadowed">
@@ -28,7 +28,7 @@
                 {
                     foreach (User f in Model.UserFriends)
                     {
-                        <div class="friend-thumb" title="@f.Name" style="background-image: url(@f.ImagePath), url(/Images/placeholder-headshot.jpg)"></div>
+                        <div class="friend-thumb friend-thumb-lrg" title="@f.Name" style="background-image: url(@f.ImagePath), url(/Images/placeholder-headshot.jpg)"></div>
                     }
                 }
             </div>
