@@ -165,18 +165,13 @@ namespace WeDecide.DAL.Concrete
 
         public IEnumerable<Question> FriendsQuestions(User currentUser, Question.Scope scope)
         {
-            //QuestionDbContext outerContext = new QuestionDbContext(); 
-            IEnumerable<Question> questions  = GetAll(q => q.QuestionScope == scope);
-            var revelant = currentUser.MyFriends.Join<User, Question, string, Question>(
-                    questions,
-                    user => user.Id, 
-                    question => question.UserId, 
-                    (user, question) =>
-                    {
-                        return (user == question.User) ? question : null;
-                    });
-            //outerContext.Dispose();
-            return revelant;
+            List<Question> Relevant = null;
+            using (QuestionDbContext dbContext = QuestionDbContext.Create())
+            {
+                IEnumerable<string> FriendIds = currentUser.MyFriends.Select(x => x.Id);
+                Relevant = dbContext.Questions.Include("User").Include("Responses.Users").Where(x => FriendIds.Contains(x.UserId)).ToList();
+            }
+            return Relevant;
 
         }
     }

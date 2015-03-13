@@ -44,9 +44,7 @@
         self.allQuestionURL = '/api/questions/GetFilteredQuestions/';
         self.singleResponseURL = 'api/questions/GetResponse/';
 
-        $scope.questions = [
-            //{ Id: 1, QuestionText: "Test question", IsActive: true, EndTime: Date.now() }
-        ];
+        $scope.questions = [];
 
         var localCheckBox = document.getElementById('checkbox_Local'),
             friendsCheckBox = document.getElementById('checkbox_Friends'),
@@ -100,7 +98,6 @@
                 else
                 {
                     console.log("Emptying friend questions");
-                    $scope.questions.length = 0;
                     for (var i = 0; i < $scope.questions.length; i++) {
                         $scope.questions.pop();
                     }
