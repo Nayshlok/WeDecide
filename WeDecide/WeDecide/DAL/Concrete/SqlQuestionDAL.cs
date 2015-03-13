@@ -42,7 +42,7 @@ namespace WeDecide.DAL.Concrete
                     dbContext.SaveChanges();
                     Success = true;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     Console.WriteLine("There was an exception");
                     Success = false;
