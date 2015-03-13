@@ -81,7 +81,7 @@ namespace WeDecide.Controllers
         }
 
         [HttpPost]
-        public ActionResult QuestionResponse(string ChosenResponse, int QuestionId)
+        public ActionResult QuestionResponsePost(string ChosenResponse, int QuestionId)
         {
             //Get the Question and Response chosen
             Question AffectedQuestion = Qdal.Get(QuestionId);

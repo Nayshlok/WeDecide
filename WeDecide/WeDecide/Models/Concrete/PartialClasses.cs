@@ -45,7 +45,10 @@ namespace WeDecide.Models.Concrete
         {
             foreach (var propMeth in left.GetType().GetProperties())
             {
-                propMeth.SetValue(left, propMeth.GetValue(right));
+                if (propMeth.SetMethod != null)
+                {
+                    propMeth.SetValue(left, propMeth.GetValue(right));
+                }
             }
         }
     }

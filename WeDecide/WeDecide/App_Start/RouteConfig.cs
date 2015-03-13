@@ -39,6 +39,11 @@ namespace WeDecide
                 defaults: new { controller = "QuestionResponse", action = "QuestionResponse" });
 
             routes.MapRoute(
+                name: "Response Post",
+                url: "Respond/Post/{QuestionId}",
+                defaults: new { controller = "QuestionResponse", action = "QuestionResponsePost" });
+
+            routes.MapRoute(
                 name: "Delete Question",
                 url: "Question/Delete/{QuestionId}",
                 defaults: new { controller = "Question", action = "RemoveQuestion" });
