@@ -35,6 +35,15 @@ namespace WeDecide.Hubs
             Clients.User(reciever.Id).addNotification(n.Id, n.SendingUser.Name, n.SenderId, n.Message);
         }
 
+        public void AddFriend(int nId, string UserID)
+        {
+            User currentUser = MembershipDAL.GetUser(HttpContext.Current.User.Identity.GetUserId());
+            User sender = MembershipDAL.GetUser(UserID);
+            MembershipDAL.AddFriend(currentUser.Id, UserID);
+            MembershipDAL.MarkNotPending(nId);
+            Clients.User(UserID).acceptNotification(sender.Name + " has accepted your friend request.", sender.Name);
+        }
+
         public void PostTimeUp()
         {
             throw new NotImplementedException();
