@@ -20,7 +20,7 @@ namespace WeDecide.Models.Concrete
         {
             get
             {
-                return DateTime.Now > EndDate;
+                return DateTime.Now < EndDate;
             }
         }
 
