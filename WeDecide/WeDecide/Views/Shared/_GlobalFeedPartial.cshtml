@@ -1,25 +1,29 @@
-﻿<label>Question #{{q.Id}}</label>
-<ul>
-    <li>
-        {{q.QuestionText}}
-    </li>
-    <li>
-        Active: {{q.IsActive}}
-    </li>
-    <li>
-        <label>Ends: {{q.EndTime}}</label>
-    </li>
-    @if (Request.IsAuthenticated)
-    {
-        <li>
-            <label>Responses</label>
-            <ul>
-                <li ng-repeat="r in q.Responses">
-                    <!--for the response in the question we're currently on...-->
-                    <!--Offer a radio button selection that is named after the question that owns it-->
-                    <input type="radio" data-qid={{q.Id}} name="question{{q.Id}}" value="{{r.Text}}" />{{r.Text}} {{r.VoteCount}}
-                </li>
-            </ul>
+﻿<section class="question shadowed">
+    <label class="questionId">Question #{{q.Id}}</label>
+    <hr />
+    <ul>
+        <li class="questionText">
+            {{q.QuestionText}}
         </li>
-    }
-</ul>
+        <li class="questionActive">
+            Active: {{q.IsActive}}
+        </li>
+        <li>
+            <label>Ends: {{q.EndTime}}</label>
+        </li>
+        @if (Request.IsAuthenticated)
+        {
+            <li class="responses">
+                <label class="responseText">Responses</label>
+                <hr />
+                <ul>
+                    <li ng-repeat="r in q.Responses">
+                        <!--for the response in the question we're currently on...-->
+                        <!--Offer a radio button selection that is named after the question that owns it-->
+                        <input type="radio" data-qid={{q.Id}} name="question{{q.Id}}" value="{{r.Text}}" />{{r.Text}} {{r.VoteCount}}
+                    </li>
+                </ul>
+            </li>
+        }
+    </ul>
+</section>
