@@ -56,20 +56,18 @@ namespace WeDecide.Controllers
             return View("FriendsView", fvm);
         }
 
-        public ActionResult AddFriend(int nId, string UserID)
+        [HttpPost]
+        public void AddFriend(int nId, string UserID)
         {
             User currentUser = memberDal.GetUser(User.Identity.GetUserId());
             memberDal.AddFriend(currentUser.Id, UserID);
             memberDal.MarkNotPending(nId);
-
-            return RedirectToAction("Index", "Profile");
         }
 
-        public ActionResult RejectFriend(int nId)
+        [HttpPost]
+        public void RejectFriend(int nId)
         {
             memberDal.MarkNotPending(nId);
-
-            return RedirectToAction("Index", "Profile");
         }
     }
 }
