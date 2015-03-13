@@ -34,7 +34,6 @@
                 printFailures(data);
             });
         }
-
         pullQuestions();
 
     }]);
@@ -46,7 +45,7 @@
         self.singleResponseURL = 'api/questions/GetResponse/';
 
         $scope.questions = [
-            { Id: 1, QuestionText: "Test question", IsActive: true, EndTime: Date.now() }
+            //{ Id: 1, QuestionText: "Test question", IsActive: true, EndTime: Date.now() }
         ];
 
         var localCheckBox = document.getElementById('checkbox_Local'),
@@ -109,4 +108,42 @@
 
         setInterval(doQuestionFlow, 3000);
     }]);
+
+    feedApp.controller('ProfileCtrl', ['$scope', '$http', function ($scope, $http) {
+
+        var self = this;
+
+        self.allQuestionURL = 'api/ProfileQuestion/CurrentQuestions';
+        self.singleQuestionURL = '/api/questions/{0}';
+
+        $scope.questions = [
+            //{ Id: 1, QuestionText: "Test question", IsActive: true, EndTime: Date.now() }
+        ];
+
+        function pullQuestions() {
+            console.log("Asking for current questions {0}".format(self.allQuestionURL));
+            $http.get(self.allQuestionURL).
+            success(function (data, status, headers, config) {
+                // things
+                console.log("Data received: {0}, data length = {1}".format(data, data.length));
+                for (var d in data) {
+                    console.log("{0}\t{1}".format(d, data[d]));
+                    var someObject = data[d];
+                    for (var o in someObject) {
+                        console.log("\tK: {0}, V: {1}".format(o, someObject[o]));
+                    }
+                    $scope.questions.push(data[d]);
+                }
+            }).
+            error(function (data, status, headers, config) {
+                // things that deal with errors
+                console.log("Failures:\n{0}".format(data));
+                printFailures(data);
+            });
+        }
+        pullQuestions();
+
+    }]);
+
+
 })();
