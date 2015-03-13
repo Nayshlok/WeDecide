@@ -19,6 +19,12 @@
     </div>
 
     <div class="login-container">
+        <div class="global-feed">
+            <h2>See what you are missing.</h2>
+            <div>
+                @Html.Partial("_GlobalFeedPartial")
+            </div>
+        </div>
         <section class="login-box">
             <h2>Sign Up</h2>
             @using (Html.BeginForm("Register", "Account", FormMethod.Post))
@@ -40,12 +46,6 @@
             }
             @Html.ActionLink("Already a user?", "Login")
         </section>
-        <div class="global-feed">
-            <h2>See what you are missing.</h2>
-            <div>
-                <!-- feed me -->
-            </div>
-        </div>
     </div>
     @Scripts.Render("~/Scripts/jquery")
     @Scripts.Render("~/Scripts/Login.js")
