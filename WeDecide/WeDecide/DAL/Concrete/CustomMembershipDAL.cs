@@ -123,8 +123,8 @@ namespace WeDecide.DAL.Concrete
         public Notification AddNotification(User sender, User reciever, Notification.NotificationType t)
         {
             Notification n = new Notification(){
-                SendingUser = sender,
-                ReceivingUser = reciever,
+                SenderId = sender.Id,
+                ReceiverId = reciever.Id,
                 Type = (int)t,
                 IsPending = true,
                 Message = sender.Name + " would like to add you as a friend."

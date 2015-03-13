@@ -304,6 +304,7 @@ header a {
 	    transform: translateX(-50%);
 	    width: 50%;
         min-height: 700px;
+        max-width: 1000px;
         margin-bottom: 40px;
         margin-top: 0;
     }
@@ -336,7 +337,6 @@ header a {
 	    position: relative;
 	    text-align: center;
 	    width: 90%;
-        height: 700px;
         margin: 0 auto 40px auto;
     }
  
