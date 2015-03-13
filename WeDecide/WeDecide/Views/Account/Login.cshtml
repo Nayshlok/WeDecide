@@ -21,10 +21,14 @@
     </div>
 
     <div class="login-container">
-        <div class="global-feed">
+        @Scripts.Render("~/Scripts/Angular")
+        @Scripts.Render("~/Scripts/Globals")
+        <div class="global-feed" ng-app="feedApp">
             <h2>See what you are missing.</h2>
-            <div>
-                @Html.Partial("_GlobalFeedPartial")
+            <div ng-controller="GlobalCtrl">
+                <section ng-repeat="q in questions">
+                    @Html.Partial("_GlobalFeedPartial")
+                </section>
             </div>
         </div>
         <section class="login-box">

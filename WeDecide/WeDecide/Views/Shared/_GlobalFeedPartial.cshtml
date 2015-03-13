@@ -1,25 +1,26 @@
-﻿@Scripts.Render("~/Scripts/Angular")
-@Scripts.Render("~/Scripts/Globals")
-<section ng-app="feedApp">
-    <article ng-controller="GlobalCtrl">
-        <h3>Global Questions</h3>
-        <ul>
-            <li ng-repeat="q in questions">
-                <label>Question #{{q.Id}}</label>
-                <ul>
-                    <li>
-                        {{q.QuestionText}}
-                    </li>
-                    <li>
-                        Active: {{q.IsActive}}
-                    </li>
-                    <li>
-                        <label>Ends: {{q.EndTime}}</label>
-                    </li>
-                </ul>
-                @*<label>{{q.QuestionText}}</label>*@
-                @*<label>Active: {{q.IsActive}}</label>*@
-            </li>
-        </ul>
-    </article>
-</section>
+﻿<h3>Global Questions</h3>
+<label>Question #{{q.Id}}</label>
+<ul>
+    <li>
+        {{q.QuestionText}}
+    </li>
+    <li>
+        Active: {{q.IsActive}}
+    </li>
+    <li>
+        <label>Ends: {{q.EndTime}}</label>
+    </li>
+    @if (Request.IsAuthenticated)
+    {
+        <li>
+            <label>Responses</label>
+            <ul>
+                <li ng-repeat="r in q.Responses">
+                    <!--for the response in the question we're currently on...-->
+                    <!--Offer a radio button selection that is named after the question that owns it-->
+                    <input type="radio" data-qid={{q.Id}} name="question{{q.Id}}" value="{{r.Text}}" />{{r.Text}} {{r.VoteCount}}
+                </li>
+            </ul>
+        </li>
+    }
+</ul>
