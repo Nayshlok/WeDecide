@@ -8,17 +8,21 @@
         login.passwordConfirm = $('#passwordConfirm');
         login.loginBtn = $('#loginBtn');
 
-        $(login.email).keyup(function () {
+        login.email.on('blur', function () {
             btnValidation();
         });
 
-        $(login.password).keyup(function () {
+        login.password.on('blur', function () {
             btnValidation();
         });
 
-        $(login.passwordConfirm).keyup(function () {
+        login.passwordConfirm.on('blur', function () {
             btnValidation();
         });
+
+        //login.loginBtn.on('mouseover', function () {
+        //    btnValidation();
+        //});
 
         function btnValidation() {
             if ($('form').valid()) {
@@ -28,10 +32,8 @@
             } else {
                 login.loginBtn.removeClass('btn-success');
                 login.loginBtn.addClass('btn-danger');
-                //login.loginBtn.attr('disabled','disabled');
+                login.loginBtn.attr('disabled','disabled');
             }
         }
-
-        btnValidation();
     }
 });
