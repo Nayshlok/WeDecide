@@ -56,18 +56,33 @@ namespace WeDecide.Controllers
             return View("FriendsView", fvm);
         }
 
+<<<<<<< HEAD
         [HttpPost]
+=======
+>>>>>>> 153ab24052047c98597e6e5fdb21931a6378364b
         public void AddFriend(int nId, string UserID)
         {
             User currentUser = memberDal.GetUser(User.Identity.GetUserId());
             memberDal.AddFriend(currentUser.Id, UserID);
             memberDal.MarkNotPending(nId);
+<<<<<<< HEAD
         }
 
         [HttpPost]
         public void RejectFriend(int nId)
         {
             memberDal.MarkNotPending(nId);
+=======
+
+            //return RedirectToAction("Index", "Profile");
+        }
+
+        public void RejectFriend(int nId)
+        {
+            memberDal.MarkNotPending(nId);
+
+            //return RedirectToAction("Index", "Profile");
+>>>>>>> 153ab24052047c98597e6e5fdb21931a6378364b
         }
     }
 }

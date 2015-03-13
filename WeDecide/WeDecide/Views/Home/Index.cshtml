@@ -9,7 +9,7 @@
 @Scripts.Render("~/Scripts/Angular")
 <section class="home-page">
     <div ng-modules="feedApp, questionApp">
-        @Html.Partial("_QuickProfilePartial", @Model.User)
+        @Html.Partial("_QuickProfilePartial", Model.User)
         <section class="welcome-header shadowed">
             <h1>Welcome, @Model.User.UserName</h1>
         </section>
@@ -20,10 +20,10 @@
             <button id="btnNewQuestion" type="button" class="bottom-btn btn-primary btn-lg btn-block">Create New Question</button>
         </div>
         <section class="content-feed shadowed">
-            <div class="filter-feed">
+            <div class="filter-feed" ng-controller="HomePageCtrl">
                 <div class="checkbox-inline">
                     <label>
-                        <input type="checkbox" id="checkbox_Friends"> Friends
+                        <input type="checkbox" id="checkbox_Friends" onclick="console.log('we\'re typing')" ng-click="doQuestionFlow"> Friends
                     </label>
                 </div>
                 <div class="checkbox-inline">
@@ -37,7 +37,7 @@
                     </label>
                 </div>
             </div>
-            <section ng-controller="GlobalCtrl">
+            <section ng-controller="HomePageCtrl">
                 <div ng-repeat="q in questions">
                     <label>Question #{{q.Id}}</label>
                     <ul>
@@ -57,7 +57,7 @@
                                 <li ng-repeat="r in q.Responses">
                                     <!--for the response in the question we're currently on...-->
                                     <!--Offer a radio button selection that is named after the question that owns it-->
-                                    <input type="radio" data-qId={{q.Id}} name="question{{q.Id}}" value="{{r.Text}}" />{{r.Text}}
+                                    <input type="radio" data-qId={{q.Id}} name="question{{q.Id}}" value="{{r.Text}}" />{{r.Text}} {{r.VoteCount}}
                                 </li>
                             </ul>
                         </li>
