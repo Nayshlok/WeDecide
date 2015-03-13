@@ -7,6 +7,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@Scripts.Render("~/Scripts/Angular")
+@Scripts.Render("~/Scripts/Globals")
 <section class="profile-page">
     <div class="profile-view">
         <section class="personal-info">
@@ -34,6 +36,66 @@
         <section class="info-box shadowed">
             <header><h2>Questions</h2></header>
             <div>
+
+                <section ng-app="feedApp">
+                    <article ng-controller="ProfileCtrl">
+                        <ul>
+                            <li ng-repeat="q in questions">
+                                <label>Question #{{q.Id}}</label>
+                                <ul>
+                                    <li>
+                                        {{q.QuestionText}}
+                                    </li>
+                                    <li>
+                                        Active: {{q.IsActive}}
+                                    </li>
+                                    <li>
+                                        <label>Ends: {{q.EndTime}}</label>
+                                    </li>
+                                    <li>
+                                        <label>Responses</label>
+                                        <ul>
+                                            <li ng-repeat="r in q.Responses">
+                                                <!--for the response in the question we're currently on...-->
+                                                <!--Offer a radio button selection that is named after the question that owns it-->
+                                                {{r.Text}} {{r.VoteCount}}
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                @*<label>{{q.QuestionText}}</label>*@
+                                @*<label>Active: {{q.IsActive}}</label>*@
+                            </li>
+                        </ul>
+                    </article>
+                </section>
+                @*<section ng-controller="ProfileCtrl">
+                    <div ng-repeat="q in questions">
+                        <label>Question #{{q.Id}}</label>
+                        <ul>
+                            <li>
+                                {{q.QuestionText}}
+                            </li>
+                            <li>
+                                Active: {{q.IsActive}}
+                            </li>
+                            <li>
+                                <label>Ends: {{q.EndTime}}</label>
+                            </li>
+                            @*<li>Owning User Id: {{q.UserId}}</li>
+                            <li>
+                                <label>Responses</label>
+                                <ul>
+                                    <li ng-repeat="r in q.Responses">
+                                        <!--for the response in the question we're currently on...-->
+                                        <!--Offer a radio button selection that is named after the question that owns it-->
+                                        {{r.Text}} {{r.VoteCount}}
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </section>*@
 
             </div>
         </section>
