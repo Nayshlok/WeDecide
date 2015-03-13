@@ -42,7 +42,7 @@ namespace WeDecide.Controllers
         public QuestionsController(/*IQuestionDAL questDal*/)
         {
             _questionLayer = new SqlQuestionDAL();
-            _memberLayer = new CustomMembershipDAL(QuestionDbContext.Create());
+            _memberLayer = new CustomMembershipDAL(/*QuestionDbContext.Create()*/);
         }
 
         // GET: api/Questions
@@ -50,7 +50,7 @@ namespace WeDecide.Controllers
         {
             var relaventQuestions = _questionLayer.GetAll(q => true);
 
-            return relaventQuestions.Where(q => q != null).Select(questionToDTO);
+            return relaventQuestions.Where(q => q != null).Select(questionToDTO).ToList();
         }
 
         [Authorize]
@@ -70,16 +70,7 @@ namespace WeDecide.Controllers
             IEnumerable<QuestionDTO> questionsDtos = null;
 
             User currentUser = _memberLayer.GetUser(User.Identity.GetUserId());
-
-            var returnables = currentUser.MyFriends.Join<User, Question, string, Question>(
-                _questionLayer
-                        .GetAll(q => q.QuestionScope == scope),
-                user => user.Id,
-                question => question.UserId, (user, question) =>
-                {
-                    return (user == question.User) ? question : null;
-                });
-
+            IEnumerable<Question> returnables = _questionLayer.FriendsQuestions(currentUser, scope);
 
             if (scope != Question.Scope.Global)
             {
@@ -120,7 +111,12 @@ namespace WeDecide.Controllers
         [ResponseType(typeof(Response))]
         public Response GetResponse(int id)
         {
-            return ((SqlQuestionDAL)_questionLayer).InnerContext.Responses.Find(id);
+            Response resp = null;
+            using (QuestionDbContext context = ((SqlQuestionDAL)_questionLayer).InnerContext)
+            {
+                resp = context.Responses.Include("Users").Include("Question").SingleOrDefault(x => x.Id == id);
+            }
+            return resp;
         }
 
         // POST: api/Questions

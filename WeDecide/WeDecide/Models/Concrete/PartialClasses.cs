@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Collections.Generic;
 using WeDecide.Models.Concrete;
 
 namespace WeDecide.Models.Concrete
@@ -50,6 +50,37 @@ namespace WeDecide.Models.Concrete
                     propMeth.SetValue(left, propMeth.GetValue(right));
                 }
             }
+        }
+    }
+
+    public class UserComparer : IEqualityComparer<User>
+    {
+        public bool Equals(User x, User y)
+        {
+            if (x != null && y != null)
+            {
+                return x.Id.Equals(y.Id);
+            }
+            return false;
+        }
+
+        public int GetHashCode(User obj)
+        {
+            return obj.Id.GetHashCode();
+        }
+    }
+
+    public partial class User
+    {
+        public override bool Equals(object obj)
+        {
+            bool IsEqual = false;
+            if (obj is User)
+            {
+                User user = (User)obj;
+                IsEqual = user.Id.Equals(this.Id);
+            }
+            return IsEqual;
         }
     }
 

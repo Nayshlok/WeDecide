@@ -59,7 +59,7 @@ namespace WeDecide.Controllers
             {
                 ViewBag.ErrorMessage = "You cannot respond to your own question";
             }
-            return !UserInScope && IsSameUser;
+            return UserInScope && !IsSameUser;
         }
 
         private bool UserInQuestionScope(Question question)
@@ -85,14 +85,16 @@ namespace WeDecide.Controllers
         {
             //Get the Question and Response chosen
             Question AffectedQuestion = Qdal.Get(QuestionId);
+            if (UserCanRespondTo(AffectedQuestion))
+            {
+                //Add User Response to AffectedQuestion
+                Response Resp = MakeUserResponse(AffectedQuestion, ChosenResponse);
 
-            //Add User Response to AffectedQuestion
-            Response Resp = MakeUserResponse(AffectedQuestion, ChosenResponse);
+                //Qdal.Update(QuestionId, AffectedQuestion);
 
-            Qdal.Update(QuestionId, AffectedQuestion);
-
-            Response NewResp = new Response() { Id = Resp.Id, IsDeleted = Resp.IsDeleted, Text = Resp.Text, QuestionId = Resp.QuestionId };
-            HubContext.User(User.Identity.GetUserId()).receivedResponse(QuestionId, NewResp);
+                Response NewResp = new Response() { Id = Resp.Id, IsDeleted = Resp.IsDeleted, Text = Resp.Text, QuestionId = Resp.QuestionId };
+                HubContext.User(User.Identity.GetUserId()).receivedResponse(QuestionId, NewResp);
+            }
             //Clients.User(UserId).receivedResponse(question.Id, question.Responses);
             //Would like to have this not actually return, as the Partial View will always be a part of something else
             //return RedirectToAction("QuestionResponse", new { id = QuestionId });
@@ -109,24 +111,27 @@ namespace WeDecide.Controllers
             {
                 response = new Response() { Question = question, Text = responseText, Users = new List<User>()};
                 //Add Response to question
-                question.Responses.Add(response);
-                response.Users.Add(currentUser);
+                //question.Responses.Add(response);
+                //response.Users.Add(currentUser);
+                Qdal.AddResponse(question.Id, response);
+                Qdal.AddUserToResponse(response.Id, currentUser.Id);
             }
             //If User has responded to question before
             if(UserHasRespondedBefore(question))
             {
-                Response oldResponse = question.Responses.First(x => x.Users.Contains(currentUser));
-                oldResponse.Users.Remove(currentUser);
+                int oldResponseId = question.Responses.First(x => x.Users.Contains(currentUser, new UserComparer())).Id;
                 response = question.Responses.First(x => x.Text.Equals(responseText));
-                response.Users.Add(currentUser);
+                Qdal.SwitchUserResponse(oldResponseId, response.Id, currentUser.Id);
             }
-            //Else
+            //Else the User has responded to this question for the first time
             else {
                 //Make new UserResponse                
                 //UserResponse NewUR = new UserResponse() { Question = question, QuestionId = question.Id, Response = response, ResponseId = response.Id };
                 //AddUserResponse(question, response, NewUR);
+                //response = question.Responses.First(x => x.Text.Equals(responseText));
+                //response.Users.Add(currentUser);
                 response = question.Responses.First(x => x.Text.Equals(responseText));
-                response.Users.Add(currentUser);
+                Qdal.AddUserToResponse(response.Id, currentUser.Id);
             }
             return response;
         }
@@ -163,10 +168,10 @@ namespace WeDecide.Controllers
         private bool UserHasRespondedBefore(Question question)
         {
             bool responded = false;
-
+            User currentUser = Mdal.GetUser(User.Identity.GetUserId());
             foreach (Response r in question.Responses)
             {
-                if (r.Users.Contains(Mdal.GetUser(User.Identity.GetUserId())))
+                if (r.Users.Contains(currentUser, new UserComparer()))
                 {
                     responded = true;
                     break;
