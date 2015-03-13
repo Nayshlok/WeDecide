@@ -33,6 +33,12 @@
         totalNotifications += 1;
         updateNotifyIcon();
     }
+
+    notify.client.acceptNotification = function (message, senderName) {
+        createAcceptNotification(message, senderName);
+        totalNotifications += 1;
+        updateNotifyIcon();
+    }
     
     //Regular jQuery stuff
     var notifyPanel = $('#notificationPanel'),
@@ -66,27 +72,25 @@
 
     function createNotification(id, sender, senderId, message) {
         var notificationWrap = $("<section class='notification bottom-shadow'><h4>" + sender + "</h4><p>" + message + "</p></section>"),
-            acceptBtn = $("<form method='post' action='Friends/AddFriend'><input type='hidden' name='nId' value='" + id + "'/><input type='hidden' name='userId' value='" + senderId + "'/><input type='submit' class='btn btn-primary' value='Accept' /></form>"),
+            acceptBtn = $("<input type='button' class='btn btn-primary' value='Accept' />"),
             declineBtn = $("<form method='post' action='Friends/RejectFriend'><input type='hidden' name='nId' value='" + id + "' /><input type='submit' class='btn btn-danger' value='Decline' /></form>");
+        console.log("wrap" + notificationWrap);
+        console.log("panel" + $('#notificationPanel'));
 
         notificationWrap.append(acceptBtn);
         notificationWrap.append(declineBtn);
         $('#notificationPanel').append(notificationWrap);
 
-        acceptBtn.on('submit', function () {
-            if ($(this).valid()) {
-                $.ajax({
-                    url: this.action,
-                    type: this.method,
-                    data: $(this).serialize(),
-                    success: function () {
-                        notificationWrap.remove();
-                        totalNotifications -= 1;
-                        updateNotifyIcon();
-                    }
+        acceptBtn.on('click', function () {
+            notify.server.addFriend(id, senderId)
+                .done(function () {
+                    notificationWrap.remove();
+                    totalNotifications -= 1;
+                    updateNotifyIcon();
+                })
+                .fail(function (error) {
+                    console.log(error);
                 });
-            }
-            return false;
         });
 
         declineBtn.on('submit', function () {
@@ -99,12 +103,16 @@
                         notificationWrap.remove();
                         totalNotifications -= 1;
                         updateNotifyIcon();
-                        window.console.log("id: " + senderId);
                     }
                 });
             }
             return false;
         });
+    }
+
+    function createAcceptNotification(message, sender) {
+        var notificationWrap = $("<section class='notification bottom-shadow'><h4>" + sender + "</h4><p>" + message + "</p></section>");
+        $('#notificationPanel').append(notificationWrap);
     }
 
     function checkForNotifications() {
