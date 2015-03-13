@@ -186,7 +186,22 @@ namespace WeDecide.Controllers
                 // If the user does not have an account, then prompt the user to create an account
                 ViewBag.ReturnUrl = returnUrl;
                 ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { UserName = loginInfo.DefaultUserName });
+
+                var UserClaim = await UserManager.GetClaimsAsync(User.Identity.GetUserId());
+                var NewUser = new ApplicationUser() { UserName = loginInfo.Email, Email = loginInfo.Email };
+                var result = await UserManager.CreateAsync(NewUser);
+                if (result.Succeeded)
+                {
+                    result = await UserManager.AddLoginAsync(NewUser.Id, loginInfo.Login);
+                    if (result.Succeeded)
+                    {
+                        await SignInAsync(NewUser, isPersistent: false);
+                        AddUserFromExternalLogin(loginInfo, NewUser);
+                        MergeFriends();
+                        return RedirectToLocal(returnUrl);
+                    }
+                }
+                return RedirectToAction("Index", "Home");
             }
         }
 
@@ -252,16 +267,20 @@ namespace WeDecide.Controllers
             }
         }
 
-        private void AddUserFromExternalLogin(ExternalLoginInfo info, ApplicationUser user)
+        private async void AddUserFromExternalLogin(ExternalLoginInfo info, ApplicationUser user)
         {
-            MembershipDAL.AddUser(user.UserName, user.Email, user.Id);
+
             //If facebook
             if("facebook".Equals(info.Login.LoginProvider.ToLower()))
             {
+                var UserClaim = await UserManager.GetClaimsAsync(User.Identity.GetUserId());
+                var token = UserClaim.FirstOrDefault(fb => fb.Type == "FacebookAccessToken").Value;
+                var FbClient = new FacebookClient(token);
+                string Name = FbClient.Get("me/name/") as string;
+                MembershipDAL.AddUser(Name, user.Email, user.Id);
                 //I hope one of these works
-                FacebookClient fb = new FacebookClient("288b1b9a9d7de9198db8fd84a9ab93c8");
-                //FacebookClient fb = new FacebookClient(Session["AccessToken"].ToString());
-                dynamic friends = fb.Get("me/friends");
+                //FacebookClient fb = new FacebookClient("288b1b9a9d7de9198db8fd84a9ab93c8");
+                //FacebookClient fb = new FacebookClient(Session["AccessToken"].ToString());'
             }
         }
 

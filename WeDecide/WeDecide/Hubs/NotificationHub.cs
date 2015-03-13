@@ -32,7 +32,7 @@ namespace WeDecide.Hubs
             User reciever = MembershipDAL.GetUserByName(recieverId);
             Notification n = MembershipDAL.AddNotification(sender, reciever, Notification.NotificationType.FriendRequest);
             //notify reciever
-            Clients.User(reciever.Id).addNotification(n.Id, n.SendingUser.Name, n.SenderId, n.Message);
+            Clients.User(reciever.Id).addNotification(n.Id, sender.Name, n.SenderId, n.Message);
         }
 
         public void AddFriend(int nId, string UserID)

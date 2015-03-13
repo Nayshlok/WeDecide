@@ -1,10 +1,11 @@
-﻿<h3>Global Questions</h3>
-<label>Question #{{q.Id}}</label>
+﻿<section class="question shadowed">
+    <label class="questionId">Question #{{q.Id}}</label>
+    <hr />
 <ul>
-    <li>
+        <li class="questionText">
         {{q.QuestionText}}
     </li>
-    <li>
+        <li class="questionActive">
         Active: {{q.IsActive}}
     </li>
     <li>
@@ -12,8 +13,9 @@
     </li>
     @if (Request.IsAuthenticated)
     {
-        <li>
-            <label>Responses</label>
+            <li class="responses">
+                <label class="responseText">Responses</label>
+                <hr />
             <ul>
                 <li ng-repeat="r in q.Responses">
                     <!--for the response in the question we're currently on...-->
@@ -29,3 +31,4 @@
         </li>
     }
 </ul>
+</section>

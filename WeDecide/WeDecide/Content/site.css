@@ -1,5 +1,4 @@
 ﻿* {
-	font-family: Arial, sans-serif;
 	margin: 0;
 	padding: 0;
  }
@@ -305,6 +304,7 @@ header a {
 	    transform: translateX(-50%);
 	    width: 50%;
         min-height: 700px;
+        max-width: 1000px;
         margin-bottom: 40px;
         margin-top: 0;
     }
@@ -337,7 +337,6 @@ header a {
 	    position: relative;
 	    text-align: center;
 	    width: 90%;
-        height: 700px;
         margin: 0 auto 40px auto;
     }
  
@@ -346,9 +345,42 @@ header a {
         width: 90%;
     }  
 }
+
+.question {
+    width: 100%;
+    margin: 20px auto 20px auto;
+    font-family: 'Raleway', sans-serif;
+}
+
+.question .questionId {
+    font-size: 1.5rem;
+}
+
+.question hr {
+    margin: 0 auto;
+    padding: 0;
+}
+
+.question .questionText {
+    font-family: 'Lobster', sans-serif;
+    font-size: 3rem;
+}
+
+.question ul li {
+    list-style: none;
+}
+
+.question .responseText {
+    font-family: 'Lobster', sans-serif;
+    font-size: 2rem;
+}
+
+.question .responses ul li {
+    display: inline-block;
+    margin: 0 10px 0 10px;
+}
  
 .profile_pic {
-	background-image: url("../Images/placeholder-headshot.jpg");
 	background-size: cover;
     background-position: center;
 	height: 175px;
@@ -357,7 +389,6 @@ header a {
  }
 
 .friend-thumb {
-    background-image: url("../Images/placeholder-headshot.jpg");
 	background-size: cover;
     background-position: center;
 	display: inline-block;
@@ -398,11 +429,14 @@ header a {
 .filter-feed {
 	padding-left: 5px;
 	position: relative;
+    font-family: 'Lobster', sans-serif;
+    font-size: 2rem;
     width: 100%;
     margin: 0 auto;
     text-align: center;
-    line-height: 125%;
+    line-height: 100%;
     padding-top: 10px;
+    padding-bottom: 5px;
    }
 
 .overflowdiv {
@@ -410,22 +444,6 @@ header a {
     overflow-x: hidden;
     overflow-y: scroll;
     width: auto;
-}
-
-.ng-scope {
-    border-bottom: 1px solid #CCC;
-    border-top: 1px solid #CCC;
-    margin: 10px auto 0 auto;
-}
-
-.ng-scope label {
-    font-family: 'Lobster', sans-serif;
-    font-size: 2rem;
-}
-
-.ng-scope li {
-    list-style: none;
-    font-family: 'Raleway', sans-serif;
 }
 
 /*End Home Page Styling*/

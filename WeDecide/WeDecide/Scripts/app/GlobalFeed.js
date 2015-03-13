@@ -44,16 +44,44 @@
         self.allQuestionURL = '/api/questions/GetFilteredQuestions/';
         self.singleResponseURL = 'api/questions/GetResponse/';
 
-        $scope.questions = [
-            //{ Id: 1, QuestionText: "Test question", IsActive: true, EndTime: Date.now() }
-        ];
+        $scope.questions = [];
 
         var localCheckBox = document.getElementById('checkbox_Local'),
             friendsCheckBox = document.getElementById('checkbox_Friends'),
             globalCheckBox = document.getElementById('checkbox_Global');
 
         // force it to check
-        globalCheckBox.checked = true;
+        globalCheckBox.checked;
+
+        //Add a question to the feed
+        function addQuestion(question) {
+            var questionWrap = $("<section class='question shadowed'></section>"),
+                questionList = $("<ul></ul>");
+            questionId = $("<label class='questionId'>Question #" + question.Id + "</label><hr />"),
+            questionText = $("<li class='questionText'>" + question.QuestionText + "</li>"),
+            questionActive = $("<li class='questionActive'>" + question.IsActive + "</li>"),
+            questionEndTime = $("<li><label>Ends: " + question.EndTime + "</label></li>"),
+            responseWrap = $("<li class='responses'></li>"),
+            responseText = $("<label class='responseText'>Responses</label><hr />"),
+            responseList = $("<ul></ul>");
+            
+            for (var r in question.Responses) {
+                response = question.Responses[r];
+                responseList.append("<li><input type='radio' data-qid='" + question.Id + "'name='question" + question.Id + "' value='" + response.Text + "' />" + response.Text + " " + response.VoteCount + "</li>");
+            }
+
+            questionWrap.append(questionId);
+            questionList.append(questionText);
+            questionList.append(questionActive);
+            questionList.append(questionEndTime);
+            responseWrap.append(responseText);
+            responseWrap.append(responseList);
+            questionList.append(responseWrap);
+            questionWrap.append(questionList);
+
+            $("#questionHolder").append(questionWrap);
+
+        }
 
         var localQuestionPool = [],
             friendsQuestionPool = [],
@@ -69,12 +97,22 @@
             console.log("GETting from: {0}".format(requestURL));
             $http.get(requestURL).
                 success(function (data, headers, status, config) {
-                    console.log("Successfully fetched {0}, with length = {1}".format(data, data.length));
-                    poolInQuestion = data; // no need for pushing, just copy the Array
+                    //console.log("Successfully fetched {0}, with length = {1}".format(data, data.length));
+                    //poolInQuestion = data; // no need for pushing, just copy the Array
 
-                    poolInQuestion.forEach(function (element) {
-                        $scope.questions.push(element);
-                    });
+                    //poolInQuestion.forEach(function (element) {
+                    //    $scope.questions.push(element);
+                    //});
+                    console.log("Data received: {0}, data length = {1}".format(data, data.length));
+                    for (var d in data) {
+                        //console.log("{0}\t{1}".format(d, data[d]));
+                        var someObject = data[d];
+                        //for (var o in someObject) {
+                        //    //console.log("\tK: {0}, V: {1}".format(o, someObject[o]));
+                        //}
+                        //$scope.questions.push(data[d]);
+                        addQuestion(someObject);
+                    }
                 }).
                 error(function (data, headers, status, config) {
                     printFailures(data); // defined in functions.js
@@ -100,10 +138,12 @@
                 else
                 {
                     console.log("Emptying friend questions");
-                    $scope.questions.length = 0;
-                    for (var i = 0; i < $scope.questions.length; i++) {
-                        $scope.questions.pop();
-                    }
+                    $("#questionHolder").empty();
+                    //while ($scope.questions.length > 0) {
+                    //    //$scope.questions.pop();
+                    //    $("#questionHolder").empty();
+                    //}
+                    console.log("question array length : " + $scope.questions.length)
                 }
             else if (filter.toString().toLowerCase() === "global")
                 if (globalCheckBox.checked) {
@@ -116,13 +156,23 @@
                 else
                 {
                     console.log("Emptying global questions");
-                    for (var i = 0; i < $scope.questions.length; i++) {
-                        $scope.questions.pop();
-                    }
-                }
-        }
+                    $("#questionHolder").empty();
+                    //while($scope.questions.length > 0){
+                    //    //$scope.questions.pop();
+                    //}
+                    console.log("question array length : " + $scope.questions.length)
 
-        $scope.doQuestionFlow("global");
+                }
+
+            function populateFeed() {
+                for (var q in $scope.questions) {
+                    window.console.log(q);
+                }
+            }
+
+            populateFeed();
+        }
+        //$scope.doQuestionFlow("global");
         //setInterval(doQuestionFlow, 6000);
     }]);
 
