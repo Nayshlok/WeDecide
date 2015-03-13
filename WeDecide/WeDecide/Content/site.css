@@ -91,8 +91,9 @@ header a {
 	position: relative;
 	right: 25px;
 	top: 35%;
-    width: 60px;
+    width: 75px;
     float: right;
+    line-height: 100%;
  }
 
 .icons form {
@@ -106,10 +107,14 @@ header a {
     float: right;
 }
 
-.icons .fa-bell {
+.icons .notification-wrapper {
     float: left;
     cursor: pointer;
 }
+
+    .icons .notification-wrapper .notification-count {
+        display: inline-block;
+    }
  
 	.icons i {margin: 0 2px 0 2px;}
  

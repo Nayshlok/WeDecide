@@ -67,7 +67,8 @@ namespace WeDecide.Models.Concrete
         public enum NotificationType
         {
             FriendRequest,
-            QuestionTimeout
+            QuestionTimeout,
+            FriendRequestAccepted
         }
     }
 }

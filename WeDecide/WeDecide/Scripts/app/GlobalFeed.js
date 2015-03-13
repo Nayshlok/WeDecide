@@ -100,7 +100,10 @@
                 else
                 {
                     console.log("Emptying friend questions");
-                    $scope.questions = [];
+                    $scope.questions.length = 0;
+                    for (var i = 0; i < $scope.questions.length; i++) {
+                        $scope.questions.pop();
+                    }
                 }
             else if (filter.toString().toLowerCase() === "global")
                 if (globalCheckBox.checked) {
@@ -113,7 +116,9 @@
                 else
                 {
                     console.log("Emptying global questions");
-                    $scope.questions = [];
+                    for (var i = 0; i < $scope.questions.length; i++) {
+                        $scope.questions.pop();
+                    }
                 }
         }
 

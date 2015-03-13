@@ -25,7 +25,10 @@
             </ul>
         </nav>
         <div class="icons">
-            <i id="notificationBtn" class="fa fa-bell" title="Notifications"></i>
+            <div class="notification-wrapper">
+                <i id="notificationBtn" class="fa fa-bell" title="Notifications"></i>
+                <i id="notificationCount" class="notification-count"></i>
+            </div>
             @using (Html.BeginForm("LogOff", "Account"))
             {
                 <i class="fa fa-sign-out" title="Log Out" onclick="javascript:this.parentNode.submit();"></i>
