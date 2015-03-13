@@ -14,6 +14,7 @@
                 console.log($(this).attr('id'));
                 console.log($.connection.hub.id);
                 var id = $(this).attr('id');
+                console.log(id);
                 notify.server.friendRequest(id)
                     .done(function () {
                         //id = id.replace(".", "\\.");

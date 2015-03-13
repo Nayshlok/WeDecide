@@ -9,7 +9,7 @@ namespace WeDecide.Models.Concrete
         public enum Scope
         {
             Friends,
-            Local,
+            //Local,
             //Regional, // Depricated
             Global
         }
