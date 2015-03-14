@@ -1,7 +1,7 @@
 ﻿$(function () {
     var notify = $.connection.notificationHub;
 
-    $.connection.hub.logging = true;
+    $.connection.hub.logging = false;
 
     $.connection.hub.start()
         .done(function () {
