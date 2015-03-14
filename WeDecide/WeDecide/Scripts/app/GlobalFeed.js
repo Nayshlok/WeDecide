@@ -55,31 +55,36 @@
 
         //Add a question to the feed
         function addQuestion(question) {
-            var questionWrap = $("<section class='question shadowed'></section>"),
-                questionList = $("<ul></ul>");
-            questionId = $("<label class='questionId'>Question #" + question.Id + "</label><hr />"),
-            questionText = $("<li class='questionText'>" + question.QuestionText + "</li>"),
-            questionActive = $("<li class='questionActive'>" + question.IsActive + "</li>"),
-            questionEndTime = $("<li><label>Ends: " + question.EndTime + "</label></li>"),
-            responseWrap = $("<li class='responses'></li>"),
-            responseText = $("<label class='responseText'>Responses</label><hr />"),
-            responseList = $("<ul></ul>");
+            if(new Date() < new Date(question.EndTime)){
+                var questionWrap = $("<section class='question shadowed'></section>"),
+                    questionList = $("<ul></ul>");
+                questionId = $("<label class='questionId'>Question #" + question.Id + "</label><hr />"),
+                questionText = $("<li class='questionText'>" + question.QuestionText + "</li>"),
+                questionActive = $("<li class='questionActive'>" + question.IsActive + "</li>"),
+                questionEndTime = $("<li><label>Ends: " + question.EndTime + "</label></li>"),
+                responseWrap = $("<li class='responses'></li>"),
+                responseText = $("<label class='responseText'>Responses</label><hr />"),
+                responseList = $("<ul></ul>");
+
+                console.log(new Date());
+                console.log(question.EndTime);
             
-            for (var r in question.Responses) {
-                response = question.Responses[r];
-                responseList.append("<li><input type='radio' data-qid='" + question.Id + "'name='question" + question.Id + "' value='" + response.Text + "' />" + response.Text + " " + response.VoteCount + "</li>");
+                for (var r in question.Responses) {
+                    response = question.Responses[r];
+                    responseList.append("<li><input type='radio' data-qid='" + question.Id + "'name='question" + question.Id + "' value='" + response.Text + "' />" + response.Text + " " + response.VoteCount + "</li>");
+                }
+
+                questionWrap.append(questionId);
+                questionList.append(questionText);
+                questionList.append(questionActive);
+                questionList.append(questionEndTime);
+                responseWrap.append(responseText);
+                responseWrap.append(responseList);
+                questionList.append(responseWrap);
+                questionWrap.append(questionList);
+
+                $("#questionHolder").append(questionWrap);
             }
-
-            questionWrap.append(questionId);
-            questionList.append(questionText);
-            questionList.append(questionActive);
-            questionList.append(questionEndTime);
-            responseWrap.append(responseText);
-            responseWrap.append(responseList);
-            questionList.append(responseWrap);
-            questionWrap.append(questionList);
-
-            $("#questionHolder").append(questionWrap);
 
         }
 
