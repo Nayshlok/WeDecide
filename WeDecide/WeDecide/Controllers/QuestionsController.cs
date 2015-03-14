@@ -30,6 +30,7 @@ namespace WeDecide.Controllers
                 IsActive = q.IsActive,
                 EndTime = q.EndDate,
                 UserId = q.UserId,
+                FreeResponseEnabled = q.FreeResponseEnabled,
                 Responses = q.Responses.Where(r => !r.IsDeleted).Select(r => {
                     return new { Text = r.Text, Id = r.Id, VoteCount = r.Users.Count };
                 })
@@ -97,7 +98,8 @@ namespace WeDecide.Controllers
                         QuestionText = innerQ.Text,
                         Id = innerQ.Id,
                         IsActive = innerQ.IsActive,
-                        EndTime = innerQ.EndDate
+                        EndTime = innerQ.EndDate,
+                        FreeResponseEnabled = innerQ.FreeResponseEnabled,
                     };
                 });
 
@@ -144,6 +146,8 @@ namespace WeDecide.Controllers
         public bool IsActive { get; set; }
         public string QuestionText { get; set; }
         public DateTime EndTime { get; set; }
+
+        public bool FreeResponseEnabled { get; set; }
 
         public string UserId { get; set; }
 

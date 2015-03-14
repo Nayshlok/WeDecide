@@ -1,29 +1,34 @@
 ﻿<section class="question shadowed">
     <label class="questionId">Question #{{q.Id}}</label>
     <hr />
-    <ul>
+<ul>
         <li class="questionText">
-            {{q.QuestionText}}
-        </li>
+        {{q.QuestionText}}
+    </li>
         <li class="questionActive">
-            Active: {{q.IsActive}}
-        </li>
-        <li>
-            <label>Ends: {{q.EndTime}}</label>
-        </li>
-        @if (Request.IsAuthenticated)
-        {
+        Active: {{q.IsActive}}
+    </li>
+    <li>
+        <label>Ends: {{q.EndTime}}</label>
+    </li>
+    @if (Request.IsAuthenticated)
+    {
             <li class="responses">
                 <label class="responseText">Responses</label>
                 <hr />
-                <ul>
-                    <li ng-repeat="r in q.Responses">
-                        <!--for the response in the question we're currently on...-->
-                        <!--Offer a radio button selection that is named after the question that owns it-->
-                        <input type="radio" data-qid={{q.Id}} name="question{{q.Id}}" value="{{r.Text}}" />{{r.Text}} {{r.VoteCount}}
-                    </li>
-                </ul>
-            </li>
-        }
-    </ul>
+            <ul>
+                <li ng-repeat="r in q.Responses">
+                    <!--for the response in the question we're currently on...-->
+                    <!--Offer a radio button selection that is named after the question that owns it-->
+                    <input type="radio" data-qid={{q.Id}} class="ChosenResponse" name="question{{q.Id}}" value="{{r.Text}}" />{{r.Text}} {{r.VoteCount}}
+                </li>
+
+                <li ng-show="{{q.FreeResponseEnabled}}">
+                    <input type="radio" data-qid={{q.Id}} name="question{{q.Id}}" class="FreeResponse" />
+                    <p>Don't like any of these answers? Submit your own : <input type="text" id="FreeResponseChoice{{q.Id}}" /></p>
+                </li>
+            </ul>
+        </li>
+    }
+</ul>
 </section>
