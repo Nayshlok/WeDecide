@@ -86,7 +86,6 @@ namespace WeDecide.DAL.Concrete
             }
         }
 
-
         public bool RemoveUser(string userId)
         {
             bool Success= false;

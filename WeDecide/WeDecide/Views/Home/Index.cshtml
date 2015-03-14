@@ -37,12 +37,13 @@
                     </label>
                 </div>
             </div>
-            <section ng-controller="HomePageCtrl">
-                <div ng-repeat="q in questions">
-                    @Html.Partial("_GlobalFeedPartial")
-                </div>
-            </section>
-                </div>
+                <section id="questionHolder" ng-controller="HomePageCtrl" >
+                    <div ng-repeat="q in questions">
+                        @Html.Partial("_GlobalFeedPartial")
+
+                    </div>
+                </section>
+               </div>
         </section>
         </div>
     @Scripts.Render("~/Scripts/MakeQuestion")
