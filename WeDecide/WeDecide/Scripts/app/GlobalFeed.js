@@ -54,6 +54,18 @@
         globalCheckBox.checked;
 
         //Add a question to the feed
+<<<<<<< HEAD
+        function addQuestion(question, type) {
+            var questionWrap = $("<section id='" + type + "' class='question shadowed'></section>"),
+                questionList = $("<ul></ul>");
+            questionId = $("<label class='questionId'>Question #" + question.Id + "</label><hr />"),
+            questionText = $("<li class='questionText'>" + question.QuestionText + "</li>"),
+            questionActive = $("<li class='questionActive'>" + question.IsActive + "</li>"),
+            questionEndTime = $("<li><label>Ends: " + question.EndTime + "</label></li>"),
+            responseWrap = $("<li class='responses'></li>"),
+            responseText = $("<label class='responseText'>Responses</label><hr />"),
+            responseList = $("<ul></ul>");
+=======
         function addQuestion(question) {
             if(new Date() < new Date(question.EndTime)){
                 var questionWrap = $("<section class='question shadowed'></section>"),
@@ -68,6 +80,7 @@
 
                 console.log(new Date());
                 console.log(question.EndTime);
+>>>>>>> 4d9782e5d3623dc2c64bad0f48a1e30c2ed1c16f
             
                 for (var r in question.Responses) {
                     response = question.Responses[r];
@@ -83,9 +96,13 @@
                 questionList.append(responseWrap);
                 questionWrap.append(questionList);
 
+<<<<<<< HEAD
+            $("#questionHolder").append(questionWrap);
+=======
                 $("#questionHolder").append(questionWrap);
             }
 
+>>>>>>> 4d9782e5d3623dc2c64bad0f48a1e30c2ed1c16f
         }
 
         var localQuestionPool = [],
@@ -108,15 +125,11 @@
                     //poolInQuestion.forEach(function (element) {
                     //    $scope.questions.push(element);
                     //});
-                    console.log("Data received: {0}, data length = {1}".format(data, data.length));
+                    //console.log("Data received: {0}, data length = {1}".format(data, data.length));
                     for (var d in data) {
-                        //console.log("{0}\t{1}".format(d, data[d]));
                         var someObject = data[d];
-                        //for (var o in someObject) {
-                        //    //console.log("\tK: {0}, V: {1}".format(o, someObject[o]));
-                        //}
-                        //$scope.questions.push(data[d]);
-                        addQuestion(someObject);
+                        $scope.questions.push(someObject);
+                        addQuestion(someObject, searchFilter);
                     }
                 }).
                 error(function (data, headers, status, config) {
@@ -134,16 +147,17 @@
 
             if (filter.toString().toLowerCase() === "friends")
                 if (friendsCheckBox.checked) {
-                    console.log("Setting friends")
-                    setTimeout(function () {
-                        // refresh the friends pool
-                        ajaxQuestionLoader("friends", friendsQuestionPool);
-                    }, 3000);
+                    console.log("Setting friends");
+                    ajaxQuestionLoader("friends", friendsQuestionPool);
+                    //setTimeout(function () {
+                    //    // refresh the friends pool
+                    //    ajaxQuestionLoader("friends", friendsQuestionPool);
+                    //}, 1000);
                 }
                 else
                 {
                     console.log("Emptying friend questions");
-                    $("#questionHolder").empty();
+                    $('#questionHolder').children().remove('#friends');
                     //while ($scope.questions.length > 0) {
                     //    //$scope.questions.pop();
                     //    $("#questionHolder").empty();
@@ -153,15 +167,18 @@
             else if (filter.toString().toLowerCase() === "global")
                 if (globalCheckBox.checked) {
                     console.log("Setting global");
-                    setTimeout(function () {
-                        // refresh the global pool
-                        ajaxQuestionLoader("global", globalQuestionPool);
-                    }, 7000);
+                    ajaxQuestionLoader("global", globalQuestionPool);
+                    //setInterval(function () {
+                    //    // refresh the global pool
+                    //    ajaxQuestionLoader("global", globalQuestionPool);
+                    //}, 10000);
                 }
                 else
                 {
                     console.log("Emptying global questions");
-                    $("#questionHolder").empty();
+                    
+                    $('#questionHolder').children().remove('#global');
+
                     //while($scope.questions.length > 0){
                     //    //$scope.questions.pop();
                     //}
