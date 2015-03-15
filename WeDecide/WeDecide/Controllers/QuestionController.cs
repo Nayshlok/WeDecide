@@ -31,6 +31,21 @@ namespace WeDecide.Controllers
             return View();
         }
 
+        private Func<Question, QuestionDTO> questionToDTO =
+            q => new QuestionDTO()
+            {
+                Id = q.Id,
+                QuestionText = q.Text,
+                IsActive = q.IsActive,
+                EndTime = q.EndDate,
+                UserId = q.UserId,
+                FreeResponseEnabled = q.FreeResponseEnabled,
+                Responses = q.Responses.Where(r => !r.IsDeleted).Select(r =>
+                {
+                    return new { Text = r.Text, Id = r.Id, VoteCount = r.Users.Count };
+                })
+            };
+
         [HttpPost]
         public ActionResult CreateQuestion(MakeQuestionViewModel q)
         {
@@ -46,7 +61,7 @@ namespace WeDecide.Controllers
                 //Don't know what to return yet, so returning response page
                 //RespondToQuestionViewModel model = new RespondToQuestionViewModel(NewQuestion);
                 //return RedirectToAction("QuestionResponse", "QuestionResponse", new { id = NewQuestion.Id });
-                return new EmptyResult();
+                return Json(questionToDTO.Invoke(NewQuestion), JsonRequestBehavior.AllowGet);
             }
             return PartialView("~/Views/Shared/_MakeQuestionPartial.cshtml");
             //return Json(ModelState.ToDictionary(x => x.Key, x => x.Value.Errors.ToList().ConvertAll(y => y.ErrorMessage)));

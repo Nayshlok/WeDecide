@@ -73,9 +73,15 @@ $('input[name=form_submit]').click(function () {
                 Responses: MyResponses
             },
             success: function (resp) {
-                if (resp.length == 0) {
+                if (resp.length >= 0) {
                     togglePopup(false);
                     clearMakeQuestionForm();
+
+                    $.getScript("GlobalFeed.js", function () {
+
+                        alert("Script loaded and executed.");
+                        addQuestion(resp);
+                    });
                 }
                 else {
                     //Set the Validation Text
