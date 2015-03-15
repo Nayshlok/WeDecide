@@ -30,6 +30,7 @@ namespace WeDecide.Controllers
                 IsActive = q.IsActive,
                 EndTime = q.EndDate,
                 UserId = q.UserId,
+                Scope = q.QuestionScope.ToString(),
                 FreeResponseEnabled = q.FreeResponseEnabled,
                 Responses = q.Responses.Where(r => !r.IsDeleted).Select(r => {
                     return new { Text = r.Text, Id = r.Id, VoteCount = r.Users.Count };
@@ -49,7 +50,15 @@ namespace WeDecide.Controllers
         // GET: api/Questions
         public IEnumerable<QuestionDTO> GetQuestion()
         {
-            var relaventQuestions = _questionLayer.GetAll(q => true);
+            IEnumerable<Question> relaventQuestions;
+            if (User.Identity != null)
+            {
+                relaventQuestions = _questionLayer.GetAll(q => q.IsActive && !q.IsDeleted && q.QuestionScope == Question.Scope.Global && q.UserId != User.Identity.GetUserId());
+            }
+            else
+            {
+                relaventQuestions = _questionLayer.GetAll(q => q.IsActive && !q.IsDeleted && q.QuestionScope == Question.Scope.Global);
+            }
 
             return relaventQuestions.Where(q => q != null).Select(questionToDTO).ToList();
         }
@@ -70,11 +79,10 @@ namespace WeDecide.Controllers
 
             IEnumerable<QuestionDTO> questionsDtos = null;
 
-            User currentUser = _memberLayer.GetUser(User.Identity.GetUserId());
-            IEnumerable<Question> returnables = _questionLayer.FriendsQuestions(currentUser, scope);
-
             if (scope != Question.Scope.Global)
             {
+                User currentUser = _memberLayer.GetUser(User.Identity.GetUserId());
+                IEnumerable<Question> returnables = _questionLayer.FriendsQuestions(currentUser, scope);
                 questionsDtos = returnables
                         .Select(questionToDTO);
             }
@@ -146,6 +154,7 @@ namespace WeDecide.Controllers
         public bool IsActive { get; set; }
         public string QuestionText { get; set; }
         public DateTime EndTime { get; set; }
+        public string Scope { get; set; }
 
         public bool FreeResponseEnabled { get; set; }
 

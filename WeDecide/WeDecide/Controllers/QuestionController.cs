@@ -8,12 +8,19 @@ using WeDecide.DAL.Abstract;
 using WeDecide.DAL.Concrete;
 using WeDecide.Models.Concrete;
 using WeDecide.ViewModels;
+using Microsoft.AspNet.SignalR.Hubs;
+using Microsoft.AspNet.SignalR;
+using WeDecide.Hubs;
 
 namespace WeDecide.Controllers
 {
-    [Authorize]
+    [System.Web.Mvc.Authorize]
     public class QuestionController : Controller
     {
+
+        private readonly static IHubConnectionContext<dynamic> FriendContext = GlobalHost.ConnectionManager.GetHubContext<FriendQuestionHub>().Clients;
+        private readonly static IHubConnectionContext<dynamic> GlobalContext = GlobalHost.ConnectionManager.GetHubContext<GlobalQuestionHub>().Clients;
+
         //Until we have the DAL injection done
         private static IQuestionDAL Qdal;
         private static IMembershipDAL Mdal;//= new CustomMembershipDAL();
@@ -39,6 +46,7 @@ namespace WeDecide.Controllers
                 IsActive = q.IsActive,
                 EndTime = q.EndDate,
                 UserId = q.UserId,
+                Scope = q.QuestionScope.ToString(),
                 FreeResponseEnabled = q.FreeResponseEnabled,
                 Responses = q.Responses.Where(r => !r.IsDeleted).Select(r =>
                 {
@@ -61,7 +69,33 @@ namespace WeDecide.Controllers
                 //Don't know what to return yet, so returning response page
                 //RespondToQuestionViewModel model = new RespondToQuestionViewModel(NewQuestion);
                 //return RedirectToAction("QuestionResponse", "QuestionResponse", new { id = NewQuestion.Id });
-                return Json(questionToDTO.Invoke(NewQuestion), JsonRequestBehavior.AllowGet);
+
+                if (NewQuestion.QuestionScope == Question.Scope.Friends)
+                {
+                    string[] userConnections = FriendQuestionHub.userConnections.Where(x => x.Value == User.Identity.GetUserId()).Select(x => x.Key).ToArray();
+                    if (userConnections.Length == 0)
+                    {
+                        FriendContext.All.addQuestion(questionToDTO.Invoke(NewQuestion));
+                    }
+                    else
+                    {
+                        FriendContext.AllExcept(userConnections).addQuestion(questionToDTO.Invoke(NewQuestion));
+                    }
+                }
+                else
+                {
+                    string[] userConnections = GlobalQuestionHub.userConnections.Where(x => x.Value == User.Identity.GetUserId()).Select(x => x.Key).ToArray();
+                    if (userConnections.Length == 0)
+                    {
+                        GlobalContext.All.addQuestion(questionToDTO.Invoke(NewQuestion));
+                    }
+                    else
+                    {
+                        GlobalContext.AllExcept(userConnections).addQuestion(questionToDTO.Invoke(NewQuestion));
+                    }
+                }
+
+                return new EmptyResult();
             }
             return PartialView("~/Views/Shared/_MakeQuestionPartial.cshtml");
             //return Json(ModelState.ToDictionary(x => x.Key, x => x.Value.Errors.ToList().ConvertAll(y => y.ErrorMessage)));
