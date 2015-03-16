@@ -206,6 +206,10 @@ function FriendConnection() {
     hub.client.addQuestion = function (question) {
         addQuestion(question);
     }
+
+    hub.client.RefreshResponse = function (responseId, responseText, VoteCount) {
+        console.log("Friend response refresh" + responseId + " " + responseText + " " + VoteCount);
+    }
 }
 
 function GlobalConnection() {
@@ -215,6 +219,10 @@ function GlobalConnection() {
 
     hub.client.addQuestion = function (question) {
         addQuestion(question);
+    }
+
+    hub.client.RefreshResponse = function (responseId, responseText, VoteCount) {
+        console.log("Global response refresh" + responseId + " " + responseText + " " + VoteCount);
     }
 }
 
@@ -239,7 +247,11 @@ function addQuestion(question) {
     responseList = $("<ul></ul>");
     for (var r in question.Responses) {
         response = question.Responses[r];
-        responseList.append("<li><input type='radio' data-qid='" + question.Id + "'name='question" + question.Id + "' value='" + response.Text + "' />" + response.Text + " " + response.VoteCount + "</li>");
+        responseList.append("<li><input type='radio' data-qid='" + question.Id + "' data-rid='" + response.Id + "'name='question" + question.Id + "' value='" + response.Text + "'");
+        if (question.FreeResponseEnabled) {
+            responseList.append(" class=''");
+        }
+        responseList.append("/>" + response.Text + " " + response.VoteCount + "</li>");
     }
 
     questionWrap.append(questionId);

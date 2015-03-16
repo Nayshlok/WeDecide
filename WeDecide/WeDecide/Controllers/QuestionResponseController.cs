@@ -8,12 +8,19 @@ using WeDecide.DAL.Abstract;
 using WeDecide.DAL.Concrete;
 using WeDecide.Models.Concrete;
 using WeDecide.ViewModels;
+using Microsoft.AspNet.SignalR.Hubs;
+using Microsoft.AspNet.SignalR;
+using WeDecide.Hubs;
 
 namespace WeDecide.Controllers
 {
     [System.Web.Mvc.Authorize]
     public class QuestionResponseController : Controller
     {
+
+        private readonly static IHubConnectionContext<dynamic> FriendContext = GlobalHost.ConnectionManager.GetHubContext<FriendQuestionHub>().Clients;
+        private readonly static IHubConnectionContext<dynamic> GlobalContext = GlobalHost.ConnectionManager.GetHubContext<GlobalQuestionHub>().Clients;
+
         //Until we have the DAL injection done
         private static IQuestionDAL Qdal;
         private static IMembershipDAL Mdal;// = new CustomMembershipDAL();
@@ -94,6 +101,15 @@ namespace WeDecide.Controllers
                 //Qdal.Update(QuestionId, AffectedQuestion);
 
                 Response NewResp = new Response() { Id = Resp.Id, IsDeleted = Resp.IsDeleted, Text = Resp.Text, QuestionId = Resp.QuestionId };
+
+                if (AffectedQuestion.QuestionScope == Question.Scope.Friends)
+                {
+                    FriendContext.All.RefreshResponse(Resp.Id, Resp.Text, Resp.Users.Count);
+                }
+                else
+                {
+                    GlobalContext.All.RefreshResponse(Resp.Id, Resp.Text, Resp.Users.Count);
+                }
             }
             //Clients.User(UserId).receivedResponse(question.Id, question.Responses);
             //Would like to have this not actually return, as the Partial View will always be a part of something else
