@@ -200,7 +200,7 @@ namespace WeDecide.Controllers
 
         private bool CanAddFreeResponse(Question question, string response)
         {
-            return question.FreeResponseEnabled && question.Responses.Count(x => x.Text.Equals(response)) < 1;
+            return question.FreeResponseEnabled && question.Responses.Count(x => x.Text.Equals(response)) < 1 && !string.IsNullOrWhiteSpace(response);
         }
 
         private bool UserHasRespondedBefore(Question question)
