@@ -97,5 +97,11 @@ namespace WeDecide.DAL.Concrete
         {
             throw new NotImplementedException();
         }
+
+
+        public int ResponseCount(int responseId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

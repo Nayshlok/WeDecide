@@ -169,10 +169,20 @@ namespace WeDecide.DAL.Concrete
             using (QuestionDbContext dbContext = QuestionDbContext.Create())
             {
                 IEnumerable<string> FriendIds = currentUser.MyFriends.Select(x => x.Id);
-                Relevant = dbContext.Questions.Include("User").Include("Responses.Users").Where(x => FriendIds.Contains(x.UserId) && (DateTime.Now < x.EndDate) && !x.IsDeleted).OrderByDescending(x => x.EndDate).ToList();
+                Relevant = dbContext.Questions.Include("User").Include("Responses.Users").Where(x => FriendIds.Contains(x.UserId) && (DateTime.Now < x.EndDate) && !x.IsDeleted && x.QScope == (int)scope).OrderByDescending(x => x.EndDate).ToList();
             }
             return Relevant;
 
+        }
+
+        public int ResponseCount(int responseId)
+        {
+            int count = 0;
+            using (QuestionDbContext dbContext = QuestionDbContext.Create())
+            {
+                count = dbContext.Responses.First(x => x.Id == responseId).Users.Count;
+            }
+            return count;
         }
     }
 }

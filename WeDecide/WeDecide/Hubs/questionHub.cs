@@ -43,7 +43,7 @@ namespace WeDecide.Hubs
 
         public override System.Threading.Tasks.Task OnConnected()
         {
-            userConnections.TryAdd(Context.ConnectionId, Context.User.Identity.GetUserId());
+            bool test = userConnections.TryAdd(Context.ConnectionId, Context.User.Identity.GetUserId());
             return base.OnConnected();
         }
 
