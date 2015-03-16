@@ -229,6 +229,7 @@ function GlobalConnection() {
     hub.client.RefreshResponse = function (responseId, VoteCount) {
         console.log("Global response refresh " + responseId + " " + responseText + " " + VoteCount);
         $("[data-rid='" + responseId + "']").text(VoteCount);
+
     }
 }
 
