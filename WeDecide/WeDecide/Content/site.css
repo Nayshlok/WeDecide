@@ -342,6 +342,7 @@ header a {
 	    position: relative;
 	    text-align: center;
 	    width: 90%;
+        min-height: 700px;
         margin: 0 auto 40px auto;
     }
  
@@ -446,7 +447,7 @@ header a {
    }
 
 .overflowdiv {
-    height: 500px;
+    max-height: 500px;
     overflow-x: hidden;
     overflow-y: scroll;
     width: auto;
@@ -651,7 +652,7 @@ header a {
 
 @media only screen and (min-width: 800px) {
     .white_content {
-        max-height: 600px;
+        max-height: 500px;
 	    background-color: white;
 	    display: none;
 	    left: 50%;
@@ -681,11 +682,14 @@ header a {
  
 		.white_content header h2 {
 			color: #FFF;
-			font-family: Arial, sans-serif;
+			font-family: 'Lobster', sans-serif;
 			margin: 10px auto;
 		 }
  
-	.white_content div {padding: 10px 20px 10px 20px;}
+	.white_content div {
+        padding: 10px 20px 10px 20px;
+        font-family: 'Raleway', sans-serif;
+	}
  
 .bottom-btn {
 	display: block;
@@ -703,10 +707,9 @@ header a {
 	border: 1px solid #F00;
  }
  
-.field-validation-error {
+.field-validation-error, .field-validation-valid {
 	color: #F00;
-    font-size: 12px;
-	font-weight: bold;
+    font-size: 1.25rem;
  }
 
 .validation-summary-errors li {
