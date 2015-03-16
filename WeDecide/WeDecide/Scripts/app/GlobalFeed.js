@@ -192,8 +192,6 @@
         pullQuestions();
 
     }]);
-
-
 })();
 
 var hub = null;
@@ -232,19 +230,24 @@ function addQuestion(question) {
         questionList = $("<ul></ul>");
     questionId = $("<label class='questionId'>Question #" + question.Id + "</label><hr />"),
     questionText = $("<li class='questionText'>" + question.QuestionText + "</li>"),
-    questionActive = $("<li class='questionActive'>" + question.IsActive + "</li>"),
-    questionEndTime = $("<li><label>Ends: " + question.EndTime + "</label></li>"),
+    timeLeft = formatTime((new Date(question.EndTime) - new Date())),
+    questionEndTime = $("<li><label>Ends in " + timeLeft[0] + " hours and " + timeLeft[1] + " minutes.</label></li>"),
     responseWrap = $("<li class='responses'></li>"),
     responseText = $("<label class='responseText'>Responses</label><hr />"),
-    responseList = $("<ul></ul>");
+    responseList = $("<ul></ul>"),
+    freeResponse = $("<li class='free-response-item'><input type='radio' data-qid='" + question.Id + "' name='question" + question.Id + "' class='FreeResponse' />Don't like any of these answers? Submit your own : <input type='text' class='form-control' id='FreeResponseChoice" + question.Id + "' /></li>");
+
     for (var r in question.Responses) {
         response = question.Responses[r];
-        responseList.append("<li><input type='radio' data-qid='" + question.Id + "'name='question" + question.Id + "' value='" + response.Text + "' />" + response.Text + " " + response.VoteCount + "</li>");
+        responseList.append("<li><input type='radio' data-qid='" + question.Id + "' class='ChosenResponse' name='question" + question.Id + "' value='" + response.Text + "' />" + response.Text + " " + response.VoteCount + "</li>");
+    }
+    
+    if (question.FreeResponseEnabled) {
+        responseList.append(freeResponse);
     }
 
     questionWrap.append(questionId);
     questionList.append(questionText);
-    questionList.append(questionActive);
     questionList.append(questionEndTime);
     responseWrap.append(responseText);
     responseWrap.append(responseList);
@@ -252,3 +255,17 @@ function addQuestion(question) {
     questionWrap.append(questionList);
     $("#questionHolder").append(questionWrap);
 }
+
+//Time formatter
+function formatTime(time) {
+    var mill, secs, mins, hrs;
+
+    mill = time % 1000;
+    time = (time - mill) / 1000;
+    secs = time % 60;
+    time = (time - secs) / 60;
+    mins = time % 60;
+    hrs = (time - mins) / 60;
+
+    return [hrs, mins, secs, mill];
+};

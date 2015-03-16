@@ -39,22 +39,24 @@
                 <section ng-app="feedApp">
                     <article ng-controller="ProfileCtrl">
                         <ul>
-                            <li ng-repeat="q in questions">
-                                <label>Question #{{q.Id}}</label>
+                            <li ng-repeat="q in questions" class="question shadowed">
+                                <label class="questionId">Question #{{q.Id}}</label>
+                                <hr />
                                 <ul>
-                                    <li>
+                                    <li class="questionText">
                                         {{q.QuestionText}}
                                     </li>
-                                    <li>
+                                    <li class="questionActive">
                                         Active: {{q.IsActive}}
                                     </li>
                                     <li>
                                         <label>Ends: {{q.EndTime}}</label>
                                     </li>
                                     <li>
-                                        <label>Responses</label>
+                                        <label class="responseText">Responses</label>
+                                        <hr />
                                         <ul>
-                                            <li ng-repeat="r in q.Responses">
+                                            <li ng-repeat="r in q.Responses" class="oldResponses">
                                                 <!--for the response in the question we're currently on...-->
                                                 <!--Offer a radio button selection that is named after the question that owns it-->
                                                 {{r.Text}} {{r.VoteCount}}

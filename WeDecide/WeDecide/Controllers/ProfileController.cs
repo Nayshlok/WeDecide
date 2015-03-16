@@ -100,7 +100,8 @@ namespace WeDecide.Controllers
             {
                 if(n.IsPending)
                 {
-                    nvms.Add(new NotificationViewModel { Id = n.Id, SenderName = n.SendingUser.Name, SenderID = n.SenderId, Message = n.Message });
+                    User sendingUser = memberDal.GetUser(n.SenderId);
+                    nvms.Add(new NotificationViewModel { Id = n.Id, SenderName = sendingUser.Name, SenderID = n.SenderId, Message = n.Message });
                 }
             }
 

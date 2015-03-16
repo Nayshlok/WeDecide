@@ -2,6 +2,7 @@
 
     //$(document).on('click', 'input[type=radio]', function () {
     $(document).on('click', '.ChosenResponse', function () {
+        console.log("clicked a radio button");
         var QuestionId = $(this).attr('data-qid');
         var ThisButton = $(this);
         $.ajax({
@@ -10,7 +11,7 @@
             data:
             {
                 ChosenResponse: ThisButton.val(),
-                QuestionId: QuestionId,
+                QuestionId: QuestionId
             }, success: function () {
                 ThisButton.prop("checked", true);
             }
