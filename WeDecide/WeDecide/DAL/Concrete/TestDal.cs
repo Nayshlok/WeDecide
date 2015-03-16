@@ -91,5 +91,11 @@ namespace WeDecide.DAL.Concrete
         {
             throw new NotImplementedException();
         }
+
+
+        public IEnumerable<Question> GetAll(Func<Question, bool> predicate, string id = null)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

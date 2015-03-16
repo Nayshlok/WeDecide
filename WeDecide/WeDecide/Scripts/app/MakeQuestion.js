@@ -73,13 +73,9 @@ $('input[name=form_submit]').click(function () {
                 Responses: MyResponses
             },
             success: function (resp) {
-                if (resp.length == 0) {
-                    togglePopup(false);
-                    clearMakeQuestionForm();
-                }
-                else {
-                    //Set the Validation Text
-                }
+                console.log("Response " + resp.Id);
+                togglePopup(false);
+                clearMakeQuestionForm();
             }
         });
     }
