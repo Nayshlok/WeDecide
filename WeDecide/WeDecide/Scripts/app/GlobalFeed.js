@@ -119,7 +119,7 @@
                     //}
                     console.log("question array length : " + $scope.questions.length)
                 }
-            else if (filter.toString().toLowerCase() === "global")
+            else if (filter.toString().toLowerCase() === "global") {
                 if (globalCheckBox.checked) {
                     console.log("Setting global");
                     ajaxQuestionLoader("global", globalQuestionPool);
@@ -129,10 +129,9 @@
                     //    ajaxQuestionLoader("global", globalQuestionPool);
                     //}, 10000);
                 }
-                else
-                {
+                else {
                     console.log("Emptying global questions");
-                    
+
                     $('#questionHolder').children().remove('#Global');
 
                     //Until we clean up the database this is a relic
@@ -141,9 +140,9 @@
                     //while($scope.questions.length > 0){
                     //    //$scope.questions.pop();
                     //}
-                    console.log("question array length : " + $scope.questions.length)
-
+                    console.log("question array length : " +$scope.questions.length);
                 }
+            }
 
             function populateFeed() {
                 for (var q in $scope.questions) {
