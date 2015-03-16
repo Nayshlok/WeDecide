@@ -355,7 +355,7 @@ header a {
 .question {
     width: 100%;
     margin: 20px auto 20px auto;
-    padding: 5px;
+    padding: 5px 5px 0px 5px;
     font-family: 'Raleway', sans-serif;
 }
 
@@ -385,6 +385,18 @@ header a {
 .question .responses ul li {
     display: inline-block;
     margin: 0 10px 0 10px;
+}
+
+.question .responses ul li input[type=radio] {
+    float: left;
+    margin-right: 3px;
+}
+
+.voteClass {
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-left: 1px solid #CCC;
+    padding-left: 3px;
 }
  
 .profile_pic {

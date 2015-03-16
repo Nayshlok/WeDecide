@@ -75,8 +75,6 @@
         var notificationWrap = $("<section class='notification bottom-shadow'><h4>" + sender + "</h4><p>" + message + "</p></section>"),
             acceptBtn = $("<input type='button' class='btn btn-primary' value='Accept' />"),
             declineBtn = $("<form method='post' action='Friends/RejectFriend'><input type='hidden' name='nId' value='" + id + "' /><input type='submit' class='btn btn-danger' value='Decline' /></form>");
-        console.log("wrap" + notificationWrap);
-        console.log("panel" + $('#notificationPanel'));
 
         notificationWrap.append(acceptBtn);
         notificationWrap.append(declineBtn);
@@ -88,6 +86,7 @@
                     notificationWrap.remove();
                     totalNotifications -= 1;
                     updateNotifyIcon();
+                    window.location.reload();
                 })
                 .fail(function (error) {
                     console.log(error);
@@ -104,6 +103,7 @@
                         notificationWrap.remove();
                         totalNotifications -= 1;
                         updateNotifyIcon();
+                        window.location.reload();
                     }
                 });
             }
