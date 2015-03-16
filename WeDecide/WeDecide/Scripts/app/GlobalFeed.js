@@ -181,7 +181,7 @@
                     //}
                     //$scope.questions.push(data[d]);
                     $("#questionHolder").append(addQuestion(someObject));
-                }
+                    }
             }).
             error(function (data, status, headers, config) {
                 // things that deal with errors
@@ -200,9 +200,17 @@ function FriendConnection() {
     console.log("Connect to friends");
     hub = $.connection.friendQuestionHub;
     $.connection.hub.start();
+    console.log("Connected to friends");
 
     hub.client.addQuestion = function (question) {
+        console.log("adding question to friend")
         $("#questionHolder").append(addQuestion(question));
+    }
+
+    hub.client.RefreshResponse = function (responseId, VoteCount) {
+        console.log("Friend response refresh " + responseId + " " + responseText + " " + VoteCount);
+        
+        $(".response" + responseId).html(VoteCount);
     }
 }
 
@@ -210,9 +218,17 @@ function GlobalConnection() {
     console.log("Connect to global");
     hub = $.connection.globalQuestionHub;
     $.connection.hub.start();
+    console.log("Connected to global: " + hub);
+
 
     hub.client.addQuestion = function (question) {
+        console.log("Adding question to global");
         $("#questionHolder").append(addQuestion(question));
+    }
+
+    hub.client.RefreshResponse = function (responseId, VoteCount) {
+        console.log("Global response refresh " + responseId + " " + responseText + " " + VoteCount);
+        $("[data-rid='" + responseId + "']").text(VoteCount);
     }
 }
 
@@ -228,18 +244,18 @@ function addQuestion(question) {
     console.log("Adding question");
     var questionWrap = $("<section id='" + question.Scope + "' class='question shadowed'></section>"),
         questionList = $("<ul></ul>");
-        questionId = $("<label class='questionId'>Question #" + question.Id + "</label><hr />"),
-        questionText = $("<li class='questionText'>" + question.QuestionText + "</li>"),
+    questionId = $("<label class='questionId'>Question #" + question.Id + "</label><hr />"),
+    questionText = $("<li class='questionText'>" + question.QuestionText + "</li>"),
         timeLeft = formatTime((new Date(question.EndTime) - new Date())),
         questionEndTime = $("<li><label>Ends in " + timeLeft[0] + " hours and " + timeLeft[1] + " minutes.</label></li>"),
-        responseWrap = $("<li class='responses'></li>"),
-        responseText = $("<label class='responseText'>Responses</label><hr />"),
+    responseWrap = $("<li class='responses'></li>"),
+    responseText = $("<label class='responseText'>Responses</label><hr />"),
         responseList = $("<ul></ul>"),
         freeResponse = $("<li class='free-response-item'><input type='radio' data-qid='" + question.Id + "' name='question" + question.Id + "' class='FreeResponse' />Don't like any of these answers? Submit your own : <input type='text' class='form-control' id='FreeResponseChoice" + question.Id + "' /></li>");
 
     for (var r in question.Responses) {
         response = question.Responses[r];
-        responseList.append("<li><input type='radio' data-qid='" + question.Id + "' class='ChosenResponse' name='question" + question.Id + "' value='" + response.Text + "' />" + response.Text + " " + response.VoteCount + "</li>");
+        responseList.append("<li><input type='radio' data-qid='" + question.Id + "' class='ChosenResponse' name='question" + question.Id + "' value='" + response.Text + "' />" + response.Text + " <span class='response" + response.Id + " voteClass'>" + response.VoteCount + "</span></li>");
     }
 
     if (question.FreeResponseEnabled) {
@@ -249,7 +265,7 @@ function addQuestion(question) {
     questionWrap.append(questionId);
     questionList.append(questionText);
     if (question.IsActive) {
-        questionList.append(questionEndTime);
+    questionList.append(questionEndTime);
     } else {
         questionList.append("<li>This question has expired.</li>");
     }

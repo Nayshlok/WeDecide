@@ -20,5 +20,7 @@ namespace WeDecide.DAL.Abstract
         void SwitchUserResponse(int oldResponseId, int newResponseId, string userId);
 
         void AddUserToResponse(int respondId, string userId);
+
+        int ResponseCount(int responseId);
     }
 }

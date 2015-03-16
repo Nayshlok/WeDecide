@@ -73,7 +73,6 @@ $('input[name=form_submit]').click(function () {
                 Responses: MyResponses
             },
             success: function (resp) {
-                console.log("Response " + resp.Id);
                 togglePopup(false);
                 clearMakeQuestionForm();
             }
