@@ -79,7 +79,7 @@
                     for (var d in data) {
                         var someObject = data[d];
                         $scope.questions.push(someObject);
-                        addQuestion(someObject);
+                        $("#questionHolder").append(addQuestion(someObject));
                     }
                 }).
                 error(function (data, headers, status, config) {
@@ -175,13 +175,14 @@
                 // things
                 console.log("Data received: {0}, data length = {1}".format(data, data.length));
                 for (var d in data) {
-                    console.log("{0}\t{1}".format(d, data[d]));
+                    //console.log("{0}\t{1}".format(d, data[d]));
                     var someObject = data[d];
-                    for (var o in someObject) {
-                        console.log("\tK: {0}, V: {1}".format(o, someObject[o]));
+                    //for (var o in someObject) {
+                    //    console.log("\tK: {0}, V: {1}".format(o, someObject[o]));
+                    //}
+                    //$scope.questions.push(data[d]);
+                    $("#questionHolder").append(addQuestion(someObject));
                     }
-                    $scope.questions.push(data[d]);
-                }
             }).
             error(function (data, status, headers, config) {
                 // things that deal with errors
@@ -192,8 +193,6 @@
         pullQuestions();
 
     }]);
-
-
 })();
 
 var hub = null;
@@ -204,7 +203,7 @@ function FriendConnection() {
     $.connection.hub.start();
 
     hub.client.addQuestion = function (question) {
-        addQuestion(question);
+        $("#questionHolder").append(addQuestion(question));
     }
 
     hub.client.RefreshResponse = function (responseId, responseText, VoteCount) {
@@ -218,7 +217,7 @@ function GlobalConnection() {
     $.connection.hub.start();
 
     hub.client.addQuestion = function (question) {
-        addQuestion(question);
+        $("#questionHolder").append(addQuestion(question));
     }
 
     hub.client.RefreshResponse = function (responseId, responseText, VoteCount) {
@@ -240,27 +239,47 @@ function addQuestion(question) {
         questionList = $("<ul></ul>");
     questionId = $("<label class='questionId'>Question #" + question.Id + "</label><hr />"),
     questionText = $("<li class='questionText'>" + question.QuestionText + "</li>"),
-    questionActive = $("<li class='questionActive'>" + question.IsActive + "</li>"),
-    questionEndTime = $("<li><label>Ends: " + question.EndTime + "</label></li>"),
+        timeLeft = formatTime((new Date(question.EndTime) - new Date())),
+        questionEndTime = $("<li><label>Ends in " + timeLeft[0] + " hours and " + timeLeft[1] + " minutes.</label></li>"),
     responseWrap = $("<li class='responses'></li>"),
     responseText = $("<label class='responseText'>Responses</label><hr />"),
-    responseList = $("<ul></ul>");
+        responseList = $("<ul></ul>"),
+        freeResponse = $("<li class='free-response-item'><input type='radio' data-qid='" + question.Id + "' name='question" + question.Id + "' class='FreeResponse' />Don't like any of these answers? Submit your own : <input type='text' class='form-control' id='FreeResponseChoice" + question.Id + "' /></li>");
+
     for (var r in question.Responses) {
         response = question.Responses[r];
-        responseList.append("<li><input type='radio' data-qid='" + question.Id + "' data-rid='" + response.Id + "'name='question" + question.Id + "' value='" + response.Text + "'");
-        if (question.FreeResponseEnabled) {
-            responseList.append(" class=''");
-        }
-        responseList.append("/>" + response.Text + " " + response.VoteCount + "</li>");
+        responseList.append("<li><input type='radio' data-qid='" + question.Id + "' class='ChosenResponse' name='question" + question.Id + "' value='" + response.Text + "' />" + response.Text + " " + response.VoteCount + "</li>");
+    }
+
+    if (question.FreeResponseEnabled) {
+        responseList.append(freeResponse);
     }
 
     questionWrap.append(questionId);
     questionList.append(questionText);
-    questionList.append(questionActive);
+    if (question.IsActive) {
     questionList.append(questionEndTime);
+    } else {
+        questionList.append("<li>This question has expired.</li>");
+    }
     responseWrap.append(responseText);
     responseWrap.append(responseList);
     questionList.append(responseWrap);
     questionWrap.append(questionList);
-    $("#questionHolder").append(questionWrap);
+    //$("#questionHolder").append(questionWrap);
+    return questionWrap;
 }
+
+//Time formatter
+function formatTime(time) {
+    var mill, secs, mins, hrs;
+
+    mill = time % 1000;
+    time = (time - mill) / 1000;
+    secs = time % 60;
+    time = (time - secs) / 60;
+    mins = time % 60;
+    hrs = (time - mins) / 60;
+
+    return [hrs, mins, secs, mill];
+};

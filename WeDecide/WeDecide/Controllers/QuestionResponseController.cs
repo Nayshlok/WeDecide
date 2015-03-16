@@ -74,6 +74,8 @@ namespace WeDecide.Controllers
         {
             User QuestionAsker = Mdal.GetUser(question.UserId);
             bool InScope = false;
+            var friends = Mdal.GetFriends(question.UserId);
+
             switch (question.QuestionScope)
             {
                 case Question.Scope.Global: InScope = true; break;
