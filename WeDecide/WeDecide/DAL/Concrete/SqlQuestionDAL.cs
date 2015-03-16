@@ -174,5 +174,15 @@ namespace WeDecide.DAL.Concrete
             return Relevant;
 
         }
+
+        public int ResponseCount(int responseId)
+        {
+            int count = 0;
+            using (QuestionDbContext dbContext = QuestionDbContext.Create())
+            {
+                count = dbContext.Responses.First(x => x.Id == responseId).Users.Count;
+            }
+            return count;
+        }
     }
 }

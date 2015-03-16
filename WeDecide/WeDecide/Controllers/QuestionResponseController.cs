@@ -101,16 +101,15 @@ namespace WeDecide.Controllers
                 Response Resp = MakeUserResponse(AffectedQuestion, ChosenResponse);
 
                 //Qdal.Update(QuestionId, AffectedQuestion);
-
-                Response NewResp = new Response() { Id = Resp.Id, IsDeleted = Resp.IsDeleted, Text = Resp.Text, QuestionId = Resp.QuestionId };
+                Response NewResp = AffectedQuestion.Responses.First(x => x.Text.Equals(Resp.Text));
 
                 if (AffectedQuestion.QuestionScope == Question.Scope.Friends)
                 {
-                    FriendContext.All.RefreshResponse(Resp.Id, Resp.Text, Resp.Users.Count);
+                    FriendContext.All.RefreshResponse(NewResp.Id, Qdal.ResponseCount(NewResp.Id));
                 }
                 else
                 {
-                    GlobalContext.All.RefreshResponse(Resp.Id, Resp.Text, Resp.Users.Count);
+                    GlobalContext.All.RefreshResponse(NewResp.Id, Qdal.ResponseCount(NewResp.Id));
                 }
             }
             //Clients.User(UserId).receivedResponse(question.Id, question.Responses);
@@ -148,9 +147,19 @@ namespace WeDecide.Controllers
             //If User has responded to question before
             if(UserHasRespondedBefore(question))
             {
-                int oldResponseId = question.Responses.First(x => x.Users.Contains(currentUser, new UserComparer())).Id;
+                Response oldResponse = question.Responses.First(x => x.Users.Contains(currentUser, new UserComparer()));
                 response = question.Responses.First(x => x.Text.Equals(responseText));
-                Qdal.SwitchUserResponse(oldResponseId, response.Id, currentUser.Id);
+                Qdal.SwitchUserResponse(oldResponse.Id, response.Id, currentUser.Id);
+                
+                if (question.QuestionScope == Question.Scope.Friends)
+                {
+                    FriendContext.All.RefreshResponse(oldResponse.Id, Qdal.ResponseCount(oldResponse.Id));
+                }
+                else
+                {
+                    GlobalContext.All.RefreshResponse(oldResponse.Id, Qdal.ResponseCount(oldResponse.Id));
+                }
+
             }
             //Else the User has responded to this question for the first time
             else {

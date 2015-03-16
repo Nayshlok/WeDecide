@@ -201,13 +201,17 @@ function FriendConnection() {
     console.log("Connect to friends");
     hub = $.connection.friendQuestionHub;
     $.connection.hub.start();
+    console.log("Connected to friends");
 
     hub.client.addQuestion = function (question) {
+        console.log("adding question to friend")
         $("#questionHolder").append(addQuestion(question));
     }
 
-    hub.client.RefreshResponse = function (responseId, responseText, VoteCount) {
-        console.log("Friend response refresh" + responseId + " " + responseText + " " + VoteCount);
+    hub.client.RefreshResponse = function (responseId, VoteCount) {
+        console.log("Friend response refresh " + responseId + " " + responseText + " " + VoteCount);
+        
+        $(".response" + responseId).html(VoteCount);
     }
 }
 
@@ -215,13 +219,17 @@ function GlobalConnection() {
     console.log("Connect to global");
     hub = $.connection.globalQuestionHub;
     $.connection.hub.start();
+    console.log("Connected to global: " + hub);
+
 
     hub.client.addQuestion = function (question) {
+        console.log("Adding question to global");
         $("#questionHolder").append(addQuestion(question));
     }
 
-    hub.client.RefreshResponse = function (responseId, responseText, VoteCount) {
-        console.log("Global response refresh" + responseId + " " + responseText + " " + VoteCount);
+    hub.client.RefreshResponse = function (responseId, VoteCount) {
+        console.log("Global response refresh " + responseId + " " + responseText + " " + VoteCount);
+        $("[data-rid='" + responseId + "']").text(VoteCount);
     }
 }
 
@@ -248,7 +256,7 @@ function addQuestion(question) {
 
     for (var r in question.Responses) {
         response = question.Responses[r];
-        responseList.append("<li><input type='radio' data-qid='" + question.Id + "' class='ChosenResponse' name='question" + question.Id + "' value='" + response.Text + "' />" + response.Text + " " + response.VoteCount + "</li>");
+        responseList.append("<li><input type='radio' data-qid='" + question.Id + "' class='ChosenResponse' name='question" + question.Id + "' value='" + response.Text + "' />" + response.Text + " <span class='response" + response.Id + " voteClass'>" + response.VoteCount + "</span></li>");
     }
 
     if (question.FreeResponseEnabled) {
