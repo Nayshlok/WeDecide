@@ -54,20 +54,8 @@
         globalCheckBox.checked;
 
         //Add a question to the feed
-<<<<<<< HEAD
-        function addQuestion(question, type) {
-            var questionWrap = $("<section id='" + type + "' class='question shadowed'></section>"),
-                questionList = $("<ul></ul>");
-            questionId = $("<label class='questionId'>Question #" + question.Id + "</label><hr />"),
-            questionText = $("<li class='questionText'>" + question.QuestionText + "</li>"),
-            questionActive = $("<li class='questionActive'>" + question.IsActive + "</li>"),
-            questionEndTime = $("<li><label>Ends: " + question.EndTime + "</label></li>"),
-            responseWrap = $("<li class='responses'></li>"),
-            responseText = $("<label class='responseText'>Responses</label><hr />"),
-            responseList = $("<ul></ul>");
-=======
         function addQuestion(question) {
-            if(new Date() < new Date(question.EndTime)){
+            if (new Date() < new Date(question.EndTime)) {
                 var questionWrap = $("<section class='question shadowed'></section>"),
                     questionList = $("<ul></ul>");
                 questionId = $("<label class='questionId'>Question #" + question.Id + "</label><hr />"),
@@ -80,8 +68,7 @@
 
                 console.log(new Date());
                 console.log(question.EndTime);
->>>>>>> 4d9782e5d3623dc2c64bad0f48a1e30c2ed1c16f
-            
+
                 for (var r in question.Responses) {
                     response = question.Responses[r];
                     responseList.append("<li><input type='radio' data-qid='" + question.Id + "'name='question" + question.Id + "' value='" + response.Text + "' />" + response.Text + " " + response.VoteCount + "</li>");
@@ -96,13 +83,10 @@
                 questionList.append(responseWrap);
                 questionWrap.append(questionList);
 
-<<<<<<< HEAD
-            $("#questionHolder").append(questionWrap);
-=======
+                $("#questionHolder").append(questionWrap);
                 $("#questionHolder").append(questionWrap);
             }
 
->>>>>>> 4d9782e5d3623dc2c64bad0f48a1e30c2ed1c16f
         }
 
         var localQuestionPool = [],
@@ -141,7 +125,7 @@
 
         // TODO: set the interval function and click event on 'checkbox.checkEvent'
         // TODO: decouple for the ng-click and pass the id into each call
-        $scope.doQuestionFlow = function(filter) {
+        $scope.doQuestionFlow = function (filter) {
             console.log("Down in the questionFlow");
             // while the box is checked, update the pools at an interval
 
@@ -154,8 +138,7 @@
                     //    ajaxQuestionLoader("friends", friendsQuestionPool);
                     //}, 1000);
                 }
-                else
-                {
+                else {
                     console.log("Emptying friend questions");
                     $('#questionHolder').children().remove('#friends');
                     //while ($scope.questions.length > 0) {
@@ -173,10 +156,9 @@
                     //    ajaxQuestionLoader("global", globalQuestionPool);
                     //}, 10000);
                 }
-                else
-                {
+                else {
                     console.log("Emptying global questions");
-                    
+
                     $('#questionHolder').children().remove('#global');
 
                     //while($scope.questions.length > 0){
