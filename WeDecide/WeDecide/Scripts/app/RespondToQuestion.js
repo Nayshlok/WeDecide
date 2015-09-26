@@ -2,6 +2,7 @@
 
     //$(document).on('click', 'input[type=radio]', function () {
     $(document).on('click', '.ChosenResponse', function () {
+        console.log("clicked a radio button");
         var QuestionId = $(this).attr('data-qid');
         var ThisButton = $(this);
         $.ajax({
@@ -10,7 +11,7 @@
             data:
             {
                 ChosenResponse: ThisButton.val(),
-                QuestionId: QuestionId,
+                QuestionId: QuestionId
             }, success: function () {
                 ThisButton.prop("checked", true);
             }
@@ -38,20 +39,25 @@
     //});
 
     $(document).on('click', '.FreeResponse', function () {
-        var QuestionId = $(this).attr('data-qid');
+
         var ThisButton = $(this);
+        var QuestionId = $(this).attr('data-qid');
         var FreeResponseId = "#FreeResponseChoice" + QuestionId;
-        $.ajax({
-            url: "/Respond/Post/" + QuestionId,
-            type: 'POST',
-            data:
-            {
-                ChosenResponse: $(FreeResponseId).val(),
-                QuestionId: QuestionId,
-            }, success: function () {
-                ThisButton.prop("checked", true);
-            }
-        });
+        if (!($(FreeResponseId).val().trim().length === 0)) {
+            $.ajax({
+                url: "/Respond/Post/" + QuestionId,
+                type: 'POST',
+                data:
+                {
+                    ChosenResponse: $(FreeResponseId).val(),
+                    QuestionId: QuestionId,
+                }, success: function () {
+                    ThisButton.prop("checked", true);
+                }
+            });
+        } else {
+            ThisButton.prop("checked", false);
+        }
         return false;
     });
 

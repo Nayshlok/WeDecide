@@ -271,6 +271,11 @@ header a {
 		display: block;
 		margin: 30px auto;
 	 }
+
+.oldResponses {
+    display: inline-block;
+    margin: 0 5px 0 5px;
+}
  
 /*Home Page styling*/
 @media only screen and (min-width: 800px) {
@@ -337,6 +342,7 @@ header a {
 	    position: relative;
 	    text-align: center;
 	    width: 90%;
+        min-height: 700px;
         margin: 0 auto 40px auto;
     }
  
@@ -349,6 +355,7 @@ header a {
 .question {
     width: 100%;
     margin: 20px auto 20px auto;
+    padding: 5px 5px 0px 5px;
     font-family: 'Raleway', sans-serif;
 }
 
@@ -378,6 +385,18 @@ header a {
 .question .responses ul li {
     display: inline-block;
     margin: 0 10px 0 10px;
+}
+
+.question .responses ul li input[type=radio] {
+    float: left;
+    margin-right: 3px;
+}
+
+.voteClass {
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-left: 1px solid #CCC;
+    padding-left: 3px;
 }
  
 .profile_pic {
@@ -440,7 +459,7 @@ header a {
    }
 
 .overflowdiv {
-    height: 500px;
+    max-height: 500px;
     overflow-x: hidden;
     overflow-y: scroll;
     width: auto;
@@ -645,7 +664,7 @@ header a {
 
 @media only screen and (min-width: 800px) {
     .white_content {
-        max-height: 600px;
+        max-height: 500px;
 	    background-color: white;
 	    display: none;
 	    left: 50%;
@@ -675,11 +694,14 @@ header a {
  
 		.white_content header h2 {
 			color: #FFF;
-			font-family: Arial, sans-serif;
+			font-family: 'Lobster', sans-serif;
 			margin: 10px auto;
 		 }
  
-	.white_content div {padding: 10px 20px 10px 20px;}
+	.white_content div {
+        padding: 10px 20px 10px 20px;
+        font-family: 'Raleway', sans-serif;
+	}
  
 .bottom-btn {
 	display: block;
@@ -697,10 +719,9 @@ header a {
 	border: 1px solid #F00;
  }
  
-.field-validation-error {
+.field-validation-error, .field-validation-valid {
 	color: #F00;
-    font-size: 12px;
-	font-weight: bold;
+    font-size: 1.25rem;
  }
 
 .validation-summary-errors li {
@@ -720,6 +741,7 @@ header a {
     padding: 5px;
     text-align: center;
     display: none;
+    overflow-y: auto;
 }
 
 .notification-panel h3 {
@@ -735,6 +757,10 @@ header a {
     padding-right: 5px;
     padding-left: 5px;
     text-align: center;
+}
+
+.notification h4 {
+    font-family: 'Lobster', sans-serif;
 }
 
 .notification form {

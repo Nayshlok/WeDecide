@@ -73,13 +73,8 @@ $('input[name=form_submit]').click(function () {
                 Responses: MyResponses
             },
             success: function (resp) {
-                if (resp.length == 0) {
-                    togglePopup(false);
-                    clearMakeQuestionForm();
-                }
-                else {
-                    //Set the Validation Text
-                }
+                togglePopup(false);
+                clearMakeQuestionForm();
             }
         });
     }
@@ -100,10 +95,12 @@ function ValidQuestion() {
     var Question = $('#Question').val();
     var IsValid = !(Question.trim().length === 0)
     //If Question is not valid
+    var ValidationMessage = "";
     if (!IsValid) {
         //Add message to span
-        $('#ValidateQuestion').html("You need to have a question");
+        ValidationMessage = "You need to have a question";
     }
+    $('#ValidateQuestion').html(ValidationMessage);
     return IsValid;
 }
 
@@ -117,10 +114,12 @@ function ValidResponses() {
         }
     }
     var ResponsesAreValid = (ValidResponses.length > 1);
+    var ValidationMessage = "";
     if (!ResponsesAreValid) {
         //Add Validation message to span
-        $("#ValidateResponses").html("You need at least two unique responses.");
+        ValidationMessage = "You need at least two unique responses.";
     }
+    $("#ValidateResponses").html(ValidationMessage);
     return ResponsesAreValid;
 }
 
@@ -143,10 +142,15 @@ function ValidTimes() {
     var hours = $('#Hours').val();
     var minutes = $('#Minutes').val();
     var TimesAreValid = (hours >= 0) && (minutes >= 0) && (minutes + hours > 0);
-    if (!TimesAreValid) {
-        //Add Validation to Span
-        $('#ValidateTimes').html("You must have at least some time for others to answer.");
+    var ValidationMessage = "";
+    if ((hours.trim().length === 0) || (minutes.trim().length === 0)) {
+        ValidationMessage = "You must input a number for the times.";
     }
+    else if (!TimesAreValid) {
+        //Add Validation to Span
+        ValidationMessage = "You must have at least some time for others to answer.";
+    }
+    $('#ValidateTimes').html(ValidationMessage);
     return TimesAreValid;
 }
 

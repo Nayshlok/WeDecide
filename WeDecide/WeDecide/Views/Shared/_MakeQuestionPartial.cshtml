@@ -12,8 +12,8 @@
                 {*@
                     <div class="form-group overflowdiv" ng-controller="UxCtrl">
                         @*@Html.ValidationMessageFor(x => x.Question)*@
-                        <span id="ValidateQuestion" class="field-validation-valid" data-valmsg-for="Question" data-valmsg-replace="true"></span>
                         <label>Question Text: </label>
+                        <span id="ValidateQuestion" class="field-validation-valid" data-valmsg-for="Question" data-valmsg-replace="true"></span>
                         @Html.TextBoxFor(x => x.Question, new { @class = "form-control", @name = "questionInput", @placeholder = "What's on your mind?" })
 
                         <span id="ValidateResponses" class="field-validation-valid" data-valmsg-for="Responses" data-valmsg-replace="true"></span>
@@ -44,7 +44,7 @@
                         @*@Html.ValidationMessageFor(x => x)*@
                         <span id="ValidateTimes" class="field-validation-valid" data-valmsg-for="" data-valmsg-replace="true"></span>
                         <p>The question should be available for: </p>
-                        <p>Hours: <input type="text" value="0" id="Hours" name="Hours" data-val="true" /> Minutes : <input type="text" value="10" id="Minutes" name="Minutes" data-val="true" /></p>
+                        <p>Hours: <input type="number" value="0" id="Hours" name="Hours" data-val="true" /> Minutes : <input type="number" value="10" id="Minutes" name="Minutes" data-val="true" /></p>
                         <input name="form_submit" type="button" value="Make Question" class="btn btn-success" />
                         @*<input type="submit" value="Make Question" class="btn btn-success"/>*@
                     </div>

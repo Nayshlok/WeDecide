@@ -300,9 +300,10 @@ namespace WeDecide.Controllers
         {
             AuthenticationManager.SignOut();
             //Get rid of dat cookie
-            HttpCookie cookie = new HttpCookie(".AspNet.ApplicationCookie");
+            HttpCookie cookie = Request.Cookies[".AspNet.ApplicationCookie"];
             cookie.Expires = DateTime.Now.AddYears(-1000);
             Response.Cookies.Add(cookie);
+            Session.Clear();
 
             return RedirectToAction("Login");
         }

@@ -18,7 +18,9 @@ namespace WeDecide.Controllers
     public class QuestionResponseController : Controller
     {
 
-        private readonly static IHubConnectionContext<dynamic> HubContext = GlobalHost.ConnectionManager.GetHubContext<questionHub>().Clients;
+        private readonly static IHubConnectionContext<dynamic> FriendContext = GlobalHost.ConnectionManager.GetHubContext<FriendQuestionHub>().Clients;
+        private readonly static IHubConnectionContext<dynamic> GlobalContext = GlobalHost.ConnectionManager.GetHubContext<GlobalQuestionHub>().Clients;
+
         //Until we have the DAL injection done
         private static IQuestionDAL Qdal;
         private static IMembershipDAL Mdal;// = new CustomMembershipDAL();
@@ -72,6 +74,8 @@ namespace WeDecide.Controllers
         {
             User QuestionAsker = Mdal.GetUser(question.UserId);
             bool InScope = false;
+            var friends = Mdal.GetFriends(question.UserId);
+
             switch (question.QuestionScope)
             {
                 case Question.Scope.Global: InScope = true; break;
@@ -97,9 +101,16 @@ namespace WeDecide.Controllers
                 Response Resp = MakeUserResponse(AffectedQuestion, ChosenResponse);
 
                 //Qdal.Update(QuestionId, AffectedQuestion);
+                Response NewResp = AffectedQuestion.Responses.First(x => x.Text.Equals(Resp.Text));
 
-                Response NewResp = new Response() { Id = Resp.Id, IsDeleted = Resp.IsDeleted, Text = Resp.Text, QuestionId = Resp.QuestionId };
-                HubContext.User(User.Identity.GetUserId()).receivedResponse(QuestionId, NewResp);
+                if (AffectedQuestion.QuestionScope == Question.Scope.Friends)
+                {
+                    FriendContext.All.RefreshResponse(NewResp.Id, Qdal.ResponseCount(NewResp.Id));
+                }
+                else
+                {
+                    GlobalContext.All.RefreshResponse(NewResp.Id, Qdal.ResponseCount(NewResp.Id));
+                }
             }
             //Clients.User(UserId).receivedResponse(question.Id, question.Responses);
             //Would like to have this not actually return, as the Partial View will always be a part of something else
@@ -136,9 +147,19 @@ namespace WeDecide.Controllers
             //If User has responded to question before
             if(UserHasRespondedBefore(question))
             {
-                int oldResponseId = question.Responses.First(x => x.Users.Contains(currentUser, new UserComparer())).Id;
+                Response oldResponse = question.Responses.First(x => x.Users.Contains(currentUser, new UserComparer()));
                 response = question.Responses.First(x => x.Text.Equals(responseText));
-                Qdal.SwitchUserResponse(oldResponseId, response.Id, currentUser.Id);
+                Qdal.SwitchUserResponse(oldResponse.Id, response.Id, currentUser.Id);
+                
+                if (question.QuestionScope == Question.Scope.Friends)
+                {
+                    FriendContext.All.RefreshResponse(oldResponse.Id, Qdal.ResponseCount(oldResponse.Id));
+                }
+                else
+                {
+                    GlobalContext.All.RefreshResponse(oldResponse.Id, Qdal.ResponseCount(oldResponse.Id));
+                }
+
             }
             //Else the User has responded to this question for the first time
             else {
@@ -179,7 +200,7 @@ namespace WeDecide.Controllers
 
         private bool CanAddFreeResponse(Question question, string response)
         {
-            return question.FreeResponseEnabled && question.Responses.Count(x => x.Text.Equals(response)) < 1;
+            return question.FreeResponseEnabled && question.Responses.Count(x => x.Text.Equals(response)) < 1 && !string.IsNullOrWhiteSpace(response);
         }
 
         private bool UserHasRespondedBefore(Question question)
